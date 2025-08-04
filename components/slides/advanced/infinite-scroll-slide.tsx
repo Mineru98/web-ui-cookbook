@@ -21,7 +21,7 @@ export default function InfiniteScrollSlide() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [codeType, setCodeType] = useState<"react" | "flutter">("react");
+  const [codeType, setCodeType] = useState<"react">("react");
   const loaderRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -266,196 +266,6 @@ const App: React.FC = () => {
 export default App;`;
   };
 
-  const getFlutterCode = () => {
-    return `import 'package:flutter/material.dart';
-
-class Post {
-  final int id;
-  final String title;
-  final String content;
-  final String author;
-  final String date;
-  final int likes;
-  final int comments;
-
-  Post({
-    required this.id,
-    required this.title,
-    required this.content,
-    required this.author,
-    required this.date,
-    required this.likes,
-    required this.comments,
-  });
-}
-
-class InfiniteScrollExample extends StatefulWidget {
-  @override
-  _InfiniteScrollExampleState createState() => _InfiniteScrollExampleState();
-}
-
-class _InfiniteScrollExampleState extends State<InfiniteScrollExample> {
-  final ScrollController _scrollController = ScrollController();
-  List<Post> _posts = [];
-  int _currentPage = 1;
-  bool _loading = false;
-  bool _hasMore = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadMorePosts();
-    
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels >=
-              _scrollController.position.maxScrollExtent - 200 &&
-          !_loading &&
-          _hasMore) {
-        _loadMorePosts();
-      }
-    });
-  }
-
-  List<Post> _generatePosts(int pageNumber, int limit) {
-    int startId = (pageNumber - 1) * limit + 1;
-    List<Post> result = [];
-
-    for (int id = startId; id < startId + limit; id++) {
-      result.add(Post(
-        id: id,
-        title: '포스트 제목 #\$id',
-        content: '이것은 포스트 #\$id의 내용입니다. 실제로는 API에서 데이터를 받아옵니다.',
-        author: '사용자_\${(id % 5) + 1}',
-        date: DateTime.now()
-            .subtract(Duration(days: id))
-            .toString()
-            .substring(0, 10),
-        likes: (id * 7) % 100,
-        comments: (id * 3) % 20,
-      ));
-    }
-
-    return result;
-  }
-
-  Future<void> _loadMorePosts() async {
-    if (_loading || !_hasMore) return;
-
-    setState(() {
-      _loading = true;
-    });
-
-    // API 호출 시뮬레이션
-    await Future.delayed(Duration(seconds: 1));
-
-    List<Post> newPosts = _generatePosts(_currentPage, 10);
-
-    setState(() {
-      _posts.addAll(newPosts);
-      _currentPage++;
-      _loading = false;
-
-      // 5페이지 후에는 더 이상 데이터가 없다고 설정
-      if (_currentPage > 5) {
-        _hasMore = false;
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('무한 스크롤 예시'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ),
-      body: _posts.isEmpty && _loading
-          ? Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              controller: _scrollController,
-              itemCount: _posts.length + (_hasMore ? 1 : 0),
-              itemBuilder: (context, index) {
-                if (index == _posts.length) {
-                  // 로딩 표시기
-                  return Container(
-                    padding: EdgeInsets.all(16),
-                    alignment: Alignment.center,
-                    child: _loading
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircularProgressIndicator(),
-                              SizedBox(width: 16),
-                              Text('로딩 중...'),
-                            ],
-                          )
-                        : Text(
-                            '더 이상 포스트가 없습니다.',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                  );
-                }
-
-                final post = _posts[index];
-                return Card(
-                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          post.title,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          post.content,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                        SizedBox(height: 12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '작성자: \${post.author} • \${post.date}',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey[500],
-                              ),
-                            ),
-                            Text(
-                              '좋아요 \${post.likes} • 댓글 \${post.comments}',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey[500],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-}`;
-  };
 
   return (
     <SlideLayout title="Infinite Scroll (무한 스크롤)">
@@ -551,35 +361,11 @@ class _InfiniteScrollExampleState extends State<InfiniteScrollExample> {
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="flex justify-center mb-4">
-              <div className="flex bg-gray-100 rounded-lg p-1 gap-1">
-                <button
-                  onClick={() => setCodeType("react")}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    codeType === "react"
-                      ? "bg-white text-gray-900 shadow-sm"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  React + TypeScript
-                </button>
-                <button
-                  onClick={() => setCodeType("flutter")}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    codeType === "flutter"
-                      ? "bg-white text-gray-900 shadow-sm"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  Flutter + Dart
-                </button>
-              </div>
-            </div>
 
             <div className="bg-gray-800 p-4 rounded-lg text-white">
               <PrismCode
-                language={codeType === "react" ? "typescript" : "dart"}
-                code={codeType === "react" ? getReactCode() : getFlutterCode()}
+                language="typescript"
+                code={getReactCode()}
               />
             </div>
           </TabsContent>

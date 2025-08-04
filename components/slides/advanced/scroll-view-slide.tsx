@@ -10,7 +10,7 @@ export default function ScrollViewSlide() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
-  const [codeType, setCodeType] = useState<"react" | "flutter">("react");
+  const [codeType, setCodeType] = useState<"react">("react");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -213,158 +213,6 @@ const App: React.FC = () => {
 export default App;`;
   };
 
-  const getFlutterCode = () => {
-    return `import 'package:flutter/material.dart';
-
-class ScrollViewExample extends StatefulWidget {
-  @override
-  _ScrollViewExampleState createState() => _ScrollViewExampleState();
-}
-
-class _ScrollViewExampleState extends State<ScrollViewExample> {
-  final ScrollController _scrollController = ScrollController();
-  double _scrollPosition = 0;
-  double _maxScroll = 0;
-  bool _showScrollToTop = false;
-  
-  @override
-  void initState() {
-    super.initState();
-    
-    _scrollController.addListener(() {
-      setState(() {
-        _scrollPosition = _scrollController.position.pixels;
-        _maxScroll = _scrollController.position.maxScrollExtent;
-        _showScrollToTop = _scrollPosition > 100;
-      });
-    });
-  }
-  
-  void _scrollToTop() {
-    _scrollController.animateTo(
-      0,
-      duration: Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
-  }
-  
-  List<String> _generateContent() {
-    final lorem = [
-      "스크롤 뷰는 화면 크기보다 더 큰 콘텐츠를 표시하기 위해 필수적인 UI 컴포넌트입니다.",
-      "대부분의 모바일 앱과 웹사이트에서는 스크롤 뷰를 기본적으로 사용합니다.",
-      "스크롤 뷰에는 세로 스크롤과 가로 스크롤이 있으며, 필요에 따라 두 방향 모두 지원할 수 있습니다.",
-      "스크롤 뷰를 구현할 때는 성능 최적화가 중요합니다.",
-      "스크롤 위치를 추적하고 특정 동작을 트리거하는 것은 다양한 기능 구현에 유용합니다.",
-      "접근성을 고려하여 키보드 내비게이션과 스크린 리더 호환성을 보장해야 합니다.",
-      "스크롤바의 시각적 디자인도 사용자 경험에 영향을 미칩니다.",
-    ];
-    
-    List<String> result = [];
-    for (int i = 0; i < 20; i++) {
-      result.add(lorem[i % lorem.length]);
-    }
-    
-    return result;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final contentList = _generateContent();
-    final progressPercentage = _maxScroll > 0 ? (_scrollPosition / _maxScroll) * 100 : 0.0;
-    
-    return Scaffold(
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              // Progress Bar
-              Container(
-                height: 4,
-                child: LinearProgressIndicator(
-                  value: _maxScroll > 0 ? _scrollPosition / _maxScroll : 0,
-                  backgroundColor: Colors.grey[300],
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                ),
-              ),
-              
-              // Scrollable Content
-              Expanded(
-                child: ListView.builder(
-                  controller: _scrollController,
-                  padding: EdgeInsets.all(16),
-                  itemCount: contentList.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(bottom: 16),
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: index % 3 == 0
-                            ? Colors.blue[50]
-                            : index % 3 == 1
-                                ? Colors.green[50]
-                                : Colors.purple[50],
-                        border: Border.all(
-                          color: index % 3 == 0
-                              ? Colors.blue[200]!
-                              : index % 3 == 1
-                                  ? Colors.green[200]!
-                                  : Colors.purple[200]!,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            contentList[index],
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[700],
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            '단락 #\${index + 1)}',
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: Colors.grey[400],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-          
-          // Scroll to Top Button
-          if (_showScrollToTop)
-            Positioned(
-              bottom: 16,
-              right: 16,
-              child: FloatingActionButton(
-                mini: true,
-                onPressed: _scrollToTop,
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.grey[700],
-                elevation: 4,
-                child: Icon(Icons.keyboard_arrow_up),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-  
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-}`;
-  };
 
   return (
     <SlideLayout title="Scroll View (스크롤 뷰)">
@@ -448,35 +296,11 @@ class _ScrollViewExampleState extends State<ScrollViewExample> {
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="flex justify-center mb-4">
-              <div className="flex bg-gray-100 rounded-lg p-1 gap-1">
-                <button
-                  onClick={() => setCodeType("react")}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    codeType === "react"
-                      ? "bg-white text-gray-900 shadow-sm"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  React + TypeScript
-                </button>
-                <button
-                  onClick={() => setCodeType("flutter")}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    codeType === "flutter"
-                      ? "bg-white text-gray-900 shadow-sm"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  Flutter + Dart
-                </button>
-              </div>
-            </div>
 
             <div className="bg-gray-800 p-4 border rounded-md">
               <PrismCode
-                language={codeType === "react" ? "typescript" : "dart"}
-                code={codeType === "react" ? getReactCode() : getFlutterCode()}
+                language="typescript"
+                code={getReactCode()}
               />
             </div>
           </TabsContent>

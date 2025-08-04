@@ -58,16 +58,9 @@ export default function PaddingMarginSlide() {
 
           <TabsContent value="code" className="mt-4">
             <div className="bg-gray-800 p-4 rounded-lg">
-              <Tabs defaultValue="react" className="w-full">
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="react">React/CSS</TabsTrigger>
-                  <TabsTrigger value="flutter">Flutter/Dart</TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="react" className="mt-4">
-                  <PrismCode
-                    language="typescript"
-                    code={`// React/CSS에서의 패딩과 마진
+              <PrismCode
+                language="typescript"
+                code={`// React/CSS에서의 패딩과 마진
 
 // CSS 클래스를 이용한 방법
 <div className="p-4">모든 방향 패딩 16px (Tailwind)</div>
@@ -117,84 +110,7 @@ export default function PaddingMarginSlide() {
   <div>첫 번째 아이템</div>
   <div>두 번째 아이템</div>
 </div>`}
-                  />
-                </TabsContent>
-
-                <TabsContent value="flutter" className="mt-4">
-                  <PrismCode
-                    language="typescript"
-                    code={`// Flutter/Dart에서의 패딩
-// Padding 위젯 사용하기
-Padding(
-  // 모든 방향에 동일한 패딩 적용
-  padding: EdgeInsets.all(16.0),
-  child: Text('모든 방향 패딩 16px'),
-),
-
-Padding(
-  // 좌우 패딩 16px, 상하 패딩 8px
-  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-  child: Text('좌우 패딩 16px, 상하 패딩 8px'),
-),
-
-Padding(
-  // 개별 방향 패딩 적용
-  padding: EdgeInsets.only(
-    top: 10.0,
-    right: 20.0,
-    bottom: 10.0,
-    left: 20.0,
-  ),
-  child: Text('개별 방향 패딩'),
-),
-
-// Flutter/Dart에서의 마진
-// 마진은 Container 위젯의 margin 속성으로 구현
-Container(
-  // 모든 방향에 동일한 마진 적용
-  margin: EdgeInsets.all(16.0),
-  color: Colors.blue,
-  child: Text('모든 방향 마진 16px'),
-),
-
-Container(
-  // 좌우 마진 16px, 상하 마진 8px
-  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-  color: Colors.green,
-  child: Text('좌우 마진 16px, 상하 마진 8px'),
-),
-
-Container(
-  // 개별 방향 마진 적용
-  margin: EdgeInsets.only(
-    top: 10.0,
-    right: 20.0,
-    bottom: 10.0,
-    left: 20.0,
-  ),
-  color: Colors.red,
-  child: Text('개별 방향 마진'),
-),
-
-// SizedBox를 이용한 간격 만들기
-Column(
-  children: [
-    Text('첫 번째 텍스트'),
-    SizedBox(height: 16.0), // 세로 간격 16px
-    Text('두 번째 텍스트'),
-  ],
-),
-
-Row(
-  children: [
-    Text('첫 번째 텍스트'),
-    SizedBox(width: 16.0), // 가로 간격 16px
-    Text('두 번째 텍스트'),
-  ],
-),`}
-                  />
-                </TabsContent>
-              </Tabs>
+              />
             </div>
           </TabsContent>
 

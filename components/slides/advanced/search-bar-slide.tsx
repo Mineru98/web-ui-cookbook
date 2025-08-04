@@ -20,7 +20,7 @@ export default function SearchBarSlide() {
   >("basic");
   const [searchText, setSearchText] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
-  const [codeType, setCodeType] = useState<"react" | "flutter">("react");
+  const [codeType, setCodeType] = useState<"react">("react");
 
   const handleClear = () => {
     setSearchText("");
@@ -695,177 +695,6 @@ export default FilterSearchBarExample;`;
     }
   };
 
-  const getFlutterCode = () => {
-    return `// ${
-      searchBarType === "basic"
-        ? "기본 검색 바"
-        : searchBarType === "expandable"
-        ? "확장형 검색 바"
-        : searchBarType === "persistent"
-        ? "영구형 검색 바"
-        : "필터형 검색 바"
-    } 구현 예시
-
-import 'package:flutter/material.dart';
-
-class ${
-      searchBarType === "basic"
-        ? "BasicSearchBar"
-        : searchBarType === "expandable"
-        ? "ExpandableSearchBar"
-        : searchBarType === "persistent"
-        ? "PersistentSearchBar"
-        : "FilterSearchBar"
-    } extends StatefulWidget {
-  @override
-  _${
-    searchBarType === "basic"
-      ? "BasicSearchBar"
-      : searchBarType === "expandable"
-      ? "ExpandableSearchBar"
-      : searchBarType === "persistent"
-      ? "PersistentSearchBar"
-      : "FilterSearchBar"
-  }State createState() => _${
-      searchBarType === "basic"
-        ? "BasicSearchBar"
-        : searchBarType === "expandable"
-        ? "ExpandableSearchBar"
-        : searchBarType === "persistent"
-        ? "PersistentSearchBar"
-        : "FilterSearchBar"
-    }State();
-}
-
-class _${
-      searchBarType === "basic"
-        ? "BasicSearchBar"
-        : searchBarType === "expandable"
-        ? "ExpandableSearchBar"
-        : searchBarType === "persistent"
-        ? "PersistentSearchBar"
-        : "FilterSearchBar"
-    }State extends State<${
-      searchBarType === "basic"
-        ? "BasicSearchBar"
-        : searchBarType === "expandable"
-        ? "ExpandableSearchBar"
-        : searchBarType === "persistent"
-        ? "PersistentSearchBar"
-        : "FilterSearchBar"
-    }> {
-  TextEditingController _searchController = TextEditingController();
-  ${searchBarType === "expandable" ? "bool _isExpanded = false;" : ""}
-  ${searchBarType === "with-filters" ? "List<String> _selectedFilters = [];" : ""}
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('${
-          searchBarType === "basic"
-            ? "기본 검색 바"
-            : searchBarType === "expandable"
-            ? "확장형 검색 바"
-            : searchBarType === "persistent"
-            ? "영구형 검색 바"
-            : "필터형 검색 바"
-        }'),
-        backgroundColor: Color(0xFF6700E6),
-        foregroundColor: Colors.white,
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            _buildSearchBar(),
-            ${searchBarType === "with-filters" ? "_buildFilterChips()," : ""}
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSearchBar() {
-    return TextField(
-      controller: _searchController,
-      decoration: InputDecoration(
-        hintText: '검색어를 입력하세요',
-        prefixIcon: Icon(Icons.search),
-        suffixIcon: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (_searchController.text.isNotEmpty)
-              IconButton(
-                icon: Icon(Icons.clear),
-                onPressed: () {
-                  _searchController.clear();
-                  setState(() {});
-                },
-              ),
-            IconButton(
-              icon: Icon(Icons.mic),
-              onPressed: () {
-                // 음성 검색 기능
-              },
-            ),
-          ],
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          borderSide: BorderSide(color: Color(0xFF6700E6), width: 2),
-        ),
-      ),
-      onChanged: (value) {
-        setState(() {});
-      },
-      onSubmitted: (value) {
-        // 검색 실행
-        print('검색: \$value');
-      },
-    );
-  }
-
-  ${
-    searchBarType === "with-filters"
-      ? `Widget _buildFilterChips() {
-    List<String> filters = ['카테고리', '가격', '브랜드', '평점', '배송'];
-    
-    return Wrap(
-      spacing: 8.0,
-      children: filters.map((filter) {
-        bool isSelected = _selectedFilters.contains(filter);
-        return FilterChip(
-          label: Text(filter),
-          selected: isSelected,
-          onSelected: (selected) {
-            setState(() {
-              if (selected) {
-                _selectedFilters.add(filter);
-              } else {
-                _selectedFilters.remove(filter);
-              }
-            });
-          },
-          selectedColor: Color(0xFF6700E6).withOpacity(0.2),
-          checkmarkColor: Color(0xFF6700E6),
-        );
-      }).toList(),
-    );
-  }`
-      : ""
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-}`;
-  };
 
   return (
     <SlideLayout title="Search Bar (검색 바)">
@@ -941,34 +770,10 @@ class _${
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="flex justify-center mb-4">
-              <div className="flex gap-2">
-                <button
-                  className={`px-4 py-2 rounded text-sm ${
-                    codeType === "react"
-                      ? "bg-[#6700e6] text-white"
-                      : "bg-gray-100"
-                  }`}
-                  onClick={() => setCodeType("react")}
-                >
-                  React + TypeScript
-                </button>
-                <button
-                  className={`px-4 py-2 rounded text-sm ${
-                    codeType === "flutter"
-                      ? "bg-[#6700e6] text-white"
-                      : "bg-gray-100"
-                  }`}
-                  onClick={() => setCodeType("flutter")}
-                >
-                  Flutter + Dart
-                </button>
-              </div>
-            </div>
             <div className="bg-gray-800 p-4 rounded-lg text-white">
               <PrismCode
-                language={codeType === "react" ? "typescript" : "dart"}
-                code={codeType === "react" ? getReactCode() : getFlutterCode()}
+                language="typescript"
+                code={getReactCode()}
               />
             </div>
           </TabsContent>

@@ -6,490 +6,6 @@ import { Loader2 } from "lucide-react";
 import { PrismCode } from "@/components/ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-// Dart 코드 예제를 위한 컴포넌트
-const DartCodeExamples = () => {
-  // 기본형 스플래시 코드
-  const basicSplashCode = `import 'package:flutter/material.dart';
-
-class BasicSplashScreen extends StatelessWidget {
-  const BasicSplashScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                color: const Color(0xFF6700e6),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Text(
-                  'APP',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              '앱 이름',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 16),
-            const SizedBox(
-              width: 20,
-              height: 20,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.black45),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}`;
-
-  // 애니메이션형 스플래시 코드
-  const animatedSplashCode = `import 'package:flutter/material.dart';
-
-class AnimatedSplashScreen extends StatefulWidget {
-  const AnimatedSplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<AnimatedSplashScreen> createState() => _AnimatedSplashScreenState();
-}
-
-class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _bounceAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1500),
-    )..repeat(reverse: true);
-
-    _bounceAnimation = Tween<double>(begin: 0, end: 20).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInOut,
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color(0xFF6700e6),
-              Color(0xFF134429),
-            ],
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AnimatedBuilder(
-                animation: _bounceAnimation,
-                builder: (context, child) {
-                  return Transform.translate(
-                    offset: Offset(0, -_bounceAnimation.value),
-                    child: child,
-                  );
-                },
-                child: Container(
-                  width: 80,
-                  height: 80,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'LOGO',
-                      style: TextStyle(
-                        color: Color(0xFF6700e6),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 24),
-              FadeTransition(
-                opacity: _controller,
-                child: const Text(
-                  '애니메이션 스플래시',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              FadeTransition(
-                opacity: _controller,
-                child: const Text(
-                  '앱 로딩 중...',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}`;
-
-  // 진행률형 스플래시 코드
-  const progressSplashCode = `import 'package:flutter/material.dart';
-import 'dart:async';
-
-class ProgressSplashScreen extends StatefulWidget {
-  const ProgressSplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ProgressSplashScreen> createState() => _ProgressSplashScreenState();
-}
-
-class _ProgressSplashScreenState extends State<ProgressSplashScreen> {
-  double _progress = 0;
-  late Timer _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    _startLoading();
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  void _startLoading() {
-    _timer = Timer.periodic(const Duration(milliseconds: 300), (timer) {
-      setState(() {
-        if (_progress < 100) {
-          _progress += 10;
-        } else {
-          _timer.cancel();
-          // 여기서 홈 화면으로 이동
-          // Navigator.of(context).pushReplacement(...);
-        }
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F4),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 80,
-              height: 80,
-              decoration: const BoxDecoration(
-                color: Color(0xFF6700e6),
-                shape: BoxShape.circle,
-              ),
-              child: const Center(
-                child: Text(
-                  'UI',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Text(
-              '\${_progress.toInt()}% 완료',
-              style: const TextStyle(
-                color: Color(0xFF6700e6),
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              width: 200,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: LinearProgressIndicator(
-                  value: _progress / 100,
-                  backgroundColor: Colors.grey.shade200,
-                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF6700e6)),
-                  minHeight: 8,
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              '리소스 로딩 중...',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}`;
-
-  // 브랜딩형 스플래시 코드
-  const brandedSplashCode = `import 'package:flutter/material.dart';
-
-class BrandedSplashScreen extends StatelessWidget {
-  const BrandedSplashScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF6700e6),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              child: const Center(
-                child: Text(
-                  'UI',
-                  style: TextStyle(
-                    color: Color(0xFF6700e6),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              '브랜드명',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                letterSpacing: 3,
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              '브랜드 슬로건이나 한 줄 설명',
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 14,
-              ),
-            ),
-            const SizedBox(height: 24),
-            const SizedBox(
-              width: 24,
-              height: 24,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}`;
-
-  // 전체 스플래시 화면 관리 코드
-  const splashManagerCode = `import 'package:flutter/material.dart';
-import 'dart:async';
-
-// 메인 애플리케이션
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '스플래시 화면 데모',
-      theme: ThemeData(
-        primaryColor: const Color(0xFF6700e6),
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6700e6)),
-      ),
-      home: const SplashScreen(),
-    );
-  }
-}
-
-// 스플래시 화면
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(
-      const Duration(seconds: 3), 
-      () => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      )
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF6700e6),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Center(
-                child: Text(
-                  'APP',
-                  style: TextStyle(
-                    color: Color(0xFF6700e6),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 32),
-            const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// 홈 화면 (스플래시 이후 표시)
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('홈 화면'),
-        backgroundColor: const Color(0xFF6700e6),
-      ),
-      body: const Center(
-        child: Text('앱 메인 컨텐츠'),
-      ),
-    );
-  }
-}`;
-
-  return (
-    <div className="mt-8 space-y-6">
-      {/* 기본형 스플래시 */}
-      <div className="space-y-2 bg-gray-800 p-4 border rounded-md mb-6">
-        <h4 className="text-lg font-medium mb-3 text-white">
-          기본 스플래시 화면
-        </h4>
-        <PrismCode code={basicSplashCode} language="typescript" />
-      </div>
-
-      {/* 애니메이션형 스플래시 */}
-      <div className="space-y-2 bg-gray-800 p-4 border rounded-md mb-6">
-        <h4 className="text-lg font-medium mb-3 text-white">
-          애니메이션 스플래시 화면
-        </h4>
-        <PrismCode code={animatedSplashCode} language="typescript" />
-      </div>
-
-      {/* 진행률형 스플래시 */}
-      <div className="space-y-2 bg-gray-800 p-4 border rounded-md mb-6">
-        <h4 className="text-lg font-medium mb-3 text-white">
-          진행률 표시 스플래시 화면
-        </h4>
-        <PrismCode code={progressSplashCode} language="typescript" />
-      </div>
-
-      {/* 브랜딩형 스플래시 */}
-      <div className="space-y-2 bg-gray-800 p-4 border rounded-md mb-6">
-        <h4 className="text-lg font-medium mb-3 text-white">
-          브랜딩 스플래시 화면
-        </h4>
-        <PrismCode code={brandedSplashCode} language="typescript" />
-      </div>
-
-      {/* 전체 스플래시 화면 관리 */}
-      <div className="space-y-2 bg-gray-800 p-4 border rounded-md mb-6">
-        <h4 className="text-lg font-medium mb-3 text-white">
-          스플래시 화면 자동 전환 구현
-        </h4>
-        <PrismCode code={splashManagerCode} language="typescript" />
-      </div>
-    </div>
-  );
-};
 
 export default function SplashPageSlide() {
   const [splashType, setSplashType] = useState<
@@ -498,340 +14,179 @@ export default function SplashPageSlide() {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  // 스플래시 코드 변수 정의
-  const basicSplashCode = `import 'package:flutter/material.dart';
+  // React/TypeScript로 구현된 스플래시 화면 코드
+  const getReactCode = () => {
+    switch (splashType) {
+      case "basic":
+        return `import React, { useEffect } from 'react';
+import { Loader2 } from 'lucide-react';
 
-class BasicSplashScreen extends StatelessWidget {
-  const BasicSplashScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                color: const Color(0xFF6700e6),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Text(
-                  'APP',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              '앱 이름',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 16),
-            const SizedBox(
-              width: 20,
-              height: 20,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.black45),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}`;
-
-  const animatedSplashCode = `import 'package:flutter/material.dart';
-
-class AnimatedSplashScreen extends StatefulWidget {
-  const AnimatedSplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<AnimatedSplashScreen> createState() => _AnimatedSplashScreenState();
+interface BasicSplashScreenProps {
+  onLoadingComplete?: () => void;
+  duration?: number;
 }
 
-class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _bounceAnimation;
+const BasicSplashScreen: React.FC<BasicSplashScreenProps> = ({
+  onLoadingComplete,
+  duration = 3000
+}) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (onLoadingComplete) {
+        onLoadingComplete();
+      }
+    }, duration);
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1500),
-    )..repeat(reverse: true);
+    return () => clearTimeout(timer);
+  }, [onLoadingComplete, duration]);
 
-    _bounceAnimation = Tween<double>(begin: 0, end: 20).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInOut,
-      ),
-    );
-  }
+  return (
+    <div className="h-screen bg-white flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-20 h-20 bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">
+          APP
+        </div>
+        <h1 className="font-medium text-gray-800 mb-4">앱 이름</h1>
+        <Loader2 className="animate-spin h-5 w-5 text-gray-500 mx-auto" />
+      </div>
+    </div>
+  );
+};
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+export default BasicSplashScreen;`;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color(0xFF6700e6),
-              Color(0xFF134429),
-            ],
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AnimatedBuilder(
-                animation: _bounceAnimation,
-                builder: (context, child) {
-                  return Transform.translate(
-                    offset: Offset(0, -_bounceAnimation.value),
-                    child: child,
-                  );
-                },
-                child: Container(
-                  width: 80,
-                  height: 80,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'LOGO',
-                      style: TextStyle(
-                        color: Color(0xFF6700e6),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 24),
-              FadeTransition(
-                opacity: _controller,
-                child: const Text(
-                  '애니메이션 스플래시',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              FadeTransition(
-                opacity: _controller,
-                child: const Text(
-                  '앱 로딩 중...',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}`;
+      case "animated":
+        return `import React, { useEffect } from 'react';
 
-  const progressSplashCode = `import 'package:flutter/material.dart';
-import 'dart:async';
-
-class ProgressSplashScreen extends StatefulWidget {
-  const ProgressSplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ProgressSplashScreen> createState() => _ProgressSplashScreenState();
+interface AnimatedSplashScreenProps {
+  onLoadingComplete?: () => void;
+  duration?: number;
 }
 
-class _ProgressSplashScreenState extends State<ProgressSplashScreen> {
-  double _progress = 0;
-  late Timer _timer;
+const AnimatedSplashScreen: React.FC<AnimatedSplashScreenProps> = ({
+  onLoadingComplete,
+  duration = 3000
+}) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (onLoadingComplete) {
+        onLoadingComplete();
+      }
+    }, duration);
 
-  @override
-  void initState() {
-    super.initState();
-    _startLoading();
-  }
+    return () => clearTimeout(timer);
+  }, [onLoadingComplete, duration]);
 
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
+  return (
+    <div className="h-screen bg-gradient-to-br from-purple-600 to-green-900 flex flex-col items-center justify-center text-white">
+      <div className="animate-bounce mb-6">
+        <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-purple-600 font-bold text-xl">
+          LOGO
+        </div>
+      </div>
+      <div className="text-center animate-fade-in">
+        <h1 className="font-medium text-lg mb-2">애니메이션 스플래시</h1>
+        <p className="text-white/70 text-sm">앱 로딩 중...</p>
+      </div>
+    </div>
+  );
+};
 
-  void _startLoading() {
-    _timer = Timer.periodic(const Duration(milliseconds: 300), (timer) {
-      setState(() {
-        if (_progress < 100) {
-          _progress += 10;
-        } else {
-          _timer.cancel();
-          // 여기서 홈 화면으로 이동
-          // Navigator.of(context).pushReplacement(...);
+export default AnimatedSplashScreen;`;
+
+      case "progress":
+        return `import React, { useState, useEffect } from 'react';
+
+interface ProgressSplashScreenProps {
+  onLoadingComplete?: () => void;
+  duration?: number;
+}
+
+const ProgressSplashScreen: React.FC<ProgressSplashScreenProps> = ({
+  onLoadingComplete,
+  duration = 3000
+}) => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          if (onLoadingComplete) {
+            setTimeout(onLoadingComplete, 500);
+          }
+          return 100;
         }
+        return prev + (100 / (duration / 100));
       });
-    });
-  }
+    }, 100);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F4),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 80,
-              height: 80,
-              decoration: const BoxDecoration(
-                color: Color(0xFF6700e6),
-                shape: BoxShape.circle,
-              ),
-              child: const Center(
-                child: Text(
-                  'UI',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Text(
-              '\${_progress.toInt()}% 완료',
-              style: const TextStyle(
-                color: Color(0xFF6700e6),
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              width: 200,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: LinearProgressIndicator(
-                  value: _progress / 100,
-                  backgroundColor: Colors.grey.shade200,
-                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF6700e6)),
-                  minHeight: 8,
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              '리소스 로딩 중...',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}`;
+    return () => clearInterval(interval);
+  }, [onLoadingComplete, duration]);
 
-  const brandedSplashCode = `import 'package:flutter/material.dart';
+  return (
+    <div className="h-screen bg-gray-100 flex flex-col items-center justify-center">
+      <div className="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mb-6">
+        UI
+      </div>
+      <div className="text-center">
+        <p className="font-medium text-purple-600 mb-2">{Math.round(progress)}% 완료</p>
+        <div className="w-56 h-2 bg-gray-200 rounded-full overflow-hidden mb-2">
+          <div 
+            className="bg-purple-600 h-full transition-all duration-100 ease-out"
+            style={{ width: \`\${progress}%\` }}
+          />
+        </div>
+        <p className="text-gray-500 text-sm">리소스 로딩 중...</p>
+      </div>
+    </div>
+  );
+};
 
-class BrandedSplashScreen extends StatelessWidget {
-  const BrandedSplashScreen({Key? key}) : super(key: key);
+export default ProgressSplashScreen;`;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF6700e6),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              child: const Center(
-                child: Text(
-                  'UI',
-                  style: TextStyle(
-                    color: Color(0xFF6700e6),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              '브랜드명',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                letterSpacing: 3,
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              '브랜드 슬로건이나 한 줄 설명',
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 14,
-              ),
-            ),
-            const SizedBox(height: 24),
-            const SizedBox(
-              width: 24,
-              height: 24,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}`;
+      case "branded":
+        return `import React, { useEffect } from 'react';
+import { Loader2 } from 'lucide-react';
+
+interface BrandedSplashScreenProps {
+  onLoadingComplete?: () => void;
+  duration?: number;
+}
+
+const BrandedSplashScreen: React.FC<BrandedSplashScreenProps> = ({
+  onLoadingComplete,
+  duration = 3000
+}) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (onLoadingComplete) {
+        onLoadingComplete();
+      }
+    }, duration);
+
+    return () => clearTimeout(timer);
+  }, [onLoadingComplete, duration]);
+
+  return (
+    <div className="h-screen bg-purple-600 flex flex-col items-center justify-center text-white">
+      <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-purple-600 font-bold text-2xl mb-4">
+        UI
+      </div>
+      <h1 className="text-xl font-bold uppercase tracking-widest mb-2">브랜드명</h1>
+      <p className="text-white/70 text-sm mb-6">브랜드 슬로건이나 한 줄 설명</p>
+      <Loader2 className="animate-spin h-6 w-6" />
+    </div>
+  );
+};
+
+export default BrandedSplashScreen;`;
+
+      default:
+        return getReactCode();
+    }
+  };
 
   // 스플래시 화면의 로딩 상태를 보여주기 위한 효과
   useEffect(() => {
@@ -1175,130 +530,13 @@ class BrandedSplashScreen extends StatelessWidget {
               </ul>
             </div>
 
-            {/* 다트 코드 예제 */}
-            <DartCodeExamples />
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
             <div className="bg-gray-800 p-4 border rounded-md mb-6">
               <PrismCode
                 language="typescript"
-                code={
-                  splashType === "basic"
-                    ? basicSplashCode
-                    : splashType === "animated"
-                    ? animatedSplashCode
-                    : splashType === "progress"
-                    ? progressSplashCode
-                    : brandedSplashCode
-                }
-              />
-            </div>
-
-            <div className="bg-gray-800 p-4 border rounded-md mb-6">
-              <h3 className="text-lg font-medium mb-3 text-white">
-                스플래시 화면 자동 전환 구현
-              </h3>
-              <PrismCode
-                language="typescript"
-                code={`import 'package:flutter/material.dart';
-import 'dart:async';
-
-// 메인 애플리케이션
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '스플래시 화면 데모',
-      theme: ThemeData(
-        primaryColor: const Color(0xFF6700e6),
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6700e6)),
-      ),
-      home: const SplashScreen(),
-    );
-  }
-}
-
-// 스플래시 화면
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(
-      const Duration(seconds: 3), 
-      () => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      )
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF6700e6),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Center(
-                child: Text(
-                  'APP',
-                  style: TextStyle(
-                    color: Color(0xFF6700e6),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 32),
-            const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// 홈 화면 (스플래시 이후 표시)
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('홈 화면'),
-        backgroundColor: const Color(0xFF6700e6),
-      ),
-      body: const Center(
-        child: Text('앱 메인 컨텐츠'),
-      ),
-    );
-  }
-}`}
+                code={getReactCode()}
               />
             </div>
           </TabsContent>
