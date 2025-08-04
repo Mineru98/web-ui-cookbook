@@ -19,6 +19,7 @@ export default function AppBarSlide() {
     "standard" | "context" | "search" | "prominent"
   >("standard");
   const [showNotification, setShowNotification] = useState(false);
+  const [codeType, setCodeType] = useState<"react" | "flutter">("react");
 
   const renderAppBar = () => {
     switch (appBarType) {
@@ -502,6 +503,361 @@ export default StandardAppBarExample;`;
     }
   };
 
+  const getFlutterCode = () => {
+    switch (appBarType) {
+      case "standard":
+        return `// 기본형 앱 바 구현 예시
+
+import 'package:flutter/material.dart';
+
+class StandardAppBar extends StatefulWidget {
+  @override
+  _StandardAppBarState createState() => _StandardAppBarState();
+}
+
+class _StandardAppBarState extends State<StandardAppBar> {
+  bool _showNotification = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: Center(child: Text('앱 콘텐츠')),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      title: Text('앱 타이틀'),
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
+      elevation: 1,
+      leading: IconButton(
+        icon: Icon(Icons.menu),
+        onPressed: () {
+          // 메뉴 동작
+        },
+      ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.search),
+          onPressed: () {
+            // 검색 동작
+          },
+        ),
+        Stack(
+          children: [
+            IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: () {
+                setState(() {
+                  _showNotification = !_showNotification;
+                });
+              },
+            ),
+            if (_showNotification)
+              Positioned(
+                right: 8,
+                top: 8,
+                child: Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+          ],
+        ),
+        IconButton(
+          icon: Icon(Icons.more_vert),
+          onPressed: () {
+            // 더보기 메뉴
+          },
+        ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+}`;
+
+      case "context":
+        return `// 컨텍스트형 앱 바 구현 예시
+
+import 'package:flutter/material.dart';
+
+class ContextAppBar extends StatefulWidget {
+  @override
+  _ContextAppBarState createState() => _ContextAppBarState();
+}
+
+class _ContextAppBarState extends State<ContextAppBar> {
+  bool _showNotification = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: Center(child: Text('앱 콘텐츠')),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      title: Text('선택된 항목 (3)'),
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
+      elevation: 1,
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+        onPressed: () {
+          // 뒤로 가기
+        },
+      ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.share),
+          onPressed: () {
+            // 공유 동작
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.bookmark_add),
+          onPressed: () {
+            // 북마크 동작
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.more_vert),
+          onPressed: () {
+            // 더보기 메뉴
+          },
+        ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+}`;
+
+      case "search":
+        return `// 검색형 앱 바 구현 예시
+
+import 'package:flutter/material.dart';
+
+class SearchAppBar extends StatefulWidget {
+  @override
+  _SearchAppBarState createState() => _SearchAppBarState();
+}
+
+class _SearchAppBarState extends State<SearchAppBar> {
+  TextEditingController _searchController = TextEditingController();
+  bool _showNotification = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: Center(child: Text('앱 콘텐츠')),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      title: TextField(
+        controller: _searchController,
+        decoration: InputDecoration(
+          hintText: '검색어를 입력하세요',
+          prefixIcon: Icon(Icons.search, color: Colors.grey),
+          border: InputBorder.none,
+          filled: true,
+          fillColor: Colors.grey[100],
+          contentPadding: EdgeInsets.symmetric(vertical: 8),
+        ),
+        style: TextStyle(fontSize: 16),
+        onChanged: (value) {
+          // 검색 로직
+        },
+      ),
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
+      elevation: 1,
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+        onPressed: () {
+          // 뒤로 가기
+        },
+      ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.more_vert),
+          onPressed: () {
+            // 더보기 메뉴
+          },
+        ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+}`;
+
+      default: // prominent
+        return `// 확장형 앱 바 구현 예시
+
+import 'package:flutter/material.dart';
+
+class ProminentAppBar extends StatefulWidget {
+  @override
+  _ProminentAppBarState createState() => _ProminentAppBarState();
+}
+
+class _ProminentAppBarState extends State<ProminentAppBar> {
+  int _selectedIndex = 0;
+  bool _showNotification = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: _buildTabContent(),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      title: Text('앱 타이틀'),
+      backgroundColor: Color(0xFF6700E6),
+      foregroundColor: Colors.white,
+      elevation: 2,
+      leading: IconButton(
+        icon: Icon(Icons.menu),
+        onPressed: () {
+          // 메뉴 동작
+        },
+      ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.search),
+          onPressed: () {
+            // 검색 동작
+          },
+        ),
+        Stack(
+          children: [
+            IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: () {
+                setState(() {
+                  _showNotification = !_showNotification;
+                });
+              },
+            ),
+            if (_showNotification)
+              Positioned(
+                right: 8,
+                top: 8,
+                child: Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+          ],
+        ),
+        IconButton(
+          icon: Icon(Icons.more_vert),
+          onPressed: () {
+            // 더보기 메뉴
+          },
+        ),
+      ],
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '확장 타이틀 영역',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    '추가 설명 텍스트 또는 액션',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white70,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              color: Color(0xFF4A0099),
+              child: TabBar(
+                controller: TabController(length: 3, vsync: this),
+                indicatorColor: Colors.white,
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.white70,
+                tabs: [
+                  Tab(text: '탭 1'),
+                  Tab(text: '탭 2'),
+                  Tab(text: '탭 3'),
+                ],
+                onTap: (index) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTabContent() {
+    return Center(
+      child: Text(
+        '탭 \${_selectedIndex + 1} 콘텐츠',
+        style: TextStyle(fontSize: 18),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+}`;
+    }
+  };
+
   return (
     <SlideLayout title="App Bar (앱 바)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -599,10 +955,36 @@ export default StandardAppBarExample;`;
             </div>
           </TabsContent>
 
-          <TabsContent value="code">
-            {/* 코드 탭 내용 */}
-            <div className="bg-gray-800 p-4 border rounded-md mt-6">
-              <PrismCode code={getReactCode()} language="typescript" />
+          <TabsContent value="code" className="mt-4">
+            <div className="flex justify-center mb-4">
+              <div className="flex gap-2">
+                <button
+                  className={`px-4 py-2 rounded text-sm ${
+                    codeType === "react"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setCodeType("react")}
+                >
+                  React + TypeScript
+                </button>
+                <button
+                  className={`px-4 py-2 rounded text-sm ${
+                    codeType === "flutter"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setCodeType("flutter")}
+                >
+                  Flutter + Dart
+                </button>
+              </div>
+            </div>
+            <div className="bg-gray-800 p-4 rounded-lg text-white">
+              <PrismCode
+                language={codeType === "react" ? "typescript" : "dart"}
+                code={codeType === "react" ? getReactCode() : getFlutterCode()}
+              />
             </div>
           </TabsContent>
 

@@ -11,6 +11,7 @@ export default function TabBarSlide() {
   const [tabBarStyle, setTabBarStyle] = useState<
     "basic" | "scrollable" | "underline" | "pills" | "material"
   >("basic");
+  const [codeType, setCodeType] = useState<"react" | "flutter">("react");
 
   const tabItems = [
     { id: "recent", label: "최근", icon: Clock },
@@ -161,6 +162,470 @@ export default function TabBarSlide() {
             </div>
           </div>
         );
+    }
+  };
+
+  const getReactCode = () => {
+    switch (tabBarStyle) {
+      case "basic":
+        return `import React, { useState } from 'react';
+import { Clock, Bookmark, Compass, User } from 'lucide-react';
+
+interface TabItem {
+  id: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+interface BasicTabBarProps {
+  items: TabItem[];
+  activeTab: string;
+  onTabChange: (tabId: string) => void;
+  className?: string;
+}
+
+const BasicTabBar: React.FC<BasicTabBarProps> = ({
+  items,
+  activeTab,
+  onTabChange,
+  className = ""
+}) => {
+  return (
+    <div className={\`border-b border-gray-200 \${className}\`}>
+      <div className="flex">
+        {items.map((tab) => {
+          const IconComponent = tab.icon;
+          return (
+            <button
+              key={tab.id}
+              className={\`px-6 py-4 text-sm font-medium transition-colors \${
+                activeTab === tab.id
+                  ? "text-purple-600 border-b-2 border-purple-600"
+                  : "text-gray-500 hover:text-gray-700"
+              }\`}
+              onClick={() => onTabChange(tab.id)}
+            >
+              <div className="flex items-center gap-2">
+                <IconComponent className="h-4 w-4" />
+                <span>{tab.label}</span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+// 사용 예시
+const BasicTabBarExample: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("recent");
+
+  const tabItems = [
+    { id: "recent", label: "최근", icon: Clock },
+    { id: "saved", label: "저장됨", icon: Bookmark },
+    { id: "explore", label: "탐색", icon: Compass },
+    { id: "profile", label: "프로필", icon: User },
+  ];
+
+  return (
+    <div className="w-full">
+      <BasicTabBar
+        items={tabItems}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
+      
+      <div className="p-6">
+        <div className="text-center">
+          <h3 className="text-lg font-semibold mb-2">
+            {tabItems.find(tab => tab.id === activeTab)?.label} 탭
+          </h3>
+          <p className="text-gray-600">
+            선택된 탭: {activeTab}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BasicTabBarExample;`;
+
+      case "scrollable":
+        return `import React, { useState } from 'react';
+
+interface ScrollableTabItem {
+  id: string;
+  label: string;
+}
+
+interface ScrollableTabBarProps {
+  items: ScrollableTabItem[];
+  activeTab: string;
+  onTabChange: (tabId: string) => void;
+  className?: string;
+}
+
+const ScrollableTabBar: React.FC<ScrollableTabBarProps> = ({
+  items,
+  activeTab,
+  onTabChange,
+  className = ""
+}) => {
+  return (
+    <div className={\`border-b border-gray-200 \${className}\`}>
+      <div className="overflow-x-auto scrollbar-hide">
+        <div className="flex whitespace-nowrap">
+          {items.map((tab) => (
+            <button
+              key={tab.id}
+              className={\`px-6 py-4 text-sm font-medium transition-colors flex-shrink-0 \${
+                activeTab === tab.id
+                  ? "text-purple-600 border-b-2 border-purple-600"
+                  : "text-gray-500 hover:text-gray-700"
+              }\`}
+              onClick={() => onTabChange(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// 사용 예시
+const ScrollableTabBarExample: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("recent");
+
+  const longTabItems = [
+    { id: "recent", label: "최근 항목" },
+    { id: "saved", label: "저장된 항목" },
+    { id: "explore", label: "탐색하기" },
+    { id: "popular", label: "인기 있는 항목" },
+    { id: "trending", label: "트렌딩 항목" },
+    { id: "recommend", label: "추천 항목" },
+    { id: "favorites", label: "즐겨찾기" },
+    { id: "bookmarks", label: "북마크" },
+    { id: "history", label: "기록" },
+    { id: "settings", label: "설정" },
+  ];
+
+  return (
+    <div className="w-full">
+      <ScrollableTabBar
+        items={longTabItems}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
+      
+      <div className="p-6">
+        <div className="text-center">
+          <h3 className="text-lg font-semibold mb-2">
+            {longTabItems.find(tab => tab.id === activeTab)?.label}
+          </h3>
+          <p className="text-gray-600">
+            선택된 탭: {activeTab}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ScrollableTabBarExample;`;
+
+      case "underline":
+        return `import React, { useState } from 'react';
+import { Clock, Bookmark, Compass, User } from 'lucide-react';
+
+interface UnderlineTabItem {
+  id: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+interface UnderlineTabBarProps {
+  items: UnderlineTabItem[];
+  activeTab: string;
+  onTabChange: (tabId: string) => void;
+  className?: string;
+}
+
+const UnderlineTabBar: React.FC<UnderlineTabBarProps> = ({
+  items,
+  activeTab,
+  onTabChange,
+  className = ""
+}) => {
+  return (
+    <div className={\`border-b border-gray-200 \${className}\`}>
+      <div className="flex">
+        {items.map((tab) => {
+          const IconComponent = tab.icon;
+          return (
+            <button
+              key={tab.id}
+              className={\`px-6 py-4 text-sm font-medium transition-all duration-200 relative \${
+                activeTab === tab.id
+                  ? "text-purple-600"
+                  : "text-gray-500 hover:text-gray-700"
+              }\`}
+              onClick={() => onTabChange(tab.id)}
+            >
+              <div className="flex flex-col items-center gap-1">
+                <IconComponent className="h-5 w-5" />
+                <span>{tab.label}</span>
+              </div>
+              
+              {/* Animated underline */}
+              {activeTab === tab.id && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600 transition-all duration-200" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+// 사용 예시
+const UnderlineTabBarExample: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("recent");
+
+  const tabItems = [
+    { id: "recent", label: "최근", icon: Clock },
+    { id: "saved", label: "저장됨", icon: Bookmark },
+    { id: "explore", label: "탐색", icon: Compass },
+    { id: "profile", label: "프로필", icon: User },
+  ];
+
+  return (
+    <div className="w-full">
+      <UnderlineTabBar
+        items={tabItems}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
+      
+      <div className="p-6">
+        <div className="text-center">
+          <h3 className="text-lg font-semibold mb-2">
+            {tabItems.find(tab => tab.id === activeTab)?.label} 탭
+          </h3>
+          <p className="text-gray-600">
+            아이콘과 텍스트가 세로로 배치된 언더라인 스타일
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UnderlineTabBarExample;`;
+
+      case "pills":
+        return `import React, { useState } from 'react';
+import { Clock, Bookmark, Compass, User } from 'lucide-react';
+
+interface PillTabItem {
+  id: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+interface PillTabBarProps {
+  items: PillTabItem[];
+  activeTab: string;
+  onTabChange: (tabId: string) => void;
+  className?: string;
+}
+
+const PillTabBar: React.FC<PillTabBarProps> = ({
+  items,
+  activeTab,
+  onTabChange,
+  className = ""
+}) => {
+  return (
+    <div className={\`p-1 bg-gray-100 rounded-lg inline-flex \${className}\`}>
+      {items.map((tab) => {
+        const IconComponent = tab.icon;
+        return (
+          <button
+            key={tab.id}
+            className={\`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 \${
+              activeTab === tab.id
+                ? "bg-white text-purple-600 shadow-sm"
+                : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+            }\`}
+            onClick={() => onTabChange(tab.id)}
+          >
+            <div className="flex items-center gap-2">
+              <IconComponent className="h-4 w-4" />
+              <span>{tab.label}</span>
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
+// 사용 예시
+const PillTabBarExample: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("recent");
+
+  const tabItems = [
+    { id: "recent", label: "최근", icon: Clock },
+    { id: "saved", label: "저장됨", icon: Bookmark },
+    { id: "explore", label: "탐색", icon: Compass },
+    { id: "profile", label: "프로필", icon: User },
+  ];
+
+  return (
+    <div className="w-full">
+      <div className="flex justify-center p-6">
+        <PillTabBar
+          items={tabItems}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
+      </div>
+      
+      <div className="p-6">
+        <div className="text-center">
+          <h3 className="text-lg font-semibold mb-2">
+            {tabItems.find(tab => tab.id === activeTab)?.label} 탭
+          </h3>
+          <p className="text-gray-600">
+            둥근 배경이 있는 알약 모양의 탭 바
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PillTabBarExample;`;
+
+      case "material":
+        return `import React, { useState, useRef, useEffect } from 'react';
+import { Clock, Bookmark, Compass, User } from 'lucide-react';
+
+interface MaterialTabItem {
+  id: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+interface MaterialTabBarProps {
+  items: MaterialTabItem[];
+  activeTab: string;
+  onTabChange: (tabId: string) => void;
+  className?: string;
+}
+
+const MaterialTabBar: React.FC<MaterialTabBarProps> = ({
+  items,
+  activeTab,
+  onTabChange,
+  className = ""
+}) => {
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  useEffect(() => {
+    const activeIndex = items.findIndex(item => item.id === activeTab);
+    const activeTabElement = tabRefs.current[activeIndex];
+    
+    if (activeTabElement) {
+      setIndicatorStyle({
+        left: activeTabElement.offsetLeft,
+        width: activeTabElement.offsetWidth,
+      });
+    }
+  }, [activeTab, items]);
+
+  return (
+    <div className={\`relative border-b border-gray-200 \${className}\`}>
+      <div className="flex">
+        {items.map((tab, index) => {
+          const IconComponent = tab.icon;
+          return (
+            <button
+              key={tab.id}
+              ref={(el) => {
+                tabRefs.current[index] = el;
+              }}
+              className={\`px-6 py-4 text-sm font-medium transition-colors relative z-10 \${
+                activeTab === tab.id
+                  ? "text-purple-600"
+                  : "text-gray-500 hover:text-gray-700"
+              }\`}
+              onClick={() => onTabChange(tab.id)}
+            >
+              <div className="flex items-center gap-2">
+                <IconComponent className="h-4 w-4" />
+                <span>{tab.label}</span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+      
+      {/* Animated indicator */}
+      <div
+        className="absolute bottom-0 h-0.5 bg-purple-600 transition-all duration-300 ease-out"
+        style={{
+          left: indicatorStyle.left,
+          width: indicatorStyle.width,
+        }}
+      />
+    </div>
+  );
+};
+
+// 사용 예시
+const MaterialTabBarExample: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("recent");
+
+  const tabItems = [
+    { id: "recent", label: "최근", icon: Clock },
+    { id: "saved", label: "저장됨", icon: Bookmark },
+    { id: "explore", label: "탐색", icon: Compass },
+    { id: "profile", label: "프로필", icon: User },
+  ];
+
+  return (
+    <div className="w-full">
+      <MaterialTabBar
+        items={tabItems}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
+      
+      <div className="p-6">
+        <div className="text-center">
+          <h3 className="text-lg font-semibold mb-2">
+            {tabItems.find(tab => tab.id === activeTab)?.label} 탭
+          </h3>
+          <p className="text-gray-600">
+            부드럽게 슬라이딩하는 인디케이터가 있는 Material Design 스타일
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MaterialTabBarExample;`;
+
+      default:
+        return getReactCode(); // Fallback to basic
     }
   };
 
@@ -674,8 +1139,35 @@ class _BasicTabBarExampleState extends State<BasicTabBarExample> with SingleTick
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
+            <div className="flex justify-center mb-4">
+              <div className="flex gap-2">
+                <button
+                  className={`px-4 py-2 rounded text-sm ${
+                    codeType === "react"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setCodeType("react")}
+                >
+                  React + TypeScript
+                </button>
+                <button
+                  className={`px-4 py-2 rounded text-sm ${
+                    codeType === "flutter"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setCodeType("flutter")}
+                >
+                  Flutter + Dart
+                </button>
+              </div>
+            </div>
             <div className="bg-gray-800 p-4 rounded-lg text-white">
-              <PrismCode code={getDartCode()} language="typescript" />
+              <PrismCode 
+                code={codeType === "react" ? getReactCode() : getDartCode()} 
+                language={codeType === "react" ? "typescript" : "dart"} 
+              />
             </div>
           </TabsContent>
 

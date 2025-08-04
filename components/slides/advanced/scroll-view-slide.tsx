@@ -10,6 +10,7 @@ export default function ScrollViewSlide() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const [codeType, setCodeType] = useState<"react" | "flutter">("react");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -62,6 +63,307 @@ export default function ScrollViewSlide() {
     }
 
     return result;
+  };
+
+  const getReactCode = () => {
+    return `import React, { useState, useEffect, useRef } from 'react';
+import { ChevronUp } from 'lucide-react';
+
+interface ScrollViewProps {
+  children: React.ReactNode;
+  className?: string;
+  showScrollToTop?: boolean;
+  showProgressBar?: boolean;
+  onScroll?: (position: number, maxScroll: number) => void;
+}
+
+const ScrollView: React.FC<ScrollViewProps> = ({
+  children,
+  className = '',
+  showScrollToTop = true,
+  showProgressBar = true,
+  onScroll
+}) => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [maxScroll, setMaxScroll] = useState(0);
+  const [showButton, setShowButton] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
+    const handleScroll = () => {
+      const position = scrollContainer.scrollTop;
+      const max = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+      
+      setScrollPosition(position);
+      setMaxScroll(max);
+      setShowButton(position > 100);
+      
+      onScroll?.(position, max);
+    };
+
+    scrollContainer.addEventListener('scroll', handleScroll);
+    handleScroll(); // 초기 값 설정
+
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleScroll);
+    };
+  }, [onScroll]);
+
+  const scrollToTop = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const progressPercentage = maxScroll > 0 ? (scrollPosition / maxScroll) * 100 : 0;
+
+  return (
+    <div className={\`relative \${className}\`}>
+      {/* Progress Bar */}
+      {showProgressBar && (
+        <div className="sticky top-0 left-0 right-0 h-1 bg-gray-200 z-10">
+          <div
+            className="h-full bg-blue-500 transition-all duration-150"
+            style={{ width: \`\${progressPercentage}%\` }}
+          />
+        </div>
+      )}
+
+      {/* Scrollable Content */}
+      <div
+        ref={scrollContainerRef}
+        className="h-full overflow-y-auto"
+        style={{
+          scrollbarWidth: 'thin',
+          scrollbarColor: '#cbd5e0 #f7fafc',
+        }}
+      >
+        {children}
+      </div>
+
+      {/* Scroll to Top Button */}
+      {showScrollToTop && showButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-4 right-4 bg-white p-3 rounded-full shadow-lg border hover:bg-gray-50 transition-all duration-300 z-20"
+          aria-label="상단으로 스크롤"
+        >
+          <ChevronUp className="w-5 h-5 text-gray-700" />
+        </button>
+      )}
+    </div>
+  );
+};
+
+// Usage Example
+const App: React.FC = () => {
+  const handleScroll = (position: number, maxScroll: number) => {
+    console.log(\`Scroll position: \${position}, Max: \${maxScroll}\`);
+  };
+
+  const generateContent = () => {
+    const paragraphs = [
+      "스크롤 뷰는 화면 크기보다 더 큰 콘텐츠를 표시하기 위해 필수적인 UI 컴포넌트입니다.",
+      "대부분의 모바일 앱과 웹사이트에서는 스크롤 뷰를 기본적으로 사용합니다.",
+      "스크롤 뷰에는 세로 스크롤과 가로 스크롤이 있으며, 필요에 따라 두 방향 모두 지원할 수 있습니다.",
+      "스크롤 뷰를 구현할 때는 성능 최적화가 중요합니다.",
+      "스크롤 위치를 추적하고 특정 동작을 트리거하는 것은 다양한 기능 구현에 유용합니다.",
+    ];
+
+    return Array.from({ length: 20 }, (_, i) => (
+      <div
+        key={i}
+        className={\`p-4 mb-4 rounded-lg \${
+          i % 3 === 0
+            ? 'bg-blue-50 border border-blue-200'
+            : i % 3 === 1
+            ? 'bg-green-50 border border-green-200'
+            : 'bg-purple-50 border border-purple-200'
+        }\`}
+      >
+        <p className="text-gray-700">{paragraphs[i % paragraphs.length]}</p>
+        <div className="text-xs text-gray-400 mt-2">단락 #{i + 1}</div>
+      </div>
+    ));
+  };
+
+  return (
+    <div className="h-96">
+      <ScrollView
+        className=""
+        showScrollToTop={true}
+        showProgressBar={true}
+        onScroll={handleScroll}
+      >
+        <div className="p-4">
+          <h2 className="text-xl font-bold mb-4">스크롤 가능한 콘텐츠</h2>
+          {generateContent()}
+        </div>
+      </ScrollView>
+    </div>
+  );
+};
+
+export default App;`;
+  };
+
+  const getFlutterCode = () => {
+    return `import 'package:flutter/material.dart';
+
+class ScrollViewExample extends StatefulWidget {
+  @override
+  _ScrollViewExampleState createState() => _ScrollViewExampleState();
+}
+
+class _ScrollViewExampleState extends State<ScrollViewExample> {
+  final ScrollController _scrollController = ScrollController();
+  double _scrollPosition = 0;
+  double _maxScroll = 0;
+  bool _showScrollToTop = false;
+  
+  @override
+  void initState() {
+    super.initState();
+    
+    _scrollController.addListener(() {
+      setState(() {
+        _scrollPosition = _scrollController.position.pixels;
+        _maxScroll = _scrollController.position.maxScrollExtent;
+        _showScrollToTop = _scrollPosition > 100;
+      });
+    });
+  }
+  
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+  
+  List<String> _generateContent() {
+    final lorem = [
+      "스크롤 뷰는 화면 크기보다 더 큰 콘텐츠를 표시하기 위해 필수적인 UI 컴포넌트입니다.",
+      "대부분의 모바일 앱과 웹사이트에서는 스크롤 뷰를 기본적으로 사용합니다.",
+      "스크롤 뷰에는 세로 스크롤과 가로 스크롤이 있으며, 필요에 따라 두 방향 모두 지원할 수 있습니다.",
+      "스크롤 뷰를 구현할 때는 성능 최적화가 중요합니다.",
+      "스크롤 위치를 추적하고 특정 동작을 트리거하는 것은 다양한 기능 구현에 유용합니다.",
+      "접근성을 고려하여 키보드 내비게이션과 스크린 리더 호환성을 보장해야 합니다.",
+      "스크롤바의 시각적 디자인도 사용자 경험에 영향을 미칩니다.",
+    ];
+    
+    List<String> result = [];
+    for (int i = 0; i < 20; i++) {
+      result.add(lorem[i % lorem.length]);
+    }
+    
+    return result;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final contentList = _generateContent();
+    final progressPercentage = _maxScroll > 0 ? (_scrollPosition / _maxScroll) * 100 : 0.0;
+    
+    return Scaffold(
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              // Progress Bar
+              Container(
+                height: 4,
+                child: LinearProgressIndicator(
+                  value: _maxScroll > 0 ? _scrollPosition / _maxScroll : 0,
+                  backgroundColor: Colors.grey[300],
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                ),
+              ),
+              
+              // Scrollable Content
+              Expanded(
+                child: ListView.builder(
+                  controller: _scrollController,
+                  padding: EdgeInsets.all(16),
+                  itemCount: contentList.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.only(bottom: 16),
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: index % 3 == 0
+                            ? Colors.blue[50]
+                            : index % 3 == 1
+                                ? Colors.green[50]
+                                : Colors.purple[50],
+                        border: Border.all(
+                          color: index % 3 == 0
+                              ? Colors.blue[200]!
+                              : index % 3 == 1
+                                  ? Colors.green[200]!
+                                  : Colors.purple[200]!,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            contentList[index],
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey[700],
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            '단락 #\${index + 1)}',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.grey[400],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          
+          // Scroll to Top Button
+          if (_showScrollToTop)
+            Positioned(
+              bottom: 16,
+              right: 16,
+              child: FloatingActionButton(
+                mini: true,
+                onPressed: _scrollToTop,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.grey[700],
+                elevation: 4,
+                child: Icon(Icons.keyboard_arrow_up),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+  
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+}`;
   };
 
   return (
@@ -146,180 +448,35 @@ export default function ScrollViewSlide() {
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
+            <div className="flex justify-center mb-4">
+              <div className="flex bg-gray-100 rounded-lg p-1 gap-1">
+                <button
+                  onClick={() => setCodeType("react")}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    codeType === "react"
+                      ? "bg-white text-gray-900 shadow-sm"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  React + TypeScript
+                </button>
+                <button
+                  onClick={() => setCodeType("flutter")}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    codeType === "flutter"
+                      ? "bg-white text-gray-900 shadow-sm"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  Flutter + Dart
+                </button>
+              </div>
+            </div>
+
             <div className="bg-gray-800 p-4 border rounded-md">
               <PrismCode
-                language="typescript"
-                code={`import 'package:flutter/material.dart';
-
-class ScrollViewExample extends StatefulWidget {
-  @override
-  _ScrollViewExampleState createState() => _ScrollViewExampleState();
-}
-
-class _ScrollViewExampleState extends State<ScrollViewExample> {
-  final ScrollController _scrollController = ScrollController();
-  double _scrollPosition = 0;
-  double _maxScroll = 0;
-  bool _showScrollToTop = false;
-  
-  @override
-  void initState() {
-    super.initState();
-    
-    _scrollController.addListener(() {
-      setState(() {
-        _scrollPosition = _scrollController.position.pixels;
-        _maxScroll = _scrollController.position.maxScrollExtent;
-        _showScrollToTop = _scrollPosition > 100;
-      });
-    });
-  }
-  
-  void _scrollToTop() {
-    _scrollController.animateTo(
-      0,
-      duration: Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
-  }
-  
-  List<String> _generateContent() {
-    final lorem = [
-      "스크롤 뷰는 화면 크기보다 더 큰 콘텐츠를 표시하기 위해 필수적인 UI 컴포넌트입니다.",
-      "대부분의 모바일 앱과 웹사이트에서는 스크롤 뷰를 기본적으로 사용합니다.",
-      "스크롤 뷰에는 세로 스크롤과 가로 스크롤이 있으며, 필요에 따라 두 방향 모두 지원할 수 있습니다.",
-      "스크롤 뷰를 구현할 때는 성능 최적화가 중요합니다.",
-      "스크롤 위치를 추적하고 특정 동작을 트리거하는 것은 다양한 기능 구현에 유용합니다.",
-      "접근성을 고려하여 키보드 내비게이션과 스크린 리더 호환성을 보장해야 합니다.",
-      "스크롤바의 시각적 디자인도 사용자 경험에 영향을 미칩니다.",
-      "스크롤 애니메이션과 스냅 기능을 추가하여 더 매끄러운 경험을 제공할 수 있습니다.",
-      "상단으로 스크롤 버튼은 긴 콘텐츠를 탐색할 때 매우 유용한 UI 요소입니다.",
-      "스크롤 이벤트를 사용하여 다양한 인터랙션을 구현할 수 있습니다.",
-    ];
-    
-    List<String> result = [];
-    for (int i = 0; i < 20; i++) {
-      result.add(lorem[i % lorem.length]);
-    }
-    
-    return result;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final paragraphs = _generateContent();
-    final progressPercentage = _maxScroll > 0 
-        ? (_scrollPosition / _maxScroll * 100).round() 
-        : 0;
-        
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('스크롤 뷰 예시'),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(24),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  '스크롤 위치: ' + _scrollPosition.round().toString(),
-                  style: TextStyle(fontSize: 12),
-                ),
-                SizedBox(width: 8),
-                Text(
-                  '최대: ' + _maxScroll.round().toString(),
-                  style: TextStyle(fontSize: 12),
-                ),
-                SizedBox(width: 8),
-                Text(
-                  '진행률: ' + progressPercentage.toString() + '%',
-                  style: TextStyle(fontSize: 12),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              // 스크롤 진행 표시기
-              LinearProgressIndicator(
-                value: _maxScroll > 0 ? _scrollPosition / _maxScroll : 0,
-                backgroundColor: Colors.grey[200],
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                minHeight: 4,
-              ),
-              
-              // 스크롤 가능한 콘텐츠
-              Expanded(
-                child: ListView.builder(
-                  controller: _scrollController,
-                  padding: EdgeInsets.all(16),
-                  itemCount: paragraphs.length,
-                  itemBuilder: (context, i) {
-                    return Card(
-                      margin: EdgeInsets.only(bottom: 16),
-                      color: i % 3 == 0 
-                          ? Colors.green.withOpacity(0.05)
-                          : i % 3 == 1 
-                              ? Colors.grey[50]
-                              : Colors.white,
-                      child: Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              paragraphs[i],
-                              style: TextStyle(color: Colors.grey[800]),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              '단락 #' + (i + 1).toString(),
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey[400],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-          
-          // 상단으로 스크롤 버튼
-          if (_showScrollToTop)
-            Positioned(
-              right: 16,
-              bottom: 16,
-              child: FloatingActionButton(
-                mini: true,
-                onPressed: _scrollToTop,
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.keyboard_arrow_up,
-                  color: Colors.grey[700],
-                ),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-  
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-}`}
+                language={codeType === "react" ? "typescript" : "dart"}
+                code={codeType === "react" ? getReactCode() : getFlutterCode()}
               />
             </div>
           </TabsContent>

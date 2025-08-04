@@ -25,6 +25,7 @@ export default function BottomSheetSlide() {
   const [sheetType, setSheetType] = useState<
     "basic" | "modal" | "scrollable" | "actions"
   >("basic");
+  const [codeType, setCodeType] = useState<"react" | "flutter">("react");
 
   const toggleSheet = () => {
     setIsOpen(!isOpen);
@@ -288,6 +289,994 @@ export default function BottomSheetSlide() {
     }
   };
 
+  const getReactCode = () => {
+    switch (sheetType) {
+      case "basic":
+        return `import React, { useState } from 'react';
+import { X } from 'lucide-react';
+
+interface BottomSheetProps {
+  isOpen: boolean;
+  onClose: () => void;
+  height?: 'small' | 'medium' | 'large' | 'full';
+  children: React.ReactNode;
+}
+
+const BottomSheet: React.FC<BottomSheetProps> = ({
+  isOpen,
+  onClose,
+  height = 'medium',
+  children
+}) => {
+  const getHeightClass = () => {
+    switch (height) {
+      case 'small': return 'h-1/4';
+      case 'medium': return 'h-1/2';
+      case 'large': return 'h-3/4';
+      case 'full': return 'h-full';
+      default: return 'h-1/2';
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-black bg-opacity-50 transition-opacity"
+        onClick={onClose}
+      />
+      
+      {/* Bottom Sheet */}
+      <div className={\`absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform transition-transform duration-300 ease-out \${getHeightClass()}\`}>
+        {/* Handle */}
+        <div className="flex justify-center pt-2 pb-4">
+          <div className="w-10 h-1 bg-gray-300 rounded-full" />
+        </div>
+        
+        {/* Content */}
+        <div className="px-4 pb-4 h-full overflow-y-auto">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// 사용 예시
+const BasicBottomSheetExample: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [height, setHeight] = useState<'small' | 'medium' | 'large' | 'full'>('medium');
+
+  return (
+    <div className="p-4">
+      <div className="flex gap-2 mb-4">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+        >
+          시트 열기
+        </button>
+        
+        <select 
+          value={height} 
+          onChange={(e) => setHeight(e.target.value as any)}
+          className="px-3 py-2 border rounded-lg"
+        >
+          <option value="small">작게</option>
+          <option value="medium">중간</option>
+          <option value="large">크게</option>
+          <option value="full">전체</option>
+        </select>
+      </div>
+
+      <BottomSheet 
+        isOpen={isOpen} 
+        onClose={() => setIsOpen(false)}
+        height={height}
+      >
+        <div className="text-center py-8">
+          <h3 className="text-lg font-semibold mb-2">기본 바텀 시트</h3>
+          <p className="text-gray-600 mb-4">
+            이것은 기본적인 바텀 시트입니다.
+          </p>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+          >
+            닫기
+          </button>
+        </div>
+      </BottomSheet>
+    </div>
+  );
+};
+
+export default BasicBottomSheetExample;`;
+
+      case "modal":
+        return `import React, { useState, useEffect } from 'react';
+import { X } from 'lucide-react';
+
+interface ModalBottomSheetProps {
+  isOpen: boolean;
+  onClose: () => void;
+  height?: 'small' | 'medium' | 'large' | 'full';
+  children: React.ReactNode;
+}
+
+const ModalBottomSheet: React.FC<ModalBottomSheetProps> = ({
+  isOpen,
+  onClose,
+  height = 'medium',
+  children
+}) => {
+  const getHeightClass = () => {
+    switch (height) {
+      case 'small': return 'h-1/4';
+      case 'medium': return 'h-1/2';
+      case 'large': return 'h-3/4';
+      case 'full': return 'h-full';
+      default: return 'h-1/2';
+    }
+  };
+
+  // ESC 키로 닫기
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    
+    if (isOpen) {
+      document.addEventListener('keydown', handleEsc);
+      document.body.style.overflow = 'hidden'; // 스크롤 방지
+    }
+    
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50">
+      {/* Modal Backdrop */}
+      <div 
+        className="absolute inset-0 bg-black bg-opacity-75 transition-opacity duration-300"
+        onClick={onClose}
+      />
+      
+      {/* Modal Bottom Sheet */}
+      <div className={\`absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform transition-transform duration-300 ease-out \${getHeightClass()}\`}>
+        {/* Header with close button */}
+        <div className="flex justify-between items-center p-4 border-b">
+          <div className="flex justify-center w-full">
+            <div className="w-10 h-1 bg-gray-300 rounded-full" />
+          </div>
+          <button
+            onClick={onClose}
+            className="absolute right-4 p-1 rounded-full hover:bg-gray-100 transition-colors"
+            aria-label="닫기"
+          >
+            <X className="h-5 w-5 text-gray-500" />
+          </button>
+        </div>
+        
+        {/* Content */}
+        <div className="p-4 h-full overflow-y-auto">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// 사용 예시
+const ModalBottomSheetExample: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [height, setHeight] = useState<'small' | 'medium' | 'large' | 'full'>('medium');
+
+  return (
+    <div className="p-4">
+      <div className="flex gap-2 mb-4">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+        >
+          모달 시트 열기
+        </button>
+        
+        <select 
+          value={height} 
+          onChange={(e) => setHeight(e.target.value as any)}
+          className="px-3 py-2 border rounded-lg"
+        >
+          <option value="small">작게</option>
+          <option value="medium">중간</option>
+          <option value="large">크게</option>
+          <option value="full">전체</option>
+        </select>
+      </div>
+
+      <ModalBottomSheet 
+        isOpen={isOpen} 
+        onClose={() => setIsOpen(false)}
+        height={height}
+      >
+        <div>
+          <h3 className="text-lg font-semibold mb-4">모달 바텀 시트</h3>
+          <p className="text-gray-600 mb-4">
+            이것은 모달 형태의 바텀 시트입니다. 배경을 클릭하거나 ESC 키를 눌러서 닫을 수 있습니다.
+          </p>
+          <div className="space-y-2">
+            {Array.from({ length: 10 }, (_, i) => (
+              <div key={i} className="p-3 bg-gray-50 rounded-lg">
+                항목 {i + 1}
+              </div>
+            ))}
+          </div>
+        </div>
+      </ModalBottomSheet>
+    </div>
+  );
+};
+
+export default ModalBottomSheetExample;`;
+
+      case "scrollable":
+        return `import React, { useState } from 'react';
+import { X, ChevronDown } from 'lucide-react';
+
+interface ScrollableBottomSheetProps {
+  isOpen: boolean;
+  onClose: () => void;
+  height?: 'small' | 'medium' | 'large' | 'full';
+  children: React.ReactNode;
+  title?: string;
+  categories?: string[];
+}
+
+const ScrollableBottomSheet: React.FC<ScrollableBottomSheetProps> = ({
+  isOpen,
+  onClose,
+  height = 'large',
+  children,
+  title = "카테고리 선택",
+  categories = []
+}) => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const getHeightClass = () => {
+    switch (height) {
+      case 'small': return 'h-1/4';
+      case 'medium': return 'h-1/2';
+      case 'large': return 'h-3/4';
+      case 'full': return 'h-full';
+      default: return 'h-3/4';
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-black bg-opacity-50 transition-opacity"
+        onClick={onClose}
+      />
+      
+      {/* Scrollable Bottom Sheet */}
+      <div className={\`absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl \${getHeightClass()}\`}>
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 rounded-t-2xl">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold">{title}</h3>
+            <button
+              onClick={onClose}
+              className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+              aria-label="닫기"
+            >
+              <X className="h-5 w-5 text-gray-500" />
+            </button>
+          </div>
+          
+          {/* Handle */}
+          <div className="flex justify-center pt-2">
+            <div className="w-10 h-1 bg-gray-300 rounded-full" />
+          </div>
+        </div>
+        
+        {/* Scrollable Content */}
+        <div className="overflow-y-auto h-full pb-4">
+          <div className="px-4 py-2">
+            {categories.map((category, index) => (
+              <label
+                key={index}
+                className="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer"
+              >
+                <input
+                  type="radio"
+                  name="category"
+                  value={category}
+                  checked={selectedCategory === category}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="w-5 h-5 text-purple-600"
+                />
+                <span className="ml-3 text-gray-700">{category}</span>
+              </label>
+            ))}
+          </div>
+          
+          {/* Additional scrollable content */}
+          <div className="px-4">
+            {children}
+          </div>
+        </div>
+        
+        {/* Footer */}
+        <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4">
+          <div className="flex gap-2">
+            <button
+              onClick={onClose}
+              className="flex-1 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+            >
+              취소
+            </button>
+            <button
+              onClick={onClose}
+              className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+            >
+              선택 완료
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// 사용 예시
+const ScrollableBottomSheetExample: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  const categories = [
+    "전자제품", "의류", "도서", "스포츠", "가전제품", 
+    "화장품", "식품", "완구", "가구", "자동차용품",
+    "건강용품", "반려동물용품", "문구", "음악", "영화"
+  ];
+
+  return (
+    <div className="p-4">
+      <button
+        onClick={() => setIsOpen(true)}
+        className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center gap-2"
+      >
+        카테고리 선택 <ChevronDown className="h-4 w-4" />
+      </button>
+
+      <ScrollableBottomSheet 
+        isOpen={isOpen} 
+        onClose={() => setIsOpen(false)}
+        height="large"
+        title="상품 카테고리"
+        categories={categories}
+      >
+        <div className="mt-4 space-y-4">
+          <h4 className="font-medium text-gray-800">추가 옵션</h4>
+          <div className="space-y-2">
+            {Array.from({ length: 20 }, (_, i) => (
+              <div key={i} className="p-3 bg-gray-50 rounded-lg">
+                <div className="font-medium">옵션 {i + 1}</div>
+                <div className="text-sm text-gray-600">상세 설명 텍스트</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </ScrollableBottomSheet>
+    </div>
+  );
+};
+
+export default ScrollableBottomSheetExample;`;
+
+      case "actions":
+        return `import React, { useState } from 'react';
+import { X, Share, Trash, Edit, Copy, Download, Heart } from 'lucide-react';
+
+interface ActionItem {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  action: () => void;
+  destructive?: boolean;
+}
+
+interface ActionBottomSheetProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title?: string;
+  actions: ActionItem[];
+}
+
+const ActionBottomSheet: React.FC<ActionBottomSheetProps> = ({
+  isOpen,
+  onClose,
+  title,
+  actions
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-black bg-opacity-50 transition-opacity"
+        onClick={onClose}
+      />
+      
+      {/* Action Bottom Sheet */}
+      <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl">
+        {title && (
+          <div className="px-4 py-3 border-b border-gray-200">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+              <button
+                onClick={onClose}
+                className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+                aria-label="닫기"
+              >
+                <X className="h-5 w-5 text-gray-500" />
+              </button>
+            </div>
+          </div>
+        )}
+        
+        {/* Handle */}
+        <div className="flex justify-center pt-2 pb-4">
+          <div className="w-10 h-1 bg-gray-300 rounded-full" />
+        </div>
+        
+        {/* Actions */}
+        <div className="px-4 pb-4">
+          <div className="space-y-1">
+            {actions.map((action, index) => {
+              const IconComponent = action.icon;
+              return (
+                <button
+                  key={index}
+                  onClick={() => {
+                    action.action();
+                    onClose();
+                  }}
+                  className={\`w-full flex items-center p-3 hover:bg-gray-100 rounded-lg transition-colors \${
+                    action.destructive ? 'text-red-600' : 'text-gray-700'
+                  }\`}
+                >
+                  <IconComponent className={\`h-5 w-5 mr-3 \${
+                    action.destructive ? 'text-red-500' : 'text-gray-500'
+                  }\`} />
+                  <span className="font-medium">{action.label}</span>
+                </button>
+              );
+            })}
+          </div>
+          
+          {/* Cancel button */}
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <button
+              onClick={onClose}
+              className="w-full p-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+            >
+              취소
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// 사용 예시
+const ActionBottomSheetExample: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const actions: ActionItem[] = [
+    {
+      icon: Share,
+      label: "공유하기",
+      action: () => console.log("공유하기")
+    },
+    {
+      icon: Copy,
+      label: "복사하기",
+      action: () => console.log("복사하기")
+    },
+    {
+      icon: Download,
+      label: "다운로드",
+      action: () => console.log("다운로드")
+    },
+    {
+      icon: Heart,
+      label: "좋아요",
+      action: () => console.log("좋아요")
+    },
+    {
+      icon: Edit,
+      label: "편집하기",
+      action: () => console.log("편집하기")
+    },
+    {
+      icon: Trash,
+      label: "삭제하기",
+      action: () => console.log("삭제하기"),
+      destructive: true
+    }
+  ];
+
+  return (
+    <div className="p-4">
+      <button
+        onClick={() => setIsOpen(true)}
+        className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+      >
+        액션 시트 열기
+      </button>
+
+      <ActionBottomSheet 
+        isOpen={isOpen} 
+        onClose={() => setIsOpen(false)}
+        title="문서 작업"
+        actions={actions}
+      />
+    </div>
+  );
+};
+
+export default ActionBottomSheetExample;`;
+
+      default:
+        return getReactCode(); // Fallback to basic
+    }
+  };
+
+  const getFlutterCode = () => {
+    return `import 'package:flutter/material.dart';
+
+class BottomSheetExample extends StatefulWidget {
+  @override
+  _BottomSheetExampleState createState() => _BottomSheetExampleState();
+}
+
+class _BottomSheetExampleState extends State<BottomSheetExample> {
+  SheetHeight _sheetHeight = SheetHeight.medium;
+  SheetType _sheetType = SheetType.basic;
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Bottom Sheet 예제'),
+        backgroundColor: Color(0xFF6700E6),
+        foregroundColor: Colors.white,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            // 높이 선택
+            Card(
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('높이 선택', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8.0,
+                      children: [
+                        ChoiceChip(
+                          label: Text('작게'),
+                          selected: _sheetHeight == SheetHeight.small,
+                          onSelected: (_) => setState(() => _sheetHeight = SheetHeight.small),
+                          selectedColor: Color(0xFF6700E6),
+                          labelStyle: TextStyle(color: _sheetHeight == SheetHeight.small ? Colors.white : null),
+                        ),
+                        ChoiceChip(
+                          label: Text('중간'),
+                          selected: _sheetHeight == SheetHeight.medium,
+                          onSelected: (_) => setState(() => _sheetHeight = SheetHeight.medium),
+                          selectedColor: Color(0xFF6700E6),
+                          labelStyle: TextStyle(color: _sheetHeight == SheetHeight.medium ? Colors.white : null),
+                        ),
+                        ChoiceChip(
+                          label: Text('크게'),
+                          selected: _sheetHeight == SheetHeight.large,
+                          onSelected: (_) => setState(() => _sheetHeight = SheetHeight.large),
+                          selectedColor: Color(0xFF6700E6),
+                          labelStyle: TextStyle(color: _sheetHeight == SheetHeight.large ? Colors.white : null),
+                        ),
+                        ChoiceChip(
+                          label: Text('전체'),
+                          selected: _sheetHeight == SheetHeight.full,
+                          onSelected: (_) => setState(() => _sheetHeight = SheetHeight.full),
+                          selectedColor: Color(0xFF6700E6),
+                          labelStyle: TextStyle(color: _sheetHeight == SheetHeight.full ? Colors.white : null),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            
+            SizedBox(height: 16),
+            
+            // 타입 선택
+            Card(
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('타입 선택', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8.0,
+                      children: [
+                        ChoiceChip(
+                          label: Text('기본형'),
+                          selected: _sheetType == SheetType.basic,
+                          onSelected: (_) => setState(() => _sheetType = SheetType.basic),
+                          selectedColor: Color(0xFF6700E6),
+                          labelStyle: TextStyle(color: _sheetType == SheetType.basic ? Colors.white : null),
+                        ),
+                        ChoiceChip(
+                          label: Text('모달형'),
+                          selected: _sheetType == SheetType.modal,
+                          onSelected: (_) => setState(() => _sheetType = SheetType.modal),
+                          selectedColor: Color(0xFF6700E6),
+                          labelStyle: TextStyle(color: _sheetType == SheetType.modal ? Colors.white : null),
+                        ),
+                        ChoiceChip(
+                          label: Text('스크롤'),
+                          selected: _sheetType == SheetType.scrollable,
+                          onSelected: (_) => setState(() => _sheetType = SheetType.scrollable),
+                          selectedColor: Color(0xFF6700E6),
+                          labelStyle: TextStyle(color: _sheetType == SheetType.scrollable ? Colors.white : null),
+                        ),
+                        ChoiceChip(
+                          label: Text('액션'),
+                          selected: _sheetType == SheetType.actions,
+                          onSelected: (_) => setState(() => _sheetType = SheetType.actions),
+                          selectedColor: Color(0xFF6700E6),
+                          labelStyle: TextStyle(color: _sheetType == SheetType.actions ? Colors.white : null),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            
+            SizedBox(height: 24),
+            
+            // 시트 열기 버튼
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => _showBottomSheet(context),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF6700E6),
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                ),
+                child: Text('Bottom Sheet 열기', style: TextStyle(fontSize: 16)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  void _showBottomSheet(BuildContext context) {
+    switch (_sheetType) {
+      case SheetType.basic:
+        _showBasicBottomSheet(context);
+        break;
+      case SheetType.modal:
+        _showModalBottomSheet(context);
+        break;
+      case SheetType.scrollable:
+        _showScrollableBottomSheet(context);
+        break;
+      case SheetType.actions:
+        _showActionBottomSheet(context);
+        break;
+    }
+  }
+  
+  void _showBasicBottomSheet(BuildContext context) {
+    showBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        height: _getSheetHeight(context),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
+        ),
+        child: Column(
+          children: [
+            // 핸들
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 8),
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            // 내용
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('기본 바텀 시트', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 8),
+                    Text('이것은 기본적인 바텀 시트입니다.', style: TextStyle(color: Colors.grey[600])),
+                    SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text('닫기'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  void _showModalBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: _getSheetHeight(context),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        ),
+        child: Column(
+          children: [
+            // 헤더
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('모달 바텀 시트', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: Icon(Icons.close),
+                  ),
+                ],
+              ),
+            ),
+            // 내용
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    Text('모달 형태의 바텀 시트입니다.', style: TextStyle(color: Colors.grey[600])),
+                    SizedBox(height: 16),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context, index) => ListTile(
+                          title: Text('항목 \${index + 1}'),
+                          leading: CircleAvatar(child: Text('\${index + 1}')),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  void _showScrollableBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: _getSheetHeight(context),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        ),
+        child: Column(
+          children: [
+            // 헤더
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('카테고리 선택', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: Icon(Icons.close),
+                  ),
+                ],
+              ),
+            ),
+            // 스크롤 가능한 내용
+            Expanded(
+              child: ListView.builder(
+                itemCount: 20,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text('카테고리 \${index + 1}'),
+                  leading: Radio(
+                    value: index,
+                    groupValue: -1,
+                    onChanged: (value) {},
+                    activeColor: Color(0xFF6700E6),
+                  ),
+                  onTap: () => Navigator.pop(context),
+                ),
+              ),
+            ),
+            // 푸터
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: Colors.grey[200]!)),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text('취소'),
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF6700E6)),
+                      child: Text('선택 완료', style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  void _showActionBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // 핸들
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 8),
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            // 헤더
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: Text('문서 작업', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            ),
+            // 액션 항목들
+            ListTile(
+              leading: Icon(Icons.share, color: Colors.blue),
+              title: Text('공유하기'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: Icon(Icons.copy, color: Colors.grey),
+              title: Text('복사하기'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: Icon(Icons.download, color: Colors.green),
+              title: Text('다운로드'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: Icon(Icons.favorite, color: Colors.red),
+              title: Text('좋아요'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: Icon(Icons.edit, color: Colors.orange),
+              title: Text('편집하기'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: Icon(Icons.delete, color: Colors.red),
+              title: Text('삭제하기'),
+              onTap: () => Navigator.pop(context),
+            ),
+            // 취소 버튼
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.all(16),
+              child: OutlinedButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('취소'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  double _getSheetHeight(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    switch (_sheetHeight) {
+      case SheetHeight.small:
+        return screenHeight * 0.25;
+      case SheetHeight.medium:
+        return screenHeight * 0.5;
+      case SheetHeight.large:
+        return screenHeight * 0.75;
+      case SheetHeight.full:
+        return screenHeight * 0.95;
+    }
+  }
+}
+
+enum SheetHeight { small, medium, large, full }
+enum SheetType { basic, modal, scrollable, actions }`;
+  };
+
   return (
     <SlideLayout title="Bottom Sheet (바텀 시트)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -390,366 +1379,34 @@ export default function BottomSheetSlide() {
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
+            <div className="flex justify-center mb-4">
+              <div className="flex gap-2">
+                <button
+                  className={`px-4 py-2 rounded text-sm ${
+                    codeType === "react"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setCodeType("react")}
+                >
+                  React + TypeScript
+                </button>
+                <button
+                  className={`px-4 py-2 rounded text-sm ${
+                    codeType === "flutter"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setCodeType("flutter")}
+                >
+                  Flutter + Dart
+                </button>
+              </div>
+            </div>
             <div className="bg-gray-800 p-4 rounded-lg text-white">
               <PrismCode
-                language="typescript"
-                code={`import 'package:flutter/material.dart';
-
-class BottomSheetExample extends StatefulWidget {
-  @override
-  _BottomSheetExampleState createState() => _BottomSheetExampleState();
-}
-
-class _BottomSheetExampleState extends State<BottomSheetExample> {
-  SheetHeight _sheetHeight = SheetHeight.medium;
-  SheetType _sheetType = SheetType.basic;
-  
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('바텀 시트 예제')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('현재 시트 유형: \${_sheetType.toString().split('.').last}'),
-            Text('시트 높이: \${_sheetHeight.toString().split('.').last}'),
-            SizedBox(height: 20),
-            
-            // 시트 타입 선택
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                _buildTypeButton(SheetType.basic, '기본형'),
-                _buildTypeButton(SheetType.modal, '모달형'),
-                _buildTypeButton(SheetType.scrollable, '스크롤형'),
-                _buildTypeButton(SheetType.actions, '액션 시트'),
-              ],
-            ),
-            
-            SizedBox(height: 20),
-            
-            // 시트 높이 선택
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                _buildHeightButton(SheetHeight.small, '작은 높이'),
-                _buildHeightButton(SheetHeight.medium, '중간 높이'),
-                _buildHeightButton(SheetHeight.large, '큰 높이'),
-                _buildHeightButton(SheetHeight.full, '전체 화면'),
-              ],
-            ),
-            
-            SizedBox(height: 30),
-            
-            ElevatedButton.icon(
-              icon: Icon(Icons.arrow_upward),
-              label: Text('바텀 시트 열기'),
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF6700e6),
-                onPrimary: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              ),
-              onPressed: () => _showBottomSheet(context),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTypeButton(SheetType type, String label) {
-    return ElevatedButton(
-      child: Text(label),
-      style: ElevatedButton.styleFrom(
-        primary: _sheetType == type ? Color(0xFF6700e6) : Colors.grey[200],
-        onPrimary: _sheetType == type ? Colors.white : Colors.black87,
-      ),
-      onPressed: () => setState(() => _sheetType = type),
-    );
-  }
-
-  Widget _buildHeightButton(SheetHeight height, String label) {
-    return ElevatedButton(
-      child: Text(label),
-      style: ElevatedButton.styleFrom(
-        primary: _sheetHeight == height ? Color(0xFF6700e6) : Colors.grey[200],
-        onPrimary: _sheetHeight == height ? Colors.white : Colors.black87,
-      ),
-      onPressed: () => setState(() => _sheetHeight = height),
-    );
-  }
-
-  void _showBottomSheet(BuildContext context) {
-    double sheetHeight;
-    switch (_sheetHeight) {
-      case SheetHeight.small:
-        sheetHeight = MediaQuery.of(context).size.height * 0.25;
-        break;
-      case SheetHeight.medium:
-        sheetHeight = MediaQuery.of(context).size.height * 0.5;
-        break;
-      case SheetHeight.large:
-        sheetHeight = MediaQuery.of(context).size.height * 0.75;
-        break;
-      case SheetHeight.full:
-        sheetHeight = MediaQuery.of(context).size.height * 0.95;
-        break;
-    }
-
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => _buildBottomSheetContent(context, sheetHeight),
-    );
-  }
-
-  Widget _buildBottomSheetContent(BuildContext context, double height) {
-    Widget content;
-    
-    switch (_sheetType) {
-      case SheetType.modal:
-        content = _buildModalContent(context);
-        break;
-      case SheetType.scrollable:
-        content = _buildScrollableContent(context);
-        break;
-      case SheetType.actions:
-        content = _buildActionsContent(context);
-        break;
-      default:
-        content = _buildBasicContent(context);
-    }
-    
-    return Container(
-      height: height,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // 핸들 바
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 8),
-            width: 40,
-            height: 4,
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-          Expanded(child: content),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBasicContent(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '바텀 시트 제목',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
-          ),
-          SizedBox(height: 16),
-          Text(
-            '바텀 시트는 화면 아래에서 올라오는 컴포넌트로, 추가 정보나 작업을 표시하는 데 사용됩니다. 다양한 높이와 콘텐츠로 구성할 수 있습니다.',
-            style: TextStyle(color: Colors.grey[600]),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildModalContent(BuildContext context) {
-    // 필터 설정 UI 구현
-    return Padding(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '필터 설정',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
-          ),
-          // 필터 UI 내용
-          // ...
-        ],
-      ),
-    );
-  }
-
-  Widget _buildScrollableContent(BuildContext context) {
-    // 스크롤 가능한 댓글 목록 UI 구현
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '댓글 (25개)',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: 20,
-            padding: EdgeInsets.all(16),
-            itemBuilder: (context, index) => _buildCommentItem(index),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCommentItem(int index) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 12),
-      margin: EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Color(0x336700e6),
-                    child: Text(
-                      String.fromCharCode(65 + (index % 26)),
-                      style: TextStyle(color: Color(0xFF6700e6)),
-                    ),
-                  ),
-                  SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('사용자\${index + 1}', style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text('3일 전', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                    ],
-                  ),
-                ],
-              ),
-              Icon(Icons.favorite_border, size: 16, color: Colors.grey),
-            ],
-          ),
-          SizedBox(height: 8),
-          Text(
-            index % 3 == 0
-                ? '정말 유용한 내용입니다. 감사합니다!'
-                : index % 3 == 1
-                    ? '좋은 정보 공유해주셔서 감사합니다. 많은 도움이 되었어요.'
-                    : '이 내용에 대해 좀 더 자세히 알고 싶어요. 추가 설명 부탁드립니다.',
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildActionsContent(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '문서 작업',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
-          ),
-          SizedBox(height: 8),
-          _buildActionButton(Icons.share, '공유하기', Colors.blue),
-          _buildActionButton(Icons.copy, '복사하기', Colors.grey),
-          _buildActionButton(Icons.edit, '편집하기', Color(0xFF6700e6)),
-          _buildActionButton(Icons.file_download, '다운로드', Colors.purple),
-          Divider(height: 32),
-          _buildActionButton(Icons.delete, '삭제하기', Colors.red),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildActionButton(IconData icon, String label, Color color) {
-    return InkWell(
-      onTap: () {},
-      borderRadius: BorderRadius.circular(8),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-        child: Row(
-          children: [
-            Icon(icon, color: color),
-            SizedBox(width: 12),
-            Text(label),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-enum SheetHeight { small, medium, large, full }
-enum SheetType { basic, modal, scrollable, actions }`}
+                language={codeType === "react" ? "typescript" : "dart"}
+                code={codeType === "react" ? getReactCode() : getFlutterCode()}
               />
             </div>
           </TabsContent>
@@ -785,7 +1442,7 @@ enum SheetType { basic, modal, scrollable, actions }`}
                   }`}
                   onClick={() => setSheetType("scrollable")}
                 >
-                  스크롤형
+                  스크롤
                 </button>
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
@@ -795,127 +1452,91 @@ enum SheetType { basic, modal, scrollable, actions }`}
                   }`}
                   onClick={() => setSheetType("actions")}
                 >
-                  액션 시트
+                  액션
                 </button>
               </div>
             </div>
 
-            <div className="border rounded-lg bg-gray-100 overflow-hidden relative h-[400px]">
-              {/* 메인 콘텐츠 */}
-              <div className="p-4 h-full">
-                <div className="bg-white rounded-lg shadow-sm border p-4 mb-4">
-                  <h3 className="text-lg font-medium mb-2">메인 콘텐츠 영역</h3>
-                  <p className="text-gray-600 mb-4">
-                    {sheetType === "modal"
-                      ? "필터 옵션을 확인하려면 바텀 시트를 열어보세요."
-                      : sheetType === "scrollable"
-                      ? "댓글을 확인하려면 바텀 시트를 열어보세요."
-                      : sheetType === "actions"
-                      ? "문서 작업 메뉴를 보려면 바텀 시트를 열어보세요."
-                      : "다양한 형태의 바텀 시트를 경험해보세요."}
-                  </p>
-                  <button
-                    onClick={toggleSheet}
-                    className="flex items-center gap-2 px-4 py-2 bg-[#6700e6] text-white rounded-lg hover:bg-[#6700e6]/90"
-                  >
-                    {isOpen ? (
-                      <>
-                        <ChevronDown className="w-4 h-4" />
-                        시트 닫기
-                      </>
-                    ) : (
-                      <>
-                        <ChevronUp className="w-4 h-4" />
-                        {sheetType === "modal" ? (
-                          <>
-                            <Filter className="w-4 h-4 mr-1" /> 필터 열기
-                          </>
-                        ) : sheetType === "scrollable" ? (
-                          "댓글 보기"
-                        ) : sheetType === "actions" ? (
-                          "액션 메뉴 열기"
-                        ) : (
-                          "바텀 시트 열기"
-                        )}
-                      </>
-                    )}
-                  </button>
-                </div>
-
-                <div className="text-center text-sm text-gray-500">
-                  <p>
-                    현재 시트 유형: <strong>{sheetType}</strong>
-                  </p>
-                  <p>
-                    시트 높이: <strong>{sheetHeight}</strong>
-                  </p>
-                  <div className="flex justify-center gap-3 mt-4">
-                    <button
-                      className={`px-3 py-1.5 rounded text-xs ${
-                        sheetHeight === "small"
-                          ? "bg-[#6700e6] text-white"
-                          : "bg-gray-100"
-                      }`}
-                      onClick={() => setSheetHeight("small")}
-                    >
-                      작은 높이
-                    </button>
-                    <button
-                      className={`px-3 py-1.5 rounded text-xs ${
-                        sheetHeight === "medium"
-                          ? "bg-[#6700e6] text-white"
-                          : "bg-gray-100"
-                      }`}
-                      onClick={() => setSheetHeight("medium")}
-                    >
-                      중간 높이
-                    </button>
-                    <button
-                      className={`px-3 py-1.5 rounded text-xs ${
-                        sheetHeight === "large"
-                          ? "bg-[#6700e6] text-white"
-                          : "bg-gray-100"
-                      }`}
-                      onClick={() => setSheetHeight("large")}
-                    >
-                      큰 높이
-                    </button>
-                    <button
-                      className={`px-3 py-1.5 rounded text-xs ${
-                        sheetHeight === "full"
-                          ? "bg-[#6700e6] text-white"
-                          : "bg-gray-100"
-                      }`}
-                      onClick={() => setSheetHeight("full")}
-                    >
-                      전체 화면
-                    </button>
-                  </div>
-                </div>
+            <div className="flex justify-center mb-4">
+              <div className="flex flex-wrap gap-2 justify-center">
+                <button
+                  className={`px-3 py-1.5 rounded text-sm ${
+                    sheetHeight === "small"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setSheetHeight("small")}
+                >
+                  작게
+                </button>
+                <button
+                  className={`px-3 py-1.5 rounded text-sm ${
+                    sheetHeight === "medium"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setSheetHeight("medium")}
+                >
+                  중간
+                </button>
+                <button
+                  className={`px-3 py-1.5 rounded text-sm ${
+                    sheetHeight === "large"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setSheetHeight("large")}
+                >
+                  크게
+                </button>
+                <button
+                  className={`px-3 py-1.5 rounded text-sm ${
+                    sheetHeight === "full"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setSheetHeight("full")}
+                >
+                  전체 화면
+                </button>
               </div>
+            </div>
 
-              {/* 바텀 시트 */}
-              <div
-                className={`absolute left-0 right-0 bottom-0 bg-white rounded-t-xl shadow-lg transition-transform duration-300 ease-out ${
-                  isOpen ? "translate-y-0" : "translate-y-full"
-                } ${getHeightClass()}`}
+            <div className="flex justify-center mb-4">
+              <button
+                onClick={toggleSheet}
+                className="px-6 py-3 bg-[#6700e6] text-white rounded-lg hover:bg-[#5a00cc] transition-colors"
               >
-                {/* 핸들 바 */}
-                <div className="flex justify-center py-2">
-                  <div className="w-10 h-1 bg-gray-300 rounded-full"></div>
-                </div>
+                바텀 시트 열기
+              </button>
+            </div>
 
+            <div className="bg-gray-100 p-4 rounded-lg">
+              <h4 className="font-medium mb-2">데모</h4>
+              <div className="h-64 bg-white rounded border relative overflow-hidden">
                 {renderSheetContent()}
               </div>
-
-              {/* 오버레이 - 모달형일 때만 표시 */}
-              {isOpen && sheetType === "modal" && (
-                <div
-                  className="absolute inset-0 bg-black/20"
-                  onClick={closeSheet}
-                ></div>
-              )}
             </div>
+
+            {/* Actual Bottom Sheet */}
+            {isOpen && (
+              <div className="fixed inset-0 z-50">
+                <div
+                  className="absolute inset-0 bg-black bg-opacity-50 transition-opacity"
+                  onClick={closeSheet}
+                />
+                <div
+                  className={`absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform transition-transform duration-300 ease-out ${
+                    isOpen ? "translate-y-0" : "translate-y-full"
+                  } ${getHeightClass()}`}
+                >
+                  <div className="flex justify-center pt-2 pb-4">
+                    <div className="w-10 h-1 bg-gray-300 rounded-full" />
+                  </div>
+                  {renderSheetContent()}
+                </div>
+              </div>
+            )}
           </TabsContent>
         </Tabs>
       </div>

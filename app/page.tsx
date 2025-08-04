@@ -38,8 +38,6 @@ import TabBarSlide from "@/components/slides/advanced/tab-bar-slide"
 import FabSlide from "@/components/slides/advanced/fab-slide"
 import SearchBarSlide from "@/components/slides/advanced/search-bar-slide"
 import HeroSlide from "@/components/slides/advanced/hero-slide"
-import SplashPageSlide from "@/components/slides/advanced/splash-page-slide"
-import WebViewSlide from "@/components/slides/advanced/web-view-slide"
 import ConclusionSlide from "@/components/slides/conclusion-slide"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -93,8 +91,6 @@ export default function Home() {
     { id: "fab", component: <FabSlide /> },
     { id: "search-bar", component: <SearchBarSlide /> },
     { id: "hero", component: <HeroSlide /> },
-    { id: "splash-page", component: <SplashPageSlide /> },
-    { id: "web-view", component: <WebViewSlide /> },
 
     // 결론
     { id: "conclusion", component: <ConclusionSlide /> },

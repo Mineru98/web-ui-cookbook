@@ -10,6 +10,7 @@ export default function HeroSlide() {
   const [heroType, setHeroType] = useState<
     "basic" | "centered" | "split" | "video"
   >("basic");
+  const [codeType, setCodeType] = useState<"react" | "flutter">("react");
 
   const renderHero = () => {
     switch (heroType) {
@@ -118,6 +119,716 @@ export default function HeroSlide() {
           </div>
         );
     }
+  };
+
+  const getReactCode = () => {
+    switch (heroType) {
+      case "basic":
+        return `import React from 'react';
+
+interface BasicHeroProps {
+  title: string;
+  subtitle?: string;
+  ctaText?: string;
+  onCtaClick?: () => void;
+  backgroundImage?: string;
+  className?: string;
+}
+
+const BasicHero: React.FC<BasicHeroProps> = ({
+  title,
+  subtitle,
+  ctaText = "시작하기",
+  onCtaClick,
+  backgroundImage = "/api/placeholder/800/400",
+  className = ""
+}) => {
+  return (
+    <div className={\`relative h-64 flex items-center \${className}\`}>
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: \`url(\${backgroundImage})\` }}
+      />
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/20" />
+      
+      {/* Content */}
+      <div className="relative z-10 text-white p-6 max-w-lg">
+        <h1 className="text-3xl font-bold mb-2">{title}</h1>
+        {subtitle && (
+          <p className="text-white/90 mb-4">{subtitle}</p>
+        )}
+        <button
+          onClick={onCtaClick}
+          className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+        >
+          {ctaText}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// 사용 예시
+const BasicHeroExample: React.FC = () => {
+  const handleCtaClick = () => {
+    console.log("CTA 버튼 클릭됨");
+  };
+
+  return (
+    <BasicHero
+      title="새로운 시작을 위한 완벽한 솔루션"
+      subtitle="우리와 함께 성공의 여정을 시작하세요. 혁신적인 기술과 전문적인 서비스로 여러분을 지원합니다."
+      ctaText="지금 시작하기"
+      onCtaClick={handleCtaClick}
+      backgroundImage="/hero-background.jpg"
+    />
+  );
+};
+
+export default BasicHeroExample;`;
+
+      case "centered":
+        return `import React from 'react';
+
+interface CenteredHeroProps {
+  title: string;
+  subtitle?: string;
+  ctaText?: string;
+  onCtaClick?: () => void;
+  gradientFrom?: string;
+  gradientTo?: string;
+  className?: string;
+}
+
+const CenteredHero: React.FC<CenteredHeroProps> = ({
+  title,
+  subtitle,
+  ctaText = "자세히 알아보기",
+  onCtaClick,
+  gradientFrom = "#6700e6",
+  gradientTo = "#134429",
+  className = ""
+}) => {
+  return (
+    <div 
+      className={\`h-64 flex items-center justify-center \${className}\`}
+      style={{
+        background: \`linear-gradient(to right, \${gradientFrom}, \${gradientTo})\`
+      }}
+    >
+      <div className="text-center text-white p-6 max-w-lg mx-auto">
+        <h1 className="text-3xl font-bold mb-4">{title}</h1>
+        {subtitle && (
+          <p className="text-white/90 mb-6 leading-relaxed">{subtitle}</p>
+        )}
+        <button
+          onClick={onCtaClick}
+          className="bg-white text-purple-600 hover:bg-gray-50 px-6 py-3 rounded-lg font-medium transition-colors"
+        >
+          {ctaText}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// 사용 예시
+const CenteredHeroExample: React.FC = () => {
+  const handleCtaClick = () => {
+    console.log("CTA 버튼 클릭됨");
+  };
+
+  return (
+    <CenteredHero
+      title="중앙 정렬 히어로 섹션"
+      subtitle="중요한 내용이나 주목을 끌어야 하는 정보를 중앙에 배치해 강조하는 히어로 섹션입니다. 브랜드 메시지나 주요 마케팅 카피에 적합합니다."
+      ctaText="자세히 알아보기"
+      onCtaClick={handleCtaClick}
+      gradientFrom="#6700e6"
+      gradientTo="#134429"
+    />
+  );
+};
+
+export default CenteredHeroExample;`;
+
+      case "split":
+        return `import React from 'react';
+import { ArrowRight } from 'lucide-react';
+
+interface SplitHeroProps {
+  title: string;
+  subtitle?: string;
+  ctaText?: string;
+  onCtaClick?: () => void;
+  imageUrl?: string;
+  imageAlt?: string;
+  className?: string;
+}
+
+const SplitHero: React.FC<SplitHeroProps> = ({
+  title,
+  subtitle,
+  ctaText = "시작하기",
+  onCtaClick,
+  imageUrl = "/api/placeholder/400/300",
+  imageAlt = "Hero Image",
+  className = ""
+}) => {
+  return (
+    <div className={\`h-64 flex items-center \${className}\`}>
+      <div className="flex w-full h-full">
+        {/* Left Content */}
+        <div className="flex-1 bg-white p-6 flex flex-col justify-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-3">{title}</h1>
+          {subtitle && (
+            <p className="text-gray-600 mb-4 text-sm leading-relaxed">{subtitle}</p>
+          )}
+          <button
+            onClick={onCtaClick}
+            className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-colors w-fit"
+          >
+            {ctaText}
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
+        
+        {/* Right Image */}
+        <div className="flex-1 relative">
+          <img
+            src={imageUrl}
+            alt={imageAlt}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// 사용 예시
+const SplitHeroExample: React.FC = () => {
+  const handleCtaClick = () => {
+    console.log("CTA 버튼 클릭됨");
+  };
+
+  return (
+    <SplitHero
+      title="분할 레이아웃으로 정보 전달"
+      subtitle="텍스트와 이미지를 나란히 배치하여 정보를 효과적으로 전달하는 히어로 섹션입니다. 제품 소개나 서비스 설명에 적합합니다."
+      ctaText="더 보기"
+      onCtaClick={handleCtaClick}
+      imageUrl="/hero-split-image.jpg"
+      imageAlt="분할 히어로 이미지"
+    />
+  );
+};
+
+export default SplitHeroExample;`;
+
+      case "video":
+        return `import React, { useRef, useEffect } from 'react';
+
+interface VideoHeroProps {
+  title: string;
+  subtitle?: string;
+  ctaText?: string;
+  onCtaClick?: () => void;
+  videoUrl?: string;
+  posterUrl?: string;
+  className?: string;
+}
+
+const VideoHero: React.FC<VideoHeroProps> = ({
+  title,
+  subtitle,
+  ctaText = "지금 시작하기",
+  onCtaClick,
+  videoUrl = "/hero-video.mp4",
+  posterUrl = "/hero-poster.jpg",
+  className = ""
+}) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Autoplay 실패 시 아무것도 하지 않음
+        console.log("비디오 자동재생이 차단되었습니다.");
+      });
+    }
+  }, []);
+
+  return (
+    <div className={\`relative h-64 flex items-center justify-center overflow-hidden \${className}\`}>
+      {/* Background Video */}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        src={videoUrl}
+        poster={posterUrl}
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+      
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/40" />
+      
+      {/* Content */}
+      <div className="relative z-10 text-center text-white p-6 max-w-lg mx-auto">
+        <h1 className="text-3xl font-bold mb-4">{title}</h1>
+        {subtitle && (
+          <p className="text-white/90 mb-6 leading-relaxed">{subtitle}</p>
+        )}
+        <button
+          onClick={onCtaClick}
+          className="bg-white text-gray-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors"
+        >
+          {ctaText}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// 사용 예시
+const VideoHeroExample: React.FC = () => {
+  const handleCtaClick = () => {
+    console.log("CTA 버튼 클릭됨");
+  };
+
+  return (
+    <VideoHero
+      title="동영상으로 전하는 강력한 메시지"
+      subtitle="배경 동영상을 활용하여 더욱 생동감 있고 몰입감 있는 사용자 경험을 제공하는 히어로 섹션입니다."
+      ctaText="지금 시작하기"
+      onCtaClick={handleCtaClick}
+      videoUrl="/background-video.mp4"
+      posterUrl="/video-poster.jpg"
+    />
+  );
+};
+
+export default VideoHeroExample;`;
+
+      default:
+        return getReactCode(); // Fallback to basic
+    }
+  };
+
+  const getFlutterCode = () => {
+    return `// ${
+      heroType === "basic"
+        ? "기본 히어로"
+        : heroType === "centered"
+        ? "중앙 정렬 히어로"
+        : heroType === "split"
+        ? "분할 히어로"
+        : "비디오 히어로"
+    } 구현 예시
+
+import 'package:flutter/material.dart';
+
+class ${
+      heroType === "basic"
+        ? "BasicHero"
+        : heroType === "centered"
+        ? "CenteredHero"
+        : heroType === "split"
+        ? "SplitHero"
+        : "VideoHero"
+    } extends StatelessWidget {
+  final String title;
+  final String? subtitle;
+  final String ctaText;
+  final VoidCallback? onCtaPressed;
+  ${heroType === "basic" ? "final String? backgroundImage;" : ""}
+  ${heroType === "video" ? "final String? videoUrl;" : ""}
+
+  const ${
+    heroType === "basic"
+      ? "BasicHero"
+      : heroType === "centered"
+      ? "CenteredHero"
+      : heroType === "split"
+      ? "SplitHero"
+      : "VideoHero"
+  }({
+    Key? key,
+    required this.title,
+    this.subtitle,
+    this.ctaText = '${
+      heroType === "basic"
+        ? "시작하기"
+        : heroType === "centered"
+        ? "자세히 알아보기"
+        : heroType === "split"
+        ? "더 보기"
+        : "지금 시작하기"
+    }',
+    this.onCtaPressed,
+    ${heroType === "basic" ? "this.backgroundImage," : ""}
+    ${heroType === "video" ? "this.videoUrl," : ""}
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 256,
+      child: ${
+        heroType === "basic"
+          ? `Stack(
+        children: [
+          // Background Image
+          if (backgroundImage != null)
+            Positioned.fill(
+              child: Image.network(
+                backgroundImage!,
+                fit: BoxFit.cover,
+              ),
+            ),
+          
+          // Gradient Overlay
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Colors.black.withOpacity(0.6),
+                    Colors.black.withOpacity(0.2),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          
+          // Content
+          Positioned(
+            left: 24,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              constraints: BoxConstraints(maxWidth: 400),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  if (subtitle != null) ...[
+                    SizedBox(height: 8),
+                    Text(
+                      subtitle!,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white.withOpacity(0.9),
+                      ),
+                    ),
+                  ],
+                  SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: onCtaPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF6700E6),
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      ctaText,
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      )`
+          : heroType === "centered"
+          ? `Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [Color(0xFF6700E6), Color(0xFF134429)],
+          ),
+        ),
+        child: Center(
+          child: Container(
+            constraints: BoxConstraints(maxWidth: 400),
+            padding: EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                if (subtitle != null) ...[
+                  SizedBox(height: 16),
+                  Text(
+                    subtitle!,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withOpacity(0.9),
+                      height: 1.5,
+                    ),
+                  ),
+                ],
+                SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: onCtaPressed,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Color(0xFF6700E6),
+                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    ctaText,
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      )`
+          : heroType === "split"
+          ? `Row(
+        children: [
+          // Left Content
+          Expanded(
+            child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.all(24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[900],
+                    ),
+                  ),
+                  if (subtitle != null) ...[
+                    SizedBox(height: 12),
+                    Text(
+                      subtitle!,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                        height: 1.5,
+                      ),
+                    ),
+                  ],
+                  SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    onPressed: onCtaPressed,
+                    icon: Icon(Icons.arrow_forward, size: 16),
+                    label: Text(ctaText),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF6700E6),
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          
+          // Right Image
+          Expanded(
+            child: Container(
+              color: Colors.grey[300],
+              child: Center(
+                child: Icon(
+                  Icons.image,
+                  size: 64,
+                  color: Colors.grey[400],
+                ),
+              ),
+            ),
+          ),
+        ],
+      )`
+          : `Stack(
+        children: [
+          // Video Placeholder
+          Positioned.fill(
+            child: Container(
+              color: Colors.grey[900],
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.play_circle_outline,
+                      size: 64,
+                      color: Colors.white.withOpacity(0.7),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Video Background',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.7),
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          
+          // Dark Overlay
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.4),
+            ),
+          ),
+          
+          // Content
+          Center(
+            child: Container(
+              constraints: BoxConstraints(maxWidth: 400),
+              padding: EdgeInsets.all(24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  if (subtitle != null) ...[
+                    SizedBox(height: 16),
+                    Text(
+                      subtitle!,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white.withOpacity(0.9),
+                        height: 1.5,
+                      ),
+                    ),
+                  ],
+                  SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: onCtaPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.grey[900],
+                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      ctaText,
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      )`
+      },
+    );
+  }
+}
+
+// 사용 예시
+class HeroExample extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('${
+          heroType === "basic"
+            ? "기본 히어로"
+            : heroType === "centered"
+            ? "중앙 정렬 히어로"
+            : heroType === "split"
+            ? "분할 히어로"
+            : "비디오 히어로"
+        }'),
+        backgroundColor: Color(0xFF6700E6),
+        foregroundColor: Colors.white,
+      ),
+      body: ${
+        heroType === "basic"
+          ? "BasicHero"
+          : heroType === "centered"
+          ? "CenteredHero"
+          : heroType === "split"
+          ? "SplitHero"
+          : "VideoHero"
+      }(
+        title: '${
+          heroType === "basic"
+            ? "새로운 시작을 위한 완벽한 솔루션"
+            : heroType === "centered"
+            ? "중앙 정렬 히어로 섹션"
+            : heroType === "split"
+            ? "분할 레이아웃으로 정보 전달"
+            : "동영상으로 전하는 강력한 메시지"
+        }',
+        subtitle: '${
+          heroType === "basic"
+            ? "우리와 함께 성공의 여정을 시작하세요."
+            : heroType === "centered"
+            ? "중요한 내용이나 주목을 끌어야 하는 정보를 중앙에 배치해 강조하는 히어로 섹션입니다."
+            : heroType === "split"
+            ? "텍스트와 이미지를 나란히 배치하여 정보를 효과적으로 전달하는 히어로 섹션입니다."
+            : "배경 동영상을 활용하여 더욱 생동감 있고 몰입감 있는 사용자 경험을 제공합니다."
+        }',
+        onCtaPressed: () {
+          print('CTA 버튼 클릭됨');
+        },
+        ${heroType === "basic" ? "backgroundImage: 'https://example.com/hero-bg.jpg'," : ""}
+        ${heroType === "video" ? "videoUrl: 'https://example.com/hero-video.mp4'," : ""}
+      ),
+    );
+  }
+}`;
   };
 
   return (
@@ -520,6 +1231,39 @@ export default ${
                     ? "SplitHero"
                     : "VideoHero"
                 };`}
+              />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="code" className="mt-4">
+            <div className="flex justify-center mb-4">
+              <div className="flex gap-2">
+                <button
+                  className={`px-4 py-2 rounded text-sm ${
+                    codeType === "react"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setCodeType("react")}
+                >
+                  React + TypeScript
+                </button>
+                <button
+                  className={`px-4 py-2 rounded text-sm ${
+                    codeType === "flutter"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setCodeType("flutter")}
+                >
+                  Flutter + Dart
+                </button>
+              </div>
+            </div>
+            <div className="bg-gray-800 p-4 rounded-lg text-white">
+              <PrismCode
+                language={codeType === "react" ? "typescript" : "dart"}
+                code={codeType === "react" ? getReactCode() : getFlutterCode()}
               />
             </div>
           </TabsContent>

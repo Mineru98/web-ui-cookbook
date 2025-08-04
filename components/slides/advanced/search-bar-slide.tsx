@@ -20,6 +20,7 @@ export default function SearchBarSlide() {
   >("basic");
   const [searchText, setSearchText] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
+  const [codeType, setCodeType] = useState<"react" | "flutter">("react");
 
   const handleClear = () => {
     setSearchText("");
@@ -194,6 +195,678 @@ export default function SearchBarSlide() {
     }
   };
 
+  const getReactCode = () => {
+    switch (searchBarType) {
+      case "basic":
+        return `import React, { useState } from 'react';
+import { Search, X, Mic } from 'lucide-react';
+
+interface BasicSearchBarProps {
+  placeholder?: string;
+  onSearch?: (query: string) => void;
+  showMicButton?: boolean;
+  className?: string;
+}
+
+const BasicSearchBar: React.FC<BasicSearchBarProps> = ({
+  placeholder = "검색어를 입력하세요",
+  onSearch,
+  showMicButton = true,
+  className = ""
+}) => {
+  const [searchText, setSearchText] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (onSearch && searchText.trim()) {
+      onSearch(searchText.trim());
+    }
+  };
+
+  const handleClear = () => {
+    setSearchText("");
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className={\`relative \${className}\`}>
+      <div className="relative flex items-center">
+        <Search className="absolute left-3 h-5 w-5 text-gray-400" />
+        
+        <input
+          type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder={placeholder}
+          className="w-full pl-10 pr-20 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+        />
+        
+        <div className="absolute right-2 flex items-center gap-1">
+          {searchText && (
+            <button
+              type="button"
+              onClick={handleClear}
+              className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="검색어 지우기"
+            >
+              <X className="h-4 w-4 text-gray-400" />
+            </button>
+          )}
+          
+          {showMicButton && (
+            <button
+              type="button"
+              className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="음성 검색"
+            >
+              <Mic className="h-4 w-4 text-gray-400" />
+            </button>
+          )}
+        </div>
+      </div>
+    </form>
+  );
+};
+
+// 사용 예시
+const BasicSearchBarExample: React.FC = () => {
+  const handleSearch = (query: string) => {
+    console.log("검색:", query);
+  };
+
+  return (
+    <div className="p-6 max-w-md mx-auto">
+      <h3 className="text-lg font-semibold mb-4">기본 검색 바</h3>
+      <BasicSearchBar 
+        placeholder="상품을 검색하세요"
+        onSearch={handleSearch}
+        showMicButton={true}
+      />
+    </div>
+  );
+};
+
+export default BasicSearchBarExample;`;
+
+      case "expandable":
+        return `import React, { useState, useRef, useEffect } from 'react';
+import { Search, ArrowLeft, X, Mic } from 'lucide-react';
+
+interface ExpandableSearchBarProps {
+  title?: string;
+  placeholder?: string;
+  onSearch?: (query: string) => void;
+  className?: string;
+}
+
+const ExpandableSearchBar: React.FC<ExpandableSearchBarProps> = ({
+  title = "검색",
+  placeholder = "검색어를 입력하세요",
+  onSearch,
+  className = ""
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isExpanded && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isExpanded]);
+
+  const handleExpand = () => {
+    setIsExpanded(true);
+  };
+
+  const handleCollapse = () => {
+    setIsExpanded(false);
+    setSearchText("");
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (onSearch && searchText.trim()) {
+      onSearch(searchText.trim());
+    }
+  };
+
+  const handleClear = () => {
+    setSearchText("");
+  };
+
+  if (!isExpanded) {
+    return (
+      <div className={\`flex items-center justify-between p-4 border-b \${className}\`}>
+        <h1 className="text-xl font-semibold">{title}</h1>
+        <button
+          onClick={handleExpand}
+          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          aria-label="검색 열기"
+        >
+          <Search className="h-6 w-6" />
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className={\`flex items-center p-4 border-b bg-white \${className}\`}>
+      <button
+        onClick={handleCollapse}
+        className="p-2 hover:bg-gray-100 rounded-full transition-colors mr-2"
+        aria-label="검색 닫기"
+      >
+        <ArrowLeft className="h-6 w-6" />
+      </button>
+      
+      <form onSubmit={handleSubmit} className="flex-1">
+        <div className="relative flex items-center">
+          <input
+            ref={inputRef}
+            type="text"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder={placeholder}
+            className="w-full py-2 text-lg outline-none"
+          />
+          
+          <div className="flex items-center gap-1">
+            {searchText && (
+              <button
+                type="button"
+                onClick={handleClear}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="검색어 지우기"
+              >
+                <X className="h-5 w-5 text-gray-400" />
+              </button>
+            )}
+            
+            <button
+              type="button"
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="음성 검색"
+            >
+              <Mic className="h-5 w-5 text-gray-400" />
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+// 사용 예시
+const ExpandableSearchBarExample: React.FC = () => {
+  const handleSearch = (query: string) => {
+    console.log("검색:", query);
+  };
+
+  return (
+    <div className="max-w-md mx-auto border rounded-lg overflow-hidden">
+      <ExpandableSearchBar 
+        title="쇼핑"
+        placeholder="상품명을 입력하세요"
+        onSearch={handleSearch}
+      />
+      <div className="p-4 text-center text-gray-500">
+        검색 아이콘을 클릭하여 확장해보세요
+      </div>
+    </div>
+  );
+};
+
+export default ExpandableSearchBarExample;`;
+
+      case "persistent":
+        return `import React, { useState } from 'react';
+import { Search, X, Mic, ArrowLeft } from 'lucide-react';
+
+interface PersistentSearchBarProps {
+  title?: string;
+  placeholder?: string;
+  backgroundColor?: string;
+  textColor?: string;
+  onSearch?: (query: string) => void;
+  onBack?: () => void;
+  className?: string;
+}
+
+const PersistentSearchBar: React.FC<PersistentSearchBarProps> = ({
+  title = "검색",
+  placeholder = "검색어를 입력하세요",
+  backgroundColor = "bg-green-600",
+  textColor = "text-white",
+  onSearch,
+  onBack,
+  className = ""
+}) => {
+  const [searchText, setSearchText] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (onSearch && searchText.trim()) {
+      onSearch(searchText.trim());
+    }
+  };
+
+  const handleClear = () => {
+    setSearchText("");
+  };
+
+  return (
+    <div className={\`\${backgroundColor} \${textColor} p-4 \${className}\`}>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center">
+          {onBack && (
+            <button
+              onClick={onBack}
+              className="p-1 hover:bg-white/10 rounded-full transition-colors mr-3"
+              aria-label="뒤로 가기"
+            >
+              <ArrowLeft className="h-6 w-6" />
+            </button>
+          )}
+          <h1 className="text-xl font-semibold">{title}</h1>
+        </div>
+      </div>
+      
+      {/* Search Bar */}
+      <form onSubmit={handleSubmit}>
+        <div className="relative flex items-center bg-white rounded-lg">
+          <Search className="absolute left-3 h-5 w-5 text-gray-400" />
+          
+          <input
+            type="text"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder={placeholder}
+            className="w-full pl-10 pr-20 py-3 text-gray-900 rounded-lg outline-none"
+          />
+          
+          <div className="absolute right-2 flex items-center gap-1">
+            {searchText && (
+              <button
+                type="button"
+                onClick={handleClear}
+                className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="검색어 지우기"
+              >
+                <X className="h-4 w-4 text-gray-400" />
+              </button>
+            )}
+            
+            <button
+              type="button"
+              className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="음성 검색"
+            >
+              <Mic className="h-4 w-4 text-gray-400" />
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+// 사용 예시
+const PersistentSearchBarExample: React.FC = () => {
+  const handleSearch = (query: string) => {
+    console.log("검색:", query);
+  };
+
+  const handleBack = () => {
+    console.log("뒤로 가기");
+  };
+
+  return (
+    <div className="max-w-md mx-auto">
+      <PersistentSearchBar 
+        title="장소 검색"
+        placeholder="장소나 주소를 검색하세요"
+        backgroundColor="bg-blue-600"
+        onSearch={handleSearch}
+        onBack={handleBack}
+      />
+      <div className="p-6 text-center text-gray-500">
+        앱 바에 통합된 영구 검색 바
+      </div>
+    </div>
+  );
+};
+
+export default PersistentSearchBarExample;`;
+
+      case "with-filters":
+        return `import React, { useState } from 'react';
+import { Search, X, Mic, Filter, Sliders } from 'lucide-react';
+
+interface FilterOption {
+  id: string;
+  label: string;
+  active: boolean;
+}
+
+interface FilterSearchBarProps {
+  placeholder?: string;
+  filters?: FilterOption[];
+  onSearch?: (query: string) => void;
+  onFilterChange?: (filters: FilterOption[]) => void;
+  className?: string;
+}
+
+const FilterSearchBar: React.FC<FilterSearchBarProps> = ({
+  placeholder = "검색어를 입력하세요",
+  filters = [],
+  onSearch,
+  onFilterChange,
+  className = ""
+}) => {
+  const [searchText, setSearchText] = useState("");
+  const [localFilters, setLocalFilters] = useState<FilterOption[]>(filters);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (onSearch && searchText.trim()) {
+      onSearch(searchText.trim());
+    }
+  };
+
+  const handleClear = () => {
+    setSearchText("");
+  };
+
+  const handleFilterToggle = (filterId: string) => {
+    const updatedFilters = localFilters.map(filter =>
+      filter.id === filterId ? { ...filter, active: !filter.active } : filter
+    );
+    setLocalFilters(updatedFilters);
+    if (onFilterChange) {
+      onFilterChange(updatedFilters);
+    }
+  };
+
+  return (
+    <div className={\`\${className}\`}>
+      {/* Search Input */}
+      <form onSubmit={handleSubmit}>
+        <div className="relative flex items-center mb-4">
+          <Search className="absolute left-3 h-5 w-5 text-gray-400" />
+          
+          <input
+            type="text"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder={placeholder}
+            className="w-full pl-10 pr-24 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+          />
+          
+          <div className="absolute right-2 flex items-center gap-1">
+            {searchText && (
+              <button
+                type="button"
+                onClick={handleClear}
+                className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="검색어 지우기"
+              >
+                <X className="h-4 w-4 text-gray-400" />
+              </button>
+            )}
+            
+            <button
+              type="button"
+              className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="음성 검색"
+            >
+              <Mic className="h-4 w-4 text-gray-400" />
+            </button>
+            
+            <button
+              type="button"
+              className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="필터 설정"
+            >
+              <Sliders className="h-4 w-4 text-gray-400" />
+            </button>
+          </div>
+        </div>
+      </form>
+      
+      {/* Filter Chips */}
+      {localFilters.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {localFilters.map((filter) => (
+            <button
+              key={filter.id}
+              onClick={() => handleFilterToggle(filter.id)}
+              className={\`px-3 py-1.5 text-sm rounded-full border transition-colors \${
+                filter.active
+                  ? "bg-purple-600 text-white border-purple-600"
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+              }\`}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// 사용 예시
+const FilterSearchBarExample: React.FC = () => {
+  const [filters, setFilters] = useState<FilterOption[]>([
+    { id: "category", label: "카테고리", active: false },
+    { id: "price", label: "가격", active: true },
+    { id: "brand", label: "브랜드", active: false },
+    { id: "rating", label: "평점", active: false },
+    { id: "delivery", label: "배송", active: false },
+  ]);
+
+  const handleSearch = (query: string) => {
+    console.log("검색:", query);
+  };
+
+  const handleFilterChange = (updatedFilters: FilterOption[]) => {
+    setFilters(updatedFilters);
+    console.log("필터 변경:", updatedFilters);
+  };
+
+  return (
+    <div className="p-6 max-w-md mx-auto">
+      <h3 className="text-lg font-semibold mb-4">필터형 검색 바</h3>
+      <FilterSearchBar 
+        placeholder="상품을 검색하세요"
+        filters={filters}
+        onSearch={handleSearch}
+        onFilterChange={handleFilterChange}
+      />
+    </div>
+  );
+};
+
+export default FilterSearchBarExample;`;
+
+      default:
+        return getReactCode(); // Fallback to basic
+    }
+  };
+
+  const getFlutterCode = () => {
+    return `// ${
+      searchBarType === "basic"
+        ? "기본 검색 바"
+        : searchBarType === "expandable"
+        ? "확장형 검색 바"
+        : searchBarType === "persistent"
+        ? "영구형 검색 바"
+        : "필터형 검색 바"
+    } 구현 예시
+
+import 'package:flutter/material.dart';
+
+class ${
+      searchBarType === "basic"
+        ? "BasicSearchBar"
+        : searchBarType === "expandable"
+        ? "ExpandableSearchBar"
+        : searchBarType === "persistent"
+        ? "PersistentSearchBar"
+        : "FilterSearchBar"
+    } extends StatefulWidget {
+  @override
+  _${
+    searchBarType === "basic"
+      ? "BasicSearchBar"
+      : searchBarType === "expandable"
+      ? "ExpandableSearchBar"
+      : searchBarType === "persistent"
+      ? "PersistentSearchBar"
+      : "FilterSearchBar"
+  }State createState() => _${
+      searchBarType === "basic"
+        ? "BasicSearchBar"
+        : searchBarType === "expandable"
+        ? "ExpandableSearchBar"
+        : searchBarType === "persistent"
+        ? "PersistentSearchBar"
+        : "FilterSearchBar"
+    }State();
+}
+
+class _${
+      searchBarType === "basic"
+        ? "BasicSearchBar"
+        : searchBarType === "expandable"
+        ? "ExpandableSearchBar"
+        : searchBarType === "persistent"
+        ? "PersistentSearchBar"
+        : "FilterSearchBar"
+    }State extends State<${
+      searchBarType === "basic"
+        ? "BasicSearchBar"
+        : searchBarType === "expandable"
+        ? "ExpandableSearchBar"
+        : searchBarType === "persistent"
+        ? "PersistentSearchBar"
+        : "FilterSearchBar"
+    }> {
+  TextEditingController _searchController = TextEditingController();
+  ${searchBarType === "expandable" ? "bool _isExpanded = false;" : ""}
+  ${searchBarType === "with-filters" ? "List<String> _selectedFilters = [];" : ""}
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('${
+          searchBarType === "basic"
+            ? "기본 검색 바"
+            : searchBarType === "expandable"
+            ? "확장형 검색 바"
+            : searchBarType === "persistent"
+            ? "영구형 검색 바"
+            : "필터형 검색 바"
+        }'),
+        backgroundColor: Color(0xFF6700E6),
+        foregroundColor: Colors.white,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            _buildSearchBar(),
+            ${searchBarType === "with-filters" ? "_buildFilterChips()," : ""}
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSearchBar() {
+    return TextField(
+      controller: _searchController,
+      decoration: InputDecoration(
+        hintText: '검색어를 입력하세요',
+        prefixIcon: Icon(Icons.search),
+        suffixIcon: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (_searchController.text.isNotEmpty)
+              IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: () {
+                  _searchController.clear();
+                  setState(() {});
+                },
+              ),
+            IconButton(
+              icon: Icon(Icons.mic),
+              onPressed: () {
+                // 음성 검색 기능
+              },
+            ),
+          ],
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(color: Color(0xFF6700E6), width: 2),
+        ),
+      ),
+      onChanged: (value) {
+        setState(() {});
+      },
+      onSubmitted: (value) {
+        // 검색 실행
+        print('검색: \$value');
+      },
+    );
+  }
+
+  ${
+    searchBarType === "with-filters"
+      ? `Widget _buildFilterChips() {
+    List<String> filters = ['카테고리', '가격', '브랜드', '평점', '배송'];
+    
+    return Wrap(
+      spacing: 8.0,
+      children: filters.map((filter) {
+        bool isSelected = _selectedFilters.contains(filter);
+        return FilterChip(
+          label: Text(filter),
+          selected: isSelected,
+          onSelected: (selected) {
+            setState(() {
+              if (selected) {
+                _selectedFilters.add(filter);
+              } else {
+                _selectedFilters.remove(filter);
+              }
+            });
+          },
+          selectedColor: Color(0xFF6700E6).withOpacity(0.2),
+          checkmarkColor: Color(0xFF6700E6),
+        );
+      }).toList(),
+    );
+  }`
+      : ""
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+}`;
+  };
+
   return (
     <SlideLayout title="Search Bar (검색 바)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -268,111 +941,34 @@ export default function SearchBarSlide() {
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
+            <div className="flex justify-center mb-4">
+              <div className="flex gap-2">
+                <button
+                  className={`px-4 py-2 rounded text-sm ${
+                    codeType === "react"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setCodeType("react")}
+                >
+                  React + TypeScript
+                </button>
+                <button
+                  className={`px-4 py-2 rounded text-sm ${
+                    codeType === "flutter"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
+                  onClick={() => setCodeType("flutter")}
+                >
+                  Flutter + Dart
+                </button>
+              </div>
+            </div>
             <div className="bg-gray-800 p-4 rounded-lg text-white">
               <PrismCode
-                language="typescript"
-                code={`// ${
-                  searchBarType === "basic"
-                    ? "기본 검색 바"
-                    : searchBarType === "expandable"
-                    ? "확장형 검색 바"
-                    : searchBarType === "persistent"
-                    ? "영구형 검색 바"
-                    : "필터형 검색 바"
-                } 구현 예시
-
-import 'package:flutter/material.dart';
-
-class ${
-                  searchBarType === "basic"
-                    ? "BasicSearchBar"
-                    : searchBarType === "expandable"
-                    ? "ExpandableSearchBar"
-                    : searchBarType === "persistent"
-                    ? "PersistentSearchBar"
-                    : "FilterSearchBar"
-                } extends StatefulWidget {
-  @override
-  _${
-    searchBarType === "basic"
-      ? "BasicSearchBar"
-      : searchBarType === "expandable"
-      ? "ExpandableSearchBar"
-      : searchBarType === "persistent"
-      ? "PersistentSearchBar"
-      : "FilterSearchBar"
-  }State createState() => _${
-                  searchBarType === "basic"
-                    ? "BasicSearchBar"
-                    : searchBarType === "expandable"
-                    ? "ExpandableSearchBar"
-                    : searchBarType === "persistent"
-                    ? "PersistentSearchBar"
-                    : "FilterSearchBar"
-                }State();
-}
-
-class _${
-                  searchBarType === "basic"
-                    ? "BasicSearchBar"
-                    : searchBarType === "expandable"
-                    ? "ExpandableSearchBar"
-                    : searchBarType === "persistent"
-                    ? "PersistentSearchBar"
-                    : "FilterSearchBar"
-                }State extends State<${
-                  searchBarType === "basic"
-                    ? "BasicSearchBar"
-                    : searchBarType === "expandable"
-                    ? "ExpandableSearchBar"
-                    : searchBarType === "persistent"
-                    ? "PersistentSearchBar"
-                    : "FilterSearchBar"
-                }> {
-  TextEditingController _searchController = TextEditingController();
-  ${searchBarType === "expandable" ? "bool _isExpanded = false;" : ""}
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  void _clearSearch() {
-    setState(() {
-      _searchController.clear();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    ${
-      searchBarType === "basic"
-        ? "return Container(\n      decoration: BoxDecoration(\n        border: Border(\n          bottom: BorderSide(color: Colors.grey[300]!),\n        ),\n      ),\n      padding: EdgeInsets.all(8),\n      child: Container(\n        decoration: BoxDecoration(\n          color: Colors.grey[100],\n          borderRadius: BorderRadius.circular(8),\n        ),\n        child: TextField(\n          controller: _searchController,\n          decoration: InputDecoration(\n            hintText: '검색어를 입력하세요',\n            prefixIcon: Icon(Icons.search, color: Colors.grey[400], size: 20),\n            suffixIcon: _searchController.text.isNotEmpty\
-                ? IconButton(\n                    icon: Icon(Icons.clear, color: Colors.grey[400], size: 20),\n                    onPressed: _clearSearch,\n                  )\n                : IconButton(\n                    icon: Icon(Icons.mic, color: Colors.grey[500], size: 20),\n                    onPressed: () {\n                      // 음성 검색 기능 실행\n                    },\n                  ),\
-            border: InputBorder.none,\
-            contentPadding: EdgeInsets.symmetric(vertical: 12),\
-          ),\
-          onChanged: (value) {\n            setState(() {});\n          },\
-        ),\
-      ),\
-    );"
-        : searchBarType === "expandable"
-        ? "return Container(\n      decoration: BoxDecoration(\n        border: Border(\n          bottom: BorderSide(color: Colors.grey[300]!),\n        ),\n      ),\n      padding: EdgeInsets.all(8),\n      child: Row(\n        children: [\n          _isExpanded\
-              ? IconButton(\n                  icon: Icon(Icons.arrow_back),\n                  onPressed: () {\n                    setState(() {\n                      _isExpanded = false;\n                      _searchController.clear();\n                    });\n                  },\n                )\n              : Container(),\n          _isExpanded\
-              ? Expanded(\n                  child: Container(\n                    height: 40,\n                    decoration: BoxDecoration(\n                      color: Colors.grey[100],\n                      borderRadius: BorderRadius.circular(8),\n                    ),\n                    child: TextField(\n                      controller: _searchController,\n                      decoration: InputDecoration(\n                        hintText: '검색어를 입력하세요',\n                        border: InputBorder.none,\n                        contentPadding: EdgeInsets.only(left: 12, bottom: 10, top: 10),\n                        suffixIcon: _searchController.text.isNotEmpty\
-                            ? IconButton(\n                                icon: Icon(Icons.clear, color: Colors.grey[400], size: 18),\n                                onPressed: _clearSearch,\n                              )\n                            : null,\n                      ),\n                      onChanged: (value) {\n                        setState(() {});\n                      },\n                    ),\n                  ),\n                )\n              : Expanded(\n                  child: Text(\n                    '앱 타이틀',\n                    style: TextStyle(\n                      fontSize: 18,\n                      fontWeight: FontWeight.w500,\n                    ),\n                  ),\n                ),\n          _isExpanded\
-              ? IconButton(\n                  icon: Icon(Icons.mic),\n                  onPressed: () {\n                    // 음성 검색 기능 실행\n                  },\n                )\n              : IconButton(\n                  icon: Icon(Icons.search),\n                  onPressed: () {\n                    setState(() {\n                      _isExpanded = true;\n                    });\n                  },\n                ),\n        ],\n      ),\n    );"
-        : searchBarType === "persistent"
-        ? "return Container(\n      color: Color(0xFF6700e6),\n      padding: EdgeInsets.all(8),\n      child: Row(\n        children: [\n          IconButton(\n            icon: Icon(Icons.arrow_back, color: Colors.white),\n            onPressed: () {\n              // 뒤로 가기 기능\n            },\n          ),\n          Expanded(\n            child: Container(\n              decoration: BoxDecoration(\n                color: Colors.white.withOpacity(0.2),\n                borderRadius: BorderRadius.circular(8),\n              ),\n              child: Row(\n                children: [\n                  Padding(\n                    padding: EdgeInsets.only(left: 12),\n                    child: Icon(Icons.search, color: Colors.white.withOpacity(0.7), size: 20),\n                  ),\n                  Expanded(\n                    child: TextField(\n                      controller: _searchController,\n                      style: TextStyle(color: Colors.white),\n                      decoration: InputDecoration(\n                        hintText: '검색어를 입력하세요',\n                        hintStyle: TextStyle(color: Colors.white.withOpacity(0.7)),\n                        border: InputBorder.none,\n                        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),\n                      ),\n                      onChanged: (value) {\n                        setState(() {});\n                      },\n                    ),\n                  ),\n                  if (_searchController.text.isNotEmpty)\n                    IconButton(\n                      icon: Icon(Icons.clear, color: Colors.white.withOpacity(0.7), size: 20),\n                      onPressed: _clearSearch,\n                    ),\n                ],\n              ),\n            ),\n          ),\n          IconButton(\n            icon: Icon(Icons.mic, color: Colors.white),\n            onPressed: () {\n              // 음성 검색 기능\n            },\n          ),\n        ],\n      ),\n    );"
-        : "return Column(\n      children: [\n        // 상단 검색 필드\n        Container(\n          decoration: BoxDecoration(\n            border: Border(bottom: BorderSide(color: Colors.grey[300]!)),\n            color: Colors.white,\n          ),\n          padding: EdgeInsets.all(8),\n          child: Container(\n            decoration: BoxDecoration(\n              color: Colors.grey[100],\n              borderRadius: BorderRadius.circular(8),\n            ),\n            child: Row(\n              children: [\n                Padding(\n                  padding: EdgeInsets.only(left: 12),\n                  child: Icon(Icons.search, color: Colors.grey[400], size: 20),\n                ),\n                Expanded(\n                  child: TextField(\n                    controller: _searchController,\n                    decoration: InputDecoration(\n                      hintText: '검색어를 입력하세요',\n                      border: InputBorder.none,\n                      contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 14),\n                    ),\n                    onChanged: (value) {\n                      setState(() {});\n                    },\n                  ),\n                ),\n                _searchController.text.isNotEmpty\
-                    ? IconButton(\n                        icon: Icon(Icons.clear, color: Colors.grey[400], size: 20),\n                        onPressed: _clearSearch,\n                        padding: EdgeInsets.zero,\n                        constraints: BoxConstraints(),\n                      )\n                    : IconButton(\n                        icon: Icon(Icons.mic, color: Colors.grey[400], size: 20),\n                        onPressed: () {\n                          // 음성 검색 기능\n                        },\n                        padding: EdgeInsets.zero,\n                        constraints: BoxConstraints(),\n                      ),\
-                SizedBox(width: 8),\n              ],\n            ),\n          ),\n        ),\n        \
-        // 필터 칩 목록\n        Container(\n          height: 50,\n          decoration: BoxDecoration(\n            border: Border(bottom: BorderSide(color: Colors.grey[200]!)),\n          ),\n          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),\n          child: ListView(\n            scrollDirection: Axis.horizontal,\n            children: [\n              FilterChip(\n                label: Row(\n                  mainAxisSize: MainAxisSize.min,\n                  children: [\n                    Icon(Icons.filter_list, size: 14, color: Color(0xFF6700e6)),\n                    SizedBox(width: 4),\n                    Text('필터'),\n                  ],\n                ),\n                backgroundColor: Color(0xFF6700e6).withOpacity(0.1),\n                labelStyle: TextStyle(color: Color(0xFF6700e6), fontSize: 12),\n                onSelected: (bool selected) {\n                  // 필터 선택 동작\n                },\n                shape: RoundedRectangleBorder(\n                  borderRadius: BorderRadius.circular(16),\n                ),\n              ),\n              SizedBox(width: 8),\n              buildFilterChip('최신순'),\n              SizedBox(width: 8),\n              buildFilterChip('인기순'),\n              SizedBox(width: 8),\n              buildFilterChip('가격 낮은순'),\n              SizedBox(width: 8),\n              buildFilterChip('가격 높은순'),\n              SizedBox(width: 8),\n              buildFilterChip('평점순'),\n            ],\n          ),\n        ),\n      ],\n    );\n  }\n  \
-  Widget buildFilterChip(String label) {\n    return FilterChip(\n      label: Text(label),\n      backgroundColor: Colors.grey[100],\n      labelStyle: TextStyle(color: Colors.grey[700], fontSize: 12),\n      onSelected: (bool selected) {\n        // 필터 선택 동작\n      },\n      shape: RoundedRectangleBorder(\n        borderRadius: BorderRadius.circular(16),\n      ),\n    );\n  }"
-    }
-  }
-}`}
+                language={codeType === "react" ? "typescript" : "dart"}
+                code={codeType === "react" ? getReactCode() : getFlutterCode()}
               />
             </div>
           </TabsContent>
@@ -381,7 +977,7 @@ class _${
             <div className="mb-6">
               <div className="flex justify-center mb-6 flex-wrap gap-2">
                 <button
-                  className={`px-3 py-1.5 rounded text-sm ${
+                  className={`px-3 py-1 text-sm rounded-full ${
                     searchBarType === "basic"
                       ? "bg-[#6700e6] text-white"
                       : "bg-gray-100"
@@ -391,20 +987,17 @@ class _${
                   기본형
                 </button>
                 <button
-                  className={`px-3 py-1.5 rounded text-sm ${
+                  className={`px-3 py-1 text-sm rounded-full ${
                     searchBarType === "expandable"
                       ? "bg-[#6700e6] text-white"
                       : "bg-gray-100"
                   }`}
-                  onClick={() => {
-                    setSearchBarType("expandable");
-                    setIsExpanded(false);
-                  }}
+                  onClick={() => setSearchBarType("expandable")}
                 >
                   확장형
                 </button>
                 <button
-                  className={`px-3 py-1.5 rounded text-sm ${
+                  className={`px-3 py-1 text-sm rounded-full ${
                     searchBarType === "persistent"
                       ? "bg-[#6700e6] text-white"
                       : "bg-gray-100"
@@ -414,7 +1007,7 @@ class _${
                   영구형
                 </button>
                 <button
-                  className={`px-3 py-1.5 rounded text-sm ${
+                  className={`px-3 py-1 text-sm rounded-full ${
                     searchBarType === "with-filters"
                       ? "bg-[#6700e6] text-white"
                       : "bg-gray-100"
@@ -424,59 +1017,12 @@ class _${
                   필터형
                 </button>
               </div>
+            </div>
 
-              <div className="border rounded-lg overflow-hidden">
-                {/* 검색 바 렌더링 */}
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <h4 className="font-medium mb-4">검색 바 데모</h4>
+              <div className="bg-white p-4 rounded border">
                 {renderSearchBar()}
-
-                {/* 검색 결과 예시 */}
-                <div className="p-4 bg-white">
-                  <h3 className="font-medium mb-2">
-                    {searchBarType === "basic"
-                      ? "기본 검색 바"
-                      : searchBarType === "expandable"
-                      ? "확장형 검색 바"
-                      : searchBarType === "persistent"
-                      ? "영구형 검색 바"
-                      : "필터 포함 검색 바"}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    {searchBarType === "basic"
-                      ? "가장 일반적인 형태의 검색 바로, 검색 아이콘과 텍스트 필드로 구성됩니다."
-                      : searchBarType === "expandable"
-                      ? "처음에는 아이콘만 표시되다가 클릭 시 전체 검색 바로 확장되는 방식입니다."
-                      : searchBarType === "persistent"
-                      ? "화면 상단에 항상 표시되는 형태의 검색 바입니다."
-                      : "검색 필터 옵션을 함께 제공하는 확장된 검색 바입니다."}
-                  </p>
-
-                  {searchText ? (
-                    <div className="space-y-2">
-                      {[1, 2, 3].map((i) => (
-                        <div key={i} className="p-3 border rounded-md">
-                          <div className="flex items-center">
-                            <div className="bg-gray-100 rounded-md w-10 h-10 flex items-center justify-center">
-                              <Search className="h-5 w-5 text-gray-500" />
-                            </div>
-                            <div className="ml-3">
-                              <div className="font-medium">
-                                검색 결과 {i}: {searchText}
-                              </div>
-                              <div className="text-sm text-gray-500">
-                                관련 검색어가 포함된 항목입니다.
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center py-10 text-gray-400">
-                      <Search className="h-10 w-10 mb-2 text-gray-300" />
-                      <p>검색어를 입력하세요</p>
-                    </div>
-                  )}
-                </div>
               </div>
             </div>
           </TabsContent>
