@@ -1,46 +1,46 @@
-"use client"
+"use client";
 
-import SlideLayout from "../slide-layout"
-import { useState, useEffect, useRef } from "react"
-import { ChevronUp } from "lucide-react"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import SlideLayout from "../slide-layout";
+import { useState, useEffect, useRef } from "react";
+import { ChevronUp } from "lucide-react";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function ScrollViewSlide() {
-  const [scrollPosition, setScrollPosition] = useState(0)
-  const [maxScroll, setMaxScroll] = useState(0)
-  const [showScrollToTop, setShowScrollToTop] = useState(false)
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-  
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [maxScroll, setMaxScroll] = useState(0);
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const scrollContainer = scrollContainerRef.current
-    if (!scrollContainer) return
-    
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
     const handleScroll = () => {
-      const position = scrollContainer.scrollTop
-      const max = scrollContainer.scrollHeight - scrollContainer.clientHeight
-      setScrollPosition(position)
-      setMaxScroll(max)
-      setShowScrollToTop(position > 100)
-    }
-    
-    scrollContainer.addEventListener('scroll', handleScroll)
-    handleScroll() // 초기 값 설정
-    
+      const position = scrollContainer.scrollTop;
+      const max = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+      setScrollPosition(position);
+      setMaxScroll(max);
+      setShowScrollToTop(position > 100);
+    };
+
+    scrollContainer.addEventListener("scroll", handleScroll);
+    handleScroll(); // 초기 값 설정
+
     return () => {
-      scrollContainer.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-  
+      scrollContainer.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const scrollToTop = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTo({
         top: 0,
-        behavior: 'smooth'
-      })
+        behavior: "smooth",
+      });
     }
-  }
-  
+  };
+
   const generateLoremIpsum = (paragraphs: number) => {
     const lorem = [
       "스크롤 뷰는 화면 크기보다 더 큰 콘텐츠를 표시하기 위해 필수적인 UI 컴포넌트입니다. 사용자가 콘텐츠를 스크롤하여 볼 수 있게 합니다.",
@@ -53,17 +53,17 @@ export default function ScrollViewSlide() {
       "스크롤 애니메이션과 스냅 기능을 추가하여 더 매끄러운 사용자 경험을 제공할 수 있습니다.",
       "상단으로 스크롤 버튼은 긴 콘텐츠를 탐색할 때 매우 유용한 UI 요소입니다.",
       "스크롤 이벤트를 사용하여 헤더 숨기기/표시하기, 애니메이션 트리거 등 다양한 인터랙션을 구현할 수 있습니다.",
-    ]
-    
-    const result = []
+    ];
+
+    const result = [];
     for (let i = 0; i < paragraphs; i++) {
-      const index = i % lorem.length
-      result.push(lorem[index])
+      const index = i % lorem.length;
+      result.push(lorem[index]);
     }
-    
-    return result
-  }
-  
+
+    return result;
+  };
+
   return (
     <SlideLayout title="Scroll View (스크롤 뷰)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -78,30 +78,39 @@ export default function ScrollViewSlide() {
             <div className="prose max-w-none">
               <h2 className="text-xl font-semibold mb-3">정의</h2>
               <p>
-                스크롤 뷰는 화면에 표시 가능한 영역보다 큰 콘텐츠를 담을 수 있는 컨테이너로,
-                사용자가 스크롤하여 내용을 탐색할 수 있게 합니다. 수직, 수평, 또는 양방향 스크롤을 지원합니다.
+                스크롤 뷰는 화면에 표시 가능한 영역보다 큰 콘텐츠를 담을 수 있는
+                컨테이너로, 사용자가 스크롤하여 내용을 탐색할 수 있게 합니다.
+                수직, 수평, 또는 양방향 스크롤을 지원합니다.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-4 bg-slate-50 rounded-md">
                 <h3 className="text-lg font-medium mb-2">스크롤 뷰 종류</h3>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>
                     <strong>수직 스크롤(Vertical Scroll)</strong>
-                    <p className="text-sm text-gray-600">위아래로 스크롤하는 가장 일반적인 형태</p>
+                    <p className="text-sm text-gray-600">
+                      위아래로 스크롤하는 가장 일반적인 형태
+                    </p>
                   </li>
                   <li>
                     <strong>수평 스크롤(Horizontal Scroll)</strong>
-                    <p className="text-sm text-gray-600">좌우로 스크롤하는 형태, 갤러리나 카루셀에 자주 사용</p>
+                    <p className="text-sm text-gray-600">
+                      좌우로 스크롤하는 형태, 갤러리나 카루셀에 자주 사용
+                    </p>
                   </li>
                   <li>
                     <strong>양방향 스크롤(Both Directions)</strong>
-                    <p className="text-sm text-gray-600">수직과 수평 모두 스크롤 가능한 형태, 큰 테이블 등에 사용</p>
+                    <p className="text-sm text-gray-600">
+                      수직과 수평 모두 스크롤 가능한 형태, 큰 테이블 등에 사용
+                    </p>
                   </li>
                   <li>
                     <strong>페이지 스크롤(Paging)</strong>
-                    <p className="text-sm text-gray-600">한 번에 한 페이지씩 스크롤되는 형태</p>
+                    <p className="text-sm text-gray-600">
+                      한 번에 한 페이지씩 스크롤되는 형태
+                    </p>
                   </li>
                 </ul>
               </div>
@@ -119,9 +128,11 @@ export default function ScrollViewSlide() {
                 </ul>
               </div>
             </div>
-            
-            <div className="p-4 border border-[#268052]/20 bg-[#268052]/5 rounded-md">
-              <h3 className="text-lg font-medium mb-2 text-[#268052]">구현 및 접근성</h3>
+
+            <div className="p-4 border border-[#6700e6]/20 bg-[#6700e6]/5 rounded-md">
+              <h3 className="text-lg font-medium mb-2 text-[#6700e6]">
+                구현 및 접근성
+              </h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700">
                 <li>스크롤 위치 표시기 제공으로 현재 위치 인식 용이하게</li>
                 <li>스크롤 상단으로 이동 버튼으로 긴 콘텐츠 탐색 지원</li>
@@ -322,48 +333,60 @@ class _ScrollViewExampleState extends State<ScrollViewExample> {
                   <span>|</span>
                   <span>최대: {Math.round(maxScroll)}</span>
                   <span>|</span>
-                  <span>진행률: {maxScroll ? Math.round((scrollPosition / maxScroll) * 100) : 0}%</span>
+                  <span>
+                    진행률:{" "}
+                    {maxScroll
+                      ? Math.round((scrollPosition / maxScroll) * 100)
+                      : 0}
+                    %
+                  </span>
                 </div>
               </div>
-              
+
               <div className="relative flex-1 flex flex-col">
-                <div 
+                <div
                   ref={scrollContainerRef}
                   className="flex-1 border rounded-lg overflow-y-auto bg-white p-4"
-                  style={{ 
-                    scrollbarWidth: 'thin',
-                    scrollbarColor: '#268052 #f1f1f1',
-                    height: '400px'
+                  style={{
+                    scrollbarWidth: "thin",
+                    scrollbarColor: "#6700e6 #f1f1f1",
+                    height: "400px",
                   }}
                 >
                   {/* 스크롤 진행 표시기 */}
                   <div className="sticky top-0 left-0 right-0 h-1 bg-gray-100 mb-4 -mx-4">
-                    <div 
-                      className="h-full bg-[#268052]" 
-                      style={{ width: `${maxScroll ? (scrollPosition / maxScroll) * 100 : 0}%` }}
+                    <div
+                      className="h-full bg-[#6700e6]"
+                      style={{
+                        width: `${
+                          maxScroll ? (scrollPosition / maxScroll) * 100 : 0
+                        }%`,
+                      }}
                     ></div>
                   </div>
-                  
+
                   {/* 스크롤 가능한 콘텐츠 */}
                   <div className="space-y-4">
                     {generateLoremIpsum(20).map((text, index) => (
-                      <div 
+                      <div
                         key={index}
                         className={`p-4 rounded-lg ${
-                          index % 3 === 0 
-                            ? 'bg-[#268052]/5 border border-[#268052]/10'
+                          index % 3 === 0
+                            ? "bg-[#6700e6]/5 border border-[#6700e6]/10"
                             : index % 3 === 1
-                              ? 'bg-gray-50'
-                              : 'border'
+                            ? "bg-gray-50"
+                            : "border"
                         }`}
                       >
                         <p className="text-gray-700">{text}</p>
-                        <div className="text-xs text-gray-400 mt-2">단락 #{index + 1}</div>
+                        <div className="text-xs text-gray-400 mt-2">
+                          단락 #{index + 1}
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
-                
+
                 {/* 스크롤 상단으로 버튼 */}
                 {showScrollToTop && (
                   <button
@@ -380,5 +403,5 @@ class _ScrollViewExampleState extends State<ScrollViewExample> {
         </Tabs>
       </div>
     </SlideLayout>
-  )
-} 
+  );
+}

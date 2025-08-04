@@ -1,38 +1,46 @@
-"use client"
+"use client";
 
-import SlideLayout from "../slide-layout"
-import { useState } from "react"
-import { Menu, X, Home, Settings, User, HelpCircle, LogOut } from "lucide-react"
-import { PrismCode } from "../../ui/prism/PrismCode"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import SlideLayout from "../slide-layout";
+import { useState } from "react";
+import {
+  Menu,
+  X,
+  Home,
+  Settings,
+  User,
+  HelpCircle,
+  LogOut,
+} from "lucide-react";
+import { PrismCode } from "../../ui/prism/PrismCode";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function DrawerSlide() {
-  const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useState(false)
-  const [isRightDrawerOpen, setIsRightDrawerOpen] = useState(false)
-  const [activeMenuItem, setActiveMenuItem] = useState('home')
-  const [drawerType, setDrawerType] = useState<'left' | 'right'>('left')
-  
+  const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useState(false);
+  const [isRightDrawerOpen, setIsRightDrawerOpen] = useState(false);
+  const [activeMenuItem, setActiveMenuItem] = useState("home");
+  const [drawerType, setDrawerType] = useState<"left" | "right">("left");
+
   const toggleLeftDrawer = () => {
-    setIsLeftDrawerOpen(!isLeftDrawerOpen)
-    if (isRightDrawerOpen) setIsRightDrawerOpen(false)
-    setDrawerType('left')
-  }
-  
+    setIsLeftDrawerOpen(!isLeftDrawerOpen);
+    if (isRightDrawerOpen) setIsRightDrawerOpen(false);
+    setDrawerType("left");
+  };
+
   const toggleRightDrawer = () => {
-    setIsRightDrawerOpen(!isRightDrawerOpen)
-    if (isLeftDrawerOpen) setIsLeftDrawerOpen(false)
-    setDrawerType('right')
-  }
-  
+    setIsRightDrawerOpen(!isRightDrawerOpen);
+    if (isLeftDrawerOpen) setIsLeftDrawerOpen(false);
+    setDrawerType("right");
+  };
+
   const menuItems = [
-    { id: 'home', label: '홈', icon: Home },
-    { id: 'profile', label: '프로필', icon: User },
-    { id: 'settings', label: '설정', icon: Settings },
-    { id: 'help', label: '도움말', icon: HelpCircle },
-  ]
+    { id: "home", label: "홈", icon: Home },
+    { id: "profile", label: "프로필", icon: User },
+    { id: "settings", label: "설정", icon: Settings },
+    { id: "help", label: "도움말", icon: HelpCircle },
+  ];
 
   const getReactCode = () => {
-    if (drawerType === 'left') {
+    if (drawerType === "left") {
       return `import React, { useState } from 'react';
 import { Menu, X, Home, Settings, User, HelpCircle, LogOut } from 'lucide-react';
 
@@ -90,7 +98,7 @@ const NavigationDrawerExample: React.FC = () => {
         }\`}
       >
         {/* Drawer Header */}
-        <div className="bg-[#268052] p-6 text-white">
+        <div className="bg-[#6700e6] p-6 text-white">
           <div className="flex justify-end mb-4">
             <button
               onClick={toggleDrawer}
@@ -103,7 +111,7 @@ const NavigationDrawerExample: React.FC = () => {
           
           <div className="flex flex-col items-start">
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4">
-              <User className="w-8 h-8 text-[#268052]" />
+              <User className="w-8 h-8 text-[#6700e6]" />
             </div>
             <h3 className="text-lg font-medium">사용자 이름</h3>
             <p className="text-white/80 text-sm">user@example.com</p>
@@ -119,7 +127,7 @@ const NavigationDrawerExample: React.FC = () => {
                   onClick={() => handleMenuItemClick(item.id)}
                   className={\`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors \${
                     activeMenuItem === item.id
-                      ? 'bg-[#268052]/10 text-[#268052]'
+                      ? 'bg-[#6700e6]/10 text-[#6700e6]'
                       : 'hover:bg-gray-100 text-gray-700'
                   }\`}
                 >
@@ -191,7 +199,7 @@ const SettingsDrawerExample: React.FC = () => {
   const themeOptions = [
     { id: 'light', color: '#ffffff', icon: Sun },
     { id: 'dark', color: '#1f2937', icon: Moon },
-    { id: 'green', color: '#268052', icon: Settings },
+    { id: 'green', color: '#6700e6', icon: Settings },
   ];
 
   return (
@@ -250,7 +258,7 @@ const SettingsDrawerExample: React.FC = () => {
                   checked={pushNotifications}
                   onChange={(e) => setPushNotifications(e.target.checked)}
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#268052]"></div>
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#6700e6]"></div>
               </label>
             </div>
           </div>
@@ -265,7 +273,7 @@ const SettingsDrawerExample: React.FC = () => {
                   onClick={() => setTheme(option.id)}
                   className={\`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-colors \${
                     theme === option.id
-                      ? 'border-[#268052] bg-opacity-20'
+                      ? 'border-[#6700e6] bg-opacity-20'
                       : 'border-gray-300 hover:border-gray-400'
                   }\`}
                   style={{ backgroundColor: option.color }}
@@ -295,7 +303,7 @@ const SettingsDrawerExample: React.FC = () => {
                   step="1"
                   value={fontSize}
                   onChange={(e) => setFontSize(Number(e.target.value))}
-                  className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#268052]"
+                  className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#6700e6]"
                 />
               </div>
               <div className="flex justify-between text-xs text-gray-500">
@@ -352,7 +360,7 @@ const SettingsDrawerExample: React.FC = () => {
 export default SettingsDrawerExample;`;
     }
   };
-  
+
   return (
     <SlideLayout title="Drawer (드로어)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -367,34 +375,45 @@ export default SettingsDrawerExample;`;
             <div className="prose max-w-none mb-6">
               <h2 className="text-xl font-semibold mb-3">정의</h2>
               <p>
-                드로어(Drawer)는 화면 가장자리에서 슬라이딩하여 나타나는 패널로, 주로 내비게이션이나 
-                추가 컨트롤을 위해 사용됩니다. 일반적으로 햄버거 메뉴 아이콘이나 슬라이드 제스처로 열고 닫을 수 있습니다.
+                드로어(Drawer)는 화면 가장자리에서 슬라이딩하여 나타나는 패널로,
+                주로 내비게이션이나 추가 컨트롤을 위해 사용됩니다. 일반적으로
+                햄버거 메뉴 아이콘이나 슬라이드 제스처로 열고 닫을 수 있습니다.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-4 bg-slate-50 rounded-md">
                 <h3 className="text-lg font-medium mb-2">드로어 종류</h3>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>
                     <strong>측면 드로어(Side Drawer)</strong>
-                    <p className="text-sm text-gray-600">화면 좌측 또는 우측에서 슬라이드, 주로 내비게이션에 사용</p>
+                    <p className="text-sm text-gray-600">
+                      화면 좌측 또는 우측에서 슬라이드, 주로 내비게이션에 사용
+                    </p>
                   </li>
                   <li>
                     <strong>바텀 드로어(Bottom Drawer)</strong>
-                    <p className="text-sm text-gray-600">화면 아래에서 위로 슬라이드, 추가 옵션이나 컨텐츠에 사용</p>
+                    <p className="text-sm text-gray-600">
+                      화면 아래에서 위로 슬라이드, 추가 옵션이나 컨텐츠에 사용
+                    </p>
                   </li>
                   <li>
                     <strong>상단 드로어(Top Drawer)</strong>
-                    <p className="text-sm text-gray-600">화면 위에서 아래로 슬라이드, 알림이나 검색에 사용</p>
+                    <p className="text-sm text-gray-600">
+                      화면 위에서 아래로 슬라이드, 알림이나 검색에 사용
+                    </p>
                   </li>
                   <li>
                     <strong>임시 드로어(Temporary Drawer)</strong>
-                    <p className="text-sm text-gray-600">오버레이로 표시되고 외부 클릭으로 닫힘</p>
+                    <p className="text-sm text-gray-600">
+                      오버레이로 표시되고 외부 클릭으로 닫힘
+                    </p>
                   </li>
                   <li>
                     <strong>영구 드로어(Permanent Drawer)</strong>
-                    <p className="text-sm text-gray-600">항상 화면에 표시되고 접히지 않음 (주로 데스크탑에서 사용)</p>
+                    <p className="text-sm text-gray-600">
+                      항상 화면에 표시되고 접히지 않음 (주로 데스크탑에서 사용)
+                    </p>
                   </li>
                 </ul>
               </div>
@@ -413,33 +432,49 @@ export default SettingsDrawerExample;`;
                 </ul>
               </div>
             </div>
-            
-            <div className="p-4 border border-[#268052]/20 bg-[#268052]/5 rounded-md">
-              <h3 className="text-lg font-medium mb-2 text-[#268052]">디자인 권장사항</h3>
+
+            <div className="p-4 border border-[#6700e6]/20 bg-[#6700e6]/5 rounded-md">
+              <h3 className="text-lg font-medium mb-2 text-[#6700e6]">
+                디자인 권장사항
+              </h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700">
                 <li>
                   <strong>명확한 계층 구조</strong>
-                  <p className="text-sm">드로어는 메인 콘텐츠 위에 떠 있는 느낌을 주어야 함</p>
+                  <p className="text-sm">
+                    드로어는 메인 콘텐츠 위에 떠 있는 느낌을 주어야 함
+                  </p>
                 </li>
                 <li>
                   <strong>직관적인 제스처</strong>
-                  <p className="text-sm">스와이프로 열고 닫을 수 있는 자연스러운 제스처 지원</p>
+                  <p className="text-sm">
+                    스와이프로 열고 닫을 수 있는 자연스러운 제스처 지원
+                  </p>
                 </li>
                 <li>
                   <strong>적절한 크기</strong>
-                  <p className="text-sm">화면의 부분적인 영역을 차지하여 컨텍스트 유지</p>
+                  <p className="text-sm">
+                    화면의 부분적인 영역을 차지하여 컨텍스트 유지
+                  </p>
                 </li>
                 <li>
                   <strong>명확한 닫기 방법</strong>
-                  <p className="text-sm">닫기 버튼, 외부 영역 탭, 백 스와이프 등 다양한 닫기 옵션 제공</p>
+                  <p className="text-sm">
+                    닫기 버튼, 외부 영역 탭, 백 스와이프 등 다양한 닫기 옵션
+                    제공
+                  </p>
                 </li>
                 <li>
                   <strong>상태 변화 표시</strong>
-                  <p className="text-sm">열리고 닫힐 때 부드러운 애니메이션으로 상태 변화 표시</p>
+                  <p className="text-sm">
+                    열리고 닫힐 때 부드러운 애니메이션으로 상태 변화 표시
+                  </p>
                 </li>
                 <li>
                   <strong>내용 구성</strong>
-                  <p className="text-sm">중요도에 따라 내용을 구성하고 스크롤이 필요한 경우 분명한 스크롤 표시</p>
+                  <p className="text-sm">
+                    중요도에 따라 내용을 구성하고 스크롤이 필요한 경우 분명한
+                    스크롤 표시
+                  </p>
                 </li>
               </ul>
             </div>
@@ -458,48 +493,48 @@ export default SettingsDrawerExample;`;
               <div className="flex justify-between mb-4 gap-4">
                 <button
                   onClick={toggleLeftDrawer}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#268052] text-white rounded-lg hover:bg-[#268052]/90"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#6700e6] text-white rounded-lg hover:bg-[#6700e6]/90"
                 >
                   <Menu className="w-5 h-5" />
                   왼쪽 드로어 열기
                 </button>
-                
+
                 <button
                   onClick={toggleRightDrawer}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#268052] text-white rounded-lg hover:bg-[#268052]/90"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#6700e6] text-white rounded-lg hover:bg-[#6700e6]/90"
                 >
                   설정 패널 열기
                   <Menu className="w-5 h-5" />
                 </button>
               </div>
-              
+
               <div className="relative bg-gray-100 h-80 rounded-lg overflow-hidden shadow-md">
                 {/* 왼쪽 드로어 */}
-                <div 
+                <div
                   className={`absolute top-0 left-0 bottom-0 w-64 bg-white shadow-lg transition-transform duration-300 ease-in-out ${
-                    isLeftDrawerOpen ? 'translate-x-0' : '-translate-x-full'
+                    isLeftDrawerOpen ? "translate-x-0" : "-translate-x-full"
                   } z-10`}
                 >
                   <div className="flex justify-between items-center p-4 border-b">
                     <h3 className="font-medium">내비게이션</h3>
-                    <button 
+                    <button
                       onClick={toggleLeftDrawer}
                       className="p-1 rounded-full hover:bg-gray-100"
                     >
                       <X className="w-5 h-5 text-gray-500" />
                     </button>
                   </div>
-                  
+
                   <nav className="p-2">
                     <ul className="space-y-1">
-                      {menuItems.map(item => (
+                      {menuItems.map((item) => (
                         <li key={item.id}>
                           <button
                             onClick={() => setActiveMenuItem(item.id)}
                             className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-left ${
-                              activeMenuItem === item.id 
-                                ? 'bg-[#268052]/10 text-[#268052]' 
-                                : 'hover:bg-gray-100'
+                              activeMenuItem === item.id
+                                ? "bg-[#6700e6]/10 text-[#6700e6]"
+                                : "hover:bg-gray-100"
                             }`}
                           >
                             <item.icon className="w-5 h-5" />
@@ -507,11 +542,9 @@ export default SettingsDrawerExample;`;
                           </button>
                         </li>
                       ))}
-                      
+
                       <li className="mt-6">
-                        <button
-                          className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-left text-red-500 hover:bg-red-50"
-                        >
+                        <button className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-left text-red-500 hover:bg-red-50">
                           <LogOut className="w-5 h-5" />
                           <span>로그아웃</span>
                         </button>
@@ -519,50 +552,60 @@ export default SettingsDrawerExample;`;
                     </ul>
                   </nav>
                 </div>
-                
+
                 {/* 오른쪽 드로어 */}
-                <div 
+                <div
                   className={`absolute top-0 right-0 bottom-0 w-64 bg-white shadow-lg transition-transform duration-300 ease-in-out ${
-                    isRightDrawerOpen ? 'translate-x-0' : 'translate-x-full'
+                    isRightDrawerOpen ? "translate-x-0" : "translate-x-full"
                   } z-10`}
                 >
                   <div className="flex justify-between items-center p-4 border-b">
                     <h3 className="font-medium">설정 패널</h3>
-                    <button 
+                    <button
                       onClick={toggleRightDrawer}
                       className="p-1 rounded-full hover:bg-gray-100"
                     >
                       <X className="w-5 h-5 text-gray-500" />
                     </button>
                   </div>
-                  
+
                   <div className="p-4">
                     <div className="space-y-4">
                       <div>
-                        <label className="text-sm font-medium block mb-1">알림 설정</label>
+                        <label className="text-sm font-medium block mb-1">
+                          알림 설정
+                        </label>
                         <div className="flex items-center justify-between">
                           <span className="text-sm">푸시 알림</span>
                           <label className="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" className="sr-only peer" defaultChecked />
-                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#268052]"></div>
+                            <input
+                              type="checkbox"
+                              className="sr-only peer"
+                              defaultChecked
+                            />
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#6700e6]"></div>
                           </label>
                         </div>
                       </div>
-                      
+
                       <div>
-                        <label className="text-sm font-medium block mb-1">테마</label>
+                        <label className="text-sm font-medium block mb-1">
+                          테마
+                        </label>
                         <div className="flex gap-2">
                           <button className="w-8 h-8 bg-white border rounded-full"></button>
                           <button className="w-8 h-8 bg-gray-900 border rounded-full"></button>
-                          <button className="w-8 h-8 bg-[#268052] border rounded-full"></button>
+                          <button className="w-8 h-8 bg-[#6700e6] border rounded-full"></button>
                         </div>
                       </div>
-                      
+
                       <div>
-                        <label className="text-sm font-medium block mb-1">글꼴 크기</label>
+                        <label className="text-sm font-medium block mb-1">
+                          글꼴 크기
+                        </label>
                         <input
                           type="range"
-                          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#268052]"
+                          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#6700e6]"
                           min="1"
                           max="3"
                           step="1"
@@ -572,47 +615,54 @@ export default SettingsDrawerExample;`;
                     </div>
                   </div>
                 </div>
-                
+
                 {/* 메인 콘텐츠 */}
                 <div className="p-4 h-full">
                   <header className="flex justify-between items-center mb-6">
-                    <button 
+                    <button
                       onClick={toggleLeftDrawer}
                       className="p-2 rounded-md hover:bg-gray-200"
                     >
                       <Menu className="w-5 h-5" />
                     </button>
-                    
+
                     <h2 className="font-semibold">앱 타이틀</h2>
-                    
-                    <button 
+
+                    <button
                       onClick={toggleRightDrawer}
                       className="p-2 rounded-md hover:bg-gray-200"
                     >
                       <Settings className="w-5 h-5" />
                     </button>
                   </header>
-                  
+
                   <div className="p-4 text-center">
-                    <p>메뉴(햄버거) 아이콘이나 설정 아이콘을 클릭하여<br/>드로어를 열어보세요.</p>
-                    <p className="text-gray-500 mt-2 text-sm">좌우에서 드로어가 슬라이드됩니다</p>
-                    
+                    <p>
+                      메뉴(햄버거) 아이콘이나 설정 아이콘을 클릭하여
+                      <br />
+                      드로어를 열어보세요.
+                    </p>
+                    <p className="text-gray-500 mt-2 text-sm">
+                      좌우에서 드로어가 슬라이드됩니다
+                    </p>
+
                     <div className="mt-8">
                       <p className="font-medium">활성 메뉴 항목:</p>
-                      <p className="text-[#268052] mt-1">
-                        {menuItems.find(item => item.id === activeMenuItem)?.label || '없음'}
+                      <p className="text-[#6700e6] mt-1">
+                        {menuItems.find((item) => item.id === activeMenuItem)
+                          ?.label || "없음"}
                       </p>
                     </div>
                   </div>
                 </div>
-                
+
                 {/* 드로어 오버레이 */}
                 {(isLeftDrawerOpen || isRightDrawerOpen) && (
-                  <div 
+                  <div
                     className="absolute inset-0 bg-black/20 z-0"
                     onClick={() => {
-                      setIsLeftDrawerOpen(false)
-                      setIsRightDrawerOpen(false)
+                      setIsLeftDrawerOpen(false);
+                      setIsRightDrawerOpen(false);
                     }}
                   ></div>
                 )}
@@ -623,4 +673,4 @@ export default SettingsDrawerExample;`;
       </div>
     </SlideLayout>
   );
-} 
+}

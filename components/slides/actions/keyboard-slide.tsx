@@ -1,68 +1,68 @@
-"use client"
+"use client";
 
-import SlideLayout from "../slide-layout"
-import { useState, useEffect } from "react"
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import SlideLayout from "../slide-layout";
+import { useState, useEffect } from "react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function KeyboardSlide() {
-  const [activeKeys, setActiveKeys] = useState<string[]>([])
-  const [lastKey, setLastKey] = useState<string>("")
-  const [boxPosition, setBoxPosition] = useState({ x: 50, y: 50 })
-  
+  const [activeKeys, setActiveKeys] = useState<string[]>([]);
+  const [lastKey, setLastKey] = useState<string>("");
+  const [boxPosition, setBoxPosition] = useState({ x: 50, y: 50 });
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const key = e.key.toLowerCase()
-      setLastKey(key)
-      
+      const key = e.key.toLowerCase();
+      setLastKey(key);
+
       if (!activeKeys.includes(key)) {
-        setActiveKeys([...activeKeys, key])
+        setActiveKeys([...activeKeys, key]);
       }
-      
+
       // 화살표 키로 박스 이동
       if (["arrowup", "arrowdown", "arrowleft", "arrowright"].includes(key)) {
-        e.preventDefault()
-        setBoxPosition(prev => {
-          let { x, y } = prev
-          const step = 10
-          
+        e.preventDefault();
+        setBoxPosition((prev) => {
+          let { x, y } = prev;
+          const step = 10;
+
           switch (key) {
-            case "arrowup": 
-              y = Math.max(0, y - step)
-              break
+            case "arrowup":
+              y = Math.max(0, y - step);
+              break;
             case "arrowdown":
-              y = Math.min(100, y + step)
-              break
+              y = Math.min(100, y + step);
+              break;
             case "arrowleft":
-              x = Math.max(0, x - step)
-              break
+              x = Math.max(0, x - step);
+              break;
             case "arrowright":
-              x = Math.min(100, x + step)
-              break
+              x = Math.min(100, x + step);
+              break;
           }
-          
-          return { x, y }
-        })
+
+          return { x, y };
+        });
       }
-    }
-    
+    };
+
     const handleKeyUp = (e: KeyboardEvent) => {
-      const key = e.key.toLowerCase()
-      setActiveKeys(activeKeys.filter(k => k !== key))
-    }
-    
-    window.addEventListener('keydown', handleKeyDown)
-    window.addEventListener('keyup', handleKeyUp)
-    
+      const key = e.key.toLowerCase();
+      setActiveKeys(activeKeys.filter((k) => k !== key));
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
     return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-      window.removeEventListener('keyup', handleKeyUp)
-    }
-  }, [activeKeys])
-  
-  const isKeyActive = (key: string) => activeKeys.includes(key.toLowerCase())
-  
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [activeKeys]);
+
+  const isKeyActive = (key: string) => activeKeys.includes(key.toLowerCase());
+
   return (
     <SlideLayout title="Keyboard (키보드)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -77,21 +77,40 @@ export default function KeyboardSlide() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                키보드 상호작용은 물리적 또는 가상 키보드를 통해 애플리케이션과 소통하는 방식입니다.
-                React에서는 KeyboardEvent를 통해 처리하며, 웹 및 데스크톱 환경에서는 주요 상호작용 방식이며, 모바일 환경에서도 텍스트 입력 및 특수 기능 사용 시 필수적입니다.
+                키보드 상호작용은 물리적 또는 가상 키보드를 통해 애플리케이션과
+                소통하는 방식입니다. React에서는 KeyboardEvent를 통해 처리하며,
+                웹 및 데스크톱 환경에서는 주요 상호작용 방식이며, 모바일
+                환경에서도 텍스트 입력 및 특수 기능 사용 시 필수적입니다.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">일반적인 키보드 상호작용</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                일반적인 키보드 상호작용
+              </h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li><strong>단축키:</strong> Ctrl+C (복사), Ctrl+V (붙여넣기) 등</li>
-                <li><strong>내비게이션:</strong> Tab (다음 요소로), Shift+Tab (이전 요소로)</li>
-                <li><strong>폼 전송:</strong> Enter 키</li>
-                <li><strong>취소:</strong> Escape 키</li>
-                <li><strong>방향키:</strong> 이동, 메뉴 항목 선택</li>
-                <li><strong>페이지 이동:</strong> Page Up, Page Down</li>
-                <li><strong>아이템 선택:</strong> Space, Enter</li>
+                <li>
+                  <strong>단축키:</strong> Ctrl+C (복사), Ctrl+V (붙여넣기) 등
+                </li>
+                <li>
+                  <strong>내비게이션:</strong> Tab (다음 요소로), Shift+Tab
+                  (이전 요소로)
+                </li>
+                <li>
+                  <strong>폼 전송:</strong> Enter 키
+                </li>
+                <li>
+                  <strong>취소:</strong> Escape 키
+                </li>
+                <li>
+                  <strong>방향키:</strong> 이동, 메뉴 항목 선택
+                </li>
+                <li>
+                  <strong>페이지 이동:</strong> Page Up, Page Down
+                </li>
+                <li>
+                  <strong>아이템 선택:</strong> Space, Enter
+                </li>
               </ul>
             </div>
 
@@ -323,45 +342,56 @@ function KeyboardEventTypes() {
                 <div className="border rounded-lg overflow-hidden shadow-sm">
                   <div className="bg-slate-50 p-3 border-b">
                     <h3 className="font-medium">키보드 이벤트 데모</h3>
-                    <p className="text-sm text-gray-600">아무 키나 눌러보세요</p>
+                    <p className="text-sm text-gray-600">
+                      아무 키나 눌러보세요
+                    </p>
                   </div>
-                  
+
                   <div className="p-4 bg-white">
                     <div className="mb-4">
                       <div className="flex justify-between mb-2">
-                        <span className="text-sm text-gray-500">마지막으로 누른 키:</span>
+                        <span className="text-sm text-gray-500">
+                          마지막으로 누른 키:
+                        </span>
                         <span className="font-mono font-medium bg-gray-100 px-2 py-1 rounded text-sm">
                           {lastKey || "-"}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-500">현재 누르고 있는 키:</span>
+                        <span className="text-sm text-gray-500">
+                          현재 누르고 있는 키:
+                        </span>
                         <div className="font-mono font-medium">
                           {activeKeys.length > 0 ? (
                             <div className="flex gap-1">
-                              {activeKeys.map(key => (
-                                <span key={key} className="bg-[#268052] text-white px-2 py-1 rounded text-xs">
+                              {activeKeys.map((key) => (
+                                <span
+                                  key={key}
+                                  className="bg-[#6700e6] text-white px-2 py-1 rounded text-xs"
+                                >
                                   {key}
                                 </span>
                               ))}
                             </div>
                           ) : (
-                            <span className="bg-gray-100 px-2 py-1 rounded text-sm">-</span>
+                            <span className="bg-gray-100 px-2 py-1 rounded text-sm">
+                              -
+                            </span>
                           )}
                         </div>
                       </div>
                     </div>
-                    
+
                     <div>
                       <h4 className="text-sm font-medium mb-2">키보드 게임</h4>
                       <div className="border-2 border-dashed border-gray-300 rounded-md p-4 h-32 relative">
-                        <div 
-                          className="absolute bg-[#268052] rounded-md w-10 h-10"
+                        <div
+                          className="absolute bg-[#6700e6] rounded-md w-10 h-10"
                           style={{
                             left: `${boxPosition.x}%`,
                             top: `${boxPosition.y}%`,
-                            transform: 'translate(-50%, -50%)',
-                            transition: 'all 0.1s ease-out'
+                            transform: "translate(-50%, -50%)",
+                            transition: "all 0.1s ease-out",
                           }}
                         />
                         <div className="absolute bottom-2 right-2 text-xs text-gray-400">
@@ -369,38 +399,56 @@ function KeyboardEventTypes() {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div>
                       <div className="mt-4">
-                        <h4 className="text-sm font-medium mb-2">키보드 상태 시각화</h4>
+                        <h4 className="text-sm font-medium mb-2">
+                          키보드 상태 시각화
+                        </h4>
                         <div className="grid grid-cols-3 text-center pb-6 w-40 mx-auto">
                           <div></div>
                           <div>
-                            <div 
-                              className={`w-10 h-10 border-2 ${isKeyActive("arrowup") ? 'bg-[#268052] text-white' : 'bg-white'} rounded-md flex items-center justify-center shadow-sm mx-auto`}
+                            <div
+                              className={`w-10 h-10 border-2 ${
+                                isKeyActive("arrowup")
+                                  ? "bg-[#6700e6] text-white"
+                                  : "bg-white"
+                              } rounded-md flex items-center justify-center shadow-sm mx-auto`}
                             >
                               <ArrowUp size={18} />
                             </div>
                           </div>
                           <div></div>
-                          
+
                           <div>
-                            <div 
-                              className={`w-10 h-10 border-2 ${isKeyActive("arrowleft") ? 'bg-[#268052] text-white' : 'bg-white'} rounded-md flex items-center justify-center shadow-sm mx-auto`}
+                            <div
+                              className={`w-10 h-10 border-2 ${
+                                isKeyActive("arrowleft")
+                                  ? "bg-[#6700e6] text-white"
+                                  : "bg-white"
+                              } rounded-md flex items-center justify-center shadow-sm mx-auto`}
                             >
                               <ArrowLeft size={18} />
                             </div>
                           </div>
                           <div>
-                            <div 
-                              className={`w-10 h-10 border-2 ${isKeyActive("arrowdown") ? 'bg-[#268052] text-white' : 'bg-white'} rounded-md flex items-center justify-center shadow-sm mx-auto`}
+                            <div
+                              className={`w-10 h-10 border-2 ${
+                                isKeyActive("arrowdown")
+                                  ? "bg-[#6700e6] text-white"
+                                  : "bg-white"
+                              } rounded-md flex items-center justify-center shadow-sm mx-auto`}
                             >
                               <ArrowDown size={18} />
                             </div>
                           </div>
                           <div>
-                            <div 
-                              className={`w-10 h-10 border-2 ${isKeyActive("arrowright") ? 'bg-[#268052] text-white' : 'bg-white'} rounded-md flex items-center justify-center shadow-sm mx-auto`}
+                            <div
+                              className={`w-10 h-10 border-2 ${
+                                isKeyActive("arrowright")
+                                  ? "bg-[#6700e6] text-white"
+                                  : "bg-white"
+                              } rounded-md flex items-center justify-center shadow-sm mx-auto`}
                             >
                               <ArrowRight size={18} />
                             </div>
@@ -410,12 +458,12 @@ function KeyboardEventTypes() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="border rounded-lg overflow-hidden shadow-sm">
                   <div className="bg-slate-50 p-3 border-b">
                     <h3 className="font-medium">일반적인 키보드 단축키</h3>
                   </div>
-                  
+
                   <div className="p-4 bg-white">
                     <table className="w-full text-sm">
                       <tbody>
@@ -453,5 +501,5 @@ function KeyboardEventTypes() {
         </Tabs>
       </div>
     </SlideLayout>
-  )
-} 
+  );
+}

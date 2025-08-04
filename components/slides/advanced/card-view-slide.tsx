@@ -1,26 +1,27 @@
-"use client"
+"use client";
 
-import SlideLayout from "../slide-layout"
-import { useState } from "react"
-import { PrismCode } from "../../ui/prism/PrismCode"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import SlideLayout from "../slide-layout";
+import { useState } from "react";
+import { PrismCode } from "../../ui/prism/PrismCode";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface Card {
-  id: number
-  title: string
-  description: string
-  image: string
-  tags: string[]
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
 }
 
 export default function CardViewSlide() {
-  const [selectedCard, setSelectedCard] = useState<number | null>(null)
-  
+  const [selectedCard, setSelectedCard] = useState<number | null>(null);
+
   const cards: Card[] = [
     {
       id: 1,
       title: "카드 컴포넌트 디자인",
-      description: "사용자 인터페이스를 위한 효과적인 카드 컴포넌트 디자인 방법",
+      description:
+        "사용자 인터페이스를 위한 효과적인 카드 컴포넌트 디자인 방법",
       image: "📱",
       tags: ["UI", "디자인", "카드"],
     },
@@ -38,8 +39,8 @@ export default function CardViewSlide() {
       image: "👆",
       tags: ["상호작용", "애니메이션"],
     },
-  ]
-  
+  ];
+
   return (
     <SlideLayout title="Card View (카드 뷰)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -54,8 +55,9 @@ export default function CardViewSlide() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                카드 뷰는 관련 정보를 담은 컨테이너로, 주로 이미지, 제목, 간략한 설명과 액션을 포함합니다.
-                정보를 시각적으로 구분하고 그룹화하여 사용자가 콘텐츠를 쉽게 스캔하고 상호작용할 수 있게 합니다.
+                카드 뷰는 관련 정보를 담은 컨테이너로, 주로 이미지, 제목, 간략한
+                설명과 액션을 포함합니다. 정보를 시각적으로 구분하고 그룹화하여
+                사용자가 콘텐츠를 쉽게 스캔하고 상호작용할 수 있게 합니다.
               </p>
             </div>
 
@@ -69,7 +71,7 @@ export default function CardViewSlide() {
                 <li>메타데이터: 태그, 날짜, 저자 등</li>
               </ul>
             </div>
-            
+
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
               <ul className="list-disc pl-6 space-y-1">
@@ -107,7 +109,7 @@ const CardComponent: React.FC<CardProps> = ({
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg">
       {/* 카드 이미지 */}
-      <div className="h-32 bg-gradient-to-r from-[#268052]/80 to-[#268052] flex items-center justify-center">
+      <div className="h-32 bg-gradient-to-r from-[#6700e6]/80 to-[#6700e6] flex items-center justify-center">
         <span className="text-4xl" role="img" aria-label="이미지">
           {image}
         </span>
@@ -128,7 +130,7 @@ const CardComponent: React.FC<CardProps> = ({
           {tags.map((tag, index) => (
             <span
               key={index}
-              className="px-2 py-1 bg-[#268052]/10 text-[#268052] text-xs rounded-full font-medium"
+              className="px-2 py-1 bg-[#6700e6]/10 text-[#6700e6] text-xs rounded-full font-medium"
             >
               {tag}
             </span>
@@ -140,7 +142,7 @@ const CardComponent: React.FC<CardProps> = ({
       <div className="bg-gray-50 border-t border-gray-200 p-3 flex justify-end">
         <button
           onClick={onAction}
-          className="px-3 py-2 bg-[#268052] text-white text-sm font-medium rounded-md hover:bg-[#268052]/90 transition-colors focus:outline-none focus:ring-2 focus:ring-[#268052] focus:ring-offset-2"
+          className="px-3 py-2 bg-[#6700e6] text-white text-sm font-medium rounded-md hover:bg-[#6700e6]/90 transition-colors focus:outline-none focus:ring-2 focus:ring-[#6700e6] focus:ring-offset-2"
           aria-label="자세히 보기"
         >
           자세히 보기
@@ -207,22 +209,28 @@ export default CardExample;`}
               <h3 className="text-lg font-medium mb-4">카드 컴포넌트 예시</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {cards.map((card) => (
-                  <div 
+                  <div
                     key={card.id}
-                    className={`border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer ${selectedCard === card.id ? 'ring-2 ring-[#268052]' : ''}`}
-                    onClick={() => setSelectedCard(card.id === selectedCard ? null : card.id)}
+                    className={`border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer ${
+                      selectedCard === card.id ? "ring-2 ring-[#6700e6]" : ""
+                    }`}
+                    onClick={() =>
+                      setSelectedCard(card.id === selectedCard ? null : card.id)
+                    }
                   >
-                    <div className="h-32 bg-gradient-to-r from-[#268052]/80 to-[#268052] flex items-center justify-center text-4xl">
+                    <div className="h-32 bg-gradient-to-r from-[#6700e6]/80 to-[#6700e6] flex items-center justify-center text-4xl">
                       {card.image}
                     </div>
                     <div className="p-4">
                       <h4 className="font-medium text-lg mb-2">{card.title}</h4>
-                      <p className="text-gray-600 text-sm mb-3">{card.description}</p>
+                      <p className="text-gray-600 text-sm mb-3">
+                        {card.description}
+                      </p>
                       <div className="flex flex-wrap gap-2">
                         {card.tags.map((tag, idx) => (
-                          <span 
-                            key={idx} 
-                            className="px-2 py-0.5 bg-[#268052]/10 text-[#268052] text-xs rounded-full"
+                          <span
+                            key={idx}
+                            className="px-2 py-0.5 bg-[#6700e6]/10 text-[#6700e6] text-xs rounded-full"
                           >
                             {tag}
                           </span>
@@ -230,19 +238,20 @@ export default CardExample;`}
                       </div>
                     </div>
                     <div className="border-t p-3 flex justify-end bg-gray-50">
-                      <button className="px-3 py-1 bg-[#268052] text-white text-sm rounded-md hover:bg-[#268052]/90">
+                      <button className="px-3 py-1 bg-[#6700e6] text-white text-sm rounded-md hover:bg-[#6700e6]/90">
                         자세히 보기
                       </button>
                     </div>
                   </div>
                 ))}
               </div>
-              
+
               {selectedCard && (
-                <div className="mt-4 p-4 bg-[#268052]/10 rounded-md">
-                  <p className="text-sm text-[#268052]">
-                    카드 #{selectedCard}가 선택되었습니다. 실제 애플리케이션에서는 상세 정보 표시, 
-                    모달 열기, 새 페이지로 이동 등의 작업이 수행될 수 있습니다.
+                <div className="mt-4 p-4 bg-[#6700e6]/10 rounded-md">
+                  <p className="text-sm text-[#6700e6]">
+                    카드 #{selectedCard}가 선택되었습니다. 실제
+                    애플리케이션에서는 상세 정보 표시, 모달 열기, 새 페이지로
+                    이동 등의 작업이 수행될 수 있습니다.
                   </p>
                 </div>
               )}
@@ -251,5 +260,5 @@ export default CardExample;`}
         </Tabs>
       </div>
     </SlideLayout>
-  )
-} 
+  );
+}

@@ -1,4 +1,4 @@
-import SlideLayout from "./slide-layout"
+import SlideLayout from "./slide-layout";
 
 export default function OverviewSlide() {
   return (
@@ -6,7 +6,9 @@ export default function OverviewSlide() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-6">
           <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-            <h2 className="text-xl font-semibold mb-4 text-[#268052]">UI 요소</h2>
+            <h2 className="text-xl font-semibold mb-4 text-[#6700e6]">
+              UI 요소
+            </h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>Text, Button, Icon Button</li>
               <li>Input, Radio Button, Check Box</li>
@@ -17,7 +19,9 @@ export default function OverviewSlide() {
           </div>
 
           <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-            <h2 className="text-xl font-semibold mb-4 text-[#268052]">UI 속성 용어</h2>
+            <h2 className="text-xl font-semibold mb-4 text-[#6700e6]">
+              UI 속성 용어
+            </h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>Padding</li>
               <li>Margin</li>
@@ -27,7 +31,9 @@ export default function OverviewSlide() {
 
         <div className="space-y-6">
           <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-            <h2 className="text-xl font-semibold mb-4 text-[#268052]">UI 액션 용어</h2>
+            <h2 className="text-xl font-semibold mb-4 text-[#6700e6]">
+              UI 액션 용어
+            </h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>Click (Tap, Touch)</li>
               <li>Drag</li>
@@ -37,7 +43,9 @@ export default function OverviewSlide() {
           </div>
 
           <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-            <h2 className="text-xl font-semibold mb-4 text-[#268052]">고급 컴포넌트</h2>
+            <h2 className="text-xl font-semibold mb-4 text-[#6700e6]">
+              고급 컴포넌트
+            </h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>Card View, List View, Grid View</li>
               <li>Scroll View, Infinite Scroll</li>
@@ -49,5 +57,5 @@ export default function OverviewSlide() {
         </div>
       </div>
     </SlideLayout>
-  )
+  );
 }

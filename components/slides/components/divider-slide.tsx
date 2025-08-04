@@ -1,16 +1,18 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import SlideLayout from "../slide-layout"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
 
 export default function DividerSlide() {
-  const [orientation, setOrientation] = useState<"horizontal" | "vertical">("horizontal")
-  const [thickness, setThickness] = useState<string>("1px")
-  const [color, setColor] = useState<string>("#e5e7eb")
+  const [orientation, setOrientation] = useState<"horizontal" | "vertical">(
+    "horizontal"
+  );
+  const [thickness, setThickness] = useState<string>("1px");
+  const [color, setColor] = useState<string>("#e5e7eb");
 
   return (
     <SlideLayout title="Divider">
@@ -26,8 +28,9 @@ export default function DividerSlide() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Divider(또는 Separator)는 콘텐츠 섹션을 시각적으로 구분하는 가로 또는 세로 선입니다. UI의 구조와 계층을
-                명확하게 하는 데 도움이 됩니다.
+                Divider(또는 Separator)는 콘텐츠 섹션을 시각적으로 구분하는 가로
+                또는 세로 선입니다. UI의 구조와 계층을 명확하게 하는 데 도움이
+                됩니다.
               </p>
             </div>
 
@@ -125,7 +128,9 @@ export default DividerExample;`}
                   <Label className="mb-2 block">방향</Label>
                   <RadioGroup
                     value={orientation}
-                    onValueChange={(value) => setOrientation(value as "horizontal" | "vertical")}
+                    onValueChange={(value) =>
+                      setOrientation(value as "horizontal" | "vertical")
+                    }
                     className="flex space-x-4"
                   >
                     <div className="flex items-center space-x-2">
@@ -166,7 +171,7 @@ export default DividerExample;`}
                     className="w-full p-2 border rounded-md"
                   >
                     <option value="#e5e7eb">기본 (회색)</option>
-                    <option value="#268052">초록색</option>
+                    <option value="#6700e6">초록색</option>
                     <option value="#3b82f6">파란색</option>
                     <option value="#ef4444">빨간색</option>
                   </select>
@@ -209,5 +214,5 @@ export default DividerExample;`}
         </Tabs>
       </div>
     </SlideLayout>
-  )
+  );
 }

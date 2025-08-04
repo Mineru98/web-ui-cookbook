@@ -1,43 +1,52 @@
-"use client"
+"use client";
 
-import SlideLayout from "../slide-layout"
-import { useState } from "react"
-import { Home, Search, Heart, User, ShoppingBag, Bell, Settings, List } from "lucide-react"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import SlideLayout from "../slide-layout";
+import { useState } from "react";
+import {
+  Home,
+  Search,
+  Heart,
+  User,
+  ShoppingBag,
+  Bell,
+  Settings,
+  List,
+} from "lucide-react";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function BottomNavigationSlide() {
-  const [activeTab, setActiveTab] = useState("home")
-  const [style, setStyle] = useState<"default" | "labeled" | "shifting" | "icon-only" | "badge">("default")
-  
+  const [activeTab, setActiveTab] = useState("home");
+  const [style, setStyle] = useState<
+    "default" | "labeled" | "shifting" | "icon-only" | "badge"
+  >("default");
+
   const navigationItems = [
     { id: "home", label: "홈", icon: Home },
     { id: "search", label: "검색", icon: Search },
     { id: "favorites", label: "관심", icon: Heart, badge: 2 },
     { id: "profile", label: "프로필", icon: User },
-  ]
-  
+  ];
+
   const shiftingItems = [
     { id: "home", label: "홈", icon: Home },
     { id: "search", label: "검색", icon: Search },
     { id: "cart", label: "장바구니", icon: ShoppingBag, badge: 3 },
     { id: "notifications", label: "알림", icon: Bell, badge: 5 },
     { id: "settings", label: "설정", icon: Settings },
-  ]
-  
+  ];
+
   const renderBottomNavigation = () => {
-    switch(style) {
+    switch (style) {
       case "labeled":
         return (
           <div className="bg-white shadow-lg border-t rounded-t-xl">
             <div className="flex items-center justify-around">
-              {navigationItems.map(item => (
+              {navigationItems.map((item) => (
                 <button
                   key={item.id}
                   className={`flex flex-col items-center justify-center p-3 flex-1 ${
-                    activeTab === item.id 
-                      ? 'text-[#268052]' 
-                      : 'text-gray-500'
+                    activeTab === item.id ? "text-[#6700e6]" : "text-gray-500"
                   }`}
                   onClick={() => setActiveTab(item.id)}
                 >
@@ -48,18 +57,18 @@ export default function BottomNavigationSlide() {
             </div>
           </div>
         );
-        
+
       case "shifting":
         return (
           <div className="bg-white shadow-lg border-t">
             <div className="flex items-center justify-around">
-              {shiftingItems.map(item => (
+              {shiftingItems.map((item) => (
                 <button
                   key={item.id}
                   className={`flex items-center justify-center p-3 flex-1 transition-all duration-300 ${
-                    activeTab === item.id 
-                      ? 'text-[#268052] scale-110' 
-                      : 'text-gray-400 scale-90'
+                    activeTab === item.id
+                      ? "text-[#6700e6] scale-110"
+                      : "text-gray-400 scale-90"
                   }`}
                   onClick={() => setActiveTab(item.id)}
                 >
@@ -72,25 +81,25 @@ export default function BottomNavigationSlide() {
                     )}
                   </div>
                   {activeTab === item.id && (
-                    <span className="text-xs font-medium ml-1.5">{item.label}</span>
+                    <span className="text-xs font-medium ml-1.5">
+                      {item.label}
+                    </span>
                   )}
                 </button>
               ))}
             </div>
           </div>
         );
-        
+
       case "icon-only":
         return (
           <div className="bg-white shadow-lg border-t">
             <div className="flex items-center justify-around">
-              {navigationItems.map(item => (
+              {navigationItems.map((item) => (
                 <button
                   key={item.id}
                   className={`flex items-center justify-center p-3 flex-1 ${
-                    activeTab === item.id 
-                      ? 'text-[#268052]' 
-                      : 'text-gray-400'
+                    activeTab === item.id ? "text-[#6700e6]" : "text-gray-400"
                   }`}
                   onClick={() => setActiveTab(item.id)}
                 >
@@ -100,18 +109,16 @@ export default function BottomNavigationSlide() {
             </div>
           </div>
         );
-        
+
       case "badge":
         return (
           <div className="bg-white shadow-lg border-t">
             <div className="flex items-center justify-around">
-              {navigationItems.map(item => (
+              {navigationItems.map((item) => (
                 <button
                   key={item.id}
                   className={`flex flex-col items-center justify-center p-3 flex-1 ${
-                    activeTab === item.id 
-                      ? 'text-[#268052]' 
-                      : 'text-gray-500'
+                    activeTab === item.id ? "text-[#6700e6]" : "text-gray-500"
                   }`}
                   onClick={() => setActiveTab(item.id)}
                 >
@@ -129,18 +136,18 @@ export default function BottomNavigationSlide() {
             </div>
           </div>
         );
-        
+
       default: // default
         return (
           <div className="bg-white shadow-lg border-t">
             <div className="flex items-center justify-around">
-              {navigationItems.map(item => (
+              {navigationItems.map((item) => (
                 <button
                   key={item.id}
                   className={`flex flex-col items-center justify-center p-3 flex-1 ${
-                    activeTab === item.id 
-                      ? 'text-[#268052] border-t-2 border-[#268052]' 
-                      : 'text-gray-500'
+                    activeTab === item.id
+                      ? "text-[#6700e6] border-t-2 border-[#6700e6]"
+                      : "text-gray-500"
                   }`}
                   onClick={() => setActiveTab(item.id)}
                 >
@@ -153,7 +160,7 @@ export default function BottomNavigationSlide() {
         );
     }
   };
-  
+
   return (
     <SlideLayout title="Bottom Navigation (하단 내비게이션)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -168,34 +175,47 @@ export default function BottomNavigationSlide() {
             <div className="prose max-w-none mb-6">
               <h2 className="text-xl font-semibold mb-3">정의</h2>
               <p>
-                하단 내비게이션은 모바일 앱에서 화면 하단에 위치하는 내비게이션 바로, 앱의 주요 탐색 기능을 제공합니다.
-                사용자가 한 손으로 쉽게 접근할 수 있는 영역에 주요 기능을 배치하여 사용성을 높이는 UI 패턴입니다.
+                하단 내비게이션은 모바일 앱에서 화면 하단에 위치하는 내비게이션
+                바로, 앱의 주요 탐색 기능을 제공합니다. 사용자가 한 손으로 쉽게
+                접근할 수 있는 영역에 주요 기능을 배치하여 사용성을 높이는 UI
+                패턴입니다.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-4 bg-slate-50 rounded-md">
                 <h3 className="text-lg font-medium mb-2">스타일 가이드</h3>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>
                     <strong>기본형 (Default)</strong>
-                    <p className="text-sm text-gray-600">아이콘과 텍스트 조합, 활성 탭은 강조표시</p>
+                    <p className="text-sm text-gray-600">
+                      아이콘과 텍스트 조합, 활성 탭은 강조표시
+                    </p>
                   </li>
                   <li>
                     <strong>라벨형 (Labeled)</strong>
-                    <p className="text-sm text-gray-600">아이콘과 텍스트가 잘 구분되도록 배치</p>
+                    <p className="text-sm text-gray-600">
+                      아이콘과 텍스트가 잘 구분되도록 배치
+                    </p>
                   </li>
                   <li>
                     <strong>시프팅형 (Shifting)</strong>
-                    <p className="text-sm text-gray-600">활성 탭이 확장되고 나머지는 축소, 탭 레이블은 활성 탭에만 표시</p>
+                    <p className="text-sm text-gray-600">
+                      활성 탭이 확장되고 나머지는 축소, 탭 레이블은 활성 탭에만
+                      표시
+                    </p>
                   </li>
                   <li>
                     <strong>아이콘 전용 (Icon-only)</strong>
-                    <p className="text-sm text-gray-600">공간 절약을 위해 아이콘만 사용하는 최소한의 디자인</p>
+                    <p className="text-sm text-gray-600">
+                      공간 절약을 위해 아이콘만 사용하는 최소한의 디자인
+                    </p>
                   </li>
                   <li>
                     <strong>배지형 (Badge)</strong>
-                    <p className="text-sm text-gray-600">알림이나 카운터를 표시하는 배지가 포함된 디자인</p>
+                    <p className="text-sm text-gray-600">
+                      알림이나 카운터를 표시하는 배지가 포함된 디자인
+                    </p>
                   </li>
                 </ul>
               </div>
@@ -211,7 +231,7 @@ export default function BottomNavigationSlide() {
                   <li>세로 방향(portrait) 사용 시 적합</li>
                   <li>스크롤 시 자동 숨김 고려</li>
                 </ul>
-                
+
                 <h3 className="text-lg font-medium mt-4 mb-2">사용 예시</h3>
                 <ul className="list-disc pl-6 space-y-1 text-sm text-gray-600">
                   <li>소셜 미디어 앱</li>
@@ -222,9 +242,11 @@ export default function BottomNavigationSlide() {
                 </ul>
               </div>
             </div>
-            
-            <div className="p-4 border border-[#268052]/20 bg-[#268052]/5 rounded-md">
-              <h3 className="text-lg font-medium mb-2 text-[#268052]">구현 및 접근성</h3>
+
+            <div className="p-4 border border-[#6700e6]/20 bg-[#6700e6]/5 rounded-md">
+              <h3 className="text-lg font-medium mb-2 text-[#6700e6]">
+                구현 및 접근성
+              </h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700">
                 <li>아이콘과 텍스트를 함께 사용하여 이해도 향상</li>
                 <li>탭 전환 시 부드러운 애니메이션 적용</li>
@@ -285,7 +307,7 @@ const BottomNavigationExample: React.FC = () => {
                   key={item.id}
                   className={\`flex flex-col items-center justify-center p-3 flex-1 \${
                     activeTab === item.id 
-                      ? 'text-[#268052]' 
+                      ? 'text-[#6700e6]' 
                       : 'text-gray-500'
                   }\`}
                   onClick={() => setActiveTab(item.id)}
@@ -308,7 +330,7 @@ const BottomNavigationExample: React.FC = () => {
                   key={item.id}
                   className={\`flex items-center justify-center p-3 flex-1 transition-all duration-300 \${
                     activeTab === item.id 
-                      ? 'text-[#268052] scale-110' 
+                      ? 'text-[#6700e6] scale-110' 
                       : 'text-gray-400 scale-90'
                   }\`}
                   onClick={() => setActiveTab(item.id)}
@@ -340,7 +362,7 @@ const BottomNavigationExample: React.FC = () => {
                   key={item.id}
                   className={\`flex items-center justify-center p-3 flex-1 \${
                     activeTab === item.id 
-                      ? 'text-[#268052]' 
+                      ? 'text-[#6700e6]' 
                       : 'text-gray-400'
                   }\`}
                   onClick={() => setActiveTab(item.id)}
@@ -362,7 +384,7 @@ const BottomNavigationExample: React.FC = () => {
                   key={item.id}
                   className={\`flex flex-col items-center justify-center p-3 flex-1 \${
                     activeTab === item.id 
-                      ? 'text-[#268052]' 
+                      ? 'text-[#6700e6]' 
                       : 'text-gray-500'
                   }\`}
                   onClick={() => setActiveTab(item.id)}
@@ -392,7 +414,7 @@ const BottomNavigationExample: React.FC = () => {
                   key={item.id}
                   className={\`flex flex-col items-center justify-center p-3 flex-1 \${
                     activeTab === item.id 
-                      ? 'text-[#268052] border-t-2 border-[#268052]' 
+                      ? 'text-[#6700e6] border-t-2 border-[#6700e6]' 
                       : 'text-gray-500'
                   }\`}
                   onClick={() => setActiveTab(item.id)}
@@ -432,7 +454,7 @@ const BottomNavigationExample: React.FC = () => {
       <main className="flex-1 flex flex-col items-center justify-center p-8">
         <div className="text-center">
           {/* Dynamic Icon Display */}
-          <div className="text-6xl text-[#268052] mb-4">
+          <div className="text-6xl text-[#6700e6] mb-4">
             {activeTab === 'home' && <Home className="w-16 h-16 mx-auto" />}
             {activeTab === 'search' && <Search className="w-16 h-16 mx-auto" />}
             {activeTab === 'favorites' && <Heart className="w-16 h-16 mx-auto" />}
@@ -465,38 +487,58 @@ export default BottomNavigationExample;`}
               <div className="flex justify-center mb-4">
                 <div className="flex gap-2">
                   <button
-                    className={`px-3 py-1.5 rounded text-sm ${style === "default" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                    className={`px-3 py-1.5 rounded text-sm ${
+                      style === "default"
+                        ? "bg-[#6700e6] text-white"
+                        : "bg-gray-100"
+                    }`}
                     onClick={() => setStyle("default")}
                   >
                     기본형
                   </button>
                   <button
-                    className={`px-3 py-1.5 rounded text-sm ${style === "labeled" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                    className={`px-3 py-1.5 rounded text-sm ${
+                      style === "labeled"
+                        ? "bg-[#6700e6] text-white"
+                        : "bg-gray-100"
+                    }`}
                     onClick={() => setStyle("labeled")}
                   >
                     라벨형
                   </button>
                   <button
-                    className={`px-3 py-1.5 rounded text-sm ${style === "shifting" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                    className={`px-3 py-1.5 rounded text-sm ${
+                      style === "shifting"
+                        ? "bg-[#6700e6] text-white"
+                        : "bg-gray-100"
+                    }`}
                     onClick={() => setStyle("shifting")}
                   >
                     시프팅형
                   </button>
                   <button
-                    className={`px-3 py-1.5 rounded text-sm ${style === "icon-only" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                    className={`px-3 py-1.5 rounded text-sm ${
+                      style === "icon-only"
+                        ? "bg-[#6700e6] text-white"
+                        : "bg-gray-100"
+                    }`}
                     onClick={() => setStyle("icon-only")}
                   >
                     아이콘 전용
                   </button>
                   <button
-                    className={`px-3 py-1.5 rounded text-sm ${style === "badge" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                    className={`px-3 py-1.5 rounded text-sm ${
+                      style === "badge"
+                        ? "bg-[#6700e6] text-white"
+                        : "bg-gray-100"
+                    }`}
                     onClick={() => setStyle("badge")}
                   >
                     배지형
                   </button>
                 </div>
               </div>
-              
+
               <div className="border rounded-lg overflow-hidden bg-gray-100 shadow-md">
                 {/* 모바일 앱 프레임 */}
                 <div className="relative h-96">
@@ -504,34 +546,52 @@ export default BottomNavigationExample;`}
                   <div className="absolute inset-0 p-4 overflow-y-auto pb-16">
                     <div className="flex items-center mb-4">
                       <List className="w-6 h-6 mr-2" />
-                      <h3 className="font-medium">{navigationItems.find(i => i.id === activeTab)?.label || shiftingItems.find(i => i.id === activeTab)?.label} 화면</h3>
+                      <h3 className="font-medium">
+                        {navigationItems.find((i) => i.id === activeTab)
+                          ?.label ||
+                          shiftingItems.find((i) => i.id === activeTab)
+                            ?.label}{" "}
+                        화면
+                      </h3>
                     </div>
-                    
+
                     <p className="text-gray-600 mb-4">
                       현재 선택된 탭: <strong>{activeTab}</strong>
                     </p>
-                    
+
                     <div className="space-y-2 pb-4">
-                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">콘텐츠 항목 1</div>
-                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">콘텐츠 항목 2</div>
-                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">콘텐츠 항목 3</div>
-                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">콘텐츠 항목 4</div>
-                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">콘텐츠 항목 5</div>
+                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
+                        콘텐츠 항목 1
+                      </div>
+                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
+                        콘텐츠 항목 2
+                      </div>
+                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
+                        콘텐츠 항목 3
+                      </div>
+                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
+                        콘텐츠 항목 4
+                      </div>
+                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
+                        콘텐츠 항목 5
+                      </div>
                     </div>
                   </div>
-                  
+
                   {/* 바텀 내비게이션 */}
                   <div className="absolute bottom-0 left-0 right-0">
                     {renderBottomNavigation()}
                   </div>
                 </div>
               </div>
-              
-              <p className="text-sm text-center text-gray-500">다른 스타일을 클릭해보세요</p>
+
+              <p className="text-sm text-center text-gray-500">
+                다른 스타일을 클릭해보세요
+              </p>
             </div>
           </TabsContent>
         </Tabs>
       </div>
     </SlideLayout>
-  )
-} 
+  );
+}

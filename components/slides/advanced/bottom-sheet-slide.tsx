@@ -1,24 +1,39 @@
-"use client"
+"use client";
 
-import SlideLayout from "../slide-layout"
-import { useState } from "react"
-import { ChevronUp, ChevronDown, Filter, X, Share, Trash, Edit, Copy, Download, Heart } from "lucide-react"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import SlideLayout from "../slide-layout";
+import { useState } from "react";
+import {
+  ChevronUp,
+  ChevronDown,
+  Filter,
+  X,
+  Share,
+  Trash,
+  Edit,
+  Copy,
+  Download,
+  Heart,
+} from "lucide-react";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function BottomSheetSlide() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [sheetHeight, setSheetHeight] = useState<"small" | "medium" | "large" | "full">("medium")
-  const [sheetType, setSheetType] = useState<"basic" | "modal" | "scrollable" | "actions">("basic")
-  
+  const [isOpen, setIsOpen] = useState(false);
+  const [sheetHeight, setSheetHeight] = useState<
+    "small" | "medium" | "large" | "full"
+  >("medium");
+  const [sheetType, setSheetType] = useState<
+    "basic" | "modal" | "scrollable" | "actions"
+  >("basic");
+
   const toggleSheet = () => {
-    setIsOpen(!isOpen)
-  }
-  
+    setIsOpen(!isOpen);
+  };
+
   const closeSheet = () => {
-    setIsOpen(false)
-  }
-  
+    setIsOpen(false);
+  };
+
   const getHeightClass = () => {
     switch (sheetHeight) {
       case "small":
@@ -32,8 +47,8 @@ export default function BottomSheetSlide() {
       default:
         return "h-1/2";
     }
-  }
-  
+  };
+
   const renderSheetContent = () => {
     switch (sheetType) {
       case "modal":
@@ -41,22 +56,19 @@ export default function BottomSheetSlide() {
           <div className="p-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-medium">필터 설정</h3>
-              <button 
+              <button
                 onClick={closeSheet}
                 className="p-1 rounded-full hover:bg-gray-100"
               >
                 <X className="h-5 w-5 text-gray-500" />
               </button>
             </div>
-            
+
             <div className="space-y-4">
               <div>
                 <h4 className="text-sm font-medium mb-2">가격 범위</h4>
                 <div className="flex gap-2">
-                  <input 
-                    type="range"
-                    className="w-full accent-[#268052]"
-                  />
+                  <input type="range" className="w-full accent-[#6700e6]" />
                 </div>
                 <div className="flex justify-between text-xs mt-1">
                   <span>₩0</span>
@@ -64,25 +76,30 @@ export default function BottomSheetSlide() {
                   <span>₩100,000+</span>
                 </div>
               </div>
-              
+
               <div>
                 <h4 className="text-sm font-medium mb-2">카테고리</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  {["의류", "신발", "액세서리", "가방", "뷰티", "가전"].map((category) => (
-                    <div key={category} className="flex items-center">
-                      <input 
-                        type="checkbox"
-                        id={`category-${category}`}
-                        className="w-4 h-4 rounded accent-[#268052]"
-                      />
-                      <label htmlFor={`category-${category}`} className="ml-2 text-sm">
-                        {category}
-                      </label>
-                    </div>
-                  ))}
+                  {["의류", "신발", "액세서리", "가방", "뷰티", "가전"].map(
+                    (category) => (
+                      <div key={category} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          id={`category-${category}`}
+                          className="w-4 h-4 rounded accent-[#6700e6]"
+                        />
+                        <label
+                          htmlFor={`category-${category}`}
+                          className="ml-2 text-sm"
+                        >
+                          {category}
+                        </label>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
-              
+
               <div className="mt-6 flex gap-2">
                 <button
                   onClick={closeSheet}
@@ -92,7 +109,7 @@ export default function BottomSheetSlide() {
                 </button>
                 <button
                   onClick={closeSheet}
-                  className="flex-1 px-3 py-2 bg-[#268052] text-white rounded-md text-sm hover:bg-[#268052]/90"
+                  className="flex-1 px-3 py-2 bg-[#6700e6] text-white rounded-md text-sm hover:bg-[#6700e6]/90"
                 >
                   적용하기
                 </button>
@@ -100,31 +117,33 @@ export default function BottomSheetSlide() {
             </div>
           </div>
         );
-        
+
       case "scrollable":
         return (
           <div>
             <div className="px-4 py-3 border-b sticky top-0 bg-white z-10 flex justify-between items-center">
               <h3 className="text-lg font-medium">댓글 (25개)</h3>
-              <button 
+              <button
                 onClick={closeSheet}
                 className="p-1 rounded-full hover:bg-gray-100"
               >
                 <X className="h-5 w-5 text-gray-500" />
               </button>
             </div>
-            
+
             <div className="p-4 overflow-y-auto max-h-[calc(100%-3rem)]">
               <div className="space-y-4">
                 {[...Array(12)].map((_, idx) => (
                   <div key={idx} className="border-b pb-3">
                     <div className="flex justify-between">
                       <div className="flex items-center">
-                        <div className="w-8 h-8 rounded-full bg-[#268052]/20 flex items-center justify-center text-[#268052]">
+                        <div className="w-8 h-8 rounded-full bg-[#6700e6]/20 flex items-center justify-center text-[#6700e6]">
                           {String.fromCharCode(65 + (idx % 26))}
                         </div>
                         <div className="ml-2">
-                          <div className="font-medium text-sm">사용자{idx + 1}</div>
+                          <div className="font-medium text-sm">
+                            사용자{idx + 1}
+                          </div>
                           <div className="text-xs text-gray-500">3일 전</div>
                         </div>
                       </div>
@@ -133,11 +152,11 @@ export default function BottomSheetSlide() {
                       </button>
                     </div>
                     <p className="mt-2 text-sm">
-                      {idx % 3 === 0 
-                        ? "정말 유용한 내용입니다. 감사합니다!" 
+                      {idx % 3 === 0
+                        ? "정말 유용한 내용입니다. 감사합니다!"
                         : idx % 3 === 1
-                          ? "좋은 정보 공유해주셔서 감사합니다. 많은 도움이 되었어요."
-                          : "이 내용에 대해 좀 더 자세히 알고 싶어요. 추가 설명 부탁드립니다."}
+                        ? "좋은 정보 공유해주셔서 감사합니다. 많은 도움이 되었어요."
+                        : "이 내용에 대해 좀 더 자세히 알고 싶어요. 추가 설명 부탁드립니다."}
                     </p>
                   </div>
                 ))}
@@ -145,43 +164,43 @@ export default function BottomSheetSlide() {
             </div>
           </div>
         );
-        
+
       case "actions":
         return (
           <div className="p-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-medium">문서 작업</h3>
-              <button 
+              <button
                 onClick={closeSheet}
                 className="p-1 rounded-full hover:bg-gray-100"
               >
                 <X className="h-5 w-5 text-gray-500" />
               </button>
             </div>
-            
+
             <div className="space-y-2">
-              <button 
+              <button
                 className="w-full flex items-center p-3 hover:bg-gray-100 rounded-lg"
                 onClick={closeSheet}
               >
                 <Share className="h-5 w-5 mr-3 text-blue-500" />
                 <span>공유하기</span>
               </button>
-              <button 
+              <button
                 className="w-full flex items-center p-3 hover:bg-gray-100 rounded-lg"
                 onClick={closeSheet}
               >
                 <Copy className="h-5 w-5 mr-3 text-gray-500" />
                 <span>복사하기</span>
               </button>
-              <button 
+              <button
                 className="w-full flex items-center p-3 hover:bg-gray-100 rounded-lg"
                 onClick={closeSheet}
               >
-                <Edit className="h-5 w-5 mr-3 text-[#268052]" />
+                <Edit className="h-5 w-5 mr-3 text-[#6700e6]" />
                 <span>편집하기</span>
               </button>
-              <button 
+              <button
                 className="w-full flex items-center p-3 hover:bg-gray-100 rounded-lg"
                 onClick={closeSheet}
               >
@@ -191,7 +210,7 @@ export default function BottomSheetSlide() {
               <div className="py-2">
                 <div className="border-t"></div>
               </div>
-              <button 
+              <button
                 className="w-full flex items-center p-3 hover:bg-red-50 rounded-lg text-red-500"
                 onClick={closeSheet}
               >
@@ -201,47 +220,63 @@ export default function BottomSheetSlide() {
             </div>
           </div>
         );
-        
+
       default: // basic
         return (
           <div className="p-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-medium">바텀 시트 제목</h3>
-              <button 
+              <button
                 onClick={closeSheet}
                 className="p-1 rounded-full hover:bg-gray-100"
               >
                 <X className="h-5 w-5 text-gray-500" />
               </button>
             </div>
-            
+
             <p className="text-gray-600 mb-6">
-              바텀 시트는 화면 아래에서 올라오는 컴포넌트로, 추가 정보나 작업을 표시하는 데 사용됩니다.
-              다양한 높이와 콘텐츠로 구성할 수 있습니다.
+              바텀 시트는 화면 아래에서 올라오는 컴포넌트로, 추가 정보나 작업을
+              표시하는 데 사용됩니다. 다양한 높이와 콘텐츠로 구성할 수 있습니다.
             </p>
-            
+
             <div className="mt-2">
               <div className="flex justify-center gap-3">
                 <button
-                  className={`px-3 py-1.5 rounded text-xs ${sheetHeight === "small" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                  className={`px-3 py-1.5 rounded text-xs ${
+                    sheetHeight === "small"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
                   onClick={() => setSheetHeight("small")}
                 >
                   작은 높이
                 </button>
                 <button
-                  className={`px-3 py-1.5 rounded text-xs ${sheetHeight === "medium" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                  className={`px-3 py-1.5 rounded text-xs ${
+                    sheetHeight === "medium"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
                   onClick={() => setSheetHeight("medium")}
                 >
                   중간 높이
                 </button>
                 <button
-                  className={`px-3 py-1.5 rounded text-xs ${sheetHeight === "large" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                  className={`px-3 py-1.5 rounded text-xs ${
+                    sheetHeight === "large"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
                   onClick={() => setSheetHeight("large")}
                 >
                   큰 높이
                 </button>
                 <button
-                  className={`px-3 py-1.5 rounded text-xs ${sheetHeight === "full" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                  className={`px-3 py-1.5 rounded text-xs ${
+                    sheetHeight === "full"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
                   onClick={() => setSheetHeight("full")}
                 >
                   전체 화면
@@ -251,8 +286,8 @@ export default function BottomSheetSlide() {
           </div>
         );
     }
-  }
-  
+  };
+
   return (
     <SlideLayout title="Bottom Sheet (바텀 시트)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -267,34 +302,45 @@ export default function BottomSheetSlide() {
             <div className="prose max-w-none mb-6">
               <h2 className="text-xl font-semibold mb-3">정의</h2>
               <p>
-                바텀 시트는 화면 하단에서 올라오는 패널로, 주 화면을 유지하면서 추가적인 콘텐츠나 작업을 
-                표시합니다. 대화상자(Modal)의 대안으로, 문맥을 유지하면서 상호작용할 수 있는 UI 패턴입니다.
+                바텀 시트는 화면 하단에서 올라오는 패널로, 주 화면을 유지하면서
+                추가적인 콘텐츠나 작업을 표시합니다. 대화상자(Modal)의 대안으로,
+                문맥을 유지하면서 상호작용할 수 있는 UI 패턴입니다.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-4 bg-slate-50 rounded-md">
                 <h3 className="text-lg font-medium mb-2">바텀 시트 유형</h3>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>
                     <strong>기본형 (Standard)</strong>
-                    <p className="text-sm text-gray-600">일반적인 바텀 시트로, 추가 정보나 설정을 표시</p>
+                    <p className="text-sm text-gray-600">
+                      일반적인 바텀 시트로, 추가 정보나 설정을 표시
+                    </p>
                   </li>
                   <li>
                     <strong>모달형 (Modal)</strong>
-                    <p className="text-sm text-gray-600">배경이 어두워지며 주 콘텐츠와의 인터랙션 차단</p>
+                    <p className="text-sm text-gray-600">
+                      배경이 어두워지며 주 콘텐츠와의 인터랙션 차단
+                    </p>
                   </li>
                   <li>
                     <strong>확장형 (Expandable)</strong>
-                    <p className="text-sm text-gray-600">여러 단계의 높이로 확장 가능한 형태</p>
+                    <p className="text-sm text-gray-600">
+                      여러 단계의 높이로 확장 가능한 형태
+                    </p>
                   </li>
                   <li>
                     <strong>스크롤형 (Scrollable)</strong>
-                    <p className="text-sm text-gray-600">길이가 긴 콘텐츠를 표시하기 위해 내부 스크롤 제공</p>
+                    <p className="text-sm text-gray-600">
+                      길이가 긴 콘텐츠를 표시하기 위해 내부 스크롤 제공
+                    </p>
                   </li>
                   <li>
                     <strong>액션 시트 (Action Sheet)</strong>
-                    <p className="text-sm text-gray-600">여러 작업 옵션을 리스트로 제공</p>
+                    <p className="text-sm text-gray-600">
+                      여러 작업 옵션을 리스트로 제공
+                    </p>
                   </li>
                 </ul>
               </div>
@@ -311,20 +357,27 @@ export default function BottomSheetSlide() {
                   <li>폼 입력</li>
                   <li>장바구니 요약</li>
                 </ul>
-                
-                <h3 className="text-lg font-medium mt-4 mb-2">사용자 경험 고려사항</h3>
+
+                <h3 className="text-lg font-medium mt-4 mb-2">
+                  사용자 경험 고려사항
+                </h3>
                 <ul className="list-disc pl-6 space-y-1 text-sm text-gray-600">
                   <li>부드럽고 자연스러운 애니메이션</li>
-                  <li>여러 방법으로 닫을 수 있는 옵션 (핸들 드래그, 외부 클릭, X 버튼)</li>
+                  <li>
+                    여러 방법으로 닫을 수 있는 옵션 (핸들 드래그, 외부 클릭, X
+                    버튼)
+                  </li>
                   <li>적절한 높이로 중요 콘텐츠 표시</li>
                   <li>상황에 맞는 키보드 처리</li>
                   <li>제스처 지원 (스와이프로 닫기)</li>
                 </ul>
               </div>
             </div>
-            
-            <div className="p-4 border border-[#268052]/20 bg-[#268052]/5 rounded-md">
-              <h3 className="text-lg font-medium mb-2 text-[#268052]">구현 팁</h3>
+
+            <div className="p-4 border border-[#6700e6]/20 bg-[#6700e6]/5 rounded-md">
+              <h3 className="text-lg font-medium mb-2 text-[#6700e6]">
+                구현 팁
+              </h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700">
                 <li>터치 제스처 인식으로 스와이프하여 열고 닫기 구현</li>
                 <li>변환(transform) 속성으로 성능 최적화된 애니메이션</li>
@@ -395,7 +448,7 @@ class _BottomSheetExampleState extends State<BottomSheetExample> {
               icon: Icon(Icons.arrow_upward),
               label: Text('바텀 시트 열기'),
               style: ElevatedButton.styleFrom(
-                primary: Color(0xFF268052),
+                primary: Color(0xFF6700e6),
                 onPrimary: Colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               ),
@@ -411,7 +464,7 @@ class _BottomSheetExampleState extends State<BottomSheetExample> {
     return ElevatedButton(
       child: Text(label),
       style: ElevatedButton.styleFrom(
-        primary: _sheetType == type ? Color(0xFF268052) : Colors.grey[200],
+        primary: _sheetType == type ? Color(0xFF6700e6) : Colors.grey[200],
         onPrimary: _sheetType == type ? Colors.white : Colors.black87,
       ),
       onPressed: () => setState(() => _sheetType = type),
@@ -422,7 +475,7 @@ class _BottomSheetExampleState extends State<BottomSheetExample> {
     return ElevatedButton(
       child: Text(label),
       style: ElevatedButton.styleFrom(
-        primary: _sheetHeight == height ? Color(0xFF268052) : Colors.grey[200],
+        primary: _sheetHeight == height ? Color(0xFF6700e6) : Colors.grey[200],
         onPrimary: _sheetHeight == height ? Colors.white : Colors.black87,
       ),
       onPressed: () => setState(() => _sheetHeight = height),
@@ -611,10 +664,10 @@ class _BottomSheetExampleState extends State<BottomSheetExample> {
               Row(
                 children: [
                   CircleAvatar(
-                    backgroundColor: Color(0x33268052),
+                    backgroundColor: Color(0x336700e6),
                     child: Text(
                       String.fromCharCode(65 + (index % 26)),
-                      style: TextStyle(color: Color(0xFF268052)),
+                      style: TextStyle(color: Color(0xFF6700e6)),
                     ),
                   ),
                   SizedBox(width: 8),
@@ -668,7 +721,7 @@ class _BottomSheetExampleState extends State<BottomSheetExample> {
           SizedBox(height: 8),
           _buildActionButton(Icons.share, '공유하기', Colors.blue),
           _buildActionButton(Icons.copy, '복사하기', Colors.grey),
-          _buildActionButton(Icons.edit, '편집하기', Color(0xFF268052)),
+          _buildActionButton(Icons.edit, '편집하기', Color(0xFF6700e6)),
           _buildActionButton(Icons.file_download, '다운로드', Colors.purple),
           Divider(height: 32),
           _buildActionButton(Icons.delete, '삭제하기', Colors.red),
@@ -705,49 +758,65 @@ enum SheetType { basic, modal, scrollable, actions }`}
             <div className="flex justify-center mb-4">
               <div className="flex flex-wrap gap-2 justify-center">
                 <button
-                  className={`px-3 py-1.5 rounded text-sm ${sheetType === "basic" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                  className={`px-3 py-1.5 rounded text-sm ${
+                    sheetType === "basic"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
                   onClick={() => setSheetType("basic")}
                 >
                   기본형
                 </button>
                 <button
-                  className={`px-3 py-1.5 rounded text-sm ${sheetType === "modal" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                  className={`px-3 py-1.5 rounded text-sm ${
+                    sheetType === "modal"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
                   onClick={() => setSheetType("modal")}
                 >
                   모달형
                 </button>
                 <button
-                  className={`px-3 py-1.5 rounded text-sm ${sheetType === "scrollable" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                  className={`px-3 py-1.5 rounded text-sm ${
+                    sheetType === "scrollable"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
                   onClick={() => setSheetType("scrollable")}
                 >
                   스크롤형
                 </button>
                 <button
-                  className={`px-3 py-1.5 rounded text-sm ${sheetType === "actions" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                  className={`px-3 py-1.5 rounded text-sm ${
+                    sheetType === "actions"
+                      ? "bg-[#6700e6] text-white"
+                      : "bg-gray-100"
+                  }`}
                   onClick={() => setSheetType("actions")}
                 >
                   액션 시트
                 </button>
               </div>
             </div>
-            
+
             <div className="border rounded-lg bg-gray-100 overflow-hidden relative h-[400px]">
               {/* 메인 콘텐츠 */}
               <div className="p-4 h-full">
                 <div className="bg-white rounded-lg shadow-sm border p-4 mb-4">
                   <h3 className="text-lg font-medium mb-2">메인 콘텐츠 영역</h3>
                   <p className="text-gray-600 mb-4">
-                    {sheetType === "modal" 
-                      ? "필터 옵션을 확인하려면 바텀 시트를 열어보세요." 
-                      : sheetType === "scrollable" 
-                        ? "댓글을 확인하려면 바텀 시트를 열어보세요."
-                        : sheetType === "actions"
-                          ? "문서 작업 메뉴를 보려면 바텀 시트를 열어보세요."
-                          : "다양한 형태의 바텀 시트를 경험해보세요."}
+                    {sheetType === "modal"
+                      ? "필터 옵션을 확인하려면 바텀 시트를 열어보세요."
+                      : sheetType === "scrollable"
+                      ? "댓글을 확인하려면 바텀 시트를 열어보세요."
+                      : sheetType === "actions"
+                      ? "문서 작업 메뉴를 보려면 바텀 시트를 열어보세요."
+                      : "다양한 형태의 바텀 시트를 경험해보세요."}
                   </p>
                   <button
                     onClick={toggleSheet}
-                    className="flex items-center gap-2 px-4 py-2 bg-[#268052] text-white rounded-lg hover:bg-[#268052]/90"
+                    className="flex items-center gap-2 px-4 py-2 bg-[#6700e6] text-white rounded-lg hover:bg-[#6700e6]/90"
                   >
                     {isOpen ? (
                       <>
@@ -757,42 +826,66 @@ enum SheetType { basic, modal, scrollable, actions }`}
                     ) : (
                       <>
                         <ChevronUp className="w-4 h-4" />
-                        {sheetType === "modal" 
-                          ? <><Filter className="w-4 h-4 mr-1" /> 필터 열기</> 
-                          : sheetType === "scrollable" 
-                            ? "댓글 보기"
-                            : sheetType === "actions"
-                              ? "액션 메뉴 열기"
-                              : "바텀 시트 열기"}
+                        {sheetType === "modal" ? (
+                          <>
+                            <Filter className="w-4 h-4 mr-1" /> 필터 열기
+                          </>
+                        ) : sheetType === "scrollable" ? (
+                          "댓글 보기"
+                        ) : sheetType === "actions" ? (
+                          "액션 메뉴 열기"
+                        ) : (
+                          "바텀 시트 열기"
+                        )}
                       </>
                     )}
                   </button>
                 </div>
-                
+
                 <div className="text-center text-sm text-gray-500">
-                  <p>현재 시트 유형: <strong>{sheetType}</strong></p>
-                  <p>시트 높이: <strong>{sheetHeight}</strong></p>
+                  <p>
+                    현재 시트 유형: <strong>{sheetType}</strong>
+                  </p>
+                  <p>
+                    시트 높이: <strong>{sheetHeight}</strong>
+                  </p>
                   <div className="flex justify-center gap-3 mt-4">
                     <button
-                      className={`px-3 py-1.5 rounded text-xs ${sheetHeight === "small" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                      className={`px-3 py-1.5 rounded text-xs ${
+                        sheetHeight === "small"
+                          ? "bg-[#6700e6] text-white"
+                          : "bg-gray-100"
+                      }`}
                       onClick={() => setSheetHeight("small")}
                     >
                       작은 높이
                     </button>
                     <button
-                      className={`px-3 py-1.5 rounded text-xs ${sheetHeight === "medium" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                      className={`px-3 py-1.5 rounded text-xs ${
+                        sheetHeight === "medium"
+                          ? "bg-[#6700e6] text-white"
+                          : "bg-gray-100"
+                      }`}
                       onClick={() => setSheetHeight("medium")}
                     >
                       중간 높이
                     </button>
                     <button
-                      className={`px-3 py-1.5 rounded text-xs ${sheetHeight === "large" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                      className={`px-3 py-1.5 rounded text-xs ${
+                        sheetHeight === "large"
+                          ? "bg-[#6700e6] text-white"
+                          : "bg-gray-100"
+                      }`}
                       onClick={() => setSheetHeight("large")}
                     >
                       큰 높이
                     </button>
                     <button
-                      className={`px-3 py-1.5 rounded text-xs ${sheetHeight === "full" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                      className={`px-3 py-1.5 rounded text-xs ${
+                        sheetHeight === "full"
+                          ? "bg-[#6700e6] text-white"
+                          : "bg-gray-100"
+                      }`}
                       onClick={() => setSheetHeight("full")}
                     >
                       전체 화면
@@ -800,24 +893,24 @@ enum SheetType { basic, modal, scrollable, actions }`}
                   </div>
                 </div>
               </div>
-              
+
               {/* 바텀 시트 */}
-              <div 
+              <div
                 className={`absolute left-0 right-0 bottom-0 bg-white rounded-t-xl shadow-lg transition-transform duration-300 ease-out ${
-                  isOpen ? 'translate-y-0' : 'translate-y-full'
+                  isOpen ? "translate-y-0" : "translate-y-full"
                 } ${getHeightClass()}`}
               >
                 {/* 핸들 바 */}
                 <div className="flex justify-center py-2">
                   <div className="w-10 h-1 bg-gray-300 rounded-full"></div>
                 </div>
-                
+
                 {renderSheetContent()}
               </div>
-              
+
               {/* 오버레이 - 모달형일 때만 표시 */}
               {isOpen && sheetType === "modal" && (
-                <div 
+                <div
                   className="absolute inset-0 bg-black/20"
                   onClick={closeSheet}
                 ></div>
@@ -827,5 +920,5 @@ enum SheetType { basic, modal, scrollable, actions }`}
         </Tabs>
       </div>
     </SlideLayout>
-  )
-} 
+  );
+}

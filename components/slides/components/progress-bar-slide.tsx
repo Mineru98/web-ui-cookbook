@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import SlideLayout from "../slide-layout"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Progress } from "@/components/ui/progress"
-import { Button } from "@/components/ui/button"
-import { Slider } from "@/components/ui/slider"
-import { Label } from "@/components/ui/label"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
+import { Label } from "@/components/ui/label";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
 
 export default function ProgressBarSlide() {
-  const [progress, setProgress] = useState(30)
-  const [color, setColor] = useState<string>("#268052")
+  const [progress, setProgress] = useState(30);
+  const [color, setColor] = useState<string>("#6700e6");
 
   const incrementProgress = () => {
-    setProgress((prev) => Math.min(prev + 10, 100))
-  }
+    setProgress((prev) => Math.min(prev + 10, 100));
+  };
 
   const decrementProgress = () => {
-    setProgress((prev) => Math.max(prev - 10, 0))
-  }
+    setProgress((prev) => Math.max(prev - 10, 0));
+  };
 
   return (
     <SlideLayout title="Progress Bar">
@@ -37,8 +37,8 @@ export default function ProgressBarSlide() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Progress Bar는 작업의 진행 상태를 시각적으로 표시하는 UI 요소입니다. 사용자에게 작업이 얼마나 완료되었는지
-                알려줍니다.
+                Progress Bar는 작업의 진행 상태를 시각적으로 표시하는 UI
+                요소입니다. 사용자에게 작업이 얼마나 완료되었는지 알려줍니다.
               </p>
             </div>
 
@@ -58,7 +58,7 @@ export default function ProgressBarSlide() {
           <TabsContent value="code" className="mt-4">
             <div className="bg-gray-800 p-4 rounded-lg">
               <PrismCode
-                language="typescript" 
+                language="typescript"
                 code={`import React, { useState, useEffect } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
@@ -183,7 +183,7 @@ export default ProgressBarExample;`}
                     onChange={(e) => setColor(e.target.value)}
                     className="w-full p-2 border rounded-md"
                   >
-                    <option value="#268052">초록색</option>
+                    <option value="#6700e6">초록색</option>
                     <option value="#3b82f6">파란색</option>
                     <option value="#ef4444">빨간색</option>
                     <option value="#8b5cf6">보라색</option>
@@ -229,5 +229,5 @@ export default ProgressBarExample;`}
         </Tabs>
       </div>
     </SlideLayout>
-  )
+  );
 }

@@ -1,23 +1,27 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import SlideLayout from "../slide-layout"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Label } from "@/components/ui/label"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
 
 export default function RadioButtonSlide() {
-  const [selectedOption, setSelectedOption] = useState<string>("option1")
-  const [options, setOptions] = useState<string[]>(["옵션 1", "옵션 2", "옵션 3"])
-  const [newOption, setNewOption] = useState<string>("")
+  const [selectedOption, setSelectedOption] = useState<string>("option1");
+  const [options, setOptions] = useState<string[]>([
+    "옵션 1",
+    "옵션 2",
+    "옵션 3",
+  ]);
+  const [newOption, setNewOption] = useState<string>("");
 
   const addOption = () => {
     if (newOption.trim() !== "") {
-      setOptions([...options, newOption.trim()])
-      setNewOption("")
+      setOptions([...options, newOption.trim()]);
+      setNewOption("");
     }
-  }
+  };
 
   return (
     <SlideLayout title="Radio Button">
@@ -33,8 +37,9 @@ export default function RadioButtonSlide() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Radio Button은 사용자가 여러 옵션 중 하나만 선택할 수 있는 UI 요소입니다. 동일한 그룹 내에서는 한 번에
-                하나의 라디오 버튼만 선택할 수 있습니다.
+                Radio Button은 사용자가 여러 옵션 중 하나만 선택할 수 있는 UI
+                요소입니다. 동일한 그룹 내에서는 한 번에 하나의 라디오 버튼만
+                선택할 수 있습니다.
               </p>
             </div>
 
@@ -52,8 +57,8 @@ export default function RadioButtonSlide() {
 
           <TabsContent value="code" className="mt-4">
             <div className="bg-gray-800 p-4 rounded-lg">
-              <PrismCode 
-                language="typescript" 
+              <PrismCode
+                language="typescript"
                 code={`import React, { useState } from 'react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
@@ -142,24 +147,39 @@ export default RadioButtonExample;`}
                     placeholder="새 옵션 추가"
                     className="flex-1 p-2 border rounded-md"
                   />
-                  <button onClick={addOption} className="px-4 py-2 bg-[#268052] text-white rounded-md">
+                  <button
+                    onClick={addOption}
+                    className="px-4 py-2 bg-[#6700e6] text-white rounded-md"
+                  >
                     추가
                   </button>
                 </div>
               </div>
 
               <div className="p-4 border rounded-md">
-                <RadioGroup value={selectedOption} onValueChange={setSelectedOption} className="space-y-2">
+                <RadioGroup
+                  value={selectedOption}
+                  onValueChange={setSelectedOption}
+                  className="space-y-2"
+                >
                   {options.map((option, index) => (
                     <div key={index} className="flex items-center space-x-2">
-                      <RadioGroupItem value={`option${index + 1}`} id={`option${index + 1}`} />
+                      <RadioGroupItem
+                        value={`option${index + 1}`}
+                        id={`option${index + 1}`}
+                      />
                       <Label htmlFor={`option${index + 1}`}>{option}</Label>
                     </div>
                   ))}
                 </RadioGroup>
 
                 <p className="mt-4 text-sm">
-                  선택된 옵션: {options[Number.parseInt(selectedOption.replace("option", "")) - 1]}
+                  선택된 옵션:{" "}
+                  {
+                    options[
+                      Number.parseInt(selectedOption.replace("option", "")) - 1
+                    ]
+                  }
                 </p>
               </div>
             </div>
@@ -167,5 +187,5 @@ export default RadioButtonExample;`}
         </Tabs>
       </div>
     </SlideLayout>
-  )
+  );
 }

@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import SlideLayout from "../slide-layout"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
 
 export default function OutlinedButtonSlide() {
-  const [borderWidth, setBorderWidth] = useState<string>("1px")
-  const [borderColor, setBorderColor] = useState<string>("#268052")
-  const [hovered, setHovered] = useState<boolean>(false)
+  const [borderWidth, setBorderWidth] = useState<string>("1px");
+  const [borderColor, setBorderColor] = useState<string>("#6700e6");
+  const [hovered, setHovered] = useState<boolean>(false);
 
   return (
     <SlideLayout title="Outlined Button">
@@ -24,8 +24,9 @@ export default function OutlinedButtonSlide() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Outlined Button은 배경색 대신 테두리(외곽선)를 사용하여 강조하는 버튼입니다. 일반적으로 보조 액션이나 덜
-                중요한 액션에 사용됩니다.
+                Outlined Button은 배경색 대신 테두리(외곽선)를 사용하여 강조하는
+                버튼입니다. 일반적으로 보조 액션이나 덜 중요한 액션에
+                사용됩니다.
               </p>
             </div>
 
@@ -43,8 +44,8 @@ export default function OutlinedButtonSlide() {
 
           <TabsContent value="code" className="mt-4">
             <div className="bg-gray-800 p-4 rounded-lg">
-              <PrismCode 
-                language="typescript" 
+              <PrismCode
+                language="typescript"
                 code={`import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Plus, Download, Heart } from 'lucide-react';
@@ -134,7 +135,9 @@ export default OutlinedButtonExample;`}
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <div className="space-y-4 mb-6">
                 <div>
-                  <label className="block text-sm font-medium mb-2">테두리 두께</label>
+                  <label className="block text-sm font-medium mb-2">
+                    테두리 두께
+                  </label>
                   <select
                     value={borderWidth}
                     onChange={(e) => setBorderWidth(e.target.value)}
@@ -147,13 +150,15 @@ export default OutlinedButtonExample;`}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">테두리 색상</label>
+                  <label className="block text-sm font-medium mb-2">
+                    테두리 색상
+                  </label>
                   <select
                     value={borderColor}
                     onChange={(e) => setBorderColor(e.target.value)}
                     className="w-full p-2 border rounded-md"
                   >
-                    <option value="#268052">초록색</option>
+                    <option value="#6700e6">초록색</option>
                     <option value="#3b82f6">파란색</option>
                     <option value="#ef4444">빨간색</option>
                     <option value="#8b5cf6">보라색</option>
@@ -168,7 +173,9 @@ export default OutlinedButtonExample;`}
                     borderWidth: borderWidth,
                     borderColor: borderColor,
                     color: borderColor,
-                    backgroundColor: hovered ? `${borderColor}10` : "transparent",
+                    backgroundColor: hovered
+                      ? `${borderColor}10`
+                      : "transparent",
                   }}
                   onMouseEnter={() => setHovered(true)}
                   onMouseLeave={() => setHovered(false)}
@@ -181,5 +188,5 @@ export default OutlinedButtonExample;`}
         </Tabs>
       </div>
     </SlideLayout>
-  )
+  );
 }

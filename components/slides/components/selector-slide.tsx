@@ -1,23 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import SlideLayout from "../slide-layout"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Label } from "@/components/ui/label"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
 
 export default function SelectorSlide() {
-  const [selectedValue, setSelectedValue] = useState<string>("")
-  const [options, setOptions] = useState<string[]>(["옵션 1", "옵션 2", "옵션 3", "옵션 4"])
-  const [newOption, setNewOption] = useState<string>("")
+  const [selectedValue, setSelectedValue] = useState<string>("");
+  const [options, setOptions] = useState<string[]>([
+    "옵션 1",
+    "옵션 2",
+    "옵션 3",
+    "옵션 4",
+  ]);
+  const [newOption, setNewOption] = useState<string>("");
 
   const addOption = () => {
     if (newOption.trim() !== "") {
-      setOptions([...options, newOption.trim()])
-      setNewOption("")
+      setOptions([...options, newOption.trim()]);
+      setNewOption("");
     }
-  }
+  };
 
   return (
     <SlideLayout title="Selector">
@@ -33,8 +44,9 @@ export default function SelectorSlide() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Selector(또는 Select)는 여러 옵션 중 하나를 선택할 수 있는 드롭다운 형태의 UI 요소입니다. 드롭다운과
-                유사하지만, 주로 데이터 선택에 특화되어 있습니다.
+                Selector(또는 Select)는 여러 옵션 중 하나를 선택할 수 있는
+                드롭다운 형태의 UI 요소입니다. 드롭다운과 유사하지만, 주로
+                데이터 선택에 특화되어 있습니다.
               </p>
             </div>
 
@@ -211,7 +223,10 @@ export default SelectorExample;`}
                     placeholder="새 옵션 추가"
                     className="flex-1 p-2 border rounded-md"
                   />
-                  <button onClick={addOption} className="px-4 py-2 bg-[#268052] text-white rounded-md">
+                  <button
+                    onClick={addOption}
+                    className="px-4 py-2 bg-[#6700e6] text-white rounded-md"
+                  >
                     추가
                   </button>
                 </div>
@@ -222,7 +237,10 @@ export default SelectorExample;`}
                   <Label htmlFor="selector-demo" className="mb-2 block">
                     선택하세요
                   </Label>
-                  <Select value={selectedValue} onValueChange={setSelectedValue}>
+                  <Select
+                    value={selectedValue}
+                    onValueChange={setSelectedValue}
+                  >
                     <SelectTrigger id="selector-demo">
                       <SelectValue placeholder="옵션을 선택하세요" />
                     </SelectTrigger>
@@ -237,7 +255,10 @@ export default SelectorExample;`}
                 </div>
 
                 {selectedValue && (
-                  <p className="mt-4 text-sm">선택된 값: {options[Number.parseInt(selectedValue.split("-")[1])]}</p>
+                  <p className="mt-4 text-sm">
+                    선택된 값:{" "}
+                    {options[Number.parseInt(selectedValue.split("-")[1])]}
+                  </p>
                 )}
               </div>
             </div>
@@ -245,5 +266,5 @@ export default SelectorExample;`}
         </Tabs>
       </div>
     </SlideLayout>
-  )
+  );
 }

@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import SlideLayout from "../slide-layout"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,22 +10,27 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { ChevronDown } from "lucide-react"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
 
 export default function DropdownSlide() {
-  const [selectedItem, setSelectedItem] = useState<string | null>(null)
-  const [items, setItems] = useState<string[]>(["프로필", "설정", "알림", "도움말"])
-  const [newItem, setNewItem] = useState<string>("")
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [items, setItems] = useState<string[]>([
+    "프로필",
+    "설정",
+    "알림",
+    "도움말",
+  ]);
+  const [newItem, setNewItem] = useState<string>("");
 
   const addItem = () => {
     if (newItem.trim() !== "") {
-      setItems([...items, newItem.trim()])
-      setNewItem("")
+      setItems([...items, newItem.trim()]);
+      setNewItem("");
     }
-  }
+  };
 
   return (
     <SlideLayout title="Dropdown">
@@ -41,7 +46,8 @@ export default function DropdownSlide() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Dropdown은 클릭하면 옵션 목록이 표시되는 UI 요소입니다. 공간을 절약하면서 여러 옵션을 제공할 수 있습니다.
+                Dropdown은 클릭하면 옵션 목록이 표시되는 UI 요소입니다. 공간을
+                절약하면서 여러 옵션을 제공할 수 있습니다.
               </p>
             </div>
 
@@ -154,7 +160,10 @@ export default DropdownExample;`}
                     placeholder="새 메뉴 항목 추가"
                     className="flex-1 p-2 border rounded-md"
                   />
-                  <button onClick={addItem} className="px-4 py-2 bg-[#268052] text-white rounded-md">
+                  <button
+                    onClick={addItem}
+                    className="px-4 py-2 bg-[#6700e6] text-white rounded-md"
+                  >
                     추가
                   </button>
                 </div>
@@ -171,19 +180,24 @@ export default DropdownExample;`}
                     <DropdownMenuLabel>메뉴 항목</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     {items.map((item, index) => (
-                      <DropdownMenuItem key={index} onSelect={() => setSelectedItem(item)}>
+                      <DropdownMenuItem
+                        key={index}
+                        onSelect={() => setSelectedItem(item)}
+                      >
                         {item}
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                {selectedItem && <p className="mt-4 text-sm">선택된 항목: {selectedItem}</p>}
+                {selectedItem && (
+                  <p className="mt-4 text-sm">선택된 항목: {selectedItem}</p>
+                )}
               </div>
             </div>
           </TabsContent>
         </Tabs>
       </div>
     </SlideLayout>
-  )
+  );
 }

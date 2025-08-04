@@ -1,17 +1,19 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import SlideLayout from "../slide-layout"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Slider } from "@/components/ui/slider"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Slider } from "@/components/ui/slider";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
 
 export default function PaddingMarginSlide() {
-  const [padding, setPadding] = useState<number>(16)
-  const [margin, setMargin] = useState<number>(16)
-  const [activeProperty, setActiveProperty] = useState<"padding" | "margin">("padding")
+  const [padding, setPadding] = useState<number>(16);
+  const [margin, setMargin] = useState<number>(16);
+  const [activeProperty, setActiveProperty] = useState<"padding" | "margin">(
+    "padding"
+  );
 
   return (
     <SlideLayout title="Padding & Margin">
@@ -26,13 +28,17 @@ export default function PaddingMarginSlide() {
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p className="mb-4">Padding과 Margin은 UI 요소의 공간을 제어하는 CSS 속성입니다.</p>
+              <p className="mb-4">
+                Padding과 Margin은 UI 요소의 공간을 제어하는 CSS 속성입니다.
+              </p>
               <ul className="list-disc pl-5 space-y-2">
                 <li>
-                  <strong>Padding</strong>: 요소의 내부 여백으로, 요소의 내용과 테두리 사이의 공간입니다.
+                  <strong>Padding</strong>: 요소의 내부 여백으로, 요소의 내용과
+                  테두리 사이의 공간입니다.
                 </li>
                 <li>
-                  <strong>Margin</strong>: 요소의 외부 여백으로, 요소의 테두리와 주변 요소 사이의 공간입니다.
+                  <strong>Margin</strong>: 요소의 외부 여백으로, 요소의 테두리와
+                  주변 요소 사이의 공간입니다.
                 </li>
               </ul>
             </div>
@@ -57,7 +63,7 @@ export default function PaddingMarginSlide() {
                   <TabsTrigger value="react">React/CSS</TabsTrigger>
                   <TabsTrigger value="flutter">Flutter/Dart</TabsTrigger>
                 </TabsList>
-                
+
                 <TabsContent value="react" className="mt-4">
                   <PrismCode
                     language="typescript"
@@ -113,7 +119,7 @@ export default function PaddingMarginSlide() {
 </div>`}
                   />
                 </TabsContent>
-                
+
                 <TabsContent value="flutter" className="mt-4">
                   <PrismCode
                     language="typescript"
@@ -197,7 +203,9 @@ Row(
               <div className="space-y-4 mb-6">
                 <RadioGroup
                   value={activeProperty}
-                  onValueChange={(value) => setActiveProperty(value as "padding" | "margin")}
+                  onValueChange={(value) =>
+                    setActiveProperty(value as "padding" | "margin")
+                  }
                   className="flex space-x-4"
                 >
                   <div className="flex items-center space-x-2">
@@ -212,16 +220,17 @@ Row(
 
                 <div>
                   <Label className="mb-2 block">
-                    {activeProperty === "padding" ? "패딩" : "마진"} 값: {activeProperty === "padding" ? padding : margin}
+                    {activeProperty === "padding" ? "패딩" : "마진"} 값:{" "}
+                    {activeProperty === "padding" ? padding : margin}
                     px
                   </Label>
                   <Slider
                     value={[activeProperty === "padding" ? padding : margin]}
                     onValueChange={(value) => {
                       if (activeProperty === "padding") {
-                        setPadding(value[0])
+                        setPadding(value[0]);
                       } else {
-                        setMargin(value[0])
+                        setMargin(value[0]);
                       }
                     }}
                     min={0}
@@ -240,13 +249,15 @@ Row(
                   마진 영역
                 </div>
                 <div
-                  className="relative bg-[#268052] rounded-md text-white flex items-center justify-center"
+                  className="relative bg-[#6700e6] rounded-md text-white flex items-center justify-center"
                   style={{ padding: `${padding}px` }}
                 >
                   <div className="text-center text-xs absolute inset-0 flex items-center justify-center opacity-30">
                     패딩 영역
                   </div>
-                  <div className="bg-white text-[#268052] p-2 rounded-md">콘텐츠</div>
+                  <div className="bg-white text-[#6700e6] p-2 rounded-md">
+                    콘텐츠
+                  </div>
                 </div>
               </div>
             </div>
@@ -254,5 +265,5 @@ Row(
         </Tabs>
       </div>
     </SlideLayout>
-  )
+  );
 }

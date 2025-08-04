@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import SlideLayout from "../slide-layout"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Slider } from "@/components/ui/slider"
-import { Label } from "@/components/ui/label"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Slider } from "@/components/ui/slider";
+import { Label } from "@/components/ui/label";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
 
 export default function SliderSlide() {
-  const [value, setValue] = useState<number[]>([50])
-  const [min, setMin] = useState<number>(0)
-  const [max, setMax] = useState<number>(100)
-  const [step, setStep] = useState<number>(1)
+  const [value, setValue] = useState<number[]>([50]);
+  const [min, setMin] = useState<number>(0);
+  const [max, setMax] = useState<number>(100);
+  const [step, setStep] = useState<number>(1);
 
   return (
     <SlideLayout title="Slider">
@@ -29,8 +29,8 @@ export default function SliderSlide() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Slider는 사용자가 지정된 범위 내에서 값을 선택할 수 있는 UI 요소입니다. 드래그 가능한 핸들을 이용해 값을
-                조절합니다.
+                Slider는 사용자가 지정된 범위 내에서 값을 선택할 수 있는 UI
+                요소입니다. 드래그 가능한 핸들을 이용해 값을 조절합니다.
               </p>
             </div>
 
@@ -232,10 +232,20 @@ export default SliderExample;`}
               <div className="space-y-6">
                 <div>
                   <Label className="mb-2 block">현재 값: {value[0]}</Label>
-                  <Slider value={value} onValueChange={setValue} min={min} max={max} step={step} className="my-4" />
+                  <Slider
+                    value={value}
+                    onValueChange={setValue}
+                    min={min}
+                    max={max}
+                    step={step}
+                    className="my-4"
+                  />
                 </div>
 
-                <div className="h-20 bg-[#268052] rounded-md opacity-30" style={{ opacity: value[0] / 100 }}>
+                <div
+                  className="h-20 bg-[#6700e6] rounded-md opacity-30"
+                  style={{ opacity: value[0] / 100 }}
+                >
                   <div className="h-full flex items-center justify-center text-white font-bold">
                     불투명도: {value[0]}%
                   </div>
@@ -246,10 +256,10 @@ export default SliderExample;`}
         </Tabs>
       </div>
     </SlideLayout>
-  )
+  );
 }
 
 // Input 컴포넌트 타입 오류 방지를 위한 임시 컴포넌트
 function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
-  return <input className="w-full p-2 border rounded-md" {...props} />
+  return <input className="w-full p-2 border rounded-md" {...props} />;
 }

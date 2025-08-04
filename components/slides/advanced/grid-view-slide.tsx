@@ -1,55 +1,122 @@
-"use client"
+"use client";
 
-import SlideLayout from "../slide-layout"
-import { useState } from "react"
-import { Heart } from "lucide-react"
-import { PrismCode } from "../../ui/prism/PrismCode"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import SlideLayout from "../slide-layout";
+import { useState } from "react";
+import { Heart } from "lucide-react";
+import { PrismCode } from "../../ui/prism/PrismCode";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface GridItem {
-  id: number
-  title: string
-  image: string
-  category: string
-  likes: number
-  isLiked: boolean
+  id: number;
+  title: string;
+  image: string;
+  category: string;
+  likes: number;
+  isLiked: boolean;
 }
 
 export default function GridViewSlide() {
   const [items, setItems] = useState<GridItem[]>([
-    { id: 1, title: "숲 풍경", image: "🌲", category: "자연", likes: 24, isLiked: false },
-    { id: 2, title: "해변 일몰", image: "🏝️", category: "자연", likes: 18, isLiked: false },
-    { id: 3, title: "도시 풍경", image: "🏙️", category: "건축", likes: 15, isLiked: false },
-    { id: 4, title: "산 정상", image: "🏔️", category: "자연", likes: 32, isLiked: false },
-    { id: 5, title: "고양이", image: "🐱", category: "동물", likes: 45, isLiked: false },
-    { id: 6, title: "강아지", image: "🐶", category: "동물", likes: 39, isLiked: false },
-    { id: 7, title: "커피", image: "☕", category: "음식", likes: 12, isLiked: false },
-    { id: 8, title: "케이크", image: "🍰", category: "음식", likes: 21, isLiked: false },
-    { id: 9, title: "도서관", image: "📚", category: "건축", likes: 8, isLiked: false },
-  ])
-  
-  const [gridSize, setGridSize] = useState<"small" | "medium" | "large">("medium")
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  
+    {
+      id: 1,
+      title: "숲 풍경",
+      image: "🌲",
+      category: "자연",
+      likes: 24,
+      isLiked: false,
+    },
+    {
+      id: 2,
+      title: "해변 일몰",
+      image: "🏝️",
+      category: "자연",
+      likes: 18,
+      isLiked: false,
+    },
+    {
+      id: 3,
+      title: "도시 풍경",
+      image: "🏙️",
+      category: "건축",
+      likes: 15,
+      isLiked: false,
+    },
+    {
+      id: 4,
+      title: "산 정상",
+      image: "🏔️",
+      category: "자연",
+      likes: 32,
+      isLiked: false,
+    },
+    {
+      id: 5,
+      title: "고양이",
+      image: "🐱",
+      category: "동물",
+      likes: 45,
+      isLiked: false,
+    },
+    {
+      id: 6,
+      title: "강아지",
+      image: "🐶",
+      category: "동물",
+      likes: 39,
+      isLiked: false,
+    },
+    {
+      id: 7,
+      title: "커피",
+      image: "☕",
+      category: "음식",
+      likes: 12,
+      isLiked: false,
+    },
+    {
+      id: 8,
+      title: "케이크",
+      image: "🍰",
+      category: "음식",
+      likes: 21,
+      isLiked: false,
+    },
+    {
+      id: 9,
+      title: "도서관",
+      image: "📚",
+      category: "건축",
+      likes: 8,
+      isLiked: false,
+    },
+  ]);
+
+  const [gridSize, setGridSize] = useState<"small" | "medium" | "large">(
+    "medium"
+  );
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
   const handleLike = (id: number) => {
-    setItems(prevItems => prevItems.map(item => {
-      if (item.id === id) {
-        return { 
-          ...item, 
-          isLiked: !item.isLiked,
-          likes: item.isLiked ? item.likes - 1 : item.likes + 1
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            isLiked: !item.isLiked,
+            likes: item.isLiked ? item.likes - 1 : item.likes + 1,
+          };
         }
-      }
-      return item
-    }))
-  }
-  
-  const filteredItems = selectedCategory 
-    ? items.filter(item => item.category === selectedCategory)
-    : items
-  
-  const categories = Array.from(new Set(items.map(item => item.category)))
-  
+        return item;
+      })
+    );
+  };
+
+  const filteredItems = selectedCategory
+    ? items.filter((item) => item.category === selectedCategory)
+    : items;
+
+  const categories = Array.from(new Set(items.map((item) => item.category)));
+
   return (
     <SlideLayout title="Grid View (그리드 뷰)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -64,8 +131,9 @@ export default function GridViewSlide() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                그리드 뷰는 콘텐츠를 행과 열의 격자 형태로 표시하는 레이아웃으로,
-                이미지 갤러리, 대시보드 타일, 제품 카탈로그 등 다양한 요소를 시각적으로 정렬하고 탐색하기에 적합합니다.
+                그리드 뷰는 콘텐츠를 행과 열의 격자 형태로 표시하는
+                레이아웃으로, 이미지 갤러리, 대시보드 타일, 제품 카탈로그 등
+                다양한 요소를 시각적으로 정렬하고 탐색하기에 적합합니다.
               </p>
             </div>
 
@@ -74,7 +142,9 @@ export default function GridViewSlide() {
               <ul className="list-disc pl-6 space-y-2">
                 <li>
                   <strong>격자 크기 (Grid Size)</strong>
-                  <p className="text-sm text-gray-600">행과 열의 개수, 항목의 크기를 결정</p>
+                  <p className="text-sm text-gray-600">
+                    행과 열의 개수, 항목의 크기를 결정
+                  </p>
                 </li>
                 <li>
                   <strong>격자 간격 (Grid Gap)</strong>
@@ -86,11 +156,13 @@ export default function GridViewSlide() {
                 </li>
                 <li>
                   <strong>반응형 동작</strong>
-                  <p className="text-sm text-gray-600">화면 크기에 따라 변하는 격자 구조</p>
+                  <p className="text-sm text-gray-600">
+                    화면 크기에 따라 변하는 격자 구조
+                  </p>
                 </li>
               </ul>
             </div>
-            
+
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
               <ul className="list-disc pl-6 space-y-1">
@@ -103,11 +175,14 @@ export default function GridViewSlide() {
                 <li>멀티미디어 콘텐츠 탐색</li>
               </ul>
             </div>
-            
+
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">구현 고려사항</h3>
               <ul className="list-disc pl-6 space-y-1">
-                <li>대량의 데이터를 효율적으로 처리하기 위한 가상화(virtualization) 적용</li>
+                <li>
+                  대량의 데이터를 효율적으로 처리하기 위한
+                  가상화(virtualization) 적용
+                </li>
                 <li>항목 선택, 멀티 선택, 컨텍스트 메뉴 등의 상호작용 지원</li>
                 <li>검색, 필터링, 정렬 기능 제공</li>
                 <li>다양한 상태(로딩, 비어있음, 오류 등)에 대한 처리</li>
@@ -291,15 +366,23 @@ void onLikePressed(int id) {
                   <span className="text-sm font-medium">카테고리:</span>
                   <div className="flex gap-2">
                     <button
-                      className={`px-3 py-1 rounded text-xs ${selectedCategory === null ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                      className={`px-3 py-1 rounded text-xs ${
+                        selectedCategory === null
+                          ? "bg-[#6700e6] text-white"
+                          : "bg-gray-100"
+                      }`}
                       onClick={() => setSelectedCategory(null)}
                     >
                       전체
                     </button>
-                    {categories.map(category => (
+                    {categories.map((category) => (
                       <button
                         key={category}
-                        className={`px-3 py-1 rounded text-xs ${selectedCategory === category ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                        className={`px-3 py-1 rounded text-xs ${
+                          selectedCategory === category
+                            ? "bg-[#6700e6] text-white"
+                            : "bg-gray-100"
+                        }`}
                         onClick={() => setSelectedCategory(category)}
                       >
                         {category}
@@ -307,12 +390,16 @@ void onLikePressed(int id) {
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium">그리드 크기:</span>
                   <div className="flex gap-2">
                     <button
-                      className={`p-1 rounded ${gridSize === "small" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                      className={`p-1 rounded ${
+                        gridSize === "small"
+                          ? "bg-[#6700e6] text-white"
+                          : "bg-gray-100"
+                      }`}
                       onClick={() => setGridSize("small")}
                     >
                       <div className="grid grid-cols-3 gap-0.5">
@@ -322,7 +409,11 @@ void onLikePressed(int id) {
                       </div>
                     </button>
                     <button
-                      className={`p-1 rounded ${gridSize === "medium" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                      className={`p-1 rounded ${
+                        gridSize === "medium"
+                          ? "bg-[#6700e6] text-white"
+                          : "bg-gray-100"
+                      }`}
                       onClick={() => setGridSize("medium")}
                     >
                       <div className="grid grid-cols-2 gap-0.5">
@@ -332,7 +423,11 @@ void onLikePressed(int id) {
                       </div>
                     </button>
                     <button
-                      className={`p-1 rounded ${gridSize === "large" ? 'bg-[#268052] text-white' : 'bg-gray-100'}`}
+                      className={`p-1 rounded ${
+                        gridSize === "large"
+                          ? "bg-[#6700e6] text-white"
+                          : "bg-gray-100"
+                      }`}
                       onClick={() => setGridSize("large")}
                     >
                       <div className="grid grid-cols-1 gap-0.5">
@@ -344,43 +439,65 @@ void onLikePressed(int id) {
                   </div>
                 </div>
               </div>
-              
-              <div 
+
+              <div
                 className={`grid gap-4 ${
-                  gridSize === "small" 
-                    ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4' 
+                  gridSize === "small"
+                    ? "grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
                     : gridSize === "medium"
-                      ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3'
-                      : 'grid-cols-1 md:grid-cols-2'
+                    ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+                    : "grid-cols-1 md:grid-cols-2"
                 }`}
               >
                 {filteredItems.map((item) => (
-                  <div 
+                  <div
                     key={item.id}
                     className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all"
                   >
-                    <div className={`${gridSize === "small" ? 'h-24' : gridSize === "medium" ? 'h-32' : 'h-40'} bg-[#268052]/10 flex items-center justify-center`}>
+                    <div
+                      className={`${
+                        gridSize === "small"
+                          ? "h-24"
+                          : gridSize === "medium"
+                          ? "h-32"
+                          : "h-40"
+                      } bg-[#6700e6]/10 flex items-center justify-center`}
+                    >
                       <span className="text-4xl">{item.image}</span>
                     </div>
-                    
+
                     <div className="p-3">
                       <div className="flex justify-between items-start mb-2">
-                        <h4 className={`font-medium ${gridSize === "small" ? 'text-sm' : ''}`}>{item.title}</h4>
-                        <span className="bg-gray-100 text-xs px-1.5 py-0.5 rounded">{item.category}</span>
+                        <h4
+                          className={`font-medium ${
+                            gridSize === "small" ? "text-sm" : ""
+                          }`}
+                        >
+                          {item.title}
+                        </h4>
+                        <span className="bg-gray-100 text-xs px-1.5 py-0.5 rounded">
+                          {item.category}
+                        </span>
                       </div>
-                      
+
                       {gridSize !== "small" && (
                         <div className="flex justify-between items-center mt-3">
                           <button
                             onClick={() => handleLike(item.id)}
-                            className={`flex items-center gap-1.5 ${item.isLiked ? 'text-red-500' : 'text-gray-500'}`}
+                            className={`flex items-center gap-1.5 ${
+                              item.isLiked ? "text-red-500" : "text-gray-500"
+                            }`}
                           >
-                            <Heart className={`w-4 h-4 ${item.isLiked ? 'fill-current' : ''}`} />
+                            <Heart
+                              className={`w-4 h-4 ${
+                                item.isLiked ? "fill-current" : ""
+                              }`}
+                            />
                             <span className="text-xs">{item.likes}</span>
                           </button>
-                          
+
                           {gridSize === "large" && (
-                            <button className="text-xs px-2 py-1 bg-[#268052]/10 rounded text-[#268052] hover:bg-[#268052]/20">
+                            <button className="text-xs px-2 py-1 bg-[#6700e6]/10 rounded text-[#6700e6] hover:bg-[#6700e6]/20">
                               더 보기
                             </button>
                           )}
@@ -395,5 +512,5 @@ void onLikePressed(int id) {
         </Tabs>
       </div>
     </SlideLayout>
-  )
-} 
+  );
+}
