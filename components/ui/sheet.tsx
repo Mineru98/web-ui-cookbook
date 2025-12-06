@@ -53,8 +53,8 @@ interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {
   /**
-   * 스크린 리더 사용자를 위한 접근성을 위해 제목이 필요합니다.
-   * 시각적으로 숨기려면 제목을 VisuallyHidden 컴포넌트로 감싸세요.
+   * ?�크�?리더 ?�용?��? ?�한 ?�근?�을 ?�해 ?�목???�요?�니??
+   * ?�각?�으�??�기?�면 ?�목??VisuallyHidden 컴포?�트�?감싸?�요.
    */
   title: string;
 }

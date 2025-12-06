@@ -22,29 +22,29 @@ export default function TimePickerSlide() {
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">설명</TabsTrigger>
+            <TabsTrigger value="description">?�명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">데모</TabsTrigger>
+            <TabsTrigger value="demo">?�모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
+              <h3 className="text-lg font-semibold mb-2">?�의</h3>
               <p>
-                Time Picker는 사용자가 시간을 선택할 수 있는 UI 요소입니다. 시, 분, 초 및 AM/PM을 선택할 수 있는
-                인터페이스를 제공합니다.
+                Time Picker???�용?��? ?�간???�택?????�는 UI ?�소?�니?? ?? �? �?�?AM/PM???�택?????�는
+                ?�터?�이?��? ?�공?�니??
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>약속 및 회의 예약</li>
-                <li>알람 설정</li>
-                <li>영업 시간 설정</li>
-                <li>배송 시간 선택</li>
-                <li>일정 관리</li>
-                <li>타임 트래킹 앱</li>
+                <li>?�속 �??�의 ?�약</li>
+                <li>?�람 ?�정</li>
+                <li>?�업 ?�간 ?�정</li>
+                <li>배송 ?�간 ?�택</li>
+                <li>?�정 관�?/li>
+                <li>?�???�래????/li>
               </ul>
             </div>
           </TabsContent>
@@ -58,8 +58,7 @@ import { Button } from "@/components/ui/button"
 import { Clock } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
-// 기본 시간 선택기
-const [time, setTime] = useState<string>("")
+// 기본 ?�간 ?�택�?const [time, setTime] = useState<string>("")
 
 const handleTimeSelect = (hours: string, minutes: string, period: "AM" | "PM") => {
   setTime(\`\${hours}:\${minutes} \${period}\`)
@@ -71,7 +70,7 @@ const handleTimeSelect = (hours: string, minutes: string, period: "AM" | "PM") =
       variant="outline"
       className="w-[240px] justify-start text-left font-normal"
     >
-      {time || "시간 선택"}
+      {time || "?�간 ?�택"}
       <Clock className="ml-auto h-4 w-4 opacity-50" />
     </Button>
   </PopoverTrigger>
@@ -100,13 +99,12 @@ const handleTimeSelect = (hours: string, minutes: string, period: "AM" | "PM") =
   </PopoverContent>
 </Popover>
 
-// 커스텀 시간 선택기
-const [hours, setHours] = useState<string>("12")
+// 커스?� ?�간 ?�택�?const [hours, setHours] = useState<string>("12")
 const [minutes, setMinutes] = useState<string>("00")
 const [period, setPeriod] = useState<"AM" | "PM">("PM")
 
 <div className="flex items-center space-x-2">
-  {/* 시간 선택 */}
+  {/* ?�간 ?�택 */}
   <select
     value={hours}
     onChange={(e) => setHours(e.target.value)}
@@ -121,7 +119,7 @@ const [period, setPeriod] = useState<"AM" | "PM">("PM")
 
   <span className="text-lg font-medium">:</span>
 
-  {/* 분 선택 */}
+  {/* �??�택 */}
   <select
     value={minutes}
     onChange={(e) => setMinutes(e.target.value)}
@@ -134,7 +132,7 @@ const [period, setPeriod] = useState<"AM" | "PM">("PM")
     ))}
   </select>
 
-  {/* AM/PM 선택 */}
+  {/* AM/PM ?�택 */}
   <select
     value={period}
     onChange={(e) => setPeriod(e.target.value as "AM" | "PM")}
@@ -145,8 +143,7 @@ const [period, setPeriod] = useState<"AM" | "PM">("PM")
   </select>
 </div>
 
-// 24시간 형식으로 변환
-const convertTo24Hour = (hours: string, period: "AM" | "PM"): string => {
+// 24?�간 ?�식?�로 변??const convertTo24Hour = (hours: string, period: "AM" | "PM"): string => {
   const hour = parseInt(hours)
   if (period === "AM") {
     return hour === 12 ? "00" : hours
@@ -202,9 +199,9 @@ const convertTo24Hour = (hours: string, period: "AM" | "PM"): string => {
                 </Popover>
 
                 <div className="text-center">
-                  <p className="text-sm">선택된 시간: {formatTime()}</p>
+                  <p className="text-sm">?�택???�간: {formatTime()}</p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    24시간 형식:{" "}
+                    24?�간 ?�식:{" "}
                     {period === "AM"
                       ? hours === "12"
                         ? "00"

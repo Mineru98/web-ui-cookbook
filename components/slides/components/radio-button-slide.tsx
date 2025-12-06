@@ -10,9 +10,9 @@ import { PrismCode } from "@/components/ui/prism/PrismCode";
 export default function RadioButtonSlide() {
   const [selectedOption, setSelectedOption] = useState<string>("option1");
   const [options, setOptions] = useState<string[]>([
-    "옵션 1",
-    "옵션 2",
-    "옵션 3",
+    "?�션 1",
+    "?�션 2",
+    "?�션 3",
   ]);
   const [newOption, setNewOption] = useState<string>("");
 
@@ -28,29 +28,28 @@ export default function RadioButtonSlide() {
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">설명</TabsTrigger>
+            <TabsTrigger value="description">?�명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">데모</TabsTrigger>
+            <TabsTrigger value="demo">?�모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
+              <h3 className="text-lg font-semibold mb-2">?�의</h3>
               <p>
-                Radio Button은 사용자가 여러 옵션 중 하나만 선택할 수 있는 UI
-                요소입니다. 동일한 그룹 내에서는 한 번에 하나의 라디오 버튼만
-                선택할 수 있습니다.
+                Radio Button?� ?�용?��? ?�러 ?�션 �??�나�??�택?????�는 UI
+                ?�소?�니?? ?�일??그룹 ?�에?�는 ??번에 ?�나???�디??버튼�?                ?�택?????�습?�다.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>단일 선택이 필요한 설문조사 질문</li>
-                <li>성별, 연령대 등의 인구통계학적 정보 수집</li>
-                <li>배송 방법, 결제 방법 선택</li>
-                <li>설정 옵션 중 하나 선택</li>
-                <li>필터링 옵션 (정렬 기준 등)</li>
+                <li>?�일 ?�택???�요???�문조사 질문</li>
+                <li>?�별, ?�령?� ?�의 ?�구?�계?�적 ?�보 ?�집</li>
+                <li>배송 방법, 결제 방법 ?�택</li>
+                <li>?�정 ?�션 �??�나 ?�택</li>
+                <li>?�터�??�션 (?�렬 기�? ??</li>
               </ul>
             </div>
           </TabsContent>
@@ -68,46 +67,46 @@ const RadioButtonExample: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      {/* 기본 라디오 버튼 그룹 */}
+      {/* 기본 ?�디??버튼 그룹 */}
       <RadioGroup defaultValue="option1" className="space-y-2">
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="option1" id="option1" />
-          <Label htmlFor="option1">옵션 1</Label>
+          <Label htmlFor="option1">?�션 1</Label>
         </div>
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="option2" id="option2" />
-          <Label htmlFor="option2">옵션 2</Label>
+          <Label htmlFor="option2">?�션 2</Label>
         </div>
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="option3" id="option3" />
-          <Label htmlFor="option3">옵션 3</Label>
+          <Label htmlFor="option3">?�션 3</Label>
         </div>
       </RadioGroup>
 
-      {/* 이벤트 핸들러가 있는 라디오 버튼 그룹 */}
+      {/* ?�벤???�들?��? ?�는 ?�디??버튼 그룹 */}
       <RadioGroup
         value={selectedOption}
         onValueChange={(value) => {
           setSelectedOption(value);
-          console.log('선택된 옵션:', value);
+          console.log('?�택???�션:', value);
         }}
         className="space-y-2"
       >
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="choice1" id="choice1" />
-          <Label htmlFor="choice1">선택지 1</Label>
+          <Label htmlFor="choice1">?�택지 1</Label>
         </div>
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="choice2" id="choice2" />
-          <Label htmlFor="choice2">선택지 2</Label>
+          <Label htmlFor="choice2">?�택지 2</Label>
         </div>
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="choice3" id="choice3" />
-          <Label htmlFor="choice3">선택지 3</Label>
+          <Label htmlFor="choice3">?�택지 3</Label>
         </div>
       </RadioGroup>
 
-      {/* 비활성화된 라디오 버튼 */}
+      {/* 비활?�화???�디??버튼 */}
       <div className="flex items-center space-x-2">
         <RadioGroupItem
           value="disabled"
@@ -118,13 +117,12 @@ const RadioButtonExample: React.FC = () => {
           htmlFor="disabled"
           className="text-muted-foreground"
         >
-          비활성화됨
-        </Label>
+          비활?�화??        </Label>
       </div>
 
       {selectedOption && (
         <p className="text-sm text-muted-foreground">
-          현재 선택: {selectedOption}
+          ?�재 ?�택: {selectedOption}
         </p>
       )}
     </div>
@@ -144,14 +142,14 @@ export default RadioButtonExample;`}
                     type="text"
                     value={newOption}
                     onChange={(e) => setNewOption(e.target.value)}
-                    placeholder="새 옵션 추가"
+                    placeholder="???�션 추�?"
                     className="flex-1 p-2 border rounded-md"
                   />
                   <button
                     onClick={addOption}
-                    className="px-4 py-2 bg-[#6700e6] text-white rounded-md"
+                    className="px-4 py-2 bg-[#49bcf3] text-white rounded-md"
                   >
-                    추가
+                    추�?
                   </button>
                 </div>
               </div>
@@ -174,7 +172,7 @@ export default RadioButtonExample;`}
                 </RadioGroup>
 
                 <p className="mt-4 text-sm">
-                  선택된 옵션:{" "}
+                  ?�택???�션:{" "}
                   {
                     options[
                       Number.parseInt(selectedOption.replace("option", "")) - 1

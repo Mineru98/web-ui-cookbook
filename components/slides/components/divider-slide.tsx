@@ -19,30 +19,28 @@ export default function DividerSlide() {
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">설명</TabsTrigger>
+            <TabsTrigger value="description">?�명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">데모</TabsTrigger>
+            <TabsTrigger value="demo">?�모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
+              <h3 className="text-lg font-semibold mb-2">?�의</h3>
               <p>
-                Divider(또는 Separator)는 콘텐츠 섹션을 시각적으로 구분하는 가로
-                또는 세로 선입니다. UI의 구조와 계층을 명확하게 하는 데 도움이
-                됩니다.
+                Divider(?�는 Separator)??콘텐�??�션???�각?�으�?구분?�는 가�?                ?�는 ?�로 ?�입?�다. UI??구조?� 계층??명확?�게 ?�는 ???��???                ?�니??
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>콘텐츠 섹션 구분</li>
-                <li>메뉴 항목 구분</li>
-                <li>폼 섹션 구분</li>
-                <li>카드 내부 콘텐츠 구분</li>
-                <li>헤더와 본문 구분</li>
-                <li>푸터 구분</li>
+                <li>콘텐�??�션 구분</li>
+                <li>메뉴 ??�� 구분</li>
+                <li>???�션 구분</li>
+                <li>카드 ?��? 콘텐�?구분</li>
+                <li>?�더?� 본문 구분</li>
+                <li>?�터 구분</li>
               </ul>
             </div>
           </TabsContent>
@@ -57,55 +55,53 @@ import { Separator } from '@/components/ui/separator';
 const DividerExample: React.FC = () => {
   return (
     <div className="space-y-8">
-      {/* 기본 가로 구분선 */}
+      {/* 기본 가�?구분??*/}
       <div className="space-y-4">
-        <p>상단 컨텐츠</p>
+        <p>?�단 컨텐�?/p>
         <Separator />
-        <p>하단 컨텐츠</p>
+        <p>?�단 컨텐�?/p>
       </div>
 
-      {/* 세로 구분선 */}
+      {/* ?�로 구분??*/}
       <div className="flex items-center space-x-4 h-16">
         <div className="flex-1 text-center">
-          왼쪽 컨텐츠
-        </div>
+          ?�쪽 컨텐�?        </div>
         <Separator orientation="vertical" className="h-full" />
         <div className="flex-1 text-center">
-          오른쪽 컨텐츠
-        </div>
+          ?�른�?컨텐�?        </div>
       </div>
 
-      {/* 커스텀 스타일의 구분선 */}
+      {/* 커스?� ?��??�의 구분??*/}
       <div className="space-y-4">
-        <p>커스텀 스타일 상단</p>
+        <p>커스?� ?��????�단</p>
         <Separator className="bg-blue-500 h-0.5" />
-        <p>커스텀 스타일 하단</p>
+        <p>커스?� ?��????�단</p>
       </div>
 
-      {/* 두꺼운 구분선 */}
+      {/* ?�꺼??구분??*/}
       <div className="space-y-4">
-        <p>두꺼운 선 상단</p>
+        <p>?�꺼?????�단</p>
         <Separator className="h-1 bg-gray-300" />
-        <p>두껌운 선 하단</p>
+        <p>?�껌?????�단</p>
       </div>
 
-      {/* 텍스트가 있는 구분선 */}
+      {/* ?�스?��? ?�는 구분??*/}
       <div className="flex items-center space-x-4">
         <Separator className="flex-1" />
         <span className="text-sm text-muted-foreground px-2">
-          또는
+          ?�는
         </span>
         <Separator className="flex-1" />
       </div>
 
-      {/* 점선 스타일 */}
+      {/* ?�선 ?��???*/}
       <div className="space-y-4">
-        <p>점선 스타일 상단</p>
+        <p>?�선 ?��????�단</p>
         <div className="border-t border-dashed border-gray-300" />
-        <p>점선 스타일 하단</p>
+        <p>?�선 ?��????�단</p>
       </div>
 
-      {/* 색상이 다른 구분선들 */}
+      {/* ?�상???�른 구분?�들 */}
       <div className="space-y-2">
         <Separator className="bg-red-500" />
         <Separator className="bg-green-500" />
@@ -135,18 +131,18 @@ export default DividerExample;`}
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="horizontal" id="horizontal" />
-                      <Label htmlFor="horizontal">가로</Label>
+                      <Label htmlFor="horizontal">가�?/Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="vertical" id="vertical" />
-                      <Label htmlFor="vertical">세로</Label>
+                      <Label htmlFor="vertical">?�로</Label>
                     </div>
                   </RadioGroup>
                 </div>
 
                 <div>
                   <Label htmlFor="thickness" className="mb-2 block">
-                    두께
+                    ?�께
                   </Label>
                   <select
                     id="thickness"
@@ -154,15 +150,15 @@ export default DividerExample;`}
                     onChange={(e) => setThickness(e.target.value)}
                     className="w-full p-2 border rounded-md"
                   >
-                    <option value="1px">얇게 (1px)</option>
+                    <option value="1px">?�게 (1px)</option>
                     <option value="2px">중간 (2px)</option>
-                    <option value="4px">두껍게 (4px)</option>
+                    <option value="4px">?�껍�?(4px)</option>
                   </select>
                 </div>
 
                 <div>
                   <Label htmlFor="color" className="mb-2 block">
-                    색상
+                    ?�상
                   </Label>
                   <select
                     id="color"
@@ -170,10 +166,10 @@ export default DividerExample;`}
                     onChange={(e) => setColor(e.target.value)}
                     className="w-full p-2 border rounded-md"
                   >
-                    <option value="#e5e7eb">기본 (회색)</option>
-                    <option value="#6700e6">초록색</option>
-                    <option value="#3b82f6">파란색</option>
-                    <option value="#ef4444">빨간색</option>
+                    <option value="#e5e7eb">기본 (?�색)</option>
+                    <option value="#49bcf3">초록??/option>
+                    <option value="#3b82f6">?��???/option>
+                    <option value="#ef4444">빨간??/option>
                   </select>
                 </div>
               </div>
@@ -181,7 +177,7 @@ export default DividerExample;`}
               <div className="p-4 border rounded-md">
                 {orientation === "horizontal" ? (
                   <div className="space-y-4">
-                    <p>상단 콘텐츠</p>
+                    <p>?�단 콘텐�?/p>
                     <div
                       className="w-full"
                       style={{
@@ -189,12 +185,12 @@ export default DividerExample;`}
                         backgroundColor: color,
                       }}
                     ></div>
-                    <p>하단 콘텐츠</p>
+                    <p>?�단 콘텐�?/p>
                   </div>
                 ) : (
                   <div className="flex h-20">
                     <div className="flex-1 flex items-center justify-center">
-                      <p>왼쪽 콘텐츠</p>
+                      <p>?�쪽 콘텐�?/p>
                     </div>
                     <div
                       className="h-full"
@@ -204,7 +200,7 @@ export default DividerExample;`}
                       }}
                     ></div>
                     <div className="flex-1 flex items-center justify-center">
-                      <p>오른쪽 콘텐츠</p>
+                      <p>?�른�?콘텐�?/p>
                     </div>
                   </div>
                 )}

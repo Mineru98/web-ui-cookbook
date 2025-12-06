@@ -56,7 +56,7 @@ export default function BottomSheetSlide() {
         return (
           <div className="p-4">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-medium">필터 설정</h3>
+              <h3 className="text-lg font-medium">?�터 ?�정</h3>
               <button
                 onClick={closeSheet}
                 className="p-1 rounded-full hover:bg-gray-100"
@@ -67,27 +67,27 @@ export default function BottomSheetSlide() {
 
             <div className="space-y-4">
               <div>
-                <h4 className="text-sm font-medium mb-2">가격 범위</h4>
+                <h4 className="text-sm font-medium mb-2">가�?범위</h4>
                 <div className="flex gap-2">
-                  <input type="range" className="w-full accent-[#6700e6]" />
+                  <input type="range" className="w-full accent-[#49bcf3]" />
                 </div>
                 <div className="flex justify-between text-xs mt-1">
-                  <span>₩0</span>
-                  <span>₩50,000</span>
-                  <span>₩100,000+</span>
+                  <span>??</span>
+                  <span>??0,000</span>
+                  <span>??00,000+</span>
                 </div>
               </div>
 
               <div>
                 <h4 className="text-sm font-medium mb-2">카테고리</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  {["의류", "신발", "액세서리", "가방", "뷰티", "가전"].map(
+                  {["?�류", "?�발", "?�세?�리", "가�?, "뷰티", "가??].map(
                     (category) => (
                       <div key={category} className="flex items-center">
                         <input
                           type="checkbox"
                           id={`category-${category}`}
-                          className="w-4 h-4 rounded accent-[#6700e6]"
+                          className="w-4 h-4 rounded accent-[#49bcf3]"
                         />
                         <label
                           htmlFor={`category-${category}`}
@@ -106,13 +106,12 @@ export default function BottomSheetSlide() {
                   onClick={closeSheet}
                   className="flex-1 px-3 py-2 border rounded-md text-sm hover:bg-gray-50"
                 >
-                  초기화
-                </button>
+                  초기??                </button>
                 <button
                   onClick={closeSheet}
-                  className="flex-1 px-3 py-2 bg-[#6700e6] text-white rounded-md text-sm hover:bg-[#6700e6]/90"
+                  className="flex-1 px-3 py-2 bg-[#49bcf3] text-white rounded-md text-sm hover:bg-[#49bcf3]/90"
                 >
-                  적용하기
+                  ?�용?�기
                 </button>
               </div>
             </div>
@@ -123,7 +122,7 @@ export default function BottomSheetSlide() {
         return (
           <div>
             <div className="px-4 py-3 border-b sticky top-0 bg-white z-10 flex justify-between items-center">
-              <h3 className="text-lg font-medium">댓글 (25개)</h3>
+              <h3 className="text-lg font-medium">?��? (25�?</h3>
               <button
                 onClick={closeSheet}
                 className="p-1 rounded-full hover:bg-gray-100"
@@ -138,14 +137,14 @@ export default function BottomSheetSlide() {
                   <div key={idx} className="border-b pb-3">
                     <div className="flex justify-between">
                       <div className="flex items-center">
-                        <div className="w-8 h-8 rounded-full bg-[#6700e6]/20 flex items-center justify-center text-[#6700e6]">
+                        <div className="w-8 h-8 rounded-full bg-[#49bcf3]/20 flex items-center justify-center text-[#49bcf3]">
                           {String.fromCharCode(65 + (idx % 26))}
                         </div>
                         <div className="ml-2">
                           <div className="font-medium text-sm">
-                            사용자{idx + 1}
+                            ?�용??idx + 1}
                           </div>
-                          <div className="text-xs text-gray-500">3일 전</div>
+                          <div className="text-xs text-gray-500">3????/div>
                         </div>
                       </div>
                       <button className="text-gray-400 hover:text-gray-600">
@@ -154,10 +153,10 @@ export default function BottomSheetSlide() {
                     </div>
                     <p className="mt-2 text-sm">
                       {idx % 3 === 0
-                        ? "정말 유용한 내용입니다. 감사합니다!"
+                        ? "?�말 ?�용???�용?�니?? 감사?�니??"
                         : idx % 3 === 1
-                        ? "좋은 정보 공유해주셔서 감사합니다. 많은 도움이 되었어요."
-                        : "이 내용에 대해 좀 더 자세히 알고 싶어요. 추가 설명 부탁드립니다."}
+                        ? "좋�? ?�보 공유?�주?�서 감사?�니?? 많�? ?��????�었?�요."
+                        : "???�용???�??좀 ???�세???�고 ?�어?? 추�? ?�명 부?�드립니??"}
                     </p>
                   </div>
                 ))}
@@ -170,7 +169,7 @@ export default function BottomSheetSlide() {
         return (
           <div className="p-4">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-medium">문서 작업</h3>
+              <h3 className="text-lg font-medium">문서 ?�업</h3>
               <button
                 onClick={closeSheet}
                 className="p-1 rounded-full hover:bg-gray-100"
@@ -185,28 +184,28 @@ export default function BottomSheetSlide() {
                 onClick={closeSheet}
               >
                 <Share className="h-5 w-5 mr-3 text-blue-500" />
-                <span>공유하기</span>
+                <span>공유?�기</span>
               </button>
               <button
                 className="w-full flex items-center p-3 hover:bg-gray-100 rounded-lg"
                 onClick={closeSheet}
               >
                 <Copy className="h-5 w-5 mr-3 text-gray-500" />
-                <span>복사하기</span>
+                <span>복사?�기</span>
               </button>
               <button
                 className="w-full flex items-center p-3 hover:bg-gray-100 rounded-lg"
                 onClick={closeSheet}
               >
-                <Edit className="h-5 w-5 mr-3 text-[#6700e6]" />
-                <span>편집하기</span>
+                <Edit className="h-5 w-5 mr-3 text-[#49bcf3]" />
+                <span>?�집?�기</span>
               </button>
               <button
                 className="w-full flex items-center p-3 hover:bg-gray-100 rounded-lg"
                 onClick={closeSheet}
               >
                 <Download className="h-5 w-5 mr-3 text-purple-500" />
-                <span>다운로드</span>
+                <span>?�운로드</span>
               </button>
               <div className="py-2">
                 <div className="border-t"></div>
@@ -216,7 +215,7 @@ export default function BottomSheetSlide() {
                 onClick={closeSheet}
               >
                 <Trash className="h-5 w-5 mr-3" />
-                <span>삭제하기</span>
+                <span>??��?�기</span>
               </button>
             </div>
           </div>
@@ -226,7 +225,7 @@ export default function BottomSheetSlide() {
         return (
           <div className="p-4">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-medium">바텀 시트 제목</h3>
+              <h3 className="text-lg font-medium">바�? ?�트 ?�목</h3>
               <button
                 onClick={closeSheet}
                 className="p-1 rounded-full hover:bg-gray-100"
@@ -236,8 +235,7 @@ export default function BottomSheetSlide() {
             </div>
 
             <p className="text-gray-600 mb-6">
-              바텀 시트는 화면 아래에서 올라오는 컴포넌트로, 추가 정보나 작업을
-              표시하는 데 사용됩니다. 다양한 높이와 콘텐츠로 구성할 수 있습니다.
+              바�? ?�트???�면 ?�래?�서 ?�라?�는 컴포?�트�? 추�? ?�보???�업??              ?�시?�는 ???�용?�니?? ?�양???�이?� 콘텐츠로 구성?????�습?�다.
             </p>
 
             <div className="mt-2">
@@ -245,42 +243,42 @@ export default function BottomSheetSlide() {
                 <button
                   className={`px-3 py-1.5 rounded text-xs ${
                     sheetHeight === "small"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetHeight("small")}
                 >
-                  작은 높이
+                  ?��? ?�이
                 </button>
                 <button
                   className={`px-3 py-1.5 rounded text-xs ${
                     sheetHeight === "medium"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetHeight("medium")}
                 >
-                  중간 높이
+                  중간 ?�이
                 </button>
                 <button
                   className={`px-3 py-1.5 rounded text-xs ${
                     sheetHeight === "large"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetHeight("large")}
                 >
-                  큰 높이
+                  ???�이
                 </button>
                 <button
                   className={`px-3 py-1.5 rounded text-xs ${
                     sheetHeight === "full"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetHeight("full")}
                 >
-                  전체 화면
+                  ?�체 ?�면
                 </button>
               </div>
             </div>
@@ -344,7 +342,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   );
 };
 
-// 사용 예시
+// ?�용 ?�시
 const BasicBottomSheetExample: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [height, setHeight] = useState<'small' | 'medium' | 'large' | 'full'>('medium');
@@ -356,7 +354,7 @@ const BasicBottomSheetExample: React.FC = () => {
           onClick={() => setIsOpen(true)}
           className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
         >
-          시트 열기
+          ?�트 ?�기
         </button>
         
         <select 
@@ -364,10 +362,10 @@ const BasicBottomSheetExample: React.FC = () => {
           onChange={(e) => setHeight(e.target.value as any)}
           className="px-3 py-2 border rounded-lg"
         >
-          <option value="small">작게</option>
+          <option value="small">?�게</option>
           <option value="medium">중간</option>
-          <option value="large">크게</option>
-          <option value="full">전체</option>
+          <option value="large">?�게</option>
+          <option value="full">?�체</option>
         </select>
       </div>
 
@@ -377,15 +375,15 @@ const BasicBottomSheetExample: React.FC = () => {
         height={height}
       >
         <div className="text-center py-8">
-          <h3 className="text-lg font-semibold mb-2">기본 바텀 시트</h3>
+          <h3 className="text-lg font-semibold mb-2">기본 바�? ?�트</h3>
           <p className="text-gray-600 mb-4">
-            이것은 기본적인 바텀 시트입니다.
+            ?�것?� 기본?�인 바�? ?�트?�니??
           </p>
           <button
             onClick={() => setIsOpen(false)}
             className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
           >
-            닫기
+            ?�기
           </button>
         </div>
       </BottomSheet>
@@ -422,7 +420,7 @@ const ModalBottomSheet: React.FC<ModalBottomSheetProps> = ({
     }
   };
 
-  // ESC 키로 닫기
+  // ESC ?�로 ?�기
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -432,7 +430,7 @@ const ModalBottomSheet: React.FC<ModalBottomSheetProps> = ({
     
     if (isOpen) {
       document.addEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'hidden'; // 스크롤 방지
+      document.body.style.overflow = 'hidden'; // ?�크�?방�?
     }
     
     return () => {
@@ -461,7 +459,7 @@ const ModalBottomSheet: React.FC<ModalBottomSheetProps> = ({
           <button
             onClick={onClose}
             className="absolute right-4 p-1 rounded-full hover:bg-gray-100 transition-colors"
-            aria-label="닫기"
+            aria-label="?�기"
           >
             <X className="h-5 w-5 text-gray-500" />
           </button>
@@ -476,7 +474,7 @@ const ModalBottomSheet: React.FC<ModalBottomSheetProps> = ({
   );
 };
 
-// 사용 예시
+// ?�용 ?�시
 const ModalBottomSheetExample: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [height, setHeight] = useState<'small' | 'medium' | 'large' | 'full'>('medium');
@@ -488,7 +486,7 @@ const ModalBottomSheetExample: React.FC = () => {
           onClick={() => setIsOpen(true)}
           className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
         >
-          모달 시트 열기
+          모달 ?�트 ?�기
         </button>
         
         <select 
@@ -496,10 +494,10 @@ const ModalBottomSheetExample: React.FC = () => {
           onChange={(e) => setHeight(e.target.value as any)}
           className="px-3 py-2 border rounded-lg"
         >
-          <option value="small">작게</option>
+          <option value="small">?�게</option>
           <option value="medium">중간</option>
-          <option value="large">크게</option>
-          <option value="full">전체</option>
+          <option value="large">?�게</option>
+          <option value="full">?�체</option>
         </select>
       </div>
 
@@ -509,14 +507,14 @@ const ModalBottomSheetExample: React.FC = () => {
         height={height}
       >
         <div>
-          <h3 className="text-lg font-semibold mb-4">모달 바텀 시트</h3>
+          <h3 className="text-lg font-semibold mb-4">모달 바�? ?�트</h3>
           <p className="text-gray-600 mb-4">
-            이것은 모달 형태의 바텀 시트입니다. 배경을 클릭하거나 ESC 키를 눌러서 닫을 수 있습니다.
+            ?�것?� 모달 ?�태??바�? ?�트?�니?? 배경???�릭?�거??ESC ?��? ?�러???�을 ???�습?�다.
           </p>
           <div className="space-y-2">
             {Array.from({ length: 10 }, (_, i) => (
               <div key={i} className="p-3 bg-gray-50 rounded-lg">
-                항목 {i + 1}
+                ??�� {i + 1}
               </div>
             ))}
           </div>
@@ -546,7 +544,7 @@ const ScrollableBottomSheet: React.FC<ScrollableBottomSheetProps> = ({
   onClose,
   height = 'large',
   children,
-  title = "카테고리 선택",
+  title = "카테고리 ?�택",
   categories = []
 }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -580,7 +578,7 @@ const ScrollableBottomSheet: React.FC<ScrollableBottomSheetProps> = ({
             <button
               onClick={onClose}
               className="p-1 rounded-full hover:bg-gray-100 transition-colors"
-              aria-label="닫기"
+              aria-label="?�기"
             >
               <X className="h-5 w-5 text-gray-500" />
             </button>
@@ -632,7 +630,7 @@ const ScrollableBottomSheet: React.FC<ScrollableBottomSheetProps> = ({
               onClick={onClose}
               className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
             >
-              선택 완료
+              ?�택 ?�료
             </button>
           </div>
         </div>
@@ -641,14 +639,14 @@ const ScrollableBottomSheet: React.FC<ScrollableBottomSheetProps> = ({
   );
 };
 
-// 사용 예시
+// ?�용 ?�시
 const ScrollableBottomSheetExample: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   
   const categories = [
-    "전자제품", "의류", "도서", "스포츠", "가전제품", 
-    "화장품", "식품", "완구", "가구", "자동차용품",
-    "건강용품", "반려동물용품", "문구", "음악", "영화"
+    "?�자?�품", "?�류", "?�서", "?�포�?, "가?�제??, 
+    "?�장??, "?�품", "?�구", "가�?, "?�동차용??,
+    "건강?�품", "반려?�물?�품", "문구", "?�악", "?�화"
   ];
 
   return (
@@ -657,23 +655,23 @@ const ScrollableBottomSheetExample: React.FC = () => {
         onClick={() => setIsOpen(true)}
         className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center gap-2"
       >
-        카테고리 선택 <ChevronDown className="h-4 w-4" />
+        카테고리 ?�택 <ChevronDown className="h-4 w-4" />
       </button>
 
       <ScrollableBottomSheet 
         isOpen={isOpen} 
         onClose={() => setIsOpen(false)}
         height="large"
-        title="상품 카테고리"
+        title="?�품 카테고리"
         categories={categories}
       >
         <div className="mt-4 space-y-4">
-          <h4 className="font-medium text-gray-800">추가 옵션</h4>
+          <h4 className="font-medium text-gray-800">추�? ?�션</h4>
           <div className="space-y-2">
             {Array.from({ length: 20 }, (_, i) => (
               <div key={i} className="p-3 bg-gray-50 rounded-lg">
-                <div className="font-medium">옵션 {i + 1}</div>
-                <div className="text-sm text-gray-600">상세 설명 텍스트</div>
+                <div className="font-medium">?�션 {i + 1}</div>
+                <div className="text-sm text-gray-600">?�세 ?�명 ?�스??/div>
               </div>
             ))}
           </div>
@@ -728,7 +726,7 @@ const ActionBottomSheet: React.FC<ActionBottomSheetProps> = ({
               <button
                 onClick={onClose}
                 className="p-1 rounded-full hover:bg-gray-100 transition-colors"
-                aria-label="닫기"
+                aria-label="?�기"
               >
                 <X className="h-5 w-5 text-gray-500" />
               </button>
@@ -781,40 +779,40 @@ const ActionBottomSheet: React.FC<ActionBottomSheetProps> = ({
   );
 };
 
-// 사용 예시
+// ?�용 ?�시
 const ActionBottomSheetExample: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const actions: ActionItem[] = [
     {
       icon: Share,
-      label: "공유하기",
-      action: () => console.log("공유하기")
+      label: "공유?�기",
+      action: () => console.log("공유?�기")
     },
     {
       icon: Copy,
-      label: "복사하기",
-      action: () => console.log("복사하기")
+      label: "복사?�기",
+      action: () => console.log("복사?�기")
     },
     {
       icon: Download,
-      label: "다운로드",
-      action: () => console.log("다운로드")
+      label: "?�운로드",
+      action: () => console.log("?�운로드")
     },
     {
       icon: Heart,
-      label: "좋아요",
-      action: () => console.log("좋아요")
+      label: "좋아??,
+      action: () => console.log("좋아??)
     },
     {
       icon: Edit,
-      label: "편집하기",
-      action: () => console.log("편집하기")
+      label: "?�집?�기",
+      action: () => console.log("?�집?�기")
     },
     {
       icon: Trash,
-      label: "삭제하기",
-      action: () => console.log("삭제하기"),
+      label: "??��?�기",
+      action: () => console.log("??��?�기"),
       destructive: true
     }
   ];
@@ -825,13 +823,13 @@ const ActionBottomSheetExample: React.FC = () => {
         onClick={() => setIsOpen(true)}
         className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
       >
-        액션 시트 열기
+        ?�션 ?�트 ?�기
       </button>
 
       <ActionBottomSheet 
         isOpen={isOpen} 
         onClose={() => setIsOpen(false)}
-        title="문서 작업"
+        title="문서 ?�업"
         actions={actions}
       />
     </div>
@@ -846,102 +844,100 @@ export default ActionBottomSheetExample;`;
   };
 
   return (
-    <SlideLayout title="Bottom Sheet (바텀 시트)">
+    <SlideLayout title="Bottom Sheet (바�? ?�트)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">설명</TabsTrigger>
+            <TabsTrigger value="description">?�명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">데모</TabsTrigger>
+            <TabsTrigger value="demo">?�모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="prose max-w-none mb-6">
-              <h2 className="text-xl font-semibold mb-3">정의</h2>
+              <h2 className="text-xl font-semibold mb-3">?�의</h2>
               <p>
-                바텀 시트는 화면 하단에서 올라오는 패널로, 주 화면을 유지하면서
-                추가적인 콘텐츠나 작업을 표시합니다. 대화상자(Modal)의 대안으로,
-                문맥을 유지하면서 상호작용할 수 있는 UI 패턴입니다.
+                바�? ?�트???�면 ?�단?�서 ?�라?�는 ?�널�? �??�면???��??�면??                추�??�인 콘텐츠나 ?�업???�시?�니?? ?�?�상??Modal)???�?�으�?
+                문맥???��??�면???�호?�용?????�는 UI ?�턴?�니??
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-4 bg-slate-50 rounded-md">
-                <h3 className="text-lg font-medium mb-2">바텀 시트 유형</h3>
+                <h3 className="text-lg font-medium mb-2">바�? ?�트 ?�형</h3>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>
-                    <strong>기본형 (Standard)</strong>
+                    <strong>기본??(Standard)</strong>
                     <p className="text-sm text-gray-600">
-                      일반적인 바텀 시트로, 추가 정보나 설정을 표시
+                      ?�반?�인 바�? ?�트�? 추�? ?�보???�정???�시
                     </p>
                   </li>
                   <li>
-                    <strong>모달형 (Modal)</strong>
+                    <strong>모달??(Modal)</strong>
                     <p className="text-sm text-gray-600">
-                      배경이 어두워지며 주 콘텐츠와의 인터랙션 차단
+                      배경???�두?��?�?�?콘텐츠�????�터?�션 차단
                     </p>
                   </li>
                   <li>
-                    <strong>확장형 (Expandable)</strong>
+                    <strong>?�장??(Expandable)</strong>
                     <p className="text-sm text-gray-600">
-                      여러 단계의 높이로 확장 가능한 형태
+                      ?�러 ?�계???�이�??�장 가?�한 ?�태
                     </p>
                   </li>
                   <li>
-                    <strong>스크롤형 (Scrollable)</strong>
+                    <strong>?�크롤형 (Scrollable)</strong>
                     <p className="text-sm text-gray-600">
-                      길이가 긴 콘텐츠를 표시하기 위해 내부 스크롤 제공
+                      길이가 �?콘텐츠�? ?�시?�기 ?�해 ?��? ?�크�??�공
                     </p>
                   </li>
                   <li>
-                    <strong>액션 시트 (Action Sheet)</strong>
+                    <strong>?�션 ?�트 (Action Sheet)</strong>
                     <p className="text-sm text-gray-600">
-                      여러 작업 옵션을 리스트로 제공
+                      ?�러 ?�업 ?�션??리스?�로 ?�공
                     </p>
                   </li>
                 </ul>
               </div>
 
               <div className="p-4 bg-slate-50 rounded-md">
-                <h3 className="text-lg font-medium mb-2">사용 사례</h3>
+                <h3 className="text-lg font-medium mb-2">?�용 ?��?</h3>
                 <ul className="list-disc pl-6 space-y-1">
-                  <li>필터링 및 정렬 옵션</li>
-                  <li>댓글 및 리뷰 목록</li>
-                  <li>지도 상세 정보</li>
+                  <li>?�터�?�??�렬 ?�션</li>
+                  <li>?��? �?리뷰 목록</li>
+                  <li>지???�세 ?�보</li>
                   <li>공유 메뉴</li>
-                  <li>설정 패널</li>
-                  <li>미디어 컨트롤</li>
-                  <li>폼 입력</li>
-                  <li>장바구니 요약</li>
+                  <li>?�정 ?�널</li>
+                  <li>미디??컨트�?/li>
+                  <li>???�력</li>
+                  <li>?�바구니 ?�약</li>
                 </ul>
 
                 <h3 className="text-lg font-medium mt-4 mb-2">
-                  사용자 경험 고려사항
+                  ?�용??경험 고려?�항
                 </h3>
                 <ul className="list-disc pl-6 space-y-1 text-sm text-gray-600">
-                  <li>부드럽고 자연스러운 애니메이션</li>
+                  <li>부?�럽�??�연?�러???�니메이??/li>
                   <li>
-                    여러 방법으로 닫을 수 있는 옵션 (핸들 드래그, 외부 클릭, X
+                    ?�러 방법?�로 ?�을 ???�는 ?�션 (?�들 ?�래�? ?��? ?�릭, X
                     버튼)
                   </li>
-                  <li>적절한 높이로 중요 콘텐츠 표시</li>
-                  <li>상황에 맞는 키보드 처리</li>
-                  <li>제스처 지원 (스와이프로 닫기)</li>
+                  <li>?�절???�이�?중요 콘텐�??�시</li>
+                  <li>?�황??맞는 ?�보??처리</li>
+                  <li>?�스�?지??(?��??�프�??�기)</li>
                 </ul>
               </div>
             </div>
 
-            <div className="p-4 border border-[#6700e6]/20 bg-[#6700e6]/5 rounded-md">
-              <h3 className="text-lg font-medium mb-2 text-[#6700e6]">
-                구현 팁
-              </h3>
+            <div className="p-4 border border-[#49bcf3]/20 bg-[#49bcf3]/5 rounded-md">
+              <h3 className="text-lg font-medium mb-2 text-[#49bcf3]">
+                구현 ??              </h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700">
-                <li>터치 제스처 인식으로 스와이프하여 열고 닫기 구현</li>
-                <li>변환(transform) 속성으로 성능 최적화된 애니메이션</li>
-                <li>상단 둥근 모서리와 핸들 바로 시각적 인지성 향상</li>
-                <li>모바일 키보드 표시 시 적절한 위치 조정</li>
-                <li>다단계 높이(기본, 중간, 최대)로 사용자 경험 개선</li>
-                <li>오버스크롤 동작 처리 (시트 콘텐츠 끝에 도달했을 때)</li>
+                <li>?�치 ?�스�??�식?�로 ?��??�프?�여 ?�고 ?�기 구현</li>
+                <li>변??transform) ?�성?�로 ?�능 최적?�된 ?�니메이??/li>
+                <li>?�단 ?�근 모서리�? ?�들 바로 ?�각???��????�상</li>
+                <li>모바???�보???�시 ???�절???�치 조정</li>
+                <li>?�단�??�이(기본, 중간, 최�?)�??�용??경험 개선</li>
+                <li>?�버?�크�??�작 처리 (?�트 콘텐�??�에 ?�달?�을 ??</li>
               </ul>
             </div>
           </TabsContent>
@@ -961,42 +957,39 @@ export default ActionBottomSheetExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     sheetType === "basic"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetType("basic")}
                 >
-                  기본형
-                </button>
+                  기본??                </button>
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     sheetType === "modal"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetType("modal")}
                 >
-                  모달형
-                </button>
+                  모달??                </button>
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     sheetType === "scrollable"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetType("scrollable")}
                 >
-                  스크롤
-                </button>
+                  ?�크�?                </button>
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     sheetType === "actions"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetType("actions")}
                 >
-                  액션
+                  ?�션
                 </button>
               </div>
             </div>
@@ -1006,17 +999,17 @@ export default ActionBottomSheetExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     sheetHeight === "small"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetHeight("small")}
                 >
-                  작게
+                  ?�게
                 </button>
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     sheetHeight === "medium"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetHeight("medium")}
@@ -1026,22 +1019,22 @@ export default ActionBottomSheetExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     sheetHeight === "large"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetHeight("large")}
                 >
-                  크게
+                  ?�게
                 </button>
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     sheetHeight === "full"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setSheetHeight("full")}
                 >
-                  전체 화면
+                  ?�체 ?�면
                 </button>
               </div>
             </div>
@@ -1049,14 +1042,14 @@ export default ActionBottomSheetExample;`;
             <div className="flex justify-center mb-4">
               <button
                 onClick={toggleSheet}
-                className="px-6 py-3 bg-[#6700e6] text-white rounded-lg hover:bg-[#5a00cc] transition-colors"
+                className="px-6 py-3 bg-[#49bcf3] text-white rounded-lg hover:bg-[#5a00cc] transition-colors"
               >
-                바텀 시트 열기
+                바�? ?�트 ?�기
               </button>
             </div>
 
             <div className="bg-gray-100 p-4 rounded-lg">
-              <h4 className="font-medium mb-2">데모</h4>
+              <h4 className="font-medium mb-2">?�모</h4>
               <div className="h-64 bg-white rounded border relative overflow-hidden">
                 {renderSheetContent()}
               </div>

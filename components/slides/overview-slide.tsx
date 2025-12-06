@@ -6,8 +6,8 @@ export default function OverviewSlide() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-6">
           <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-            <h2 className="text-xl font-semibold mb-4 text-[#6700e6]">
-              UI 요소
+            <h2 className="text-xl font-semibold mb-4 text-[#49bcf3]">
+              UI ?�소
             </h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>Text, Button, Icon Button</li>
@@ -19,8 +19,8 @@ export default function OverviewSlide() {
           </div>
 
           <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-            <h2 className="text-xl font-semibold mb-4 text-[#6700e6]">
-              UI 속성 용어
+            <h2 className="text-xl font-semibold mb-4 text-[#49bcf3]">
+              UI ?�성 ?�어
             </h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>Padding</li>
@@ -31,8 +31,8 @@ export default function OverviewSlide() {
 
         <div className="space-y-6">
           <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-            <h2 className="text-xl font-semibold mb-4 text-[#6700e6]">
-              UI 액션 용어
+            <h2 className="text-xl font-semibold mb-4 text-[#49bcf3]">
+              UI ?�션 ?�어
             </h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>Click (Tap, Touch)</li>
@@ -43,8 +43,8 @@ export default function OverviewSlide() {
           </div>
 
           <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-            <h2 className="text-xl font-semibold mb-4 text-[#6700e6]">
-              고급 컴포넌트
+            <h2 className="text-xl font-semibold mb-4 text-[#49bcf3]">
+              고급 컴포?�트
             </h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>Card View, List View, Grid View</li>

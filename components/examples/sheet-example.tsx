@@ -15,21 +15,21 @@ export function SheetExample() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">시트 열기</Button>
+        <Button variant="outline">?�트 ?�기</Button>
       </SheetTrigger>
-      {/* title 속성은 접근성을 위해 필수입니다 */}
-      <SheetContent title="시트 제목">
+      {/* title ?�성?� ?�근?�을 ?�해 ?�수?�니??*/}
+      <SheetContent title="?�트 ?�목">
         <SheetHeader>
-          <SheetTitle>설정</SheetTitle>
+          <SheetTitle>?�정</SheetTitle>
           <SheetDescription>
-            계정 환경설정을 변경할 수 있습니다.
+            계정 ?�경?�정??변경할 ???�습?�다.
           </SheetDescription>
         </SheetHeader>
         <div className="py-4">
-          여기에 시트 내용이 들어갑니다.
+          ?�기???�트 ?�용???�어갑니??
         </div>
         <SheetFooter>
-          <Button>변경사항 저장</Button>
+          <Button>변경사???�??/Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>
@@ -40,15 +40,15 @@ export function SheetWithHiddenTitle() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">제목 숨김 시트</Button>
+        <Button variant="outline">?�목 ?��? ?�트</Button>
       </SheetTrigger>
-      {/* VisuallyHidden을 사용하지 않고도 title 속성을 통해 접근성을 제공합니다 */}
-      <SheetContent title="숨겨진 시트 제목">
+      {/* VisuallyHidden???�용?��? ?�고??title ?�성???�해 ?�근?�을 ?�공?�니??*/}
+      <SheetContent title="?�겨�??�트 ?�목">
         <div className="py-4">
-          이 시트는 시각적 제목 없이 내용만 표시하지만, 스크린 리더는 제목을 읽을 수 있습니다.
+          ???�트???�각???�목 ?�이 ?�용�??�시?��?�? ?�크�?리더???�목???�을 ???�습?�다.
         </div>
         <SheetFooter>
-          <Button>확인</Button>
+          <Button>?�인</Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>

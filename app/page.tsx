@@ -119,7 +119,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <div className="flex-1 flex flex-col">
         <div className="flex-1 relative overflow-hidden">
           {slides.map((slide, index) => (
@@ -138,7 +138,7 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="p-4 flex justify-between items-center border-t bg-white">
+        <div className="p-4 flex justify-between items-center border-t bg-background">
           <div className="flex gap-2">
             <Button variant="outline" size="icon" onClick={goToHome} aria-label="홈으로">
               <HomeIcon className="h-4 w-4" />

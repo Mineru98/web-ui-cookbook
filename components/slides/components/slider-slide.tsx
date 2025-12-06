@@ -20,29 +20,29 @@ export default function SliderSlide() {
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">설명</TabsTrigger>
+            <TabsTrigger value="description">?�명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">데모</TabsTrigger>
+            <TabsTrigger value="demo">?�모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
+              <h3 className="text-lg font-semibold mb-2">?�의</h3>
               <p>
-                Slider는 사용자가 지정된 범위 내에서 값을 선택할 수 있는 UI
-                요소입니다. 드래그 가능한 핸들을 이용해 값을 조절합니다.
+                Slider???�용?��? 지?�된 범위 ?�에??값을 ?�택?????�는 UI
+                ?�소?�니?? ?�래�?가?�한 ?�들???�용??값을 조절?�니??
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
               <ul className="list-disc pl-5 space-y-1">
                 <li>볼륨 조절</li>
-                <li>밝기, 대비 등 시각적 설정</li>
-                <li>가격 범위 필터</li>
-                <li>줌 레벨 조절</li>
-                <li>진행 상태 표시 및 조절</li>
-                <li>수치 입력 (나이, 무게 등)</li>
+                <li>밝기, ?��????�각???�정</li>
+                <li>가�?범위 ?�터</li>
+                <li>�??�벨 조절</li>
+                <li>진행 ?�태 ?�시 �?조절</li>
+                <li>?�치 ?�력 (?�이, 무게 ??</li>
               </ul>
             </div>
           </TabsContent>
@@ -62,9 +62,9 @@ const SliderExample: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      {/* 기본 슬라이더 */}
+      {/* 기본 ?�라?�더 */}
       <div className="space-y-3">
-        <Label>기본 슬라이더 (값: {singleValue[0]})</Label>
+        <Label>기본 ?�라?�더 (�? {singleValue[0]})</Label>
         <Slider
           value={singleValue}
           onValueChange={setSingleValue}
@@ -74,10 +74,10 @@ const SliderExample: React.FC = () => {
         />
       </div>
 
-      {/* 범위 슬라이더 (두 개의 핸들) */}
+      {/* 범위 ?�라?�더 (??개의 ?�들) */}
       <div className="space-y-3">
         <Label>
-          범위 슬라이더 (범위: {rangeValue[0]} - {rangeValue[1]})
+          범위 ?�라?�더 (범위: {rangeValue[0]} - {rangeValue[1]})
         </Label>
         <Slider
           value={rangeValue}
@@ -88,20 +88,20 @@ const SliderExample: React.FC = () => {
         />
       </div>
 
-      {/* 이벤트 핸들러가 있는 슬라이더 */}
+      {/* ?�벤???�들?��? ?�는 ?�라?�더 */}
       <div className="space-y-3">
-        <Label>볼륨 조절 (값: {volume[0]}%)</Label>
+        <Label>볼륨 조절 (�? {volume[0]}%)</Label>
         <Slider
           value={volume}
           onValueChange={(newValue) => {
             setVolume(newValue);
-            console.log('볼륨 변경:', newValue[0]);
+            console.log('볼륨 변�?', newValue[0]);
           }}
           max={100}
           step={5}
           className="w-full"
         />
-        {/* 볼륨 시각화 */}
+        {/* 볼륨 ?�각??*/}
         <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
           <div 
             className="h-full bg-blue-500 transition-all duration-200"
@@ -110,10 +110,10 @@ const SliderExample: React.FC = () => {
         </div>
       </div>
 
-      {/* 비활성화된 슬라이더 */}
+      {/* 비활?�화???�라?�더 */}
       <div className="space-y-3">
         <Label className="text-muted-foreground">
-          비활성화된 슬라이더 (값: 50)
+          비활?�화???�라?�더 (�? 50)
         </Label>
         <Slider
           value={[50]}
@@ -124,9 +124,9 @@ const SliderExample: React.FC = () => {
         />
       </div>
 
-      {/* 다양한 단계별 슬라이더 */}
+      {/* ?�양???�계�??�라?�더 */}
       <div className="space-y-3">
-        <Label>가격 범위 (₩{rangeValue[0] * 1000} - ₩{rangeValue[1] * 1000})</Label>
+        <Label>가�?범위 (??rangeValue[0] * 1000} - ??rangeValue[1] * 1000})</Label>
         <Slider
           value={rangeValue}
           onValueChange={setRangeValue}
@@ -137,9 +137,9 @@ const SliderExample: React.FC = () => {
         />
       </div>
 
-      {/* 세로 형태의 슬라이더 (CSS로 회전) */}
+      {/* ?�로 ?�태???�라?�더 (CSS�??�전) */}
       <div className="flex items-center space-x-4">
-        <Label>세로 슬라이더</Label>
+        <Label>?�로 ?�라?�더</Label>
         <div className="h-32 flex items-center justify-center">
           <Slider
             value={[singleValue[0]]}
@@ -155,9 +155,9 @@ const SliderExample: React.FC = () => {
         </span>
       </div>
 
-      {/* 색상으로 표시되는 슬라이더 */}
+      {/* ?�상?�로 ?�시?�는 ?�라?�더 */}
       <div className="space-y-3">
-        <Label>색상 강도 (값: {singleValue[0]})</Label>
+        <Label>?�상 강도 (�? {singleValue[0]})</Label>
         <Slider
           value={singleValue}
           onValueChange={setSingleValue}
@@ -188,8 +188,7 @@ export default SliderExample;`}
                 <div className="grid grid-cols-3 gap-4">
                   <div>
                     <Label htmlFor="min-value" className="mb-2 block">
-                      최소값
-                    </Label>
+                      최소�?                    </Label>
                     <Input
                       id="min-value"
                       type="number"
@@ -202,8 +201,7 @@ export default SliderExample;`}
 
                   <div>
                     <Label htmlFor="max-value" className="mb-2 block">
-                      최대값
-                    </Label>
+                      최�?�?                    </Label>
                     <Input
                       id="max-value"
                       type="number"
@@ -215,7 +213,7 @@ export default SliderExample;`}
 
                   <div>
                     <Label htmlFor="step-value" className="mb-2 block">
-                      단계
+                      ?�계
                     </Label>
                     <Input
                       id="step-value"
@@ -231,7 +229,7 @@ export default SliderExample;`}
 
               <div className="space-y-6">
                 <div>
-                  <Label className="mb-2 block">현재 값: {value[0]}</Label>
+                  <Label className="mb-2 block">?�재 �? {value[0]}</Label>
                   <Slider
                     value={value}
                     onValueChange={setValue}
@@ -243,7 +241,7 @@ export default SliderExample;`}
                 </div>
 
                 <div
-                  className="h-20 bg-[#6700e6] rounded-md opacity-30"
+                  className="h-20 bg-[#49bcf3] rounded-md opacity-30"
                   style={{ opacity: value[0] / 100 }}
                 >
                   <div className="h-full flex items-center justify-center text-white font-bold">
@@ -259,7 +257,7 @@ export default SliderExample;`}
   );
 }
 
-// Input 컴포넌트 타입 오류 방지를 위한 임시 컴포넌트
+// Input 컴포?�트 ?�???�류 방�?�??�한 ?�시 컴포?�트
 function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return <input className="w-full p-2 border rounded-md" {...props} />;
 }

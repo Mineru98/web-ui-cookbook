@@ -17,9 +17,9 @@ export default function FabSlide() {
       case "extended":
         return (
           <div className="relative h-48 bg-gray-50 border rounded-lg p-4 flex items-end justify-end">
-            <button className="px-4 py-3 bg-[#6700e6] text-white rounded-full shadow-lg flex items-center">
+            <button className="px-4 py-3 bg-[#49bcf3] text-white rounded-full shadow-lg flex items-center">
               <Plus className="h-5 w-5 mr-2" />
-              <span className="font-medium text-sm">새 항목 추가</span>
+              <span className="font-medium text-sm">????�� 추�?</span>
             </button>
           </div>
         );
@@ -27,7 +27,7 @@ export default function FabSlide() {
       case "mini":
         return (
           <div className="relative h-48 bg-gray-50 border rounded-lg p-4 flex items-end justify-end">
-            <button className="p-2 bg-[#6700e6] text-white rounded-full shadow-lg flex items-center justify-center">
+            <button className="p-2 bg-[#49bcf3] text-white rounded-full shadow-lg flex items-center justify-center">
               <Plus className="h-4 w-4" />
             </button>
           </div>
@@ -48,15 +48,14 @@ export default function FabSlide() {
                 </div>
                 <div className="flex items-center">
                   <span className="bg-gray-800 text-white text-xs px-2 py-1 rounded mr-2">
-                    이메일
-                  </span>
+                    ?�메??                  </span>
                   <button className="p-3 bg-red-500 text-white rounded-full shadow-md">
                     <Mail className="h-5 w-5" />
                   </button>
                 </div>
                 <div className="flex items-center">
                   <span className="bg-gray-800 text-white text-xs px-2 py-1 rounded mr-2">
-                    전화
+                    ?�화
                   </span>
                   <button className="p-3 bg-green-500 text-white rounded-full shadow-md">
                     <Phone className="h-5 w-5" />
@@ -73,7 +72,7 @@ export default function FabSlide() {
               </div>
             )}
             <button
-              className="p-4 bg-[#6700e6] text-white rounded-full shadow-lg flex items-center justify-center transition-transform duration-200"
+              className="p-4 bg-[#49bcf3] text-white rounded-full shadow-lg flex items-center justify-center transition-transform duration-200"
               onClick={() => setIsSpeedDialOpen(!isSpeedDialOpen)}
             >
               {isSpeedDialOpen ? (
@@ -88,7 +87,7 @@ export default function FabSlide() {
       default: // basic
         return (
           <div className="relative h-48 bg-gray-50 border rounded-lg p-4 flex items-end justify-end">
-            <button className="p-4 bg-[#6700e6] text-white rounded-full shadow-lg flex items-center justify-center">
+            <button className="p-4 bg-[#49bcf3] text-white rounded-full shadow-lg flex items-center justify-center">
               <Plus className="h-6 w-6" />
             </button>
           </div>
@@ -104,25 +103,25 @@ import { Plus } from 'lucide-react';
 
 const ExtendedFabExample: React.FC = () => {
   const handleAddItem = () => {
-    // 버튼 클릭 시 실행할 코드
-    console.log('새 항목 추가 버튼 클릭됨');
+    // 버튼 ?�릭 ???�행??코드
+    console.log('????�� 추�? 버튼 ?�릭??);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
-      {/* 메인 콘텐츠 */}
+      {/* 메인 콘텐�?*/}
       <main className="flex items-center justify-center h-96">
-        <p className="text-gray-600">화면 콘텐츠</p>
+        <p className="text-gray-600">?�면 콘텐�?/p>
       </main>
 
       {/* Extended FAB */}
       <button
         onClick={handleAddItem}
-        className="fixed bottom-6 right-6 px-4 py-3 bg-[#6700e6] text-white rounded-full shadow-lg hover:bg-[#6700e6]/90 focus:outline-none focus:ring-2 focus:ring-[#6700e6] focus:ring-offset-2 transition-all duration-200 flex items-center gap-2"
-        aria-label="새 항목 추가"
+        className="fixed bottom-6 right-6 px-4 py-3 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-none focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center gap-2"
+        aria-label="????�� 추�?"
       >
         <Plus className="h-5 w-5" />
-        <span className="font-medium text-sm">새 항목 추가</span>
+        <span className="font-medium text-sm">????�� 추�?</span>
       </button>
     </div>
   );
@@ -136,22 +135,22 @@ import { Plus } from 'lucide-react';
 
 const MiniFabExample: React.FC = () => {
   const handleAddItem = () => {
-    // 버튼 클릭 시 실행할 코드
-    console.log('미니 FAB 클릭됨');
+    // 버튼 ?�릭 ???�행??코드
+    console.log('미니 FAB ?�릭??);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
-      {/* 메인 콘텐츠 */}
+      {/* 메인 콘텐�?*/}
       <main className="flex items-center justify-center h-96">
-        <p className="text-gray-600">화면 콘텐츠</p>
+        <p className="text-gray-600">?�면 콘텐�?/p>
       </main>
 
       {/* Mini FAB */}
       <button
         onClick={handleAddItem}
-        className="fixed bottom-6 right-6 w-10 h-10 bg-[#6700e6] text-white rounded-full shadow-lg hover:bg-[#6700e6]/90 focus:outline-none focus:ring-2 focus:ring-[#6700e6] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
-        aria-label="새 항목 추가"
+        className="fixed bottom-6 right-6 w-10 h-10 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-none focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
+        aria-label="????�� 추�?"
       >
         <Plus className="h-4 w-4" />
       </button>
@@ -180,25 +179,25 @@ const SpeedDialFabExample: React.FC = () => {
       icon: MessageSquare,
       label: '메시지',
       color: 'bg-blue-500',
-      action: () => console.log('메시지 기능 실행')
+      action: () => console.log('메시지 기능 ?�행')
     },
     {
       icon: Mail,
-      label: '이메일',
+      label: '?�메??,
       color: 'bg-red-500',
-      action: () => console.log('이메일 기능 실행')
+      action: () => console.log('?�메??기능 ?�행')
     },
     {
       icon: Phone,
-      label: '전화',
+      label: '?�화',
       color: 'bg-green-500',
-      action: () => console.log('전화 기능 실행')
+      action: () => console.log('?�화 기능 ?�행')
     },
     {
       icon: Share2,
       label: '공유',
       color: 'bg-purple-500',
-      action: () => console.log('공유 기능 실행')
+      action: () => console.log('공유 기능 ?�행')
     }
   ];
 
@@ -208,9 +207,9 @@ const SpeedDialFabExample: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
-      {/* 메인 콘텐츠 */}
+      {/* 메인 콘텐�?*/}
       <main className="flex items-center justify-center h-96">
-        <p className="text-gray-600">화면 콘텐츠</p>
+        <p className="text-gray-600">?�면 콘텐�?/p>
       </main>
 
       {/* Speed Dial FAB */}
@@ -238,8 +237,8 @@ const SpeedDialFabExample: React.FC = () => {
         {/* Main FAB */}
         <button
           onClick={toggleSpeedDial}
-          className="w-14 h-14 bg-[#6700e6] text-white rounded-full shadow-lg hover:bg-[#6700e6]/90 focus:outline-none focus:ring-2 focus:ring-[#6700e6] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
-          aria-label={isDialOpen ? '스피드 다이얼 닫기' : '스피드 다이얼 열기'}
+          className="w-14 h-14 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-none focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
+          aria-label={isDialOpen ? '?�피???�이???�기' : '?�피???�이???�기'}
         >
           {isDialOpen ? (
             <X className="h-6 w-6" />
@@ -260,22 +259,22 @@ import { Plus } from 'lucide-react';
 
 const BasicFabExample: React.FC = () => {
   const handleAddItem = () => {
-    // 버튼 클릭 시 실행할 코드
-    console.log('기본 FAB 클릭됨');
+    // 버튼 ?�릭 ???�행??코드
+    console.log('기본 FAB ?�릭??);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
-      {/* 메인 콘텐츠 */}
+      {/* 메인 콘텐�?*/}
       <main className="flex items-center justify-center h-96">
-        <p className="text-gray-600">화면 콘텐츠</p>
+        <p className="text-gray-600">?�면 콘텐�?/p>
       </main>
 
       {/* Basic FAB */}
       <button
         onClick={handleAddItem}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-[#6700e6] text-white rounded-full shadow-lg hover:bg-[#6700e6]/90 focus:outline-none focus:ring-2 focus:ring-[#6700e6] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
-        aria-label="새 항목 추가"
+        className="fixed bottom-6 right-6 w-14 h-14 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-none focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
+        aria-label="????�� 추�?"
       >
         <Plus className="h-6 w-6" />
       </button>
@@ -292,19 +291,17 @@ export default BasicFabExample;`;
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">설명</TabsTrigger>
+            <TabsTrigger value="description">?�명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">데모</TabsTrigger>
+            <TabsTrigger value="demo">?�모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="prose max-w-none mb-6">
-              <h2 className="text-xl font-semibold mb-3">정의</h2>
+              <h2 className="text-xl font-semibold mb-3">?�의</h2>
               <p>
-                Floating Action Button(FAB)은 화면 위에 떠 있는 원형 버튼으로,
-                사용자가 앱에서 취할 수 있는 주요 액션을 나타냅니다. 일반적으로
-                화면의 오른쪽 하단이나 중앙 하단에 위치하며, 가장 중요하거나
-                자주 사용하는 작업에 빠르게 접근할 수 있게 합니다.
+                Floating Action Button(FAB)?� ?�면 ?�에 ???�는 ?�형 버튼?�로,
+                ?�용?��? ?�에??취할 ???�는 주요 ?�션???��??�니?? ?�반?�으�?                ?�면???�른�??�단?�나 중앙 ?�단???�치?�며, 가??중요?�거??                ?�주 ?�용?�는 ?�업??빠르�??�근?????�게 ?�니??
               </p>
             </div>
 
@@ -313,80 +310,76 @@ export default BasicFabExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     fabType === "basic"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setFabType("basic")}
                 >
-                  기본형
-                </button>
+                  기본??                </button>
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     fabType === "extended"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setFabType("extended")}
                 >
-                  확장형
-                </button>
+                  ?�장??                </button>
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     fabType === "mini"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setFabType("mini")}
                 >
-                  미니형
-                </button>
+                  미니??                </button>
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     fabType === "speed-dial"
-                      ? "bg-[#6700e6] text-white"
+                      ? "bg-[#49bcf3] text-white"
                       : "bg-gray-100"
                   }`}
                   onClick={() => setFabType("speed-dial")}
                 >
-                  스피드 다이얼
-                </button>
+                  ?�피???�이??                </button>
               </div>
 
               <div className="border rounded-lg overflow-hidden">
-                {/* FAB 렌더링 */}
+                {/* FAB ?�더�?*/}
                 {renderFAB()}
 
-                {/* 설명 */}
+                {/* ?�명 */}
                 <div className="p-4 bg-white">
                   <h3 className="font-medium mb-2">
                     {fabType === "basic"
                       ? "기본 FAB"
                       : fabType === "extended"
-                      ? "확장형 FAB"
+                      ? "?�장??FAB"
                       : fabType === "mini"
                       ? "미니 FAB"
-                      : "스피드 다이얼 FAB"}
+                      : "?�피???�이??FAB"}
                   </h3>
                   <p className="text-gray-600 text-sm mb-4">
                     {fabType === "basic"
-                      ? "일반적인 크기의 원형 버튼으로 아이콘만 표시합니다."
+                      ? "?�반?�인 ?�기???�형 버튼?�로 ?�이콘만 ?�시?�니??"
                       : fabType === "extended"
-                      ? "텍스트와 아이콘을 함께 표시하는 확장된 형태의 FAB입니다."
+                      ? "?�스?��? ?�이콘을 ?�께 ?�시?�는 ?�장???�태??FAB?�니??"
                       : fabType === "mini"
-                      ? "더 작은 크기의 FAB로 보조 액션에 사용됩니다."
-                      : "클릭 시 여러 관련 액션을 표시하는 확장 가능한 FAB입니다."}
+                      ? "???��? ?�기??FAB�?보조 ?�션???�용?�니??"
+                      : "?�릭 ???�러 관???�션???�시?�는 ?�장 가?�한 FAB?�니??"}
                   </p>
 
                   <div className="bg-gray-50 p-3 rounded-md border text-sm">
-                    <strong>사용 예시:</strong>
+                    <strong>?�용 ?�시:</strong>
                     <p className="mt-1">
                       {fabType === "basic"
-                        ? "새 메시지 작성, 새 항목 추가 등 주요 액션"
+                        ? "??메시지 ?�성, ????�� 추�? ??주요 ?�션"
                         : fabType === "extended"
-                        ? "새 문서 만들기, 검색 시작하기 등 명확한 레이블이 필요한 경우"
+                        ? "??문서 만들�? 검???�작?�기 ??명확???�이블이 ?�요??경우"
                         : fabType === "mini"
-                        ? "주요 FAB 옆에서 보조 액션 제공 또는 공간이 제한된 경우"
-                        : "연락처 공유, 소셜 미디어 공유 등 여러 관련 옵션이 필요한 경우"}
+                        ? "주요 FAB ?�에??보조 ?�션 ?�공 ?�는 공간???�한??경우"
+                        : "?�락�?공유, ?�셜 미디??공유 ???�러 관???�션???�요??경우"}
                     </p>
                   </div>
                 </div>
@@ -394,83 +387,83 @@ export default BasicFabExample;`;
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                 <div className="p-4 bg-slate-50 rounded-md">
-                  <h3 className="text-lg font-medium mb-2">FAB 유형</h3>
+                  <h3 className="text-lg font-medium mb-2">FAB ?�형</h3>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>
-                      <strong>기본형 (Regular FAB)</strong>
+                      <strong>기본??(Regular FAB)</strong>
                       <p className="text-sm text-gray-600">
-                        지름 56dp의 표준 크기, 주요 액션에 사용
+                        지�?56dp???��? ?�기, 주요 ?�션???�용
                       </p>
                     </li>
                     <li>
-                      <strong>미니형 (Mini FAB)</strong>
+                      <strong>미니??(Mini FAB)</strong>
                       <p className="text-sm text-gray-600">
-                        지름 40dp의 작은 크기, 보조 액션에 사용
+                        지�?40dp???��? ?�기, 보조 ?�션???�용
                       </p>
                     </li>
                     <li>
-                      <strong>확장형 (Extended FAB)</strong>
+                      <strong>?�장??(Extended FAB)</strong>
                       <p className="text-sm text-gray-600">
-                        텍스트와 아이콘을 함께 표시하는 직사각형 형태
+                        ?�스?��? ?�이콘을 ?�께 ?�시?�는 직사각형 ?�태
                       </p>
                     </li>
                     <li>
-                      <strong>스피드 다이얼 (Speed Dial)</strong>
+                      <strong>?�피???�이??(Speed Dial)</strong>
                       <p className="text-sm text-gray-600">
-                        클릭 시 여러 관련 액션을 보여주는 확장 가능 FAB
+                        ?�릭 ???�러 관???�션??보여주는 ?�장 가??FAB
                       </p>
                     </li>
                   </ul>
                 </div>
 
                 <div className="p-4 bg-slate-50 rounded-md">
-                  <h3 className="text-lg font-medium mb-2">위치 및 동작</h3>
+                  <h3 className="text-lg font-medium mb-2">?�치 �??�작</h3>
                   <ul className="list-disc pl-6 space-y-1">
-                    <li>일반적으로 오른쪽 하단이나 중앙 하단에 위치</li>
-                    <li>스크롤 시에도 항상 보이도록 고정 위치 사용</li>
-                    <li>화면 간 이동 시 일관된 위치 유지</li>
-                    <li>탭 전환 시 FAB 액션이 변경될 수 있음</li>
-                    <li>FAB는 화면에 표시된 내용과 관련된 액션 제공</li>
-                    <li>접근성을 위한 충분한 터치 영역 확보</li>
-                    <li>시각적 피드백과 애니메이션으로 상호작용 강화</li>
+                    <li>?�반?�으�??�른�??�단?�나 중앙 ?�단???�치</li>
+                    <li>?�크�??�에????�� 보이?�록 고정 ?�치 ?�용</li>
+                    <li>?�면 �??�동 ???��????�치 ?��?</li>
+                    <li>???�환 ??FAB ?�션??변경될 ???�음</li>
+                    <li>FAB???�면???�시???�용�?관?�된 ?�션 ?�공</li>
+                    <li>?�근?�을 ?�한 충분???�치 ?�역 ?�보</li>
+                    <li>?�각???�드백과 ?�니메이?�으�??�호?�용 강화</li>
                   </ul>
                 </div>
               </div>
             </div>
 
-            <div className="p-4 border border-[#6700e6]/20 bg-[#6700e6]/5 rounded-md">
-              <h3 className="text-lg font-medium mb-2 text-[#6700e6]">
-                디자인 권장사항
+            <div className="p-4 border border-[#49bcf3]/20 bg-[#49bcf3]/5 rounded-md">
+              <h3 className="text-lg font-medium mb-2 text-[#49bcf3]">
+                ?�자??권장?�항
               </h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700">
                 <li>
-                  <strong>Z-축 그림자</strong>
+                  <strong>Z-�?그림??/strong>
                   <p className="text-sm">
-                    FAB의 떠 있는 효과를 강조하기 위해 그림자 적용
+                    FAB?????�는 ?�과�?강조?�기 ?�해 그림???�용
                   </p>
                 </li>
                 <li>
-                  <strong>명확한 아이콘 사용</strong>
+                  <strong>명확???�이�??�용</strong>
                   <p className="text-sm">
-                    FAB의 기능을 직관적으로 이해할 수 있는 아이콘 선택
+                    FAB??기능??직�??�으�??�해?????�는 ?�이�??�택
                   </p>
                 </li>
                 <li>
-                  <strong>사용자 인터페이스 일관성</strong>
+                  <strong>?�용???�터?�이???��???/strong>
                   <p className="text-sm">
-                    애플리케이션의 브랜드 색상과 디자인 언어 유지
+                    ?�플리�??�션??브랜???�상�??�자???�어 ?��?
                   </p>
                 </li>
                 <li>
-                  <strong>애니메이션 효과</strong>
+                  <strong>?�니메이???�과</strong>
                   <p className="text-sm">
-                    클릭, 호버, 확장 시 부드러운 애니메이션 적용
+                    ?�릭, ?�버, ?�장 ??부?�러???�니메이???�용
                   </p>
                 </li>
                 <li>
-                  <strong>모바일 최적화</strong>
+                  <strong>모바??최적??/strong>
                   <p className="text-sm">
-                    터치 조작에 최적화된 크기와 간격 확보
+                    ?�치 조작??최적?�된 ?�기?� 간격 ?�보
                   </p>
                 </li>
               </ul>
@@ -489,33 +482,33 @@ export default BasicFabExample;`;
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-2">
-                  FAB 유형 선택
+                  FAB ?�형 ?�택
                 </label>
                 <select
                   value={fabType}
                   onChange={(e) => setFabType(e.target.value as any)}
                   className="w-full p-2 border rounded-md mb-4"
                 >
-                  <option value="basic">기본형 (Regular FAB)</option>
-                  <option value="extended">확장형 (Extended FAB)</option>
-                  <option value="mini">미니형 (Mini FAB)</option>
-                  <option value="speed-dial">스피드 다이얼 (Speed Dial)</option>
+                  <option value="basic">기본??(Regular FAB)</option>
+                  <option value="extended">?�장??(Extended FAB)</option>
+                  <option value="mini">미니??(Mini FAB)</option>
+                  <option value="speed-dial">?�피???�이??(Speed Dial)</option>
                 </select>
               </div>
 
               <div className="flex flex-col items-center gap-4">
-                {/* 데모 섹션에서 FAB 표시 */}
+                {/* ?�모 ?�션?�서 FAB ?�시 */}
                 <div className="w-full h-64 bg-gray-50 border rounded-lg relative overflow-hidden">
                   <div className="absolute right-4 bottom-4">
                     {fabType === "extended" ? (
-                      <button className="px-4 py-3 bg-[#6700e6] text-white rounded-full shadow-lg flex items-center">
+                      <button className="px-4 py-3 bg-[#49bcf3] text-white rounded-full shadow-lg flex items-center">
                         <Plus className="h-5 w-5 mr-2" />
                         <span className="font-medium text-sm">
-                          새 항목 추가
+                          ????�� 추�?
                         </span>
                       </button>
                     ) : fabType === "mini" ? (
-                      <button className="p-2 bg-[#6700e6] text-white rounded-full shadow-lg flex items-center justify-center">
+                      <button className="p-2 bg-[#49bcf3] text-white rounded-full shadow-lg flex items-center justify-center">
                         <Plus className="h-4 w-4" />
                       </button>
                     ) : fabType === "speed-dial" ? (
@@ -532,15 +525,14 @@ export default BasicFabExample;`;
                             </div>
                             <div className="flex items-center">
                               <span className="bg-gray-800 text-white text-xs px-2 py-1 rounded mr-2">
-                                이메일
-                              </span>
+                                ?�메??                              </span>
                               <button className="p-3 bg-red-500 text-white rounded-full shadow-md">
                                 <Mail className="h-5 w-5" />
                               </button>
                             </div>
                             <div className="flex items-center">
                               <span className="bg-gray-800 text-white text-xs px-2 py-1 rounded mr-2">
-                                전화
+                                ?�화
                               </span>
                               <button className="p-3 bg-green-500 text-white rounded-full shadow-md">
                                 <Phone className="h-5 w-5" />
@@ -557,7 +549,7 @@ export default BasicFabExample;`;
                           </div>
                         )}
                         <button
-                          className="p-4 bg-[#6700e6] text-white rounded-full shadow-lg flex items-center justify-center"
+                          className="p-4 bg-[#49bcf3] text-white rounded-full shadow-lg flex items-center justify-center"
                           onClick={() => setIsSpeedDialOpen(!isSpeedDialOpen)}
                         >
                           {isSpeedDialOpen ? (
@@ -568,7 +560,7 @@ export default BasicFabExample;`;
                         </button>
                       </div>
                     ) : (
-                      <button className="p-4 bg-[#6700e6] text-white rounded-full shadow-lg flex items-center justify-center">
+                      <button className="p-4 bg-[#49bcf3] text-white rounded-full shadow-lg flex items-center justify-center">
                         <Plus className="h-6 w-6" />
                       </button>
                     )}
@@ -578,8 +570,8 @@ export default BasicFabExample;`;
                 <div className="w-full text-center text-sm mt-4">
                   {fabType === "speed-dial" && (
                     <p className="text-gray-600">
-                      FAB를 클릭하여 스피드 다이얼 옵션을{" "}
-                      {isSpeedDialOpen ? "닫기" : "열기"}
+                      FAB�??�릭?�여 ?�피???�이???�션??" "}
+                      {isSpeedDialOpen ? "?�기" : "?�기"}
                     </p>
                   )}
                 </div>

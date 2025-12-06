@@ -16,66 +16,63 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function GestureSlide() {
   return (
-    <SlideLayout title="Gesture (제스처)">
+    <SlideLayout title="Gesture (?�스�?">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">설명</TabsTrigger>
+            <TabsTrigger value="description">?�명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">데모</TabsTrigger>
+            <TabsTrigger value="demo">?�모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
+              <h3 className="text-lg font-semibold mb-2">?�의</h3>
               <p>
-                제스처(Gesture)는 터치스크린이나 트랙패드에서 손가락 움직임을
-                통해 인터페이스와 상호작용하는 방식입니다. React에서는 Touch
-                Events API와 마우스 이벤트를 조합하여 구현하며, 일반적으로 탭,
-                스와이프, 핀치, 스프레드, 더블탭, 롱 프레스 등이 포함됩니다.
+                ?�스�?Gesture)???�치?�크린이???�랙?�드?�서 ?��????�직임??                ?�해 ?�터?�이?��? ?�호?�용?�는 방식?�니?? React?�서??Touch
+                Events API?� 마우???�벤?��? 조합?�여 구현?�며, ?�반?�으�???
+                ?��??�프, ?��? ?�프?�드, ?�블?? �??�레???�이 ?�함?�니??
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">
-                일반적인 제스처 유형
+                ?�반?�인 ?�스�??�형
               </h3>
               <ul className="list-disc pl-5 space-y-1">
                 <li>
-                  <strong>탭(Tap):</strong> 클릭과 동일, 요소 선택
+                  <strong>??Tap):</strong> ?�릭�??�일, ?�소 ?�택
                 </li>
                 <li>
-                  <strong>더블 탭(Double Tap):</strong> 확대/축소, 특별 기능
-                  활성화
+                  <strong>?�블 ??Double Tap):</strong> ?��?/축소, ?�별 기능
+                  ?�성??                </li>
+                <li>
+                  <strong>�??�레??Long Press):</strong> 컨텍?�트 메뉴, 추�?
+                  ?�션 ?�시
                 </li>
                 <li>
-                  <strong>롱 프레스(Long Press):</strong> 컨텍스트 메뉴, 추가
-                  옵션 표시
+                  <strong>?��??�프(Swipe):</strong> ?�이지 ?�환, 목록 ?�크�?                </li>
+                <li>
+                  <strong>?��?Pinch)/?�프?�드(Spread):</strong> ?��?/축소
                 </li>
                 <li>
-                  <strong>스와이프(Swipe):</strong> 페이지 전환, 목록 스크롤
+                  <strong>?�전(Rotate):</strong> ?��?지???�소 ?�전
                 </li>
                 <li>
-                  <strong>핀치(Pinch)/스프레드(Spread):</strong> 확대/축소
-                </li>
-                <li>
-                  <strong>회전(Rotate):</strong> 이미지나 요소 회전
-                </li>
-                <li>
-                  <strong>멀티 터치:</strong> 여러 손가락을 사용한 복합 동작
+                  <strong>멀???�치:</strong> ?�러 ?��??�을 ?�용??복합 ?�작
                 </li>
               </ul>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">구현 고려사항</h3>
+              <h3 className="text-lg font-semibold mb-2">구현 고려?�항</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>다양한 기기에서 일관된 인식률 보장</li>
-                <li>접근성 고려 (대체 상호작용 방식 제공)</li>
-                <li>시각적 피드백으로 제스처 인식 표시</li>
-                <li>제스처 간의 충돌 방지 (예: 스와이프와 스크롤)</li>
-                <li>성능 최적화 (이벤트 스로틀링, 디바운싱)</li>
-                <li>사용자 교육 및 온보딩 고려</li>
+                <li>?�양??기기?�서 ?��????�식�?보장</li>
+                <li>?�근??고려 (?��??�호?�용 방식 ?�공)</li>
+                <li>?�각???�드백으�??�스�??�식 ?�시</li>
+                <li>?�스�?간의 충돌 방�? (?? ?��??�프?� ?�크�?</li>
+                <li>?�능 최적??(?�벤???�로?��? ?�바?�싱)</li>
+                <li>?�용??교육 �??�보??고려</li>
               </ul>
             </div>
           </TabsContent>
@@ -84,12 +81,11 @@ export default function GestureSlide() {
             <div className="bg-gray-800 p-4 rounded-lg text-white">
               <PrismCode
                 language="typescript"
-                code={`// 기본 탭/클릭 제스처
-import { useState, useRef } from 'react';
+                code={`// 기본 ???�릭 ?�스�?import { useState, useRef } from 'react';
 
 function TapGesture() {
   const handleClick = () => {
-    console.log('탭 감지됨!');
+    console.log('??감�???');
   };
 
   return (
@@ -97,15 +93,13 @@ function TapGesture() {
       className="w-24 h-24 bg-blue-500 flex items-center justify-center text-white cursor-pointer"
       onClick={handleClick}
     >
-      탭
-    </div>
+      ??    </div>
   );
 }
 
-// 더블 탭 제스처
-function DoubleTapGesture() {
+// ?�블 ???�스�?function DoubleTapGesture() {
   const handleDoubleClick = () => {
-    console.log('더블 탭 감지됨!');
+    console.log('?�블 ??감�???');
   };
 
   return (
@@ -113,18 +107,17 @@ function DoubleTapGesture() {
       className="w-24 h-24 bg-green-500 flex items-center justify-center text-white cursor-pointer"
       onDoubleClick={handleDoubleClick}
     >
-      더블 탭
-    </div>
+      ?�블 ??    </div>
   );
 }
 
-// 롱 프레스 제스처 (Context Menu 또는 Touch Event 사용)
+// �??�레???�스�?(Context Menu ?�는 Touch Event ?�용)
 function LongPressGesture() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   
   const handleMouseDown = () => {
     timerRef.current = setTimeout(() => {
-      console.log('롱 프레스 감지됨!');
+      console.log('�??�레??감�???');
     }, 500);
   };
   
@@ -144,12 +137,11 @@ function LongPressGesture() {
       onTouchStart={handleMouseDown}
       onTouchEnd={handleMouseUp}
     >
-      길게 누르기
-    </div>
+      길게 ?�르�?    </div>
   );
 }
 
-// 스와이프 제스처 (Touch Events 사용)
+// ?��??�프 ?�스�?(Touch Events ?�용)
 function SwipeGesture() {
   const [swipeDirection, setSwipeDirection] = useState('');
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
@@ -170,8 +162,8 @@ function SwipeGesture() {
     const minSwipeDistance = 50;
     
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
-      const direction = deltaX > 0 ? '오른쪽' : '왼쪽';
-      console.log(\`\${direction}으로 스와이프!\`);
+      const direction = deltaX > 0 ? '?�른�? : '?�쪽';
+      console.log(\`\${direction}?�로 ?��??�프!\`);
       setSwipeDirection(direction);
       
       setTimeout(() => setSwipeDirection(''), 1000);
@@ -186,12 +178,12 @@ function SwipeGesture() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      스와이프 {swipeDirection && \`(방향: \${swipeDirection})\`}
+      ?��??�프 {swipeDirection && \`(방향: \${swipeDirection})\`}
     </div>
   );
 }
 
-// 핀치/스프레드 제스처 (Scale Gesture)
+// ?��??�프?�드 ?�스�?(Scale Gesture)
 function ScaleGesture() {
   const [scale, setScale] = useState(1.0);
   const lastTouchDistanceRef = useRef<number | null>(null);
@@ -232,12 +224,12 @@ function ScaleGesture() {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      핀치/스프레드
+      ?��??�프?�드
     </div>
   );
 }
 
-// 회전 제스처 (Rotation Gesture)
+// ?�전 ?�스�?(Rotation Gesture)
 function RotationGesture() {
   const [rotation, setRotation] = useState(0);
   const elementRef = useRef<HTMLDivElement>(null);
@@ -277,7 +269,7 @@ function RotationGesture() {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      회전
+      ?�전
     </div>
   );
 }`}
@@ -289,36 +281,36 @@ function RotationGesture() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <GestureDemo
-                  title="탭 (Tap)"
-                  description="화면을 빠르게 터치했다 떼는 동작"
-                  instruction="박스를 탭해보세요"
+                  title="??(Tap)"
+                  description="?�면??빠르�??�치?�다 ?�는 ?�작"
+                  instruction="박스�???��보세??
                   gesture="tap"
                 />
                 <GestureDemo
-                  title="더블 탭 (Double Tap)"
-                  description="같은 위치를 연속해서 두 번 탭하는 동작"
-                  instruction="박스를 더블 탭해보세요"
+                  title="?�블 ??(Double Tap)"
+                  description="같�? ?�치�??�속?�서 ??�???��???�작"
+                  instruction="박스�??�블 ??��보세??
                   gesture="doubletap"
                 />
                 <GestureDemo
-                  title="롱 프레스 (Long Press)"
-                  description="화면을 길게 누르고 있는 동작"
-                  instruction="박스를 길게 누르세요"
+                  title="�??�레??(Long Press)"
+                  description="?�면??길게 ?�르�??�는 ?�작"
+                  instruction="박스�?길게 ?�르?�요"
                   gesture="longpress"
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <GestureDemo
-                  title="스와이프 (Swipe)"
-                  description="화면을 특정 방향으로 밀어내는 동작"
-                  instruction="박스를 옆으로 스와이프하세요"
+                  title="?��??�프 (Swipe)"
+                  description="?�면???�정 방향?�로 밀?�내???�작"
+                  instruction="박스�??�으�??��??�프?�세??
                   gesture="swipe"
                 />
                 <GestureDemo
-                  title="핀치 & 스프레드 (Pinch/Spread)"
-                  description="두 손가락을 모으거나 벌리는 동작"
-                  instruction="두 손가락으로 확대/축소해보세요"
+                  title="?��?& ?�프?�드 (Pinch/Spread)"
+                  description="???��??�을 모으거나 벌리???�작"
+                  instruction="???��??�으�??��?/축소?�보?�요"
                   gesture="pinch"
                 />
               </div>
@@ -351,17 +343,17 @@ function GestureDemo({
   const initialTouchRef = useRef<{ x: number; y: number } | null>(null);
   const lastTapTimeRef = useRef(0);
 
-  // 탭 처리
+  // ??처리
   const handleTap = () => {
     if (gesture === "tap") {
-      setAction("탭 감지됨!");
+      setAction("??감�???");
       setTimeout(() => setAction(""), 800);
     } else if (gesture === "doubletap") {
       const now = Date.now();
       const timeSinceLastTap = now - lastTapTimeRef.current;
 
       if (timeSinceLastTap < 300) {
-        setAction("더블 탭 감지됨!");
+        setAction("?�블 ??감�???");
         setTimeout(() => setAction(""), 800);
       }
 
@@ -369,13 +361,13 @@ function GestureDemo({
     }
   };
 
-  // 롱 프레스 처리
+  // �??�레??처리
   const handleTouchStart = () => {
     if (gesture === "longpress") {
       initialTouchRef.current = { x: 0, y: 0 };
 
       timerRef.current = setTimeout(() => {
-        setAction("롱 프레스 감지됨!");
+        setAction("�??�레??감�???");
         setTimeout(() => setAction(""), 800);
       }, 500);
     } else if (gesture === "swipe") {
@@ -394,8 +386,8 @@ function GestureDemo({
       const deltaX = touch.clientX - initialTouchRef.current.x;
 
       if (Math.abs(deltaX) > 50) {
-        const direction = deltaX > 0 ? "오른쪽" : "왼쪽";
-        setAction(`${direction}으로 스와이프!`);
+        const direction = deltaX > 0 ? "?�른�? : "?�쪽";
+        setAction(`${direction}?�로 ?��??�프!`);
         setPosition({ x: deltaX / 5, y: 0 });
         setTimeout(() => {
           setAction("");
@@ -416,7 +408,7 @@ function GestureDemo({
       );
 
       setScale(Math.min(Math.max(0.5, distance / 100), 2));
-      setAction("핀치/스프레드 중...");
+      setAction("?��??�프?�드 �?..");
     }
   };
 
@@ -453,37 +445,37 @@ function GestureDemo({
     switch (gesture) {
       case "tap":
         return (
-          <div className="w-8 h-8 bg-[#6700e6]/20 rounded-full flex items-center justify-center">
-            <ArrowDownIcon className="w-5 h-5 text-[#6700e6]" />
+          <div className="w-8 h-8 bg-[#49bcf3]/20 rounded-full flex items-center justify-center">
+            <ArrowDownIcon className="w-5 h-5 text-[#49bcf3]" />
           </div>
         );
       case "doubletap":
         return (
           <div className="flex">
-            <div className="w-8 h-8 bg-[#6700e6]/20 rounded-full flex items-center justify-center">
-              <ArrowDownIcon className="w-5 h-5 text-[#6700e6]" />
+            <div className="w-8 h-8 bg-[#49bcf3]/20 rounded-full flex items-center justify-center">
+              <ArrowDownIcon className="w-5 h-5 text-[#49bcf3]" />
             </div>
-            <div className="w-8 h-8 bg-[#6700e6]/20 rounded-full flex items-center justify-center ml-1">
-              <ArrowDownIcon className="w-5 h-5 text-[#6700e6]" />
+            <div className="w-8 h-8 bg-[#49bcf3]/20 rounded-full flex items-center justify-center ml-1">
+              <ArrowDownIcon className="w-5 h-5 text-[#49bcf3]" />
             </div>
           </div>
         );
       case "longpress":
         return (
-          <div className="w-8 h-8 bg-[#6700e6]/20 rounded-full flex items-center justify-center border-2 border-[#6700e6]"></div>
+          <div className="w-8 h-8 bg-[#49bcf3]/20 rounded-full flex items-center justify-center border-2 border-[#49bcf3]"></div>
         );
       case "swipe":
         return (
           <div className="flex">
-            <ArrowLeftIcon className="w-5 h-5 text-[#6700e6] mr-1" />
-            <ArrowRightIcon className="w-5 h-5 text-[#6700e6]" />
+            <ArrowLeftIcon className="w-5 h-5 text-[#49bcf3] mr-1" />
+            <ArrowRightIcon className="w-5 h-5 text-[#49bcf3]" />
           </div>
         );
       case "pinch":
         return (
           <div className="flex">
-            <Minimize2 className="w-5 h-5 text-[#6700e6] mr-1" />
-            <Maximize2 className="w-5 h-5 text-[#6700e6]" />
+            <Minimize2 className="w-5 h-5 text-[#49bcf3] mr-1" />
+            <Maximize2 className="w-5 h-5 text-[#49bcf3]" />
           </div>
         );
       default:
@@ -509,9 +501,9 @@ function GestureDemo({
       >
         <div
           className={`
-            w-32 h-32 bg-[#6700e6]/10 border-2 border-[#6700e6] rounded-lg 
+            w-32 h-32 bg-[#49bcf3]/10 border-2 border-[#49bcf3] rounded-lg 
             flex items-center justify-center cursor-pointer transition-all
-            ${action ? "bg-[#6700e6]/20" : ""}
+            ${action ? "bg-[#49bcf3]/20" : ""}
           `}
           style={{
             transform: `
@@ -524,7 +516,7 @@ function GestureDemo({
           onClick={handleTap}
         >
           {action ? (
-            <div className="font-medium text-[#6700e6] text-center text-sm">
+            <div className="font-medium text-[#49bcf3] text-center text-sm">
               {action}
             </div>
           ) : (
@@ -538,8 +530,7 @@ function GestureDemo({
           className="mt-4 text-xs text-gray-500 hover:text-gray-700"
           onClick={resetDemo}
         >
-          초기화
-        </button>
+          초기??        </button>
       </div>
     </div>
   );

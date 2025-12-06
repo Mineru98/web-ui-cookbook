@@ -34,28 +34,27 @@ export default function IconButtonSlide() {
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">설명</TabsTrigger>
+            <TabsTrigger value="description">?�명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">데모</TabsTrigger>
+            <TabsTrigger value="demo">?�모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
+              <h3 className="text-lg font-semibold mb-2">?�의</h3>
               <p>
-                Icon Button은 텍스트 대신 아이콘을 사용하는 버튼입니다. 공간을 절약하면서도 직관적인 의미를 전달할 수
-                있습니다.
+                Icon Button?� ?�스???�???�이콘을 ?�용?�는 버튼?�니?? 공간???�약?�면?�도 직�??�인 ?��?�??�달????                ?�습?�다.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>툴바 (Toolbar)에서의 액션 버튼</li>
-                <li>소셜 미디어 상호작용 (좋아요, 공유 등)</li>
-                <li>컴팩트한 UI가 필요한 모바일 인터페이스</li>
-                <li>내비게이션 컨트롤 (뒤로 가기, 홈 등)</li>
-                <li>상태 토글 (음소거/음소거 해제, 북마크 등)</li>
+                <li>?�바 (Toolbar)?�서???�션 버튼</li>
+                <li>?�셜 미디???�호?�용 (좋아?? 공유 ??</li>
+                <li>컴팩?�한 UI가 ?�요??모바???�터?�이??/li>
+                <li>?�비게이??컨트�?(?�로 가�? ????</li>
+                <li>?�태 ?��? (?�소�??�소�??�제, 북마????</li>
               </ul>
             </div>
           </TabsContent>
@@ -84,17 +83,17 @@ const IconButtonExample: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* 기본 아이콘 버튼 */}
+      {/* 기본 ?�이�?버튼 */}
       <div className="space-y-2">
-        <h3 className="text-sm font-medium">기본 아이콘 버튼</h3>
+        <h3 className="text-sm font-medium">기본 ?�이�?버튼</h3>
         <Button size="icon" onClick={() => {}}>
           <Heart className="h-4 w-4" />
         </Button>
       </div>
 
-      {/* 다양한 스타일의 아이콘 버튼 */}
+      {/* ?�양???��??�의 ?�이�?버튼 */}
       <div className="space-y-2">
-        <h3 className="text-sm font-medium">다양한 스타일</h3>
+        <h3 className="text-sm font-medium">?�양???��???/h3>
         <div className="flex space-x-2">
           <Button variant="outline" size="icon" onClick={() => {}}>
             <Star className="h-4 w-4" />
@@ -114,28 +113,28 @@ const IconButtonExample: React.FC = () => {
         </div>
       </div>
 
-      {/* 접근성을 위한 aria-label 추가 */}
+      {/* ?�근?�을 ?�한 aria-label 추�? */}
       <div className="space-y-2">
-        <h3 className="text-sm font-medium">접근성 고려</h3>
+        <h3 className="text-sm font-medium">?�근??고려</h3>
         <Button 
           size="icon" 
           onClick={() => {}} 
-          aria-label="설정"
-          title="설정"
+          aria-label="?�정"
+          title="?�정"
         >
           <Settings className="h-4 w-4" />
         </Button>
       </div>
 
-      {/* 이벤트 핸들러가 있는 아이콘 버튼 */}
+      {/* ?�벤???�들?��? ?�는 ?�이�?버튼 */}
       <div className="space-y-2">
-        <h3 className="text-sm font-medium">상태 변화 버튼</h3>
+        <h3 className="text-sm font-medium">?�태 변??버튼</h3>
         <Button 
           variant={liked ? "default" : "outline"}
           size="icon"
           onClick={() => {
             setLiked(!liked);
-            console.log(liked ? "좋아요 취소" : "좋아요");
+            console.log(liked ? "좋아??취소" : "좋아??);
           }}
           className={liked ? "bg-red-500 hover:bg-red-600" : ""}
         >
@@ -143,9 +142,9 @@ const IconButtonExample: React.FC = () => {
         </Button>
       </div>
 
-      {/* 다양한 크기의 아이콘 버튼 */}
+      {/* ?�양???�기???�이�?버튼 */}
       <div className="space-y-2">
-        <h3 className="text-sm font-medium">다양한 크기</h3>
+        <h3 className="text-sm font-medium">?�양???�기</h3>
         <div className="flex items-center space-x-2">
           <Button variant="outline" size="icon" className="h-8 w-8">
             <Plus className="h-3 w-3" />
@@ -161,11 +160,11 @@ const IconButtonExample: React.FC = () => {
         </div>
       </div>
 
-      {/* 실용적인 아이콘 버튼들 */}
+      {/* ?�용?�인 ?�이�?버튼??*/}
       <div className="space-y-2">
-        <h3 className="text-sm font-medium">실용적인 예시</h3>
+        <h3 className="text-sm font-medium">?�용?�인 ?�시</h3>
         <div className="flex space-x-2">
-          <Button variant="outline" size="icon" aria-label="다운로드">
+          <Button variant="outline" size="icon" aria-label="?�운로드">
             <Download className="h-4 w-4" />
           </Button>
           
@@ -173,7 +172,7 @@ const IconButtonExample: React.FC = () => {
             <Share className="h-4 w-4" />
           </Button>
           
-          <Button variant="outline" size="icon" aria-label="편집">
+          <Button variant="outline" size="icon" aria-label="?�집">
             <Edit className="h-4 w-4" />
           </Button>
         </div>
@@ -190,7 +189,7 @@ export default IconButtonExample;`}
           <TabsContent value="demo" className="mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">아이콘 선택</label>
+                <label className="block text-sm font-medium mb-2">?�이�??�택</label>
                 <select
                   value={selectedIcon}
                   onChange={(e) => setSelectedIcon(e.target.value)}

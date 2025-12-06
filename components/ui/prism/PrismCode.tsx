@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/components/prism-typescript";
-// …다른 언어 import 생략
+// ??���??�어 import ?�략
 
 interface PrismCodeProps {
   code: string;
@@ -20,7 +20,7 @@ export function PrismCode({ code, language, plugins = [] }: PrismCodeProps) {
     if (codeRef.current) Prism.highlightElement(codeRef.current);
   }, [code, language]);
 
-  /** Prism이 넣을 속성을 서버에서도 넣어 준다 */
+  /** Prism???�을 ?�성???�버?�서???�어 준??*/
   const preClass = `language-${language} ${plugins.join(" ")}`.trim();
 
   return (
