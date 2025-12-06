@@ -353,10 +353,10 @@ const BasicBottomSheetExample: React.FC = () => {
           onChange={(e) => setHeight(e.target.value as any)}
           className="px-3 py-2 border rounded-lg"
         >
-          <option value="small">?�게</option>
+          <option value="small">작게</option>
           <option value="medium">중간</option>
-          <option value="large">?�게</option>
-          <option value="full">?�체</option>
+          <option value="large">크게</option>
+          <option value="full">전체</option>
         </select>
       </div>
 
@@ -485,10 +485,10 @@ const ModalBottomSheetExample: React.FC = () => {
           onChange={(e) => setHeight(e.target.value as any)}
           className="px-3 py-2 border rounded-lg"
         >
-          <option value="small">?�게</option>
+          <option value="small">작게</option>
           <option value="medium">중간</option>
-          <option value="large">?�게</option>
-          <option value="full">?�체</option>
+          <option value="large">크게</option>
+          <option value="full">전체</option>
         </select>
       </div>
 

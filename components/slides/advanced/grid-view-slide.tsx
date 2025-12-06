@@ -1,10 +1,10 @@
 "use client";
 
-import SlideLayout from "../slide-layout";
-import { useState } from "react";
-import { Heart } from "lucide-react";
-import { PrismCode } from "../../ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Heart } from "lucide-react";
+import { useState } from "react";
+import { PrismCode } from "../../ui/prism/PrismCode";
+import SlideLayout from "../slide-layout";
 
 interface GridItem {
   id: number;
@@ -177,7 +177,7 @@ const GridView: React.FC<GridViewProps> = ({
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           }\`}
         >
-          ?�체
+          전체
         </button>
         {categories.map(category => (
           <button
@@ -290,7 +290,6 @@ const App: React.FC = () => {
 export default App;`;
   };
 
-
   return (
     <SlideLayout title="Grid View (그리드 뷰)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -308,8 +307,9 @@ export default App;`;
                   Grid View란?
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Grid View는 2차원 격자 형태로 아이템들을 배치하는 레이아웃 컴포넌트입니다.
-                  이미지 갤러리, 상품 목록, 카드 레이아웃 등에 주로 사용됩니다.
+                  Grid View는 2차원 격자 형태로 아이템들을 배치하는 레이아웃
+                  컴포넌트입니다. 이미지 갤러리, 상품 목록, 카드 레이아웃 등에
+                  주로 사용됩니다.
                 </p>
               </div>
 
@@ -318,10 +318,22 @@ export default App;`;
                   주요 특징
                 </h4>
                 <ul className="space-y-2 text-gray-600">
-                  <li>• <strong>반응형 디자인:</strong> 화면 크기에 따라 자동으로 열 수 조정</li>
-                  <li>• <strong>균등한 크기:</strong> 모든 아이템이 일정한 크기를 유지</li>
-                  <li>• <strong>스크롤 지원:</strong> 내용이 많을 때 자동으로 스크롤 제공</li>
-                  <li>• <strong>터치 친화적:</strong> 모바일 디바이스에서 직관적인 탐색</li>
+                  <li>
+                    • <strong>반응형 디자인:</strong> 화면 크기에 따라 자동으로
+                    열 수 조정
+                  </li>
+                  <li>
+                    • <strong>균등한 크기:</strong> 모든 아이템이 일정한 크기를
+                    유지
+                  </li>
+                  <li>
+                    • <strong>스크롤 지원:</strong> 내용이 많을 때 자동으로
+                    스크롤 제공
+                  </li>
+                  <li>
+                    • <strong>터치 친화적:</strong> 모바일 디바이스에서 직관적인
+                    탐색
+                  </li>
                 </ul>
               </div>
 
@@ -354,12 +366,8 @@ export default App;`;
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-
             <div className="bg-gray-800 p-4 rounded-lg text-white">
-              <PrismCode
-                language="typescript"
-                code={getReactCode()}
-              />
+              <PrismCode language="typescript" code={getReactCode()} />
             </div>
           </TabsContent>
 
@@ -388,7 +396,7 @@ export default App;`;
                   <button
                     key={category}
                     className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                        selectedCategory === category
+                      selectedCategory === category
                         ? "bg-blue-500 text-white"
                         : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                     }`}

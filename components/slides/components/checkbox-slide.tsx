@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import SlideLayout from "../slide-layout";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { PrismCode } from "@/components/ui/prism/PrismCode";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
 
 export default function CheckBoxSlide() {
   const [options, setOptions] = useState([
@@ -124,7 +124,7 @@ const CheckboxExample: React.FC = () => {
             setIsSubscribed(checked === true);
           }}
         />
-        <Label htmlFor="subscription">구독?�기</Label>
+        <Label htmlFor="subscription">구독하기</Label>
       </div>
     </div>
   );
