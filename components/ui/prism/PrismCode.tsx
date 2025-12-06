@@ -19,7 +19,7 @@ export function PrismCode({ code, language, plugins = [] }: PrismCodeProps) {
     if (codeRef.current) Prism.highlightElement(codeRef.current);
   }, [code, language]);
 
-  /** Prism???�을 ?�성???�버?�서???�어 준??*/
+  /** Prism 클래스를 생성하기 위한 클래스명 조합 */
   const preClass = `language-${language} ${plugins.join(" ")}`.trim();
 
   return (

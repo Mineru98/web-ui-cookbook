@@ -1,21 +1,25 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import SlideLayout from "../slide-layout"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
-import { Clock } from "lucide-react"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { PrismCode } from "@/components/ui/prism/PrismCode"
+import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { PrismCode } from "@/components/ui/prism/PrismCode";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Clock } from "lucide-react";
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
 
 export default function TimePickerSlide() {
-  const [hours, setHours] = useState<string>("12")
-  const [minutes, setMinutes] = useState<string>("00")
-  const [period, setPeriod] = useState<"AM" | "PM">("PM")
+  const [hours, setHours] = useState<string>("12");
+  const [minutes, setMinutes] = useState<string>("00");
+  const [period, setPeriod] = useState<"AM" | "PM">("PM");
 
   const formatTime = () => {
-    return `${hours}:${minutes} ${period}`
-  }
+    return `${hours}:${minutes} ${period}`;
+  };
 
   return (
     <SlideLayout title="Time Picker">
@@ -31,8 +35,8 @@ export default function TimePickerSlide() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Time Picker는 사용자가 시간을 선택할 수 있는 UI 요소입니다. 시, 분, 초와 AM/PM을 선택할 수 있는
-                인터페이스를 제공합니다.
+                Time Picker는 사용자가 시간을 선택할 수 있는 UI 요소입니다. 시,
+                분, 초와 AM/PM을 선택할 수 있는 인터페이스를 제공합니다.
               </p>
             </div>
 
@@ -58,7 +62,8 @@ import { Button } from "@/components/ui/button"
 import { Clock } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
-// 기본 ?�간 ?�택�?const [time, setTime] = useState<string>("")
+// 기본 시간 선택기
+const [time, setTime] = useState<string>("")
 
 const handleTimeSelect = (hours: string, minutes: string, period: "AM" | "PM") => {
   setTime(\`\${hours}:\${minutes} \${period}\`)
@@ -70,7 +75,7 @@ const handleTimeSelect = (hours: string, minutes: string, period: "AM" | "PM") =
       variant="outline"
       className="w-[240px] justify-start text-left font-normal"
     >
-      {time || "?�간 ?�택"}
+      {time || "시간 선택"}
       <Clock className="ml-auto h-4 w-4 opacity-50" />
     </Button>
   </PopoverTrigger>
@@ -99,12 +104,13 @@ const handleTimeSelect = (hours: string, minutes: string, period: "AM" | "PM") =
   </PopoverContent>
 </Popover>
 
-// 커스?� ?�간 ?�택�?const [hours, setHours] = useState<string>("12")
+// 커스텀 시간 선택기
+const [hours, setHours] = useState<string>("12")
 const [minutes, setMinutes] = useState<string>("00")
 const [period, setPeriod] = useState<"AM" | "PM">("PM")
 
 <div className="flex items-center space-x-2">
-  {/* ?�간 ?�택 */}
+  {/* 시간 선택 */}
   <select
     value={hours}
     onChange={(e) => setHours(e.target.value)}
@@ -119,7 +125,7 @@ const [period, setPeriod] = useState<"AM" | "PM">("PM")
 
   <span className="text-lg font-medium">:</span>
 
-  {/* �??�택 */}
+  {/* 분 선택 */}
   <select
     value={minutes}
     onChange={(e) => setMinutes(e.target.value)}
@@ -132,7 +138,7 @@ const [period, setPeriod] = useState<"AM" | "PM">("PM")
     ))}
   </select>
 
-  {/* AM/PM ?�택 */}
+  {/* AM/PM 선택 */}
   <select
     value={period}
     onChange={(e) => setPeriod(e.target.value as "AM" | "PM")}
@@ -143,7 +149,8 @@ const [period, setPeriod] = useState<"AM" | "PM">("PM")
   </select>
 </div>
 
-// 24?�간 ?�식?�로 변??const convertTo24Hour = (hours: string, period: "AM" | "PM"): string => {
+// 24시간 형식으로 변환
+const convertTo24Hour = (hours: string, period: "AM" | "PM"): string => {
   const hour = parseInt(hours)
   if (period === "AM") {
     return hour === 12 ? "00" : hours
@@ -160,19 +167,31 @@ const [period, setPeriod] = useState<"AM" | "PM">("PM")
               <div className="flex flex-col items-center space-y-4">
                 <Popover>
                   <PopoverTrigger asChild>
-                    <Button variant="outline" className="w-[240px] justify-start text-left font-normal">
+                    <Button
+                      variant="outline"
+                      className="w-[240px] justify-start text-left font-normal"
+                    >
                       {formatTime()}
                       <Clock className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-4" align="start">
                     <div className="flex space-x-2">
-                      <select value={hours} onChange={(e) => setHours(e.target.value)} className="p-2 border rounded-md">
-                        {Array.from({ length: 12 }, (_, i) => i + 1).map((hour) => (
-                          <option key={hour} value={hour.toString().padStart(2, "0")}>
-                            {hour.toString().padStart(2, "0")}
-                          </option>
-                        ))}
+                      <select
+                        value={hours}
+                        onChange={(e) => setHours(e.target.value)}
+                        className="p-2 border rounded-md"
+                      >
+                        {Array.from({ length: 12 }, (_, i) => i + 1).map(
+                          (hour) => (
+                            <option
+                              key={hour}
+                              value={hour.toString().padStart(2, "0")}
+                            >
+                              {hour.toString().padStart(2, "0")}
+                            </option>
+                          )
+                        )}
                       </select>
                       <span className="flex items-center">:</span>
                       <select
@@ -180,15 +199,22 @@ const [period, setPeriod] = useState<"AM" | "PM">("PM")
                         onChange={(e) => setMinutes(e.target.value)}
                         className="p-2 border rounded-md"
                       >
-                        {Array.from({ length: 60 }, (_, i) => i).map((minute) => (
-                          <option key={minute} value={minute.toString().padStart(2, "0")}>
-                            {minute.toString().padStart(2, "0")}
-                          </option>
-                        ))}
+                        {Array.from({ length: 60 }, (_, i) => i).map(
+                          (minute) => (
+                            <option
+                              key={minute}
+                              value={minute.toString().padStart(2, "0")}
+                            >
+                              {minute.toString().padStart(2, "0")}
+                            </option>
+                          )
+                        )}
                       </select>
                       <select
                         value={period}
-                        onChange={(e) => setPeriod(e.target.value as "AM" | "PM")}
+                        onChange={(e) =>
+                          setPeriod(e.target.value as "AM" | "PM")
+                        }
                         className="p-2 border rounded-md"
                       >
                         <option value="AM">AM</option>
@@ -199,16 +225,16 @@ const [period, setPeriod] = useState<"AM" | "PM">("PM")
                 </Popover>
 
                 <div className="text-center">
-                  <p className="text-sm">?�택???�간: {formatTime()}</p>
+                  <p className="text-sm">선택한 시간: {formatTime()}</p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    24?�간 ?�식:{" "}
+                    24시간 형식:{" "}
                     {period === "AM"
                       ? hours === "12"
                         ? "00"
                         : hours
                       : hours === "12"
-                        ? "12"
-                        : (Number.parseInt(hours) + 12).toString()}
+                      ? "12"
+                      : (Number.parseInt(hours) + 12).toString()}
                     :{minutes}
                   </p>
                 </div>
@@ -218,5 +244,5 @@ const [period, setPeriod] = useState<"AM" | "PM">("PM")
         </Tabs>
       </div>
     </SlideLayout>
-  )
+  );
 }

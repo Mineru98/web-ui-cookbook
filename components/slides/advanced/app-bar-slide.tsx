@@ -268,7 +268,7 @@ const SearchAppBarExample: React.FC = () => {
           <button 
             onClick={handleBack}
             className="p-1.5 rounded-full hover:bg-gray-100 transition-colors"
-            aria-label="?�로 가�?
+            aria-label="뒤로 가기"
           >
             <ArrowLeft className="h-5 w-5 text-gray-700" />
           </button>
@@ -291,7 +291,7 @@ const SearchAppBarExample: React.FC = () => {
           <button 
             onClick={handleMore}
             className="p-1.5 rounded-full hover:bg-gray-100 transition-colors"
-            aria-label="?�보�?메뉴"
+            aria-label="더보기 메뉴"
           >
             <MoreVertical className="h-5 w-5 text-gray-700" />
           </button>
@@ -355,7 +355,7 @@ const ProminentAppBarExample: React.FC = () => {
             >
               <Menu className="h-5 w-5" />
             </button>
-            <span className="ml-4 font-medium">???�?��?</span>
+            <span className="ml-4 font-medium">앱 이름</span>
           </div>
           
           <div className="flex items-center gap-2">
@@ -461,7 +461,7 @@ const StandardAppBarExample: React.FC = () => {
             >
               <Menu className="h-5 w-5 text-gray-700" />
             </button>
-            <span className="ml-4 font-medium text-gray-900">???�?��?</span>
+            <span className="ml-4 font-medium text-gray-900">앱 이름</span>
           </div>
           
           <div className="flex items-center gap-2">
@@ -502,7 +502,6 @@ const StandardAppBarExample: React.FC = () => {
 export default StandardAppBarExample;`;
     }
   };
-
 
   return (
     <SlideLayout title="App Bar (앱바)">
@@ -603,10 +602,7 @@ export default StandardAppBarExample;`;
 
           <TabsContent value="code" className="mt-4">
             <div className="bg-gray-800 p-4 rounded-lg text-white">
-              <PrismCode
-                language="typescript"
-                code={getReactCode()}
-              />
+              <PrismCode language="typescript" code={getReactCode()} />
             </div>
           </TabsContent>
 
@@ -655,7 +651,7 @@ export default StandardAppBarExample;`;
                 </button>
               </div>
             </div>
-            {/* ?�모 ???�용 */}
+            {/* 데모 영역 */}
             <div className="mt-4">
               <div className="border rounded-lg overflow-hidden">
                 {renderAppBar()}
@@ -674,7 +670,8 @@ export default StandardAppBarExample;`;
                       }`}
                       onClick={() => setAppBarType("standard")}
                     >
-                      기본??                    </button>
+                      기본형
+                    </button>
                     <button
                       className={`px-3 py-1.5 rounded text-sm ${
                         appBarType === "context"
@@ -683,7 +680,8 @@ export default StandardAppBarExample;`;
                       }`}
                       onClick={() => setAppBarType("context")}
                     >
-                      컨텍?�트??                    </button>
+                      컨텍스트형
+                    </button>
                     <button
                       className={`px-3 py-1.5 rounded text-sm ${
                         appBarType === "search"
@@ -692,7 +690,7 @@ export default StandardAppBarExample;`;
                       }`}
                       onClick={() => setAppBarType("search")}
                     >
-                      검?�형
+                      검색형
                     </button>
                     <button
                       className={`px-3 py-1.5 rounded text-sm ${
@@ -702,7 +700,8 @@ export default StandardAppBarExample;`;
                       }`}
                       onClick={() => setAppBarType("prominent")}
                     >
-                      ?�장??                    </button>
+                      확장형
+                    </button>
                   </div>
                 </div>
               </div>

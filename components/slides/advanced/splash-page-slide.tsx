@@ -275,7 +275,7 @@ export default BrandedSplashScreen;`;
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <div className="mt-2 text-gray-500 text-sm">리소??로딩 �?..</div>
+            <div className="mt-2 text-gray-500 text-sm">리소스 로딩 중...</div>
           </div>
         );
 

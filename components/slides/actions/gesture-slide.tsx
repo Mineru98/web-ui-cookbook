@@ -369,7 +369,7 @@ function GestureDemo({
   };
 
   // 길게 누르기 처리
-  const handleTouchStart = () => {
+  const handleTouchStart = (e: React.TouchEvent) => {
     if (gesture === "longpress") {
       initialTouchRef.current = { x: 0, y: 0 };
 
@@ -378,7 +378,8 @@ function GestureDemo({
         setTimeout(() => setAction(""), 800);
       }, 500);
     } else if (gesture === "swipe") {
-      initialTouchRef.current = { x: 0, y: 0 };
+      const touch = e.touches[0];
+      initialTouchRef.current = { x: touch.clientX, y: touch.clientY };
     }
   };
 

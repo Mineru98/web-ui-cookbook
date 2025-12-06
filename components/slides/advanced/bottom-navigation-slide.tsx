@@ -1,19 +1,19 @@
 "use client";
 
-import SlideLayout from "../slide-layout";
-import { useState } from "react";
-import {
-  Home,
-  Search,
-  Heart,
-  User,
-  ShoppingBag,
-  Bell,
-  Settings,
-  List,
-} from "lucide-react";
 import { PrismCode } from "@/components/ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Bell,
+  Heart,
+  Home,
+  List,
+  Search,
+  Settings,
+  ShoppingBag,
+  User,
+} from "lucide-react";
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
 
 export default function BottomNavigationSlide() {
   const [activeTab, setActiveTab] = useState("home");
@@ -277,19 +277,21 @@ const BottomNavigationExample: React.FC = () => {
   const [activeTab, setActiveTab] = useState('home');
   const [style, setStyle] = useState<'default' | 'labeled' | 'shifting' | 'icon-only' | 'badge'>('default');
 
-  // 기본 ?�비게이???�이??  const navigationItems: NavigationItem[] = [
-    { id: 'home', label: '??, icon: Home },
-    { id: 'search', label: '검??, icon: Search },
-    { id: 'favorites', label: '관??, icon: Heart, badge: 2 },
-    { id: 'profile', label: '?�로??, icon: User },
+  // 기본 네비게이션 아이템
+  const navigationItems: NavigationItem[] = [
+    { id: 'home', label: '홈', icon: Home },
+    { id: 'search', label: '검색', icon: Search },
+    { id: 'favorites', label: '관심', icon: Heart, badge: 2 },
+    { id: 'profile', label: '프로필', icon: User },
   ];
 
-  // ?�프???��??�용 ?�이??  const shiftingItems: NavigationItem[] = [
-    { id: 'home', label: '??, icon: Home },
-    { id: 'search', label: '검??, icon: Search },
-    { id: 'cart', label: '?�바구니', icon: ShoppingBag, badge: 3 },
-    { id: 'notifications', label: '?�림', icon: Bell, badge: 5 },
-    { id: 'settings', label: '?�정', icon: Settings },
+  // 시프팅형에 사용할 아이템
+  const shiftingItems: NavigationItem[] = [
+    { id: 'home', label: '홈', icon: Home },
+    { id: 'search', label: '검색', icon: Search },
+    { id: 'cart', label: '장바구니', icon: ShoppingBag, badge: 3 },
+    { id: 'notifications', label: '알림', icon: Bell, badge: 5 },
+    { id: 'settings', label: '설정', icon: Settings },
   ];
 
   const renderBottomNavigation = () => {
@@ -433,17 +435,17 @@ const BottomNavigationExample: React.FC = () => {
       {/* App Bar */}
       <header className="bg-white border-b shadow-sm">
         <div className="flex items-center justify-between px-4 py-3">
-          <h1 className="text-lg font-semibold">?�단 ?�비게이???�시</h1>
+          <h1 className="text-lg font-semibold">하단 네비게이션 예시</h1>
           <select
             value={style}
             onChange={(e) => setStyle(e.target.value as any)}
             className="text-sm border rounded px-2 py-1"
           >
-            <option value="default">기본??/option>
-            <option value="labeled">?�벨??/option>
-            <option value="shifting">?�프?�형</option>
-            <option value="icon-only">?�이�??�용</option>
-            <option value="badge">배�???/option>
+            <option value="default">기본형</option>
+            <option value="labeled">레이블형</option>
+            <option value="shifting">시프팅형</option>
+            <option value="icon-only">아이콘전용</option>
+            <option value="badge">배지형</option>
           </select>
         </div>
       </header>
@@ -462,8 +464,8 @@ const BottomNavigationExample: React.FC = () => {
             {activeTab === 'settings' && <Settings className="w-16 h-16 mx-auto" />}
           </div>
           
-          <h2 className="text-xl font-semibold mb-2">?�재 ?�택???? {activeTab}</h2>
-          <p className="text-gray-500">?�재 ?��??? {style}</p>
+          <h2 className="text-xl font-semibold mb-2">현재 선택된 탭: {activeTab}</h2>
+          <p className="text-gray-500">현재 스타일: {style}</p>
         </div>
       </main>
 
@@ -492,7 +494,8 @@ export default BottomNavigationExample;`}
                     }`}
                     onClick={() => setStyle("default")}
                   >
-                    기본??                  </button>
+                    기본형
+                  </button>
                   <button
                     className={`px-3 py-1.5 rounded text-sm ${
                       style === "labeled"
@@ -501,7 +504,8 @@ export default BottomNavigationExample;`}
                     }`}
                     onClick={() => setStyle("labeled")}
                   >
-                    ?�벨??                  </button>
+                    레이블형
+                  </button>
                   <button
                     className={`px-3 py-1.5 rounded text-sm ${
                       style === "shifting"
@@ -510,7 +514,7 @@ export default BottomNavigationExample;`}
                     }`}
                     onClick={() => setStyle("shifting")}
                   >
-                    ?�프?�형
+                    시프팅형
                   </button>
                   <button
                     className={`px-3 py-1.5 rounded text-sm ${
@@ -520,7 +524,7 @@ export default BottomNavigationExample;`}
                     }`}
                     onClick={() => setStyle("icon-only")}
                   >
-                    ?�이�??�용
+                    아이콘전용
                   </button>
                   <button
                     className={`px-3 py-1.5 rounded text-sm ${
@@ -530,14 +534,15 @@ export default BottomNavigationExample;`}
                     }`}
                     onClick={() => setStyle("badge")}
                   >
-                    배�???                  </button>
+                    배지형{" "}
+                  </button>
                 </div>
               </div>
 
               <div className="border rounded-lg overflow-hidden bg-gray-100 shadow-md">
-                {/* 모바?????�레??*/}
+                {/* 모바일 프레임 */}
                 <div className="relative h-96">
-                  {/* ??콘텐�??�역 */}
+                  {/* 메인 콘텐츠 영역 */}
                   <div className="absolute inset-0 p-4 overflow-y-auto pb-16">
                     <div className="flex items-center mb-4">
                       <List className="w-6 h-6 mr-2" />
@@ -546,34 +551,34 @@ export default BottomNavigationExample;`}
                           ?.label ||
                           shiftingItems.find((i) => i.id === activeTab)
                             ?.label}{" "}
-                        ?�면
+                        화면
                       </h3>
                     </div>
 
                     <p className="text-gray-600 mb-4">
-                      ?�재 ?�택???? <strong>{activeTab}</strong>
+                      현재 선택된 탭: <strong>{activeTab}</strong>
                     </p>
 
                     <div className="space-y-2 pb-4">
                       <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
-                        콘텐�???�� 1
+                        콘텐츠 항목 1
                       </div>
                       <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
-                        콘텐�???�� 2
+                        콘텐츠 항목 2
                       </div>
                       <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
-                        콘텐�???�� 3
+                        콘텐츠 항목 3
                       </div>
                       <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
-                        콘텐�???�� 4
+                        콘텐츠 항목 4
                       </div>
                       <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
-                        콘텐�???�� 5
+                        콘텐츠 항목 5
                       </div>
                     </div>
                   </div>
 
-                  {/* 바�? ?�비게이??*/}
+                  {/* 바닥 네비게이션 */}
                   <div className="absolute bottom-0 left-0 right-0">
                     {renderBottomNavigation()}
                   </div>
@@ -581,7 +586,7 @@ export default BottomNavigationExample;`}
               </div>
 
               <p className="text-sm text-center text-gray-500">
-                ?�른 ?��??�을 ?�릭?�보?�요
+                다른 스타일을 클릭해보세요
               </p>
             </div>
           </TabsContent>
