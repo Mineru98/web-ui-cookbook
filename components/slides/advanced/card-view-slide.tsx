@@ -1,9 +1,9 @@
 "use client";
 
-import SlideLayout from "../slide-layout";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { PrismCode } from "../../ui/prism/PrismCode";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import SlideLayout from "../slide-layout";
 
 interface Card {
   id: number;
@@ -19,66 +19,69 @@ export default function CardViewSlide() {
   const cards: Card[] = [
     {
       id: 1,
-      title: "카드 컴포?�트 ?�자??,
+      title: "카드 컴포넌트 예제",
       description:
-        "?�용???�터?�이?��? ?�한 ?�과?�인 카드 컴포?�트 ?�자??방법",
-      image: "?��",
-      tags: ["UI", "?�자??, "카드"],
+        "사용자 친화적인 인터페이스를 위한 현대적인 카드 컴포넌트 예제 방법",
+      image: "🎴",
+      tags: ["UI", "예제", "카드"],
     },
     {
       id: 2,
-      title: "반응??카드 ?�이?�웃",
-      description: "?�양???�면 ?�기??맞춰 조정?�는 반응??카드 ?�이?�웃 구현",
-      image: "?��",
-      tags: ["반응??, "?�이?�웃", "CSS"],
+      title: "반응형 카드 레이아웃",
+      description: "다양한 화면 크기에 맞춰 조정되는 반응형 카드 레이아웃 구현",
+      image: "📱",
+      tags: ["반응형", "레이아웃", "CSS"],
     },
     {
       id: 3,
-      title: "카드 ?�호?�용",
-      description: "카드 컴포?�트???�릭, ?�버 ???�용???�호?�용 ?�과 ?�용",
-      image: "?��",
-      tags: ["?�호?�용", "?�니메이??],
+      title: "카드 인터랙션",
+      description: "카드 컴포넌트의 클릭, 호버 등 다양한 인터랙션 효과와 활용",
+      image: "✨",
+      tags: ["인터랙션", "애니메이션"],
     },
   ];
 
   return (
-    <SlideLayout title="Card View (카드 �?">
+    <SlideLayout title="Card View (카드 뷰)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�의</h3>
+              <h3 className="text-lg font-semibold mb-2">개요</h3>
               <p>
-                카드 뷰는 관???�보�??��? 컨테?�너�? 주로 ?��?지, ?�목, 간략??                ?�명�??�션???�함?�니?? ?�보�??�각?�으�?구분?�고 그룹?�하??                ?�용?��? 콘텐츠�? ?�게 ?�캔?�고 ?�호?�용?????�게 ?�니??
+                카드 뷰는 관련된 정보를 담는 컨테이너로, 주로 이미지, 제목,
+                간략한 설명과 액션을 포함합니다. 정보를 시각적으로 구분하고
+                그룹화하여 사용자가 콘텐츠를 쉽게 스캔하고 인터랙션할 수 있게
+                합니다.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">주요 구성 ?�소</h3>
+              <h3 className="text-lg font-semibold mb-2">주요 구성 요소</h3>
               <ul className="list-disc pl-6 space-y-1">
-                <li>?�목: 간결?�고 명확???�목</li>
-                <li>?��?지/?�이�? ?�각???�소 (?�택 ?�항)</li>
-                <li>?�명: 간략???�용 ?�약</li>
-                <li>?�션 버튼: ?�호?�용 ?�소</li>
-                <li>메�??�이?? ?�그, ?�짜, ?�????/li>
+                <li>제목: 간결하고 명확한 제목</li>
+                <li>이미지/아이콘: 시각적 요소 (선택 사항)</li>
+                <li>설명: 간략한 내용 요약</li>
+                <li>액션 버튼: 인터랙션 요소</li>
+                <li>메타데이터: 태그, 날짜, 작성자 등</li>
               </ul>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
+              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
               <ul className="list-disc pl-6 space-y-1">
-                <li>?�품 목록 (?�커머스)</li>
-                <li>?�스 �?블로�?글</li>
-                <li>?�셜 미디???�스??/li>
-                <li>?�?�보???�보 ?�널</li>
-                <li>?�용???�로??/li>
-                <li>?�로?�트 ?�는 ?�스???�시</li>
+                <li>상품 목록 (이커머스)</li>
+                <li>뉴스 블로그 글</li>
+                <li>소셜 미디어 피드</li>
+                <li>대시보드 정보 패널</li>
+                <li>사용자 프로필</li>
+                <li>포트폴리오 프로젝트 시각화</li>
               </ul>
             </div>
           </TabsContent>
@@ -106,14 +109,14 @@ const CardComponent: React.FC<CardProps> = ({
 }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg">
-      {/* 카드 ?��?지 */}
+      {/* 카드 이미지 */}
       <div className="h-32 bg-gradient-to-r from-[#49bcf3]/80 to-[#49bcf3] flex items-center justify-center">
-        <span className="text-4xl" role="img" aria-label="?��?지">
+        <span className="text-4xl" role="img" aria-label="이미지">
           {image}
         </span>
       </div>
       
-      {/* 카드 ?�용 */}
+      {/* 카드 내용 */}
       <div className="p-4">
         <h3 className="font-bold text-lg text-gray-900 mb-2">
           {title}
@@ -123,7 +126,7 @@ const CardComponent: React.FC<CardProps> = ({
           {description}
         </p>
         
-        {/* ?�그 목록 */}
+        {/* 태그 목록 */}
         <div className="flex flex-wrap gap-2 mb-4">
           {tags.map((tag, index) => (
             <span
@@ -136,49 +139,49 @@ const CardComponent: React.FC<CardProps> = ({
         </div>
       </div>
       
-      {/* 카드 ?�션 */}
+      {/* 카드 액션 */}
       <div className="bg-gray-50 border-t border-gray-200 p-3 flex justify-end">
         <button
           onClick={onAction}
           className="px-3 py-2 bg-[#49bcf3] text-white text-sm font-medium rounded-md hover:bg-[#49bcf3]/90 transition-colors focus:outline-none focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2"
-          aria-label="?�세??보기"
+          aria-label="상세 정보 보기"
         >
-          ?�세??보기
+          상세 정보 보기
         </button>
       </div>
     </div>
   );
 };
 
-// ?�용 ?�시
+// 사용 예시
 const CardExample: React.FC = () => {
   const cardData = [
     {
       id: 1,
-      title: "카드 컴포?�트 ?�자??,
-      description: "?�용???�터?�이?��? ?�한 ?�과?�인 카드 컴포?�트 ?�자??방법",
-      image: "?��",
-      tags: ["UI", "?�자??, "카드"],
+      title: "카드 컴포넌트 예제",
+      description: "사용자 친화적인 인터페이스를 위한 현대적인 카드 컴포넌트 예제 방법",
+      image: "🎴",
+      tags: ["UI", "예제", "카드"],
     },
     {
       id: 2,
-      title: "반응??카드 ?�이?�웃",
-      description: "?�양???�면 ?�기??맞춰 조정?�는 반응??카드 ?�이?�웃 구현",
-      image: "?��",
-      tags: ["반응??, "?�이?�웃", "CSS"],
+      title: "반응형 카드 레이아웃",
+      description: "다양한 화면 크기에 맞춰 조정되는 반응형 카드 레이아웃 구현",
+      image: "📱",
+      tags: ["반응형", "레이아웃", "CSS"],
     },
     {
       id: 3,
-      title: "카드 ?�호?�용",
-      description: "카드 컴포?�트???�릭, ?�버 ???�용???�호?�용 ?�과 ?�용",
-      image: "?��",
-      tags: ["?�호?�용", "?�니메이??],
+      title: "카드 인터랙션",
+      description: "카드 컴포넌트의 클릭, 호버 등 다양한 인터랙션 효과와 활용",
+      image: "✨",
+      tags: ["인터랙션", "애니메이션"],
     },
   ];
 
   const handleCardAction = (cardId: number) => {
     console.log(\`Card \${cardId} action clicked\`);
-    // ?�기??카드 ?�션 로직 구현
+    // 실제 애플리케이션에서 카드 액션 로직 구현
   };
 
   return (
@@ -204,7 +207,7 @@ export default CardExample;`}
 
           <TabsContent value="demo" className="mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-medium mb-4">카드 컴포?�트 ?�시</h3>
+              <h3 className="text-lg font-medium mb-4">카드 컴포넌트 예시</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {cards.map((card) => (
                   <div
@@ -237,7 +240,7 @@ export default CardExample;`}
                     </div>
                     <div className="border-t p-3 flex justify-end bg-gray-50">
                       <button className="px-3 py-1 bg-[#49bcf3] text-white text-sm rounded-md hover:bg-[#49bcf3]/90">
-                        ?�세??보기
+                        상세 정보 보기
                       </button>
                     </div>
                   </div>
@@ -247,8 +250,9 @@ export default CardExample;`}
               {selectedCard && (
                 <div className="mt-4 p-4 bg-[#49bcf3]/10 rounded-md">
                   <p className="text-sm text-[#49bcf3]">
-                    카드 #{selectedCard}가 ?�택?�었?�니?? ?�제
-                    ?�플리�??�션?�서???�세 ?�보 ?�시, 모달 ?�기, ???�이지�?                    ?�동 ?�의 ?�업???�행?????�습?�다.
+                    카드 #{selectedCard}가 선택되었습니다. 실제
+                    애플리케이션에서는 상세 정보 표시, 모달 열기, 다른 페이지로
+                    이동 등의 작업을 수행할 수 있습니다.
                   </p>
                 </div>
               )}

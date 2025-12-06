@@ -1,10 +1,10 @@
 "use client";
 
-import SlideLayout from "../slide-layout";
-import { useState } from "react";
-import { Check, ChevronRight, MoreVertical } from "lucide-react";
-import { PrismCode } from "../../ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Check, ChevronRight, MoreVertical } from "lucide-react";
+import { useState } from "react";
+import { PrismCode } from "../../ui/prism/PrismCode";
+import SlideLayout from "../slide-layout";
 
 interface ListItem {
   id: number;
@@ -18,36 +18,36 @@ export default function ListViewSlide() {
   const [items, setItems] = useState<ListItem[]>([
     {
       id: 1,
-      title: "UI ?�자??초안 ?�성",
-      description: "모바????메인 ?�면 UI ?�자??초안 ?�료",
+      title: "UI 디자인 초안 작성",
+      description: "모바일 앱 메인 화면 UI 디자인 초안 완료",
       status: "completed",
       priority: "high",
     },
     {
       id: 2,
-      title: "컴포?�트 ?�이브러�?구축",
-      description: "?�사??가?�한 UI 컴포?�트 ?�트 개발",
+      title: "컴포넌트 라이브러리 구축",
+      description: "재사용 가능한 UI 컴포넌트 셋 개발",
       status: "in-progress",
       priority: "medium",
     },
     {
       id: 3,
-      title: "?�용???�스??진행",
-      description: "?�로?��??�에 ?�???�용???�드�??�집",
+      title: "사용자 테스트 진행",
+      description: "프로토타입에 대한 사용자 피드백 수집",
       status: "pending",
       priority: "high",
     },
     {
       id: 4,
-      title: "?�근??검??,
-      description: "WCAG 가?�드?�인???�른 ?�근??검??,
+      title: "접근성 검토",
+      description: "WCAG 가이드라인에 따른 접근성 검토",
       status: "pending",
       priority: "medium",
     },
     {
       id: 5,
-      title: "?�자??가?�드 문서??,
-      description: "UI ?��???가?�드 �??�용 방법 문서??,
+      title: "디자인 가이드 문서화",
+      description: "UI 스타일 가이드 및 사용 방법 문서화",
       status: "in-progress",
       priority: "low",
     },
@@ -76,7 +76,8 @@ export default function ListViewSlide() {
     );
   };
 
-  // ?�태???�른 ?��????�래??  const getStatusClass = (status: string) => {
+  // 상태에 따른 스타일 클래스
+  const getStatusClass = (status: string) => {
     switch (status) {
       case "completed":
         return "bg-green-100 text-green-800";
@@ -89,7 +90,8 @@ export default function ListViewSlide() {
     }
   };
 
-  // ?�선?�위???�른 ?��????�래??  const getPriorityClass = (priority: string) => {
+  // 우선순위에 따른 스타일 클래스
+  const getPriorityClass = (priority: string) => {
     switch (priority) {
       case "high":
         return "bg-red-100 text-red-800";
@@ -182,46 +184,46 @@ export default function ListViewSlide() {
   };
 
   return (
-    <SlideLayout title="List View (리스??�?">
+    <SlideLayout title="List View (리스트 뷰)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�의</h3>
+              <h3 className="text-lg font-semibold mb-2">의의</h3>
               <p>
-                리스??뷰는 ??��???�로�??�열?�는 UI ?�턴?�로, 주로 ?�스?��?
-                간단??컨트롤로 구성?�니?? ?�용?��? ?�러 ??��???�색?�고
-                ?�택?�며 ?�업?????�는 ?�율?�인 방법???�공?�니??
+                리스트 뷰는 항목들을 세로로 나열하는 UI 패턴으로, 주로 텍스트와
+                간단한 컨트롤로 구성됩니다. 사용자들이 여러 항목을 검색하고
+                선택하며 작업을 수행하는 효율적인 방법을 제공합니다.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�반?�인 ?�도</h3>
+              <h3 className="text-lg font-semibold mb-2">일반적인 용도</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>?�메?? 메시지, ?�림 ?�시</li>
-                <li>?�정 ?�션 ?�열</li>
-                <li>?�업 목록 관�?/li>
-                <li>검??결과 ?�시</li>
-                <li>?�락�?목록 관�?/li>
-                <li>콘텐�?카테고리 ?�색</li>
+                <li>이메일 메시지, 알림 표시</li>
+                <li>설정 옵션 나열</li>
+                <li>작업 목록 관리</li>
+                <li>검색 결과 표시</li>
+                <li>연락처 목록 관리</li>
+                <li>콘텐츠 카테고리 검색</li>
               </ul>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">주요 ?�징</h3>
+              <h3 className="text-lg font-semibold mb-2">주요 특징</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>?��?????�� ?�식</li>
-                <li>?�크�?가?�한 ?�터?�이??/li>
-                <li>??���?컨텍?�트 ?�업</li>
-                <li>?�택/비선???�태 UI</li>
-                <li>?�양??밀???�이?�웃 지??/li>
-                <li>?�어???�로고침 ???�스�?지??/li>
+                <li>스크롤 가능한 리스트</li>
+                <li>클릭 가능한 인터페이스</li>
+                <li>롱프레스 컨텍스트 작업</li>
+                <li>선택/비선택 상태 UI</li>
+                <li>다양한 밀도 레이아웃 지원</li>
+                <li>드래그 앤 새로고침 풀 스크롤 지원</li>
               </ul>
             </div>
           </TabsContent>
@@ -247,22 +249,22 @@ const ListViewExample: React.FC = () => {
   const [items, setItems] = useState<ListItem[]>([
     { 
       id: 1, 
-      title: "UI ?�자??초안 ?�성", 
-      description: "모바????메인 ?�면 UI ?�자??초안 ?�료",
+      title: "UI 디자인 초안 작성", 
+      description: "모바일 앱 메인 화면 UI 디자인 초안 완료",
       status: "completed",
       priority: "high"
     },
     { 
       id: 2, 
-      title: "컴포?�트 ?�이브러�?구축", 
-      description: "?�사??가?�한 UI 컴포?�트 ?�트 개발",
+      title: "컴포넌트 라이브러리 구축", 
+      description: "재사용 가능한 UI 컴포넌트 셋 개발",
       status: "in-progress",
       priority: "medium"
     },
     { 
       id: 3, 
-      title: "?�용???�스??진행", 
-      description: "?�로?��??�에 ?�???�용???�드�??�집",
+      title: "사용자 테스트 진행", 
+      description: "프로토타입에 대한 사용자 피드백 수집",
       status: "pending",
       priority: "high"
     },
@@ -285,7 +287,8 @@ const ListViewExample: React.FC = () => {
     }));
   };
   
-  // ?�태???�른 ?��????�래??  const getStatusClass = (status: string): string => {
+  // 상태에 따른 스타일 클래스
+  const getStatusClass = (status: string): string => {
     switch(status) {
       case "completed":
         return "bg-green-100 text-green-800";
@@ -298,7 +301,8 @@ const ListViewExample: React.FC = () => {
     }
   };
   
-  // ?�선?�위???�른 ?��????�래??  const getPriorityClass = (priority: string): string => {
+  // 우선순위에 따른 스타일 클래스
+  const getPriorityClass = (priority: string): string => {
     switch(priority) {
       case "high":
         return "bg-red-100 text-red-800";
@@ -368,33 +372,33 @@ const ListViewExample: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-4">
-      {/* ?�더 */}
+      {/* 헤더 */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl font-semibold">?�무 목록</h1>
+        <h1 className="text-xl font-semibold">작업 목록</h1>
         <select
           value={viewType}
           onChange={(e) => setViewType(e.target.value as ViewType)}
           className="px-3 py-1 border rounded-md text-sm"
         >
           <option value="default">기본 보기</option>
-          <option value="compact">간결??보기</option>
-          <option value="detailed">?�세 보기</option>
+          <option value="compact">간결한 보기</option>
+          <option value="detailed">상세 보기</option>
         </select>
       </div>
 
-      {/* 리스??*/}
+      {/* 리스트 */}
       <div className="bg-white rounded-lg p-4 shadow-sm">
         <div className="overflow-y-auto max-h-96">
           {renderListItems()}
         </div>
       </div>
       
-      {/* ?�택????�� ?�보 */}
+      {/* 선택된 항목 정보 */}
       {selectedItem && (
         <div className="mt-4 p-4 bg-[#49bcf3]/10 rounded-md">
           <p className="text-sm text-[#49bcf3]">
-            ??�� #{selectedItem}가 ?�택?�었?�니?? ?�제 ?�플리�??�션?�서???�세 ?�보 ?�시, 
-            ?�업 ?�태 변�? ??�� ?�의 ?�업???�행?????�습?�다.
+            항목 #{selectedItem}가 선택되었습니다. 실제 애플리케이션에서는 상세 정보 표시, 
+            작업 상태 변경 항목의 작업을 수행하는 것을 학습합니다.
           </p>
         </div>
       )}
@@ -428,7 +432,7 @@ export default ListViewExample;`}
                   }`}
                   onClick={() => setViewType("compact")}
                 >
-                  간결??보기
+                  간결한 보기
                 </button>
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
@@ -438,13 +442,13 @@ export default ListViewExample;`}
                   }`}
                   onClick={() => setViewType("detailed")}
                 >
-                  ?�세 보기
+                  상세 보기
                 </button>
               </div>
 
               <div className="border rounded-lg p-4 bg-white">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="font-medium">?�무 목록</h3>
+                  <h3 className="font-medium">작업 목록</h3>
                   <button className="p-1 rounded-full hover:bg-gray-100">
                     <MoreVertical className="w-5 h-5 text-gray-500" />
                   </button>
@@ -458,9 +462,9 @@ export default ListViewExample;`}
               {selectedItem && (
                 <div className="mt-4 p-4 bg-[#49bcf3]/10 rounded-md">
                   <p className="text-sm text-[#49bcf3]">
-                    ??�� #{selectedItem}가 ?�택?�었?�니?? ?�제
-                    ?�플리�??�션?�서???�세 ?�보 ?�시, ?�업 ?�태 변�? ??�� ?�의
-                    ?�업???�행?????�습?�다.
+                    항목 #{selectedItem}가 선택되었습니다. 실제
+                    애플리케이션에서는 상세 정보 표시, 작업 상태 변경 항목의
+                    작업을 수행하는 것을 학습합니다.
                   </p>
                 </div>
               )}

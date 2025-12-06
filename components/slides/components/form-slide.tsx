@@ -33,7 +33,7 @@ export default function FormSlide() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitted(true)
-    // ?�제로는 ?�기??API ?�출 ?�의 ?�업???�행
+    // 실제로는 여기서 API 호출 등의 작업을 수행
   }
 
   return (
@@ -41,29 +41,29 @@ export default function FormSlide() {
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�의</h3>
+              <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Form?� ?�용?�로부???�이?��? ?�집?�기 ?�한 ?�러 ?�력 ?�소�?그룹?�한 UI 컴포?�트?�니?? ?�스???�드,
-                체크박스, ?�디??버튼 ???�양???�력 ?�소�??�함?????�습?�다.
+                Form은 사용자로부터 데이터를 수집하기 위한 여러 입력 요소를 그룹화한 UI 컴포넌트입니다. 텍스트 필드,
+                체크박스, 라디오 버튼 등 다양한 입력 요소를 포함할 수 있습니다.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
+              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>로그???�원가??/li>
-                <li>?�락�??�보 ?�집</li>
-                <li>?�문조사</li>
-                <li>결제 ?�보 ?�력</li>
-                <li>검???�터</li>
-                <li>?�정 구성</li>
+                <li>로그인/회원가입</li>
+                <li>연락처 정보 수집</li>
+                <li>설문조사</li>
+                <li>결제 정보 입력</li>
+                <li>검색 필터</li>
+                <li>설정 구성</li>
               </ul>
             </div>
           </TabsContent>
@@ -105,83 +105,84 @@ const FormExample: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // ??검�?    if (!formData.name) {
-      alert('?�름???�력?�세??);
+    // 폼 검증
+    if (!formData.name) {
+      alert('이름을 입력하세요');
       return;
     }
     if (!formData.email) {
-      alert('?�메?�을 ?�력?�세??);
+      alert('이메일을 입력하세요');
       return;
     }
     if (!formData.agreeTerms) {
-      alert('?�용?��????�의?�주?�요');
+      alert('이용약관에 동의해주세요');
       return;
     }
-    
-    // ???�출 처리
-    console.log('???�출:', formData);
+
+    // 폼 제출 처리
+    console.log('폼 제출:', formData);
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* ?�름 ?�드 */}
+      {/* 이름 필드 */}
       <div className="space-y-2">
-        <Label htmlFor="name" className="font-bold">?�름</Label>
+        <Label htmlFor="name" className="font-bold">이름</Label>
         <Input
           id="name"
           name="name"
-          placeholder="?�름???�력?�세??
+          placeholder="이름을 입력하세요"
           value={formData.name}
           onChange={handleChange}
           required
         />
       </div>
-      
-      {/* ?�메???�드 */}
+
+      {/* 이메일 필드 */}
       <div className="space-y-2">
-        <Label htmlFor="email" className="font-bold">?�메??/Label>
+        <Label htmlFor="email" className="font-bold">이메일</Label>
         <Input
           id="email"
           name="email"
           type="email"
-          placeholder="?�메?�을 ?�력?�세??
+          placeholder="이메일을 입력하세요"
           value={formData.email}
           onChange={handleChange}
           required
         />
       </div>
-      
-      {/* 비�?번호 ?�드 */}
+
+      {/* 비밀번호 필드 */}
       <div className="space-y-2">
-        <Label htmlFor="password" className="font-bold">비�?번호</Label>
+        <Label htmlFor="password" className="font-bold">비밀번호</Label>
         <Input
           id="password"
           name="password"
           type="password"
-          placeholder="비�?번호�??�력?�세??
+          placeholder="비밀번호를 입력하세요"
           value={formData.password}
           onChange={handleChange}
           required
         />
       </div>
-      
-      {/* ?��? ?�의 체크박스 */}
+
+      {/* 약관 동의 체크박스 */}
       <div className="flex items-center space-x-2">
         <Checkbox
           id="terms"
           checked={formData.agreeTerms}
           onCheckedChange={handleCheckboxChange}
         />
-        <Label htmlFor="terms">?�용?��????�의?�니??/Label>
+        <Label htmlFor="terms">이용약관에 동의합니다</Label>
       </div>
-      
-      {/* ?�출 버튼 */}
-      <Button 
-        type="submit" 
+
+      {/* 제출 버튼 */}
+      <Button
+        type="submit"
         className="w-full"
         disabled={!formData.name || !formData.email || !formData.agreeTerms}
       >
-        ?�출?�기
+        제출하기
       </Button>
     </form>
   );
@@ -196,19 +197,20 @@ export default FormExample;`}
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               {isSubmitted ? (
                 <div className="p-4 bg-green-50 border border-green-200 rounded-md">
-                  <h3 className="text-lg font-semibold text-green-800 mb-2">?�이 ?�출?�었?�니??</h3>
-                  <p className="text-green-700">?�음 ?�보가 ?�출?�었?�니??</p>
+                  <h3 className="text-lg font-semibold text-green-800 mb-2">폼이 제출되었습니다!</h3>
+                  <p className="text-green-700">다음 정보가 제출되었습니다:</p>
                   <ul className="mt-2 space-y-1 text-green-700">
                     <li>
-                      <strong>?�름:</strong> {formData.name}
+                      <strong>이름:</strong> {formData.name}
                     </li>
                     <li>
-                      <strong>?�메??</strong> {formData.email}
+                      <strong>이메일:</strong> {formData.email}
                     </li>
                     <li>
-                      <strong>비�?번호:</strong> ?�••••••�?                    </li>
+                      <strong>비밀번호:</strong> ••••••••
+                    </li>
                     <li>
-                      <strong>?�용?��? ?�의:</strong> {formData.agreeTerms ? "?? : "?�니??}
+                      <strong>이용약관 동의:</strong> {formData.agreeTerms ? "예" : "아니오"}
                     </li>
                   </ul>
                   <Button
@@ -224,17 +226,17 @@ export default FormExample;`}
                       })
                     }}
                   >
-                    ?�시 ?�성?�기
+                    다시 작성하기
                   </Button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name">?�름</Label>
+                    <Label htmlFor="name">이름</Label>
                     <Input
                       id="name"
                       name="name"
-                      placeholder="?�름???�력?�세??
+                      placeholder="이름을 입력하세요"
                       value={formData.name}
                       onChange={handleChange}
                       required
@@ -242,12 +244,12 @@ export default FormExample;`}
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email">?�메??/Label>
+                    <Label htmlFor="email">이메일</Label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
-                      placeholder="?�메?�을 ?�력?�세??
+                      placeholder="이메일을 입력하세요"
                       value={formData.email}
                       onChange={handleChange}
                       required
@@ -255,12 +257,12 @@ export default FormExample;`}
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="password">비�?번호</Label>
+                    <Label htmlFor="password">비밀번호</Label>
                     <Input
                       id="password"
                       name="password"
                       type="password"
-                      placeholder="비�?번호�??�력?�세??
+                      placeholder="비밀번호를 입력하세요"
                       value={formData.password}
                       onChange={handleChange}
                       required
@@ -269,14 +271,14 @@ export default FormExample;`}
 
                   <div className="flex items-center space-x-2">
                     <Checkbox id="terms" checked={formData.agreeTerms} onCheckedChange={handleCheckboxChange} />
-                    <Label htmlFor="terms">?�용?��????�의?�니??/Label>
+                    <Label htmlFor="terms">이용약관에 동의합니다</Label>
                   </div>
 
                   <Button
                     type="submit"
                     disabled={!formData.name || !formData.email || !formData.password || !formData.agreeTerms}
                   >
-                    ?�출?�기
+                    제출하기
                   </Button>
                 </form>
               )}

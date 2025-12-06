@@ -1,11 +1,10 @@
 // components/ui/prism/PrismCode.tsx
 "use client";
 
-import React, { useEffect, useRef } from "react";
 import Prism from "prismjs";
-import "prismjs/themes/prism-okaidia.css";
 import "prismjs/components/prism-typescript";
-// ??‹¤ë¥??¸ì–´ import ?ëµ
+import "prismjs/themes/prism-okaidia.css";
+import React, { useEffect, useRef } from "react";
 
 interface PrismCodeProps {
   code: string;
@@ -20,7 +19,7 @@ export function PrismCode({ code, language, plugins = [] }: PrismCodeProps) {
     if (codeRef.current) Prism.highlightElement(codeRef.current);
   }, [code, language]);
 
-  /** Prism???£ì„ ?ì„±???œë²„?ì„œ???£ì–´ ì¤€??*/
+  /** Prism???ï¿½ì„ ?ï¿½ì„±???ï¿½ë²„?ï¿½ì„œ???ï¿½ì–´ ì¤€??*/
   const preClass = `language-${language} ${plugins.join(" ")}`.trim();
 
   return (

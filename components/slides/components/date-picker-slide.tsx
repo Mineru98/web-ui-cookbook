@@ -20,29 +20,29 @@ export default function DatePickerSlide() {
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�의</h3>
+              <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Date Picker???�용?��? ?�짜�??�택?????�는 캘린???�태??UI ?�소?�니?? ?�짜 ?�력??직�??�이�??�용?�기
-                ?�게 만들?�줍?�다.
+                Date Picker는 사용자가 날짜를 선택할 수 있는 캘린더 형태의 UI 요소입니다. 날짜 입력을 직관적이고 사용하기
+                쉽게 만들어줍니다.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
+              <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>?�약 ?�스??(?�텔, ??���???</li>
-                <li>?�정 관�?�?캘린????/li>
-                <li>?�벤??계획</li>
-                <li>?�년?�일 ?�력</li>
-                <li>?�짜 범위 ?�터</li>
-                <li>?�로?�트 마감???�정</li>
+                <li>예약 시스템 (호텔, 항공권 등)</li>
+                <li>일정 관리자 캘린더</li>
+                <li>이벤트 계획</li>
+                <li>생년월일 입력</li>
+                <li>날짜 범위 필터</li>
+                <li>프로젝트 마감일 설정</li>
               </ul>
             </div>
           </TabsContent>
@@ -60,7 +60,8 @@ import { ko } from "date-fns/locale"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 
-// 기본 ?�짜 ?�택�?const [date, setDate] = useState<Date>()
+// 기본 날짜 선택기
+const [date, setDate] = useState<Date>()
 
 <Popover>
   <PopoverTrigger asChild>
@@ -71,7 +72,7 @@ import { cn } from "@/lib/utils"
         !date && "text-muted-foreground"
       )}
     >
-      {date ? format(date, "yyyy??MM??dd??) : "?�짜 ?�택"}
+      {date ? format(date, "yyyy년 MM월 dd일") : "날짜 선택"}
       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
     </Button>
   </PopoverTrigger>
@@ -85,7 +86,8 @@ import { cn } from "@/lib/utils"
   </PopoverContent>
 </Popover>
 
-// ?�짜 범위 ?�택�?const [dateRange, setDateRange] = useState<{
+// 날짜 범위 선택기
+const [dateRange, setDateRange] = useState<{
   from: Date | undefined
   to: Date | undefined
 }>({ from: undefined, to: undefined })
@@ -102,14 +104,14 @@ import { cn } from "@/lib/utils"
       {dateRange?.from ? (
         dateRange.to ? (
           <>
-            {format(dateRange.from, "yyyy??MM??dd??)} -{" "}
-            {format(dateRange.to, "yyyy??MM??dd??)}
+            {format(dateRange.from, "yyyy년 MM월 dd일")} -{" "}
+            {format(dateRange.to, "yyyy년 MM월 dd일")}
           </>
         ) : (
-          format(dateRange.from, "yyyy??MM??dd??)
+          format(dateRange.from, "yyyy년 MM월 dd일")
         )
       ) : (
-        "?�짜 범위 ?�택"
+        "날짜 범위 선택"
       )}
       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
     </Button>
@@ -124,7 +126,8 @@ import { cn } from "@/lib/utils"
   </PopoverContent>
 </Popover>
 
-// ?�중 ?�짜 ?�택�?const [selectedDates, setSelectedDates] = useState<Date[]>([])
+// 다중 날짜 선택기
+const [selectedDates, setSelectedDates] = useState<Date[]>([])
 
 <Calendar
   mode="multiple"
@@ -145,7 +148,7 @@ import { cn } from "@/lib/utils"
                       variant="outline"
                       className={cn("w-[240px] justify-start text-left font-normal", !date && "text-muted-foreground")}
                     >
-                      {date ? format(date, "PPP", { locale: ko }) : <span>?�짜 ?�택</span>}
+                      {date ? format(date, "PPP", { locale: ko }) : <span>날짜 선택</span>}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </PopoverTrigger>
@@ -155,7 +158,7 @@ import { cn } from "@/lib/utils"
                 </Popover>
 
                 {date && (
-                  <p className="text-sm">?�택???�짜: {format(date, "yyyy??MM??dd??(EEEE)", { locale: ko })}</p>
+                  <p className="text-sm">선택된 날짜: {format(date, "yyyy년 MM월 dd일 (EEEE)", { locale: ko })}</p>
                 )}
               </div>
             </div>

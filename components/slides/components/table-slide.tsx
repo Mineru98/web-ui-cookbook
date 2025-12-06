@@ -11,9 +11,9 @@ import { PrismCode } from "@/components/ui/prism/PrismCode"
 
 export default function TableSlide() {
   const [data, setData] = useState([
-    { id: 1, name: "?�길??, email: "hong@example.com", role: "관리자" },
-    { id: 2, name: "김철수", email: "kim@example.com", role: "?�용?? },
-    { id: 3, name: "?�영??, email: "lee@example.com", role: "?�집?? },
+    { id: 1, name: "홍길동", email: "hong@example.com", role: "관리자" },
+    { id: 2, name: "김철수", email: "kim@example.com", role: "사용자" },
+    { id: 3, name: "이영희", email: "lee@example.com", role: "편집자" },
   ])
 
   const [newRow, setNewRow] = useState({ name: "", email: "", role: "" })
@@ -30,27 +30,28 @@ export default function TableSlide() {
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�의</h3>
+              <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Table?� ?�과 ?�로 구성???�이?��? ?�시?�는 UI ?�소?�니?? 구조?�된 ?�보�??�과?�으�?보여주는 ??                ?�용?�니??
+                Table은 행과 열로 구성된 데이터를 표시하는 UI 요소입니다. 구조화된 정보를 효과적으로 보여주는 데
+                사용됩니다.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
+              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>?�이??목록 ?�시</li>
-                <li>?�용??관�??�터?�이??/li>
-                <li>?�고 관�?/li>
-                <li>금융 ?�이???�시</li>
-                <li>?�정 �??�간??/li>
+                <li>데이터 목록 표시</li>
+                <li>사용자 관리 대시보드</li>
+                <li>재고 관리</li>
+                <li>금융 데이터 표시</li>
+                <li>일정 및 시간표</li>
                 <li>비교 차트</li>
               </ul>
             </div>
@@ -81,9 +82,9 @@ interface User {
 
 const TableExample: React.FC = () => {
   const [data, setData] = useState<User[]>([
-    { id: 1, name: '?�길??, email: 'hong@example.com', role: '관리자' },
-    { id: 2, name: '김철수', email: 'kim@example.com', role: '?�용?? },
-    { id: 3, name: '?�영??, email: 'lee@example.com', role: '?�집?? },
+    { id: 1, name: '홍길동', email: 'hong@example.com', role: '관리자' },
+    { id: 2, name: '김철수', email: 'kim@example.com', role: '사용자' },
+    { id: 3, name: '이영희', email: 'lee@example.com', role: '편집자' },
   ]);
 
   const deleteRow = (id: number) => {
@@ -92,44 +93,44 @@ const TableExample: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      {/* 기본 ?�이�?*/}
+      {/* 기본 테이블 */}
       <div>
-        <h3 className="text-lg font-semibold mb-2">기본 ?�이�?/h3>
+        <h3 className="text-lg font-semibold mb-2">기본 테이블</h3>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>?�름</TableHead>
-              <TableHead>?�메??/TableHead>
-              <TableHead>??��</TableHead>
+              <TableHead>이름</TableHead>
+              <TableHead>이메일</TableHead>
+              <TableHead>역할</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell>?�길??/TableCell>
+              <TableCell>홍길동</TableCell>
               <TableCell>hong@example.com</TableCell>
               <TableCell>관리자</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>김철수</TableCell>
               <TableCell>kim@example.com</TableCell>
-              <TableCell>?�용??/TableCell>
+              <TableCell>사용자</TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </div>
 
-      {/* ?�적 ?�이?��? ?�는 ?�이�?*/}
+      {/* 동적 데이터가 있는 테이블 */}
       <div>
-        <h3 className="text-lg font-semibold mb-2">?�적 ?�이???�이�?/h3>
+        <h3 className="text-lg font-semibold mb-2">동적 데이터 테이블</h3>
         <Table>
-          <TableCaption>?�용??목록</TableCaption>
+          <TableCaption>사용자 목록</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">ID</TableHead>
-              <TableHead>?�름</TableHead>
-              <TableHead>?�메??/TableHead>
-              <TableHead>??��</TableHead>
-              <TableHead>?�션</TableHead>
+              <TableHead>이름</TableHead>
+              <TableHead>이메일</TableHead>
+              <TableHead>역할</TableHead>
+              <TableHead>액션</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -140,12 +141,12 @@ const TableExample: React.FC = () => {
                 <TableCell>{row.email}</TableCell>
                 <TableCell>{row.role}</TableCell>
                 <TableCell>
-                  <Button 
-                    variant="destructive" 
+                  <Button
+                    variant="destructive"
                     size="sm"
                     onClick={() => deleteRow(row.id)}
                   >
-                    ??��
+                    삭제
                   </Button>
                 </TableCell>
               </TableRow>
@@ -154,37 +155,37 @@ const TableExample: React.FC = () => {
         </Table>
       </div>
 
-      {/* ?��??�링???�이�?*/}
+      {/* 커스텀 스타일링된 테이블 */}
       <div>
-        <h3 className="text-lg font-semibold mb-2">?��??�링???�이�?/h3>
+        <h3 className="text-lg font-semibold mb-2">커스텀 스타일링된 테이블</h3>
         <div className="rounded-md border">
           <Table>
             <TableHeader>
               <TableRow className="bg-muted/50">
-                <TableHead className="h-12">?�품�?/TableHead>
-                <TableHead>가�?/TableHead>
-                <TableHead>?�고</TableHead>
-                <TableHead className="text-right">?�태</TableHead>
+                <TableHead className="h-12">제품명</TableHead>
+                <TableHead>가격</TableHead>
+                <TableHead>재고</TableHead>
+                <TableHead className="text-right">상태</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               <TableRow className="hover:bg-muted/50">
-                <TableCell className="font-medium">?�트�?/TableCell>
-                <TableCell>??,200,000</TableCell>
+                <TableCell className="font-medium">노트북</TableCell>
+                <TableCell>₩1,200,000</TableCell>
                 <TableCell>15</TableCell>
                 <TableCell className="text-right">
                   <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium bg-green-50 text-green-700">
-                    ?�고?�음
+                    재고있음
                   </span>
                 </TableCell>
               </TableRow>
               <TableRow className="hover:bg-muted/50">
-                <TableCell className="font-medium">마우??/TableCell>
-                <TableCell>??5,000</TableCell>
+                <TableCell className="font-medium">마우스</TableCell>
+                <TableCell>₩35,000</TableCell>
                 <TableCell>0</TableCell>
                 <TableCell className="text-right">
                   <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium bg-red-50 text-red-700">
-                    ?�절
+                    품절
                   </span>
                 </TableCell>
               </TableRow>
@@ -207,51 +208,52 @@ export default TableExample;`}
                 <div className="grid grid-cols-3 gap-4">
                   <div>
                     <Label htmlFor="name" className="mb-2 block">
-                      ?�름
+                      이름
                     </Label>
                     <Input
                       id="name"
                       value={newRow.name}
                       onChange={(e) => setNewRow({ ...newRow, name: e.target.value })}
-                      placeholder="?�름 ?�력"
+                      placeholder="이름 입력"
                     />
                   </div>
                   <div>
                     <Label htmlFor="email" className="mb-2 block">
-                      ?�메??                    </Label>
+                      이메일
+                    </Label>
                     <Input
                       id="email"
                       value={newRow.email}
                       onChange={(e) => setNewRow({ ...newRow, email: e.target.value })}
-                      placeholder="?�메???�력"
+                      placeholder="이메일 입력"
                     />
                   </div>
                   <div>
                     <Label htmlFor="role" className="mb-2 block">
-                      ??��
+                      역할
                     </Label>
                     <Input
                       id="role"
                       value={newRow.role}
                       onChange={(e) => setNewRow({ ...newRow, role: e.target.value })}
-                      placeholder="??�� ?�력"
+                      placeholder="역할 입력"
                     />
                   </div>
                 </div>
                 <Button onClick={addRow} disabled={!newRow.name || !newRow.email || !newRow.role}>
-                  ??추�?
+                  행 추가
                 </Button>
               </div>
 
               <div className="border rounded-md overflow-hidden">
                 <Table>
-                  <TableCaption>?�용??목록</TableCaption>
+                  <TableCaption>사용자 목록</TableCaption>
                   <TableHeader>
                     <TableRow>
                       <TableHead className="w-[100px]">ID</TableHead>
-                      <TableHead>?�름</TableHead>
-                      <TableHead>?�메??/TableHead>
-                      <TableHead>??��</TableHead>
+                      <TableHead>이름</TableHead>
+                      <TableHead>이메일</TableHead>
+                      <TableHead>역할</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>

@@ -9,9 +9,9 @@ import { PrismCode } from "@/components/ui/prism/PrismCode";
 
 export default function CheckBoxSlide() {
   const [options, setOptions] = useState([
-    { id: "option1", label: "?�션 1", checked: false },
-    { id: "option2", label: "?�션 2", checked: false },
-    { id: "option3", label: "?�션 3", checked: false },
+    { id: "option1", label: "옵션 1", checked: false },
+    { id: "option2", label: "옵션 2", checked: false },
+    { id: "option3", label: "옵션 3", checked: false },
   ]);
 
   const [newOption, setNewOption] = useState("");
@@ -40,28 +40,29 @@ export default function CheckBoxSlide() {
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�의</h3>
+              <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Check Box???�용?��? ?�러 ?�션 �??�러 개�? ?�택?????�는 UI
-                ?�소?�니?? �?체크박스???�립?�으�??�택?�거???�제????                ?�습?�다.
+                Check Box는 사용자가 여러 옵션 중 여러 개를 선택할 수 있는 UI
+                요소입니다. 각 체크박스는 독립적으로 선택하거나 해제할 수
+                있습니다.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
+              <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>?�중 ?�택???�요???�문조사 질문</li>
-                <li>?�터 ?�션 ?�택 (?�러 카테고리 ?�택)</li>
-                <li>?�용?��? ?�의</li>
-                <li>?�정 ?�션 ?�성??비활?�화</li>
-                <li>????목록(To-do list)???�료 ?�시</li>
-                <li>?�중 ??�� ?�택 (?�메?? ?�일 ??</li>
+                <li>다중 선택이 필요한 설문조사 질문</li>
+                <li>필터 옵션 선택 (여러 카테고리 선택)</li>
+                <li>이용약관 동의</li>
+                <li>특정 옵션 활성화/비활성화</li>
+                <li>할 일 목록(To-do list)의 완료 표시</li>
+                <li>다중 항목 선택 (이메일, 파일 등)</li>
               </ul>
             </div>
           </TabsContent>
@@ -86,34 +87,35 @@ const CheckboxExample: React.FC = () => {
           checked={false} 
           onCheckedChange={() => {}} 
         />
-        <Label htmlFor="terms">?�용?��????�의?�니??/Label>
+        <Label htmlFor="terms">이용약관에 동의합니다</Label>
       </div>
 
-      {/* 기본값이 체크??체크박스 */}
+      {/* 기본값이 체크된 체크박스 */}
       <div className="flex items-center space-x-2">
-        <Checkbox 
-          id="marketing" 
-          checked={true} 
-          onCheckedChange={() => {}} 
+        <Checkbox
+          id="marketing"
+          checked={true}
+          onCheckedChange={() => {}}
         />
-        <Label htmlFor="marketing">마�????�메???�신</Label>
+        <Label htmlFor="marketing">마케팅 이메일 수신</Label>
       </div>
 
-      {/* 비활?�화??체크박스 */}
+      {/* 비활성화된 체크박스 */}
       <div className="flex items-center space-x-2">
-        <Checkbox 
-          id="disabled" 
-          checked={false} 
-          disabled 
+        <Checkbox
+          id="disabled"
+          checked={false}
+          disabled
         />
-        <Label 
-          htmlFor="disabled" 
+        <Label
+          htmlFor="disabled"
           className="text-muted-foreground"
         >
-          비활?�화??        </Label>
+          비활성화됨
+        </Label>
       </div>
 
-      {/* ?�벤???�들?��? ?�는 체크박스 */}
+      {/* 이벤트 핸들러가 있는 체크박스 */}
       <div className="flex items-center space-x-2">
         <Checkbox
           id="subscription"
@@ -122,7 +124,7 @@ const CheckboxExample: React.FC = () => {
             setIsSubscribed(checked === true);
           }}
         />
-        <Label htmlFor="subscription">구독?�기</Label>
+        <Label htmlFor="subscription">구독?�기</Label>
       </div>
     </div>
   );
@@ -141,14 +143,14 @@ export default CheckboxExample;`}
                     type="text"
                     value={newOption}
                     onChange={(e) => setNewOption(e.target.value)}
-                    placeholder="???�션 추�?"
+                    placeholder="새 옵션 추가"
                     className="flex-1 p-2 border rounded-md"
                   />
                   <button
                     onClick={addOption}
                     className="px-4 py-2 bg-[#49bcf3] text-white rounded-md"
                   >
-                    추�?
+                    추가
                   </button>
                 </div>
               </div>
@@ -171,7 +173,7 @@ export default CheckboxExample;`}
                 </div>
 
                 <div className="mt-4 text-sm">
-                  <p>?�택???�션:</p>
+                  <p>선택된 옵션:</p>
                   <ul className="list-disc pl-5 mt-2">
                     {options
                       .filter((option) => option.checked)

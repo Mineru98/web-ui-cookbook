@@ -1,19 +1,18 @@
 "use client";
 
-import SlideLayout from "../slide-layout";
-import { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   ArrowLeft,
   ArrowRight,
-  RefreshCw,
-  Home,
-  X,
-  Share,
-  MoreVertical,
   Globe,
+  Home,
+  MoreVertical,
+  RefreshCw,
+  Share,
+  X,
 } from "lucide-react";
-import { PrismCode } from "../../ui/prism/PrismCode";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState } from "react";
+import SlideLayout from "../slide-layout";
 
 export default function WebViewSlide() {
   const [webViewType, setWebViewType] = useState<
@@ -62,7 +61,8 @@ export default function WebViewSlide() {
                   <Globe className="h-8 w-8 text-gray-500" />
                 </div>
                 <p className="text-gray-600 text-sm mb-2">
-                  ??콘텐츠�? ?�기???�시?�니??                </p>
+                  웹 콘텐츠를 불러오는 중입니다
+                </p>
                 <p className="text-gray-500 text-xs">{url}</p>
               </div>
             </div>
@@ -73,13 +73,12 @@ export default function WebViewSlide() {
         return (
           <div className="h-72 flex flex-col bg-white overflow-hidden border">
             <div className="p-3 bg-gray-50 border-b">
-              <h3 className="font-medium text-gray-800">?????�베?�드 ?�뷰</h3>
+              <h3 className="font-medium text-gray-800">임베디드 웹뷰</h3>
             </div>
             <div className="flex-1 flex items-center justify-center p-6 bg-white">
               <div className="bg-gray-100 border rounded-lg p-4 w-full mx-auto max-w-sm">
                 <div className="flex justify-between items-center mb-3">
-                  <div className="text-gray-800 font-medium">
-                    ?��? ??콘텐�?                  </div>
+                  <div className="text-gray-800 font-medium">웹 콘텐츠</div>
                   <button className="p-1 text-gray-500 hover:text-gray-700">
                     <X className="h-4 w-4" />
                   </button>
@@ -89,7 +88,7 @@ export default function WebViewSlide() {
                 </div>
                 <div className="flex space-x-2">
                   <button className="flex-1 bg-[#49bcf3] text-white rounded-md py-1.5 text-sm">
-                    ?�의
+                    동의
                   </button>
                   <button className="flex-1 bg-gray-200 text-gray-700 rounded-md py-1.5 text-sm">
                     취소
@@ -103,35 +102,35 @@ export default function WebViewSlide() {
       case "full-page":
         return (
           <div className="h-72 flex flex-col">
-            {/* ?�체 콘텐츠�? ?�뷰 */}
+            {/* 전체 콘텐츠를 뷰 */}
             <div className="flex-1 bg-gray-100 flex items-center justify-center text-center">
               <div>
                 <div className="mx-auto w-20 h-20 bg-white rounded-lg shadow-md flex items-center justify-center mb-4">
                   <Globe className="h-10 w-10 text-[#49bcf3]" />
                 </div>
                 <h3 className="font-medium text-gray-800 mb-1">
-                  ?�체 ?�이지 ?�뷰
+                  전체 페이지 뷰
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  ???�이?�브 UI ?�이 ?�체 ?�면????콘텐츠로 ?�시?�니??
+                  네이티브 UI 없이 전체 화면을 웹 콘텐츠로 표시합니다
                 </p>
                 <p className="text-[#49bcf3] text-xs mt-3">{url}</p>
               </div>
             </div>
 
-            {/* ?�단 ?�비게이??�?*/}
+            {/* 하단 네비게이션 바 */}
             <div className="bg-white border-t py-2 px-4 flex justify-around">
               <button className="p-2 text-gray-500 flex flex-col items-center">
                 <Home className="h-5 w-5" />
-                <span className="text-xs mt-1">??/span>
+                <span className="text-xs mt-1">홈</span>
               </button>
               <button className="p-2 text-[#49bcf3] flex flex-col items-center">
                 <Globe className="h-5 w-5" />
-                <span className="text-xs mt-1">??/span>
+                <span className="text-xs mt-1">웹</span>
               </button>
               <button className="p-2 text-gray-500 flex flex-col items-center">
                 <MoreVertical className="h-5 w-5" />
-                <span className="text-xs mt-1">?�보�?/span>
+                <span className="text-xs mt-1">더보기</span>
               </button>
             </div>
           </div>
@@ -164,7 +163,8 @@ export default function WebViewSlide() {
                   <Globe className="h-8 w-8 text-gray-400" />
                 </div>
                 <p className="text-gray-600 text-sm">
-                  ??콘텐츠�? ?�기???�시?�니??                </p>
+                  웹 콘텐츠를 불러오는 중입니다
+                </p>
               </div>
             </div>
           </div>
@@ -173,23 +173,24 @@ export default function WebViewSlide() {
   };
 
   return (
-    <SlideLayout title="WebView (?�뷰)">
+    <SlideLayout title="WebView (웹뷰)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="prose max-w-none mb-6">
-              <h2 className="text-xl font-semibold mb-3">?�의</h2>
+              <h2 className="text-xl font-semibold mb-3">정의</h2>
               <p>
-                ?�뷰(WebView)??모바?????�에????콘텐츠�? ?�시?�기 ?�한
-                컴포?�트?�니?? ?�이?�브 ?�플리�??�션 ?�에 ?�장??브라?��?�?
-                HTML, CSS, JavaScript�??�성?????�이지�????��??�서 보여�???                ?�습?�다. ?��? ?�해 ?�과 ??기술???�합?�여 ?�이브리???�을
-                개발?�거???��? ??콘텐츠�? ???�에 ?�합?????�습?�다.
+                웹뷰(WebView)는 모바일 앱에서 웹 콘텐츠를 표시하기 위한
+                컴포넌트입니다. 네이티브 애플리케이션 안에 내장된 브라우저로
+                HTML, CSS, JavaScript로 구성된 웹페이지를 앱에서 보여주는
+                기능입니다. 이를 통해 웹과 네이티브 기술을 결합하여 하이브리드
+                앱을 개발할 수 있으며, 웹 콘텐츠를 앱에 통합할 수 있습니다.
               </p>
             </div>
 
@@ -207,12 +208,12 @@ export default function WebViewSlide() {
                     onClick={() => setWebViewType(type as any)}
                   >
                     {type === "basic"
-                      ? "기본??
+                      ? "기본"
                       : type === "custom-ui"
-                      ? "커스?� UI??
+                      ? "커스텀 UI"
                       : type === "embedded"
-                      ? "?�베?�드??
-                      : "?�체?�이지??}
+                      ? "임베디드"
+                      : "전체페이지"}
                   </button>
                 ))}
               </div>
@@ -223,69 +224,70 @@ export default function WebViewSlide() {
                 <div className="p-4 bg-white">
                   <h3 className="font-medium mb-2">
                     {webViewType === "basic"
-                      ? "기본 ?�뷰"
+                      ? "기본 웹뷰"
                       : webViewType === "custom-ui"
-                      ? "커스?� UI ?�뷰"
+                      ? "커스텀 UI 웹뷰"
                       : webViewType === "embedded"
-                      ? "?�베?�드 ?�뷰"
-                      : "?�체 ?�이지 ?�뷰"}
+                      ? "임베디드 웹뷰"
+                      : "전체 페이지 웹뷰"}
                   </h3>
                   <p className="text-gray-600 text-sm mb-4">
                     {webViewType === "basic"
-                      ? "기본?�인 ?�태???�뷰�? ???�에????콘텐츠�? ?�시?�는 ?�플??구현?�니??"
+                      ? "기본적인 형태의 웹뷰로 앱에서 웹 콘텐츠를 표시하는 예제를 구현한 것입니다"
                       : webViewType === "custom-ui"
-                      ? "?�의 ?�자???�스?�에 맞춰 커스?�마?�징??UI�?가�??�뷰?�니??"
+                      ? "앱의 디자인 시스템에 맞춰 커스터마이징된 UI를 가진 웹뷰입니다"
                       : webViewType === "embedded"
-                      ? "???�면???��??�만 ??콘텐츠�? ?�시?�는 ?�베?�드 ?�태???�뷰?�니??"
-                      : "?�체 ?�면????콘텐츠로 채워지???�태�? ????최소?�의 ?�이?�브 UI�??�시?�니??"}
+                      ? "앱 화면의 일부만 웹 콘텐츠를 표시하는 임베디드 형태의 웹뷰입니다"
+                      : "전체 화면을 웹 콘텐츠로 채워지는 형태로, 최소한의 네이티브 UI만 표시합니다"}
                   </p>
 
                   <div className="bg-gray-50 p-3 rounded-md border text-sm">
-                    <strong>주요 ?�징:</strong>
+                    <strong>주요 특징:</strong>
                     <ul className="list-disc pl-5 mt-2 space-y-1">
-                      <li>?�이?�브 ?�과 ??기술??결합</li>
-                      <li>?��? ??콘텐�??�시 가??/li>
-                      <li>JavaScript?� ?�이?�브 코드 �??�방???�신 지??/li>
-                      <li>???�에???��????�용??경험 ?�공</li>
-                      <li>???�데?�트가 ???�데?�트 ?�이 가??/li>
+                      <li>네이티브 앱과 웹 기술의 결합</li>
+                      <li>웹 콘텐츠 즉시 표시 가능</li>
+                      <li>JavaScript와 네이티브 코드 간 양방향 통신 지원</li>
+                      <li>앱에서 웹의 풍부한 사용자 경험 제공</li>
+                      <li>웹 업데이트가 앱 업데이트 없이 가능</li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* ?�용 ?��? & 주요 기능 */}
+            {/* 사용 사례 & 주요 기능 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-4 bg-slate-50 rounded-md">
-                <h3 className="text-lg font-medium mb-2">?�뷰 ?�용 ?��?</h3>
+                <h3 className="text-lg font-medium mb-2">웹뷰 사용 사례</h3>
                 <ul className="list-disc pl-6 space-y-1">
                   <li>
-                    <strong>?�이브리????개발</strong>
+                    <strong>하이브리드 앱 개발</strong>
                     <p className="text-sm text-gray-600">
-                      ?�의 ?��? ?�는 ?�체�??�으�?구현
+                      앱의 일부 기능은 네이티브로 구현
                     </p>
                   </li>
                   <li>
-                    <strong>?��? 콘텐�??�시</strong>
+                    <strong>웹 콘텐츠 표시</strong>
                     <p className="text-sm text-gray-600">
-                      ?��? ?�이?�나 콘텐�??�시
+                      웹 페이지나 콘텐츠 표시
                     </p>
                   </li>
                   <li>
-                    <strong>?�앱 브라?��?</strong>
+                    <strong>인앱 브라우저</strong>
                     <p className="text-sm text-gray-600">
-                      ??종료 ?�이 ???�색 지??                    </p>
-                  </li>
-                  <li>
-                    <strong>OAuth ?�증</strong>
-                    <p className="text-sm text-gray-600">
-                      ?�셜 로그??????기반 ?�증 처리
+                      앱 종료 없이 웹 탐색 지원
                     </p>
                   </li>
                   <li>
-                    <strong>?�적 콘텐�??�데?�트</strong>
+                    <strong>OAuth 인증</strong>
                     <p className="text-sm text-gray-600">
-                      ???�데?�트 ?�이 콘텐�?갱신
+                      소셜 로그인 등 웹 기반 인증 처리
+                    </p>
+                  </li>
+                  <li>
+                    <strong>동적 콘텐츠 업데이트</strong>
+                    <p className="text-sm text-gray-600">
+                      웹 업데이트 없이 콘텐츠 갱신
                     </p>
                   </li>
                 </ul>
@@ -293,59 +295,58 @@ export default function WebViewSlide() {
               <div className="p-4 bg-slate-50 rounded-md">
                 <h3 className="text-lg font-medium mb-2">주요 기능</h3>
                 <ul className="list-disc pl-6 space-y-1">
-                  <li>???�이지 로드 �??�더�?/li>
-                  <li>JavaScript ?�행 �?처리</li>
-                  <li>JS-?�이?�브 브릿지 ?�신</li>
-                  <li>쿠키 �??�션 관�?/li>
-                  <li>?�비게이???�어</li>
-                  <li>?�일 ?�로???�운로드</li>
-                  <li>?�프?�인 지??(캐싱)</li>
-                  <li>보안 ?�책 ?�용</li>
+                  <li>웹 페이지 로드 및 리더 모드</li>
+                  <li>JavaScript 실행 및 처리</li>
+                  <li>JS-네이티브 브릿지 통신</li>
+                  <li>쿠키 및 세션 관리</li>
+                  <li>네비게이션 컨트롤러</li>
+                  <li>파일 다운로드 및 업로드</li>
+                  <li>오프라인 지원 (캐싱)</li>
+                  <li>보안 정책 적용</li>
                 </ul>
               </div>
             </div>
 
-            {/* 고려?�항 */}
+            {/* 고려사항 */}
             <div className="p-4 border border-[#49bcf3]/20 bg-[#49bcf3]/5 rounded-md mt-6">
               <h3 className="text-lg font-medium mb-2 text-[#49bcf3]">
-                ?�뷰 구현 ??고려?�항
+                웹뷰 구현 시 고려사항
               </h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700">
                 <li>
                   <strong>보안</strong>
-                  <p className="text-sm">HTTPS ?�용, ?�증 ?�큰 관�?/p>
+                  <p className="text-sm">HTTPS 사용, 인증 토큰 관리</p>
                 </li>
                 <li>
-                  <strong>?�능</strong>
-                  <p className="text-sm">로딩 ?�간·메모�?최적??/p>
+                  <strong>성능</strong>
+                  <p className="text-sm">로딩 시간·메모리 최적화</p>
                 </li>
                 <li>
-                  <strong>반응??/strong>
-                  <p className="text-sm">?�양???�면 ?�기 ?�??/p>
+                  <strong>반응형</strong>
+                  <p className="text-sm">다양한 화면 크기 대응</p>
                 </li>
                 <li>
-                  <strong>?�프?�인</strong>
-                  <p className="text-sm">캐싱 ?�략</p>
+                  <strong>오프라인</strong>
+                  <p className="text-sm">캐싱 전략</p>
                 </li>
                 <li>
                   <strong>UX</strong>
-                  <p className="text-sm">?��????�용??경험</p>
+                  <p className="text-sm">일관된 사용자 경험</p>
                 </li>
                 <li>
-                  <strong>?�랫??차이</strong>
-                  <p className="text-sm">Android vs iOS 차이 ?�해</p>
+                  <strong>플랫폼 차이</strong>
+                  <p className="text-sm">Android vs iOS 차이 이해</p>
                 </li>
                 <li>
-                  <strong>?�근??/strong>
-                  <p className="text-sm">???�근??준??/p>
+                  <strong>접근성</strong>
+                  <p className="text-sm">웹 접근성 준수</p>
                 </li>
                 <li>
-                  <strong>?�션 관�?/strong>
-                  <p className="text-sm">?�↔️웹 ?�증 ?�태 공유</p>
+                  <strong>세션 관리</strong>
+                  <p className="text-sm">앱↔️웹 인증 상태 공유</p>
                 </li>
               </ul>
             </div>
-
           </TabsContent>
         </Tabs>
       </div>

@@ -28,29 +28,29 @@ export default function ProgressBarSlide() {
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�의</h3>
+              <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Progress Bar???�업??진행 ?�태�??�각?�으�??�시?�는 UI
-                ?�소?�니?? ?�용?�에�??�업???�마???�료?�었?��? ?�려줍니??
+                Progress Bar는 작업의 진행 상태를 시각적으로 표시하는 UI
+                요소입니다. 사용자에게 작업이 얼마나 완료되었는지 알려줍니다.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
+              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>?�일 ?�로???�운로드 진행 ?�태</li>
-                <li>?�식 ?�성 진행 ?�태</li>
-                <li>?�치 ?�로?�스</li>
-                <li>?�이지 로딩 ?�시</li>
-                <li>목표 ?�성 진행 ?�태</li>
-                <li>?�계�??�로?�스 ?�시</li>
+                <li>파일 업로드/다운로드 진행 상태</li>
+                <li>양식 작성 진행 상태</li>
+                <li>설치 프로세스</li>
+                <li>페이지 로딩 표시</li>
+                <li>목표 달성 진행 상태</li>
+                <li>단계별 프로세스 표시</li>
               </ul>
             </div>
           </TabsContent>
@@ -69,25 +69,25 @@ const ProgressBarExample: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* 기본 진행 ?�시�?*/}
+      {/* 기본 진행 표시줄 */}
       <div className="space-y-2">
-        <p className="text-sm font-medium">기본 진행 ?�시�?(60%)</p>
+        <p className="text-sm font-medium">기본 진행 표시줄 (60%)</p>
         <Progress value={60} className="h-2" />
       </div>
 
-      {/* 값이 ?�는 불확??진행 ?�시�?*/}
+      {/* 값이 없는 불확정 진행 표시줄 */}
       <div className="space-y-2">
-        <p className="text-sm font-medium">불확??진행 ?�시�?/p>
+        <p className="text-sm font-medium">불확정 진행 표시줄</p>
         <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
           <div className="h-full bg-primary animate-pulse" />
         </div>
       </div>
 
-      {/* 커스?� ?��??�의 진행 ?�시�?*/}
+      {/* 커스텀 스타일의 진행 표시줄 */}
       <div className="space-y-2">
-        <p className="text-sm font-medium">커스?� ?��???(75%)</p>
-        <Progress 
-          value={75} 
+        <p className="text-sm font-medium">커스텀 스타일 (75%)</p>
+        <Progress
+          value={75}
           className="h-3 bg-gray-200"
           style={{
             '--progress-foreground': '#22c55e'
@@ -95,44 +95,45 @@ const ProgressBarExample: React.FC = () => {
         />
       </div>
 
-      {/* ?�적 진행 ?�시�?*/}
+      {/* 동적 진행 표시줄 */}
       <div className="space-y-2">
-        <p className="text-sm font-medium">?�적 진행 ?�시�?/p>
+        <p className="text-sm font-medium">동적 진행 표시줄</p>
         <DynamicProgressBar />
       </div>
 
-      {/* ?�동 ?�어 진행 ?�시�?*/}
+      {/* 수동 제어 진행 표시줄 */}
       <div className="space-y-2">
-        <p className="text-sm font-medium">?�동 ?�어 ({progress}%)</p>
+        <p className="text-sm font-medium">수동 제어 ({progress}%)</p>
         <Progress value={progress} className="h-2" />
         <div className="flex space-x-2">
-          <Button 
-            size="sm" 
-            variant="outline" 
+          <Button
+            size="sm"
+            variant="outline"
             onClick={() => setProgress(Math.max(0, progress - 10))}
           >
             -10%
           </Button>
-          <Button 
-            size="sm" 
-            variant="outline" 
+          <Button
+            size="sm"
+            variant="outline"
             onClick={() => setProgress(Math.min(100, progress + 10))}
           >
             +10%
           </Button>
-          <Button 
-            size="sm" 
-            variant="outline" 
+          <Button
+            size="sm"
+            variant="outline"
             onClick={() => setProgress(0)}
           >
-            초기??          </Button>
+            초기화
+          </Button>
         </div>
       </div>
     </div>
   );
 };
 
-// ?�적 진행 ?�시�?컴포?�트
+// 동적 진행 표시줄 컴포넌트
 const DynamicProgressBar: React.FC = () => {
   const [dynamicProgress, setDynamicProgress] = useState(0);
 
@@ -140,7 +141,7 @@ const DynamicProgressBar: React.FC = () => {
     const timer = setInterval(() => {
       setDynamicProgress(prev => {
         if (prev >= 100) {
-          return 0; // 100%???�달?�면 ?�시 0%부???�작
+          return 0; // 100%에 도달하면 다시 0%부터 시작
         }
         return prev + 10;
       });
@@ -161,7 +162,7 @@ export default ProgressBarExample;`}
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <div className="space-y-6 mb-6">
                 <div>
-                  <Label className="mb-2 block">진행�? {progress}%</Label>
+                  <Label className="mb-2 block">진행률: {progress}%</Label>
                   <Slider
                     value={[progress]}
                     onValueChange={(value) => setProgress(value[0])}
@@ -174,7 +175,7 @@ export default ProgressBarExample;`}
 
                 <div>
                   <Label htmlFor="color" className="mb-2 block">
-                    ?�상
+                    색상
                   </Label>
                   <select
                     id="color"
@@ -182,10 +183,10 @@ export default ProgressBarExample;`}
                     onChange={(e) => setColor(e.target.value)}
                     className="w-full p-2 border rounded-md"
                   >
-                    <option value="#49bcf3">초록??/option>
-                    <option value="#3b82f6">?��???/option>
-                    <option value="#ef4444">빨간??/option>
-                    <option value="#8b5cf6">보라??/option>
+                    <option value="#49bcf3">초록색</option>
+                    <option value="#3b82f6">파란색</option>
+                    <option value="#ef4444">빨간색</option>
+                    <option value="#8b5cf6">보라색</option>
                   </select>
                 </div>
 

@@ -18,10 +18,10 @@ import { PrismCode } from "@/components/ui/prism/PrismCode";
 export default function DropdownSlide() {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [items, setItems] = useState<string[]>([
-    "?�로??,
-    "?�정",
-    "?�림",
-    "?��?�?,
+    "프로필",
+    "설정",
+    "알림",
+    "도움말",
   ]);
   const [newItem, setNewItem] = useState<string>("");
 
@@ -37,28 +37,29 @@ export default function DropdownSlide() {
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�의</h3>
+              <h3 className="text-lg font-semibold mb-2">정의</h3>
               <p>
-                Dropdown?� ?�릭?�면 ?�션 목록???�시?�는 UI ?�소?�니?? 공간??                ?�약?�면???�러 ?�션???�공?????�습?�다.
+                Dropdown은 클릭하면 옵션 목록을 표시하는 UI 요소입니다. 공간을
+                절약하면서 여러 옵션을 제공할 수 있습니다.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">?�용 ?��?</h3>
+              <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>?�비게이??메뉴</li>
-                <li>?�정 메뉴</li>
-                <li>?�렬 �??�터 ?�션</li>
-                <li>?�어 ?�택</li>
-                <li>?�용???�로??메뉴</li>
-                <li>컨텍?�트 메뉴 (?�클�?메뉴)</li>
+                <li>네비게이션 메뉴</li>
+                <li>설정 메뉴</li>
+                <li>정렬 및 필터 옵션</li>
+                <li>언어 선택</li>
+                <li>사용자 프로필 메뉴</li>
+                <li>컨텍스트 메뉴 (우클릭 메뉴)</li>
               </ul>
             </div>
           </TabsContent>
@@ -91,7 +92,7 @@ const DropdownExample: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      {/* 기본 ?�롭?�운 메뉴 */}
+      {/* 기본 드롭다운 메뉴 */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="flex items-center space-x-2">
@@ -100,42 +101,43 @@ const DropdownExample: React.FC = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel className="font-bold">??계정</DropdownMenuLabel>
+          <DropdownMenuLabel className="font-bold">내 계정</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onSelect={() => console.log('?�택?? profile')}>
-            ?�로??          </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => console.log('?�택?? settings')}>
-            ?�정
+          <DropdownMenuItem onSelect={() => console.log('선택됨: profile')}>
+            프로필
           </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => console.log('?�택?? logout')}>
-            로그?�웃
+          <DropdownMenuItem onSelect={() => console.log('선택됨: settings')}>
+            설정
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => console.log('선택됨: logout')}>
+            로그아웃
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* ?�벤???�들?��? ?�는 ?�롭?�운 메뉴 (Select) */}
+      {/* 이벤트 핸들러가 있는 드롭다운 메뉴 (Select) */}
       <Select onValueChange={(value) => {
         setSelectedValue(value);
         if (value === 'profile') {
-          console.log('?�로??);
+          console.log('프로필');
         } else if (value === 'settings') {
-          console.log('?�정');
+          console.log('설정');
         }
       }}>
         <SelectTrigger className="w-[200px]">
-          <SelectValue placeholder="메뉴 ?�기" />
+          <SelectValue placeholder="메뉴 열기" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="profile">?�로??/SelectItem>
-          <SelectItem value="settings">?�정</SelectItem>
-          <SelectItem value="help">?��?�?/SelectItem>
-          <SelectItem value="logout">로그?�웃</SelectItem>
+          <SelectItem value="profile">프로필</SelectItem>
+          <SelectItem value="settings">설정</SelectItem>
+          <SelectItem value="help">도움말</SelectItem>
+          <SelectItem value="logout">로그아웃</SelectItem>
         </SelectContent>
       </Select>
 
       {selectedValue && (
         <p className="text-sm text-muted-foreground">
-          ?�택??�? {selectedValue}
+          선택된 값: {selectedValue}
         </p>
       )}
     </div>
@@ -155,14 +157,14 @@ export default DropdownExample;`}
                     type="text"
                     value={newItem}
                     onChange={(e) => setNewItem(e.target.value)}
-                    placeholder="??메뉴 ??�� 추�?"
+                    placeholder="새 메뉴 항목 추가"
                     className="flex-1 p-2 border rounded-md"
                   />
                   <button
                     onClick={addItem}
                     className="px-4 py-2 bg-[#49bcf3] text-white rounded-md"
                   >
-                    추�?
+                    추가
                   </button>
                 </div>
               </div>
@@ -175,7 +177,7 @@ export default DropdownExample;`}
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    <DropdownMenuLabel>메뉴 ??��</DropdownMenuLabel>
+                    <DropdownMenuLabel>메뉴 항목</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     {items.map((item, index) => (
                       <DropdownMenuItem
@@ -189,7 +191,7 @@ export default DropdownExample;`}
                 </DropdownMenu>
 
                 {selectedItem && (
-                  <p className="mt-4 text-sm">?�택????��: {selectedItem}</p>
+                  <p className="mt-4 text-sm">선택된 항목: {selectedItem}</p>
                 )}
               </div>
             </div>

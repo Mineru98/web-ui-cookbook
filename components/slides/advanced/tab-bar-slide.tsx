@@ -1,10 +1,10 @@
 "use client";
 
-import SlideLayout from "../slide-layout";
-import { useState } from "react";
-import { Clock, Bookmark, Compass, User } from "lucide-react";
-import { PrismCode } from "../../ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Bookmark, Clock, Compass, User } from "lucide-react";
+import { useState } from "react";
+import { PrismCode } from "../../ui/prism/PrismCode";
+import SlideLayout from "../slide-layout";
 
 export default function TabBarSlide() {
   const [activeTab, setActiveTab] = useState("recent");
@@ -15,18 +15,18 @@ export default function TabBarSlide() {
 
   const tabItems = [
     { id: "recent", label: "최근", icon: Clock },
-    { id: "saved", label: "?�?�됨", icon: Bookmark },
-    { id: "explore", label: "?�색", icon: Compass },
-    { id: "profile", label: "?�로??, icon: User },
+    { id: "saved", label: "저장됨", icon: Bookmark },
+    { id: "explore", label: "탐색", icon: Compass },
+    { id: "profile", label: "프로필", icon: User },
   ];
 
   const longTabItems = [
-    { id: "recent", label: "최근 ??��" },
-    { id: "saved", label: "?�?�된 ??��" },
-    { id: "explore", label: "?�색?�기" },
-    { id: "popular", label: "?�기 ?�는 ??��" },
-    { id: "trending", label: "?�렌????��" },
-    { id: "recommend", label: "추천 ??��" },
+    { id: "recent", label: "최근 항목" },
+    { id: "saved", label: "저장된 항목" },
+    { id: "explore", label: "탐색하기" },
+    { id: "popular", label: "인기 있는 항목" },
+    { id: "trending", label: "트렌딩 항목" },
+    { id: "recommend", label: "추천 항목" },
     { id: "favorites", label: "즐겨찾기" },
   ];
 
@@ -217,15 +217,15 @@ const BasicTabBar: React.FC<BasicTabBarProps> = ({
   );
 };
 
-// ?�용 ?�시
+// 사용 예시
 const BasicTabBarExample: React.FC = () => {
   const [activeTab, setActiveTab] = useState("recent");
 
   const tabItems = [
     { id: "recent", label: "최근", icon: Clock },
-    { id: "saved", label: "?�?�됨", icon: Bookmark },
-    { id: "explore", label: "?�색", icon: Compass },
-    { id: "profile", label: "?�로??, icon: User },
+    { id: "saved", label: "저장됨", icon: Bookmark },
+    { id: "explore", label: "탐색", icon: Compass },
+    { id: "profile", label: "프로필", icon: User },
   ];
 
   return (
@@ -239,9 +239,10 @@ const BasicTabBarExample: React.FC = () => {
       <div className="p-6">
         <div className="text-center">
           <h3 className="text-lg font-semibold mb-2">
-            {tabItems.find(tab => tab.id === activeTab)?.label} ??          </h3>
+            {tabItems.find(tab => tab.id === activeTab)?.label} 탭
+          </h3>
           <p className="text-gray-600">
-            ?�택???? {activeTab}
+            선택된 탭: {activeTab}
           </p>
         </div>
       </div>
@@ -295,21 +296,21 @@ const ScrollableTabBar: React.FC<ScrollableTabBarProps> = ({
   );
 };
 
-// ?�용 ?�시
+// 사용 예시
 const ScrollableTabBarExample: React.FC = () => {
   const [activeTab, setActiveTab] = useState("recent");
 
   const longTabItems = [
-    { id: "recent", label: "최근 ??��" },
-    { id: "saved", label: "?�?�된 ??��" },
-    { id: "explore", label: "?�색?�기" },
-    { id: "popular", label: "?�기 ?�는 ??��" },
-    { id: "trending", label: "?�렌????��" },
-    { id: "recommend", label: "추천 ??��" },
+    { id: "recent", label: "최근 항목" },
+    { id: "saved", label: "저장된 항목" },
+    { id: "explore", label: "탐색하기" },
+    { id: "popular", label: "인기 있는 항목" },
+    { id: "trending", label: "트렌딩 항목" },
+    { id: "recommend", label: "추천 항목" },
     { id: "favorites", label: "즐겨찾기" },
-    { id: "bookmarks", label: "북마?? },
+    { id: "bookmarks", label: "북마크" },
     { id: "history", label: "기록" },
-    { id: "settings", label: "?�정" },
+    { id: "settings", label: "설정" },
   ];
 
   return (
@@ -326,7 +327,7 @@ const ScrollableTabBarExample: React.FC = () => {
             {longTabItems.find(tab => tab.id === activeTab)?.label}
           </h3>
           <p className="text-gray-600">
-            ?�택???? {activeTab}
+            선택된 탭: {activeTab}
           </p>
         </div>
       </div>
@@ -391,15 +392,15 @@ const UnderlineTabBar: React.FC<UnderlineTabBarProps> = ({
   );
 };
 
-// ?�용 ?�시
+// 사용 예시
 const UnderlineTabBarExample: React.FC = () => {
   const [activeTab, setActiveTab] = useState("recent");
 
   const tabItems = [
     { id: "recent", label: "최근", icon: Clock },
-    { id: "saved", label: "?�?�됨", icon: Bookmark },
-    { id: "explore", label: "?�색", icon: Compass },
-    { id: "profile", label: "?�로??, icon: User },
+    { id: "saved", label: "저장됨", icon: Bookmark },
+    { id: "explore", label: "탐색", icon: Compass },
+    { id: "profile", label: "프로필", icon: User },
   ];
 
   return (
@@ -413,9 +414,11 @@ const UnderlineTabBarExample: React.FC = () => {
       <div className="p-6">
         <div className="text-center">
           <h3 className="text-lg font-semibold mb-2">
-            {tabItems.find(tab => tab.id === activeTab)?.label} ??          </h3>
+            {tabItems.find(tab => tab.id === activeTab)?.label} 탭
+          </h3>
           <p className="text-gray-600">
-            ?�이콘과 ?�스?��? ?�로�?배치???�더?�인 ?��???          </p>
+            아이콘과 텍스트를 세로로 배치한 언더라인 스타일
+          </p>
         </div>
       </div>
     </div>
@@ -472,15 +475,15 @@ const PillTabBar: React.FC<PillTabBarProps> = ({
   );
 };
 
-// ?�용 ?�시
+// 사용 예시
 const PillTabBarExample: React.FC = () => {
   const [activeTab, setActiveTab] = useState("recent");
 
   const tabItems = [
     { id: "recent", label: "최근", icon: Clock },
-    { id: "saved", label: "?�?�됨", icon: Bookmark },
-    { id: "explore", label: "?�색", icon: Compass },
-    { id: "profile", label: "?�로??, icon: User },
+    { id: "saved", label: "저장됨", icon: Bookmark },
+    { id: "explore", label: "탐색", icon: Compass },
+    { id: "profile", label: "프로필", icon: User },
   ];
 
   return (
@@ -496,9 +499,11 @@ const PillTabBarExample: React.FC = () => {
       <div className="p-6">
         <div className="text-center">
           <h3 className="text-lg font-semibold mb-2">
-            {tabItems.find(tab => tab.id === activeTab)?.label} ??          </h3>
+            {tabItems.find(tab => tab.id === activeTab)?.label} 탭
+          </h3>
           <p className="text-gray-600">
-            ?�근 배경???�는 ?�약 모양????�?          </p>
+            둥근 배경으로 강조하는 알약 모양 스타일
+          </p>
         </div>
       </div>
     </div>
@@ -584,15 +589,15 @@ const MaterialTabBar: React.FC<MaterialTabBarProps> = ({
   );
 };
 
-// ?�용 ?�시
+// 사용 예시
 const MaterialTabBarExample: React.FC = () => {
   const [activeTab, setActiveTab] = useState("recent");
 
   const tabItems = [
     { id: "recent", label: "최근", icon: Clock },
-    { id: "saved", label: "?�?�됨", icon: Bookmark },
-    { id: "explore", label: "?�색", icon: Compass },
-    { id: "profile", label: "?�로??, icon: User },
+    { id: "saved", label: "저장됨", icon: Bookmark },
+    { id: "explore", label: "탐색", icon: Compass },
+    { id: "profile", label: "프로필", icon: User },
   ];
 
   return (
@@ -606,9 +611,11 @@ const MaterialTabBarExample: React.FC = () => {
       <div className="p-6">
         <div className="text-center">
           <h3 className="text-lg font-semibold mb-2">
-            {tabItems.find(tab => tab.id === activeTab)?.label} ??          </h3>
+            {tabItems.find(tab => tab.id === activeTab)?.label} 탭
+          </h3>
           <p className="text-gray-600">
-            부?�럽�??�라?�딩?�는 ?�디케?�터가 ?�는 Material Design ?��???          </p>
+            부드럽게 슬라이딩하는 인디케이터가 있는 Material Design 스타일
+          </p>
         </div>
       </div>
     </div>
@@ -622,115 +629,110 @@ export default MaterialTabBarExample;`;
     }
   };
 
-
   return (
-    <SlideLayout title="??�?(Tab Bar)">
+    <SlideLayout title="탭바(Tab Bar)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="space-y-4 mt-4">
             <div className="prose max-w-none mb-6">
-              <h2 className="text-xl font-semibold mb-3">?�의</h2>
+              <h2 className="text-xl font-semibold mb-3">정의</h2>
               <p>
-                ??�?Tab Bar)???�일??계층 ?�에???�러 ?�면 ?�는 콘텐�??�션
-                �??�환???�한 ?�비게이??컴포?�트?�니?? ?�용?��? ?�게 관??                콘텐�?간을 ?�동?????�도�?카테고리별로 구분??직�??�인
-                ?�터?�이?��? ?�공?�니??
+                탭바(Tab Bar)는 일관된 계층 구조에서 여러 화면을 전환하는 콘텐츠
+                전환을 위한 네비게이션 컴포넌트입니다. 사용자에게 쉽게 관리할 수
+                있는 콘텐츠간을 이동할 수 있도록 카테고리별로 구분하여 직관적인
+                인터페이스를 제공합니다.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-4 bg-slate-50 rounded-md">
-                <h3 className="text-lg font-medium mb-2">??�??��???/h3>
+                <h3 className="text-lg font-medium mb-2">탭바 스타일</h3>
                 <ul className="list-disc pl-6 space-y-1">
                   <li>
-                    <strong>기본??(Basic)</strong>
+                    <strong>기본형(Basic)</strong>
                     <p className="text-sm text-gray-600">
-                      ?�반?�인 ?�스???? ?�단 ?�디케?�터�??�성 ???�시
+                      일반적인 텍스트만 있는 단순 인디케이터로 구성된 스타일
                     </p>
                   </li>
                   <li>
-                    <strong>?�이�??�더?�인??(Underline)</strong>
+                    <strong>아이콘 언더라인형(Underline)</strong>
                     <p className="text-sm text-gray-600">
-                      ?�이콘과 ?�스??결합, ?�단???�더?�인 ?�디케?�터 ?�시
+                      아이콘과 텍스트 결합, 세로로 언더라인 인디케이터 표시
                     </p>
                   </li>
                   <li>
-                    <strong>?�크롤형 (Scrollable)</strong>
+                    <strong>스크롤형 (Scrollable)</strong>
                     <p className="text-sm text-gray-600">
-                      많�? ??�� ?�을 ??가로로 ?�크�?가?�한 ?�식
+                      많은 탭 항목을 한번에 가로로 스크롤 가능한 방식
                     </p>
                   </li>
                   <li>
-                    <strong>????�� (Pills)</strong>
+                    <strong>알약형 (Pills)</strong>
                     <p className="text-sm text-gray-600">
-                      ?�근 모서�??�태�??�체 배경 강조?�는 ?�식
+                      둥근 모서리의 태블릿 전체 배경 강조하는 방식
                     </p>
                   </li>
                   <li>
-                    <strong>머티리얼??(Material)</strong>
+                    <strong>머티리얼형(Material)</strong>
                     <p className="text-sm text-gray-600">
-                      ?�니메이???�디케?�터가 ???�동 ??부?�럽�??�환
+                      애니메이션 인디케이터가 함께 동작하며 부드럽게 전환
                     </p>
                   </li>
                 </ul>
               </div>
 
               <div className="p-4 bg-slate-50 rounded-md">
-                <h3 className="text-lg font-medium mb-2">?�용 ?��?</h3>
+                <h3 className="text-lg font-medium mb-2">사용 사례</h3>
                 <ul className="list-disc pl-6 space-y-1">
                   <li>
-                    카테고리�?콘텐�?분류 (?�스, ?�포�? ?�터?�인먼트 ??
+                    카테고리별 콘텐츠 분류 (뉴스, 스포츠, 엔터테인먼트 등)
                   </li>
-                  <li>?�정 ?�면???�션 구분 (?�반, 계정, ?�림 ??</li>
+                  <li>설정 페이지의 섹션 구분 (일반, 계정, 알림 등)</li>
                   <li>
-                    ?�품 ?�세 ?�이지???�보 구분 (?�세?�보, 리뷰, 문의 ??
+                    상품 상세 페이지의 정보 구분 (상세정보, 리뷰, 문의 등)
                   </li>
-                  <li>
-                    ?�셜 미디???�의 ?�?�라??분류 (?�로?? ?�기, 추천 ??
-                  </li>
-                  <li>?�양??�?모드 ?�환 (목록?? 갤러리형, 지?�형 ??</li>
+                  <li>소셜 미디어의 피드라인 분류 (프로필, 인기, 추천 등)</li>
+                  <li>다양한 보기 모드 전환 (목록형, 갤러리형, 지도형 등)</li>
                 </ul>
 
                 <h3 className="text-lg font-medium mt-4 mb-2">
-                  ?�근??고려?�항
+                  접근성 고려사항
                 </h3>
                 <ul className="list-disc pl-6 space-y-1 text-sm text-gray-600">
-                  <li>충분???�상 ?�비로 가?�성 ?�보</li>
-                  <li>?�절???�치 ?�역 ?�기 (최소 48x48dp)</li>
-                  <li>?�재 ?�택????�� 명확???�시</li>
-                  <li>?�크�?리더 지??(ARIA ?�성 ?�용)</li>
-                  <li>?�보???�근??지??/li>
+                  <li>충분한 터치 영역으로 가독성 보장</li>
+                  <li>적절한 터치 영역 크기 (최소 48x48dp)</li>
+                  <li>현재 선택된 탭의 명확한 표시</li>
+                  <li>스크린 리더 지원 (ARIA 속성 사용)</li>
+                  <li>키보드 접근성 지원</li>
                 </ul>
               </div>
             </div>
 
             <div className="p-4 border border-[#49bcf3]/20 bg-[#49bcf3]/5 rounded-md">
               <h3 className="text-lg font-medium mb-2 text-[#49bcf3]">
-                ?�자??권장?�항
+                디자이너 권장사항
               </h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700">
-                <li>?��????�자???�어 ?��? (???�체 ?��??�과 ?�일)</li>
-                <li>??번에 �????�는 ?�절???????��? (4-6�?권장)</li>
-                <li>명확???�이�??�용 (짧고 직�??�인 ?�어 ?�택)</li>
-                <li>?�이콘과 ?�스??조합?�로 ?�해???�상</li>
-                <li>?�절???�백�?간격?�로 가?�성 ?�보</li>
-                <li>??�??�환 ??부?�러???�니메이???�용</li>
-                <li>?��??�프 ?�스�?지??고려 (??�?좌우 ?��??�프)</li>
+                <li>타겟 사용자의 언어 사용 (폰트 크기와 스타일)</li>
+                <li>한번에 보이는 탭의 적절한 개수 (4-6개 권장)</li>
+                <li>명확한 라벨 사용 (짧고 직관적인 단어 선택)</li>
+                <li>아이콘과 텍스트 조합으로 이해도 향상</li>
+                <li>적절한 여백과 간격으로 가독성 보장</li>
+                <li>탭 전환 시 부드러운 애니메이션 사용</li>
+                <li>다양한 디바이스 크기 고려 (탭 좌우 스크롤)</li>
               </ul>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
             <div className="bg-gray-800 p-4 rounded-lg text-white">
-              <PrismCode 
-                code={getReactCode()} 
-                language="typescript" 
-              />
+              <PrismCode code={getReactCode()} language="typescript" />
             </div>
           </TabsContent>
 
@@ -744,7 +746,8 @@ export default MaterialTabBarExample;`;
                 }`}
                 onClick={() => setTabBarStyle("basic")}
               >
-                기본??              </button>
+                기본형
+              </button>
               <button
                 className={`px-3 py-1 text-sm rounded-full ${
                   tabBarStyle === "underline"
@@ -753,7 +756,8 @@ export default MaterialTabBarExample;`;
                 }`}
                 onClick={() => setTabBarStyle("underline")}
               >
-                ?�이�??�더?�인??              </button>
+                아이콘 언더라인형
+              </button>
               <button
                 className={`px-3 py-1 text-sm rounded-full ${
                   tabBarStyle === "scrollable"
@@ -762,7 +766,7 @@ export default MaterialTabBarExample;`;
                 }`}
                 onClick={() => setTabBarStyle("scrollable")}
               >
-                ?�크롤형
+                스크롤형
               </button>
               <button
                 className={`px-3 py-1 text-sm rounded-full ${
@@ -772,7 +776,7 @@ export default MaterialTabBarExample;`;
                 }`}
                 onClick={() => setTabBarStyle("pills")}
               >
-                ????��
+                알약형
               </button>
               <button
                 className={`px-3 py-1 text-sm rounded-full ${
@@ -782,7 +786,8 @@ export default MaterialTabBarExample;`;
                 }`}
                 onClick={() => setTabBarStyle("material")}
               >
-                머티리얼??              </button>
+                머티리얼형
+              </button>
             </div>
 
             <div className="border rounded-md shadow-sm overflow-hidden">
@@ -790,7 +795,8 @@ export default MaterialTabBarExample;`;
                 <div className="w-full max-w-md">
                   {renderTabBar()}
                   <div className="p-8 text-center text-gray-500">
-                    {activeTab} 콘텐�?                  </div>
+                    {activeTab} 콘텐츠
+                  </div>
                 </div>
               </div>
             </div>

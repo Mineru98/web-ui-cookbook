@@ -19,40 +19,40 @@ export default function GridViewSlide() {
   const [items, setItems] = useState<GridItem[]>([
     {
       id: 1,
-      title: "???�경",
-      image: "?��",
-      category: "?�연",
+      title: "산 풍경",
+      image: "🏔️",
+      category: "자연",
       likes: 24,
       isLiked: false,
     },
     {
       id: 2,
-      title: "?��? ?�몰",
-      image: "?���?,
-      category: "?�연",
+      title: "해변 일몰",
+      image: "🌅",
+      category: "자연",
       likes: 18,
       isLiked: false,
     },
     {
       id: 3,
-      title: "?�시 ?�경",
-      image: "?���?,
+      title: "도시 야경",
+      image: "🌃",
       category: "건축",
       likes: 15,
       isLiked: false,
     },
     {
       id: 4,
-      title: "???�상",
-      image: "?���?,
-      category: "?�연",
+      title: "숲 풍경",
+      image: "🌲",
+      category: "자연",
       likes: 32,
       isLiked: false,
     },
     {
       id: 5,
       title: "빌딩",
-      image: "?��",
+      image: "🏢",
       category: "건축",
       likes: 12,
       isLiked: false,
@@ -60,31 +60,31 @@ export default function GridViewSlide() {
     {
       id: 6,
       title: "꽃밭",
-      image: "?��",
-      category: "?�연",
+      image: "🌺",
+      category: "자연",
       likes: 28,
       isLiked: false,
     },
     {
       id: 7,
       title: "교량",
-      image: "?��",
+      image: "🌉",
       category: "건축",
       likes: 19,
       isLiked: false,
     },
     {
       id: 8,
-      title: "맛있???�식",
-      image: "?��",
-      category: "?�식",
+      title: "맛있는 음식",
+      image: "🍕",
+      category: "음식",
       likes: 21,
       isLiked: false,
     },
     {
       id: 9,
-      title: "?�서관",
-      image: "?��",
+      title: "도서관",
+      image: "📚",
       category: "건축",
       likes: 8,
       isLiked: false,
@@ -177,7 +177,7 @@ const GridView: React.FC<GridViewProps> = ({
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           }\`}
         >
-          ?�체
+          ?�체
         </button>
         {categories.map(category => (
           <button
@@ -205,7 +205,7 @@ const GridView: React.FC<GridViewProps> = ({
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }\`}
           >
-            {size === 'small' ? '?�게' : size === 'medium' ? '보통' : '?�게'}
+            {size === 'small' ? '작게' : size === 'medium' ? '보통' : '크게'}
           </button>
         ))}
       </div>
@@ -224,7 +224,7 @@ const GridView: React.FC<GridViewProps> = ({
               <h3 className="font-semibold text-sm mb-1">{item.title}</h3>
               <p className="text-xs text-gray-500 mb-2">{item.category}</p>
               <div className="flex items-center justify-between">
-                <span className="text-xs text-gray-600">{item.likes}�?/span>
+                <span className="text-xs text-gray-600">{item.likes}개</span>
                 <button
                   onClick={() => onLike?.(item.id)}
                   className={\`p-1 rounded-full transition-colors \${
@@ -249,9 +249,9 @@ const App: React.FC = () => {
   const [items, setItems] = useState<GridItem[]>([
     {
       id: 1,
-      title: "???�경",
-      image: "?��",
-      category: "?�연",
+      title: "산 풍경",
+      image: "🏔️",
+      category: "자연",
       likes: 24,
       isLiked: false,
     },
@@ -292,62 +292,62 @@ export default App;`;
 
 
   return (
-    <SlideLayout title="Grid View (그리??�?">
+    <SlideLayout title="Grid View (그리드 뷰)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="mt-4">
             <div className="space-y-6">
               <div>
                 <h3 className="text-lg font-semibold mb-3 text-gray-800">
-                  Grid View?�?
+                  Grid View란?
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Grid View??2차원 격자 ?�태�??�이?�들??배치?�는 ?�이?�웃 컴포?�트?�니?? 
-                  ?��?지 갤러�? ?�품 목록, 카드 ?�이?�웃 ?�에 주로 ?�용?�니??
+                  Grid View는 2차원 격자 형태로 아이템들을 배치하는 레이아웃 컴포넌트입니다.
+                  이미지 갤러리, 상품 목록, 카드 레이아웃 등에 주로 사용됩니다.
                 </p>
               </div>
 
               <div>
                 <h4 className="text-md font-semibold mb-2 text-gray-800">
-                  주요 ?�징
+                  주요 특징
                 </h4>
                 <ul className="space-y-2 text-gray-600">
-                  <li>??<strong>반응???�자??</strong> ?�면 ?�기???�라 ?�동?�로 ????조정</li>
-                  <li>??<strong>균등???�기:</strong> 모든 ?�이?�이 ?�정???�기�??��?</li>
-                  <li>??<strong>?�크�?지??</strong> ?�용??많을 ???�동?�로 ?�크�??�공</li>
-                  <li>??<strong>?�치 친화??</strong> 모바???�바?�스?�서 직�??�인 ?�색</li>
+                  <li>• <strong>반응형 디자인:</strong> 화면 크기에 따라 자동으로 열 수 조정</li>
+                  <li>• <strong>균등한 크기:</strong> 모든 아이템이 일정한 크기를 유지</li>
+                  <li>• <strong>스크롤 지원:</strong> 내용이 많을 때 자동으로 스크롤 제공</li>
+                  <li>• <strong>터치 친화적:</strong> 모바일 디바이스에서 직관적인 탐색</li>
                 </ul>
               </div>
 
               <div>
                 <h4 className="text-md font-semibold mb-2 text-gray-800">
-                  ?�용 ?��?
+                  사용 사례
                 </h4>
                 <ul className="space-y-2 text-gray-600">
-                  <li>???�진 갤러�?�??��?지 ?�범</li>
-                  <li>???�품 카탈로그 �??�핑�??�품 진열</li>
-                  <li>?????�이�?그리??(?�스?�린)</li>
-                  <li>???�트?�리??�??�품 ?�시</li>
-                  <li>???�스 기사 ?�네???�이?�웃</li>
+                  <li>• 사진 갤러리 및 이미지 앨범</li>
+                  <li>• 상품 카탈로그 및 쇼핑몰 상품 진열</li>
+                  <li>• 앱 아이콘 그리드(홈스크린)</li>
+                  <li>• 포트폴리오 및 작품 표시</li>
+                  <li>• 뉴스 기사 썸네일 레이아웃</li>
                 </ul>
               </div>
 
               <div>
                 <h4 className="text-md font-semibold mb-2 text-gray-800">
-                  구현 ??고려?�항
+                  구현 시 고려사항
                 </h4>
                 <ul className="space-y-2 text-gray-600">
-                  <li>???�절???��?지 비율�??�기 ?�정</li>
-                  <li>??로딩 ?�태 �??�레?�스?�???�공</li>
-                  <li>???�근?�을 ?�한 ?�보???�비게이??지??/li>
-                  <li>???�능 최적?��? ?�한 가?�화(Virtualization) 고려</li>
-                  <li>???�크�??�치 ?�??�?무한 ?�크�?기능 고려</li>
+                  <li>• 적절한 이미지 비율과 크기 설정</li>
+                  <li>• 로딩 상태 및 플레이스홀더 제공</li>
+                  <li>• 접근성을 위한 적절한 내비게이션 지원</li>
+                  <li>• 성능 최적화를 위한 가상화(Virtualization) 고려</li>
+                  <li>• 스크롤 위치 유지 및 무한 스크롤 기능 고려</li>
                 </ul>
               </div>
             </div>
@@ -366,9 +366,9 @@ export default App;`;
           <TabsContent value="demo" className="mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <div className="flex justify-between items-center mb-4">
-                <h4 className="text-lg font-semibold">Grid View ?�모</h4>
+                <h4 className="text-lg font-semibold">Grid View 데모</h4>
                 <div className="text-sm text-gray-500">
-                  {filteredItems.length}�???��
+                  {filteredItems.length}개 항목
                 </div>
               </div>
 
@@ -382,7 +382,7 @@ export default App;`;
                   }`}
                   onClick={() => setSelectedCategory(null)}
                 >
-                  ?�체
+                  전체
                 </button>
                 {categories.map((category) => (
                   <button

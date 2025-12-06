@@ -1,10 +1,10 @@
 "use client";
 
-import SlideLayout from "../slide-layout";
-import { useState, useEffect, useRef } from "react";
-import { Loader2 } from "lucide-react";
 import { PrismCode } from "@/components/ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Loader2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import SlideLayout from "../slide-layout";
 
 interface Post {
   id: number;
@@ -25,7 +25,7 @@ export default function InfiniteScrollSlide() {
   const loaderRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // ?��? ?�스???�성 ?�퍼 ?�수
+  // 더미 포스트 생성 헬퍼 함수
   const generatePosts = (pageNumber: number, limit: number) => {
     const startId = (pageNumber - 1) * limit + 1;
     const endId = startId + limit - 1;
@@ -34,9 +34,9 @@ export default function InfiniteScrollSlide() {
     for (let id = startId; id <= endId; id++) {
       const post: Post = {
         id,
-        title: `?�피?�트 ?�크롤에 ?�???�스??#${id}`,
-        content: `?�것?� ?�피?�트 ?�크�??�시�??�한 ?��? 콘텐츠입?�다. ???�스?�는 ID ${id}�?가지�??�습?�다. ?�제로는 API?�서 ?�이?��? 가?�오�??�니??`,
-        author: `?�용??${(id % 5) + 1}`,
+        title: `인피니트 스크롤에 맞는 포스트 #${id}`,
+        content: `이것은 인피니트 스크롤을 시연하기 위한 더미 콘텐츠입니다. 이 포스트는 ID ${id}를 가지고 있습니다. 실제로는 API에서 데이터를 가져오겠지만,`,
+        author: `사용자${(id % 5) + 1}`,
         date: new Date(Date.now() - id * 86400000).toLocaleDateString("ko-KR", {
           year: "numeric",
           month: "long",
@@ -51,26 +51,27 @@ export default function InfiniteScrollSlide() {
     return result;
   };
 
-  // ?�이지 로딩 ?�수
+  // 페이지 로딩 함수
   const loadMorePosts = () => {
     if (loading || !hasMore) return;
 
     setLoading(true);
 
-    // API ?�출 ?��??�이??    setTimeout(() => {
+    // API 호출 시뮬레이션
+    setTimeout(() => {
       const newPosts = generatePosts(page, 5);
       setPosts((prevPosts) => [...prevPosts, ...newPosts]);
       setPage((prevPage) => prevPage + 1);
       setLoading(false);
 
-      // 5?�이지 ?�에?????�상 ?�이?��? ?�다�??�정
+      // 5페이지 이후에는 더 이상 페이지가 없다고 설정
       if (page >= 5) {
         setHasMore(false);
       }
     }, 1000);
   };
 
-  // Intersection Observer ?�정
+  // Intersection Observer 설정
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -92,7 +93,7 @@ export default function InfiniteScrollSlide() {
     };
   }, [loaderRef, loading, hasMore]);
 
-  // 초기 ?�스??로딩
+  // 초기 포스트 로딩
   useEffect(() => {
     loadMorePosts();
   }, []);
@@ -128,7 +129,7 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
   const [page, setPage] = useState(1);
   const loaderRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer�??�용??무한 ?�크�?구현
+  // Intersection Observer를 활용한 무한 스크롤 구현
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -160,7 +161,7 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
     }
   };
 
-  // 초기 ?�이??로드
+  // 초기 페이지 로드
   useEffect(() => {
     handleLoadMore();
   }, []);
@@ -176,16 +177,16 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
           <p className="text-gray-600 mb-3">{post.content}</p>
           <div className="flex justify-between items-center text-sm text-gray-500">
             <div>
-              ?�성?? {post.author} ??{post.date}
+              작성자: {post.author} · {post.date}
             </div>
             <div>
-              좋아??{post.likes} ???��? {post.comments}
+              좋아요 {post.likes} · 댓글 {post.comments}
             </div>
           </div>
         </div>
       ))}
 
-      {/* 로딩 ?�시�?*/}
+      {/* 로딩 표시기 */}
       <div
         ref={loaderRef}
         className="py-8 flex justify-center items-center"
@@ -193,32 +194,33 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
         {loading ? (
           <div className="flex items-center gap-2">
             <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
-            <span className="text-gray-600">로딩 �?..</span>
+            <span className="text-gray-600">로딩 중..</span>
           </div>
         ) : !hasMore ? (
-          <span className="text-gray-500">???�상 ?�스?��? ?�습?�다.</span>
+          <span className="text-gray-500">더 이상 포스트가 없습니다.</span>
         ) : null}
       </div>
     </div>
   );
 };
 
-// ?�용 ?�시
+// 사용 예시
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // API ?�출 ?��??�이??  const generatePosts = (pageNumber: number, limit: number = 10): Post[] => {
+  // API 호출 시뮬레이션
+  const generatePosts = (pageNumber: number, limit: number = 10): Post[] => {
     const startId = (pageNumber - 1) * limit + 1;
     const posts: Post[] = [];
 
     for (let id = startId; id < startId + limit; id++) {
       posts.push({
         id,
-        title: \`?�스???�목 #\${id}\`,
-        content: \`?�것?� ?�스??#\${id}???�용?�니?? ?�제로는 API?�서 ?�이?��? 받아?�니??\`,
-        author: \`?�용??\${(id % 5) + 1}\`,
+        title: \`포스트 제목 #\${id}\`,
+        content: \`이것은 포스트 #\${id}의 내용입니다. 실제로는 API에서 데이터를 받아오겠지만,\`,
+        author: \`사용자\${(id % 5) + 1}\`,
         date: new Date(Date.now() - id * 86400000).toLocaleDateString('ko-KR'),
         likes: Math.floor(Math.random() * 100),
         comments: Math.floor(Math.random() * 20),
@@ -231,11 +233,12 @@ const App: React.FC = () => {
   const loadMore = async (): Promise<Post[]> => {
     setLoading(true);
 
-    // API ?�출 ?��??�이??    await new Promise(resolve => setTimeout(resolve, 1000));
+    // API 호출 시뮬레이션
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     const newPosts = generatePosts(currentPage, 10);
     
-    // 5?�이지 ?�에?????�상 ?�이?��? ?�다�??�정
+    // 5페이지 이후에는 더 이상 페이지가 없다고 설정
     if (currentPage >= 5) {
       setHasMore(false);
     }
@@ -248,7 +251,7 @@ const App: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">무한 ?�크�??�시</h1>
+      <h1 className="text-2xl font-bold mb-6">무한 스크롤 예시</h1>
       <div className="h-96 overflow-y-auto border rounded-lg p-4">
         <InfiniteScroll
           loadMore={loadMore}
@@ -263,27 +266,26 @@ const App: React.FC = () => {
 export default App;`;
   };
 
-
   return (
-    <SlideLayout title="Infinite Scroll (무한 ?�크�?">
+    <SlideLayout title="Infinite Scroll (무한 스크롤)">
       <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">?�명</TabsTrigger>
+            <TabsTrigger value="description">설명</TabsTrigger>
             <TabsTrigger value="code">코드</TabsTrigger>
-            <TabsTrigger value="demo">?�모</TabsTrigger>
+            <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="mt-4">
             <div className="space-y-6">
               <div>
                 <h3 className="text-lg font-semibold mb-3 text-gray-800">
-                  무한 ?�크롤이?�?
+                  무한 스크롤이란?
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  무한 ?�크롤�? ?�용?��? ?�이지 ?�단???�달?�을 ???�동?�로 추�?
-                  콘텐츠�? 로드?�는 UX ?�턴?�니?? 별도???�이지 ?�동?�나 '??보기'
-                  버튼 ?�이 ?�속?�인 콘텐�??�비 경험???�공?�니??
+                  무한 스크롤을 사용하면 페이지 단위의 전달을 없이 자동으로 추가
+                  콘텐츠를 로드하는 UX 패턴입니다. 별도로 페이지 이동이나
+                  '더보기' 버튼 없이 연속적인 콘텐츠 탐색 경험을 제공합니다.
                 </p>
               </div>
 
@@ -293,49 +295,63 @@ export default App;`;
                     구현 방식
                   </h4>
                   <ul className="space-y-2 text-gray-600">
-                    <li>??<strong>Intersection Observer API:</strong> ?�소가 뷰포?�에 ?�어?�는지 감�??�는 ?��??�인 방식</li>
-                    <li>??<strong>?�크�??�벤??</strong> ?�크�??�치�?추적?�는 ?�통?�인 방식 (?�능 주의)</li>
-                    <li>??<strong>가?�화(Virtualization):</strong> ?�?�의 ?�이?�에???�면??보이????���??�더�?/li>
-                    <li>??<strong>?�이지?�이??API ?�용:</strong> ?�버?�서 ?�이지 ?�는 커서 기반 ?�이???�출</li>
+                    <li>
+                      • <strong>Intersection Observer API:</strong> 요소가
+                      뷰포트에 들어오는지 감지하는 현대적인 방식
+                    </li>
+                    <li>
+                      • <strong>스크롤 이벤트:</strong> 스크롤 위치를 추적하는
+                      전통적인 방식 (성능 주의)
+                    </li>
+                    <li>
+                      • <strong>가상화(Virtualization):</strong> 대량의 데이터에
+                      대해 보이는 부분만 렌더링
+                    </li>
+                    <li>
+                      • <strong>페이지네이션 API 활용:</strong> 서버에서 페이지
+                      단위 커서 기반 페이지네이션 호출
+                    </li>
                   </ul>
                 </div>
 
                 <div className="bg-slate-50 rounded-lg p-4">
                   <h4 className="text-md font-semibold mb-3 text-gray-800">
-                    ?�용 ?��?
+                    사용 사례
                   </h4>
                   <ul className="space-y-2 text-gray-600">
-                    <li>???�셜 미디???�드 (Facebook, Twitter, Instagram ??</li>
-                    <li>??검??결과 목록</li>
-                    <li>???�품 카탈로그</li>
-                    <li>???�스 ?�드</li>
-                    <li>???��?지 갤러�?/li>
-                    <li>???��? ?�션</li>
+                    <li>
+                      • 소셜 미디어 피드 (Facebook, Twitter, Instagram 등)
+                    </li>
+                    <li>• 검색 결과 목록</li>
+                    <li>• 제품 카탈로그</li>
+                    <li>• 뉴스 피드</li>
+                    <li>• 이미지 갤러리</li>
+                    <li>• 댓글 섹션</li>
                   </ul>
                 </div>
               </div>
 
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <h4 className="text-md font-semibold mb-3 text-blue-800">
-                  ?�단??비교
+                  장단점 비교
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <h5 className="font-medium text-green-700 mb-2">?�점</h5>
+                    <h5 className="font-medium text-green-700 mb-2">장점</h5>
                     <ul className="space-y-1 text-sm text-gray-600">
-                      <li>???�속?�인 ?�색 경험</li>
-                      <li>???�이지 ?�환 ?�음</li>
-                      <li>???�용??참여 증�?</li>
-                      <li>??모바??친화??/li>
+                      <li>• 연속적인 탐색 경험</li>
+                      <li>• 페이지 전환 없음</li>
+                      <li>• 사용자 참여 증대</li>
+                      <li>• 모바일 친화적</li>
                     </ul>
                   </div>
                   <div>
-                    <h5 className="font-medium text-red-700 mb-2">?�점</h5>
+                    <h5 className="font-medium text-red-700 mb-2">단점</h5>
                     <ul className="space-y-1 text-sm text-gray-600">
-                      <li>???�능 ?�슈 가?�성</li>
-                      <li>???�정 ??�� 찾기 ?�려?�</li>
-                      <li>???�근??문제 발생 가??/li>
-                      <li>??SEO 최적???�려?�</li>
+                      <li>• 성능 이슈 가능성</li>
+                      <li>• 특정 위치 찾기 어려움</li>
+                      <li>• 접근성 문제 발생 가능</li>
+                      <li>• SEO 최적화 어려움</li>
                     </ul>
                   </div>
                 </div>
@@ -343,40 +359,37 @@ export default App;`;
 
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                 <h4 className="text-md font-semibold mb-3 text-yellow-800">
-                  구현 ??고려?�항
+                  구현 시 고려사항
                 </h4>
                 <ul className="space-y-2 text-gray-600">
-                  <li>??로딩 ?�태 ?�시�??�공</li>
-                  <li>???�러 처리 �??�시??메커?�즘</li>
-                  <li>??메모�??�용??관�?(??�� ?��? 많을 경우)</li>
-                  <li>???�바?�싱(debouncing) ?�는 ?�로?��?throttling) ?�용</li>
-                  <li>??초기 로드 ?�간 최적??/li>
-                  <li>??SEO �??�근??고려</li>
+                  <li>• 로딩 상태 표시기 제공</li>
+                  <li>• 에러 처리 및 재시도 메커니즘</li>
+                  <li>• 메모리 사용량 관리(데이터가 많을 경우)</li>
+                  <li>• 디바운싱(debouncing) 또는 스로틀링(throttling) 활용</li>
+                  <li>• 초기 로드 시간 최적화</li>
+                  <li>• SEO 및 접근성 고려</li>
                 </ul>
               </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-
             <div className="bg-gray-800 p-4 rounded-lg text-white">
-              <PrismCode
-                language="typescript"
-                code={getReactCode()}
-              />
+              <PrismCode language="typescript" code={getReactCode()} />
             </div>
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <div className="flex justify-between items-center mb-4">
-                <h4 className="text-lg font-semibold">무한 ?�크�??�모</h4>
+                <h4 className="text-lg font-semibold">무한 스크롤 데모</h4>
                 <div className="text-sm text-gray-500">
-                  ?�재 {posts.length}�??�스??로드??                </div>
+                  현재 {posts.length}개의 포스트가 로드됨
+                </div>
               </div>
 
               <p className="text-sm text-gray-600 mb-4">
-                ?�래�??�크롤하�?추�? ?�스?��? ?�동?�로 로드?�니??
+                아래로 스크롤하면 추가 포스트가 자동으로 로드됩니다.
               </p>
 
               <div
@@ -398,16 +411,16 @@ export default App;`;
                         <p className="text-gray-600 my-2">{post.content}</p>
                         <div className="flex justify-between items-center text-sm text-gray-500">
                           <div>
-                            ?�성?? {post.author} ??{post.date}
+                            작성자: {post.author} · {post.date}
                           </div>
                           <div>
-                            좋아??{post.likes} ???��? {post.comments}
+                            좋아요 {post.likes} · 댓글 {post.comments}
                           </div>
                         </div>
                       </div>
                     ))}
 
-                    {/* 로딩 ?�시�?*/}
+                    {/* 로딩 표시기 */}
                     <div
                       ref={loaderRef}
                       className="py-4 flex justify-center items-center"
@@ -415,11 +428,11 @@ export default App;`;
                       {loading ? (
                         <div className="flex items-center gap-2">
                           <Loader2 className="w-5 h-5 text-[#49bcf3] animate-spin" />
-                          <span className="text-gray-600">로딩 �?..</span>
+                          <span className="text-gray-600">로딩 중..</span>
                         </div>
                       ) : !hasMore ? (
                         <span className="text-gray-500">
-                          ???�상 ?�스?��? ?�습?�다.
+                          더 이상 포스트가 없습니다.
                         </span>
                       ) : null}
                     </div>
