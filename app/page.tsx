@@ -199,7 +199,7 @@ export default function Home() {
                       <h3 className="text-sm font-semibold text-muted-foreground px-4 py-1">UI 속성 용어</h3>
                       <Separator className="my-1" />
                     </div>
-                    {slides.slice(18, 30).map((slide, index) => (
+                    {slides.slice(18, 19).map((slide, index) => (
                       <Button
                         key={slide.id}
                         variant={currentSlide === index + 18 ? "default" : "ghost"}
@@ -221,16 +221,16 @@ export default function Home() {
                       <h3 className="text-sm font-semibold text-muted-foreground px-4 py-1">UI 액션 용어</h3>
                       <Separator className="my-1" />
                     </div>
-                    {slides.slice(30, 34).map((slide, index) => (
+                    {slides.slice(19, 23).map((slide, index) => (
                       <Button
                         key={slide.id}
-                        variant={currentSlide === index + 30 ? "default" : "ghost"}
+                        variant={currentSlide === index + 19 ? "default" : "ghost"}
                         className="w-full justify-start"
                         onClick={() => {
-                          goToSlide(index + 30)
+                          goToSlide(index + 19)
                         }}
                       >
-                        {index + 31}.{" "}
+                        {index + 20}.{" "}
                         {slide.id
                           .split("-")
                           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -243,16 +243,16 @@ export default function Home() {
                       <h3 className="text-sm font-semibold text-muted-foreground px-4 py-1">고급 컴포넌트</h3>
                       <Separator className="my-1" />
                     </div>
-                    {slides.slice(34, 49).map((slide, index) => (
+                    {slides.slice(23, 36).map((slide, index) => (
                       <Button
                         key={slide.id}
-                        variant={currentSlide === index + 34 ? "default" : "ghost"}
+                        variant={currentSlide === index + 23 ? "default" : "ghost"}
                         className="w-full justify-start"
                         onClick={() => {
-                          goToSlide(index + 34)
+                          goToSlide(index + 23)
                         }}
                       >
-                        {index + 35}.{" "}
+                        {index + 24}.{" "}
                         {slide.id
                           .split("-")
                           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -265,16 +265,16 @@ export default function Home() {
                       <h3 className="text-sm font-semibold text-muted-foreground px-4 py-1">결론</h3>
                       <Separator className="my-1" />
                     </div>
-                    {slides.slice(49).map((slide, index) => (
+                    {slides.slice(36).map((slide, index) => (
                       <Button
                         key={slide.id}
-                        variant={currentSlide === index + 49 ? "default" : "ghost"}
+                        variant={currentSlide === index + 36 ? "default" : "ghost"}
                         className="w-full justify-start"
                         onClick={() => {
-                          goToSlide(index + 49)
+                          goToSlide(index + 36)
                         }}
                       >
-                        {index + 50}.{" "}
+                        {index + 37}.{" "}
                         {slide.id
                           .split("-")
                           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
