@@ -52,25 +52,25 @@ const sheetVariants = cva(
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {
-  /**
-   * 스크린 리더 사용자를 위한 접근성을 위해 제목이 필요합니다.
-   * 시각적으로 숨기려면 제목을 VisuallyHidden 컴포넌트로 감싸세요.
-   */
   title: string;
+  description?: string;
 }
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
->(({ side = "right", className, children, title, ...props }, ref) => (
+>(({ side = "right", className, children, title, description, ...props }, ref) => (
   <SheetPortal>
     <SheetOverlay />
     <SheetPrimitive.Content
       ref={ref}
-      className={cn(sheetVariants({ side }), className)}
+      className={cn(sheetVariants({ side }), "pb-20", className)}
       {...props}
     >
       <SheetPrimitive.Title className="sr-only">{title}</SheetPrimitive.Title>
+      <SheetPrimitive.Description className="sr-only">
+        {description || title}
+      </SheetPrimitive.Description>
       {children}
       <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
         <X className="h-4 w-4" />
