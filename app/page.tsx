@@ -45,6 +45,8 @@ import SearchBarSlide from "@/components/slides/advanced/search-bar-slide";
 import HeroSlide from "@/components/slides/advanced/hero-slide";
 import ConclusionSlide from "@/components/slides/conclusion-slide";
 import { Button } from "@/components/ui/button";
+import { KoHeading } from "@/components/ui/KoHeading";
+import { KoText } from "@/components/ui/KoText";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 type SlideDef = {
@@ -241,24 +243,39 @@ export default function Home(): ReactElement {
             >
               <div className="flex h-full flex-col">
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                  <KoText
+                    balance={false}
+                    className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary"
+                  >
                     Contents
-                  </p>
-                  <h2 className="mt-1 text-xl font-bold tracking-tight">목차</h2>
-                  <p className="mt-1 text-sm text-muted-foreground">
+                  </KoText>
+                  <KoHeading
+                    as="h2"
+                    className="mt-1 text-xl font-bold tracking-tight"
+                  >
+                    목차
+                  </KoHeading>
+                  <KoText
+                    balance={false}
+                    className="mt-1 text-sm text-muted-foreground"
+                  >
                     <span className="num font-medium text-foreground">
                       {currentSlide + 1}
                     </span>{" "}
                     / <span className="num">{total}</span> 페이지
-                  </p>
+                  </KoText>
                 </div>
 
                 <div className="scrollbar-clean mt-5 flex-1 space-y-5 overflow-y-auto pr-1">
                   {groupedSlides.map((group) => (
                     <div key={group.section}>
-                      <h3 className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      <KoHeading
+                        as="h3"
+                        balance={false}
+                        className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                      >
                         {group.section}
-                      </h3>
+                      </KoHeading>
                       <div className="space-y-0.5">
                         {group.items.map((item) => {
                           const isActive = item.index === currentSlide;

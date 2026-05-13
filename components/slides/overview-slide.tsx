@@ -6,6 +6,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import SlideLayout from "./slide-layout";
+import { KoHeading } from "@/components/ui/KoHeading";
+import { KoText } from "@/components/ui/KoText";
 
 type CategoryCard = {
   id: string;
@@ -97,12 +99,15 @@ export default function OverviewSlide() {
                   {category.count}
                 </span>
               </div>
-              <h2 className="relative mt-4 text-lg font-semibold tracking-tight sm:text-xl">
+              <KoHeading
+                as="h2"
+                className="relative mt-4 text-lg font-semibold tracking-tight sm:text-xl"
+              >
                 {category.title}
-              </h2>
-              <p className="relative mt-1.5 text-sm leading-relaxed text-muted-foreground">
+              </KoHeading>
+              <KoText className="relative mt-1.5 text-sm leading-relaxed text-muted-foreground">
                 {category.description}
-              </p>
+              </KoText>
               <ul className="relative mt-4 space-y-1.5 text-sm text-foreground/80">
                 {category.items.map((item) => (
                   <li
@@ -113,7 +118,7 @@ export default function OverviewSlide() {
                       className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-primary/70"
                       aria-hidden
                     />
-                    <span>{item}</span>
+                    <KoText as="span">{item}</KoText>
                   </li>
                 ))}
               </ul>

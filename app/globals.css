@@ -134,6 +134,15 @@
   body {
     @apply bg-background text-foreground;
   }
+  .ko-heading,
+  .ko-text {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .ko-heading [data-br],
+  .ko-text [data-br] {
+    word-break: keep-all;
+  }
   /* Scoped scrollbar handling — only hide in slide content, not globally */
   .scrollbar-clean {
     scrollbar-width: thin;

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BalancerProvider } from "@/components/ui/Balancer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -100,7 +101,9 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <BalancerProvider>{children}</BalancerProvider>
+      </body>
     </html>
   );
 }

@@ -1,4 +1,6 @@
 import { Check, ArrowUpRight } from "lucide-react";
+import { KoHeading } from "@/components/ui/KoHeading";
+import { KoText } from "@/components/ui/KoText";
 
 const TAKEAWAYS = [
   {
@@ -44,24 +46,31 @@ export default function ConclusionSlide() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
 
       <div className="relative z-10 mx-auto h-full w-full max-w-5xl overflow-y-auto px-6 py-10 sm:px-10 sm:py-14 scrollbar-clean">
-        <div className="reveal-fade inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-medium tracking-wide text-white/90 backdrop-blur-md">
+        <KoText
+          as="div"
+          balance={false}
+          className="reveal-fade inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-medium tracking-wide text-white/90 backdrop-blur-md"
+        >
           Wrap Up · 마무리
-        </div>
+        </KoText>
 
-        <h1 className="reveal-up mt-4 text-balance text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
+        <KoHeading
+          as="h1"
+          className="reveal-up mt-4 text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl"
+        >
           잘 만든 UI는
           <br />
           <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
             대화에서 시작합니다
           </span>
-        </h1>
-        <p
-          className="reveal-up mt-4 max-w-2xl text-balance text-base leading-relaxed text-white/85 sm:text-lg"
+        </KoHeading>
+        <KoText
+          className="reveal-up mt-4 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg"
           style={{ animationDelay: "120ms" }}
         >
           UI 컴포넌트와 상호작용 어휘를 함께 정리하는 일은, 결국 더 좋은 제품을
           만들기 위한 가장 빠른 길입니다.
-        </p>
+        </KoText>
 
         <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
           {TAKEAWAYS.map((item, idx) => (
@@ -74,22 +83,28 @@ export default function ConclusionSlide() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 text-white">
                   <Check className="h-4 w-4" aria-hidden />
                 </div>
-                <strong className="text-base font-semibold text-white">
+                <KoText
+                  as="span"
+                  className="text-base font-semibold text-white"
+                >
                   {item.title}
-                </strong>
+                </KoText>
               </div>
-              <p className="mt-2.5 text-sm leading-relaxed text-white/80">
+              <KoText className="mt-2.5 text-sm leading-relaxed text-white/80">
                 {item.body}
-              </p>
+              </KoText>
             </div>
           ))}
         </div>
 
         <div className="mt-10 rounded-2xl border border-white/15 bg-white/[0.06] p-6 backdrop-blur-md sm:p-7">
           <div className="flex items-center justify-between gap-3">
-            <h2 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+            <KoHeading
+              as="h2"
+              className="text-xl font-semibold tracking-tight text-white sm:text-2xl"
+            >
               다음 단계
-            </h2>
+            </KoHeading>
             <ArrowUpRight
               className="h-5 w-5 text-white/60"
               aria-hidden
@@ -104,20 +119,23 @@ export default function ConclusionSlide() {
                 <span className="num text-xs font-semibold tracking-widest text-white/60">
                   {step.label}
                 </span>
-                <h3 className="mt-2 text-base font-semibold text-white">
+                <KoHeading
+                  as="h3"
+                  className="mt-2 text-base font-semibold text-white"
+                >
                   {step.title}
-                </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-white/75">
+                </KoHeading>
+                <KoText className="mt-1.5 text-sm leading-relaxed text-white/75">
                   {step.body}
-                </p>
+                </KoText>
               </div>
             ))}
           </div>
         </div>
 
-        <p className="mt-10 text-center text-base font-light tracking-wide text-white/85 sm:text-lg">
+        <KoText className="mt-10 text-center text-base font-light tracking-wide text-white/85 sm:text-lg">
           감사합니다 — Web UI Cookbook
-        </p>
+        </KoText>
       </div>
     </div>
   );

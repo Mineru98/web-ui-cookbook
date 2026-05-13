@@ -1,4 +1,7 @@
 import type { ReactNode } from "react";
+import { KoHeading } from "@/components/ui/KoHeading";
+import { KoReadableContent } from "@/components/ui/KoReadableContent";
+import { KoText } from "@/components/ui/KoText";
 
 interface SlideLayoutProps {
   title: string;
@@ -29,13 +32,20 @@ export default function SlideLayout({
       <div className="relative flex h-full w-full flex-col px-5 pt-6 pb-4 sm:px-8 sm:pt-8 md:px-10 lg:px-12">
         <header className="mx-auto w-full max-w-6xl flex-shrink-0">
           {eyebrow ? (
-            <div className="reveal-fade text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+            <KoText
+              as="div"
+              balance={false}
+              className="reveal-fade text-[11px] font-semibold uppercase tracking-[0.18em] text-primary"
+            >
               {eyebrow}
-            </div>
+            </KoText>
           ) : null}
-          <h1 className="reveal-up mt-1 text-balance text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
+          <KoHeading
+            as="h1"
+            className="reveal-up mt-1 text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl"
+          >
             {title}
-          </h1>
+          </KoHeading>
           <div
             aria-hidden
             className="reveal-fade mt-4 h-px w-full bg-gradient-to-r from-border via-border to-transparent"
@@ -43,7 +53,7 @@ export default function SlideLayout({
         </header>
 
         <div className="mx-auto mt-5 w-full max-w-6xl flex-1 overflow-y-auto pr-1 scrollbar-clean sm:mt-6">
-          {children}
+          <KoReadableContent>{children}</KoReadableContent>
         </div>
       </div>
     </div>
