@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     siteName: "Web UI 용어 정리",
     images: [
       {
-        url: "/thumbnail.png",
+        url: "/thumbnail.webp",
         width: 1200,
         height: 630,
         alt: "Web UI 용어 정리",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     title: "Web UI 용어 정리",
     description:
       "웹 UI 개발에 필요한 주요 용어들을 정리한 사이트입니다. 프론트엔드 개발, 디자인 시스템, 사용자 인터페이스 관련 용어와 개념을 쉽게 이해하고 학습할 수 있습니다.",
-    images: ["/thumbnail.png"],
+    images: ["/thumbnail.webp"],
   },
   robots: {
     index: true,
@@ -69,20 +69,20 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.webp", sizes: "16x16", type: "image/webp" },
+      { url: "/favicon-32x32.webp", sizes: "32x32", type: "image/webp" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.webp", sizes: "180x180", type: "image/webp" },
     ],
     other: [
       {
         rel: "android-chrome-192x192",
-        url: "/android-chrome-192x192.png",
+        url: "/android-chrome-192x192.webp",
       },
       {
         rel: "android-chrome-512x512",
-        url: "/android-chrome-512x512.png",
+        url: "/android-chrome-512x512.webp",
       },
     ],
   },
@@ -96,8 +96,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="kr">
-      <body>{children}</body>
+    <html lang="ko">
+      <head>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
+      </head>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
