@@ -2,8 +2,8 @@
 
 import { PrismCode } from "@/components/ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Heart, Loader2, MessageCircle } from "lucide-react";
+import { type ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import SlideLayout from "../slide-layout";
 
 interface Post {
@@ -11,259 +11,328 @@ interface Post {
   title: string;
   content: string;
   author: string;
+  avatar: string;
   date: string;
   likes: number;
   comments: number;
+  tag: string;
+  accent: string;
 }
 
-export default function InfiniteScrollSlide() {
+const TOPICS: Array<{ title: string; content: string; tag: string; accent: string }> = [
+  {
+    title: "디자인 시스템 토큰 설계 노트",
+    content:
+      "색·간격·모션을 토큰으로 묶으면 디자이너와 엔지니어가 동일한 어휘로 대화할 수 있습니다.",
+    tag: "Design System",
+    accent: "from-sky-500/20 to-sky-500/0",
+  },
+  {
+    title: "버튼 상태 8가지를 정리해봤어요",
+    content:
+      "default · hover · active · focus · disabled · loading · success · destructive — 인터랙션이 살아 있어야 신뢰감이 생깁니다.",
+    tag: "Interaction",
+    accent: "from-violet-500/20 to-violet-500/0",
+  },
+  {
+    title: "모바일에서 한국어 줄바꿈, 어떻게 처리하시나요?",
+    content:
+      "word-break: keep-all 한 줄로 어색한 단어 끊김이 사라집니다. 작은 디테일이 가독성을 크게 바꿔요.",
+    tag: "Typography",
+    accent: "from-amber-500/20 to-amber-500/0",
+  },
+  {
+    title: "스크롤 인터랙션, 어디까지 해보셨어요?",
+    content:
+      "Sticky · Parallax · Scroll-driven 애니메이션까지 — 스크롤은 이제 단순한 이동이 아니라 스토리텔링 도구입니다.",
+    tag: "Motion",
+    accent: "from-emerald-500/20 to-emerald-500/0",
+  },
+  {
+    title: "폼 입력 UX 체크리스트",
+    content:
+      "Label · Placeholder · Helper · Error 네 단계로 나눠 설계하면 사용자가 길을 잃지 않습니다.",
+    tag: "Form UX",
+    accent: "from-rose-500/20 to-rose-500/0",
+  },
+  {
+    title: "다크 모드 컬러 토큰 만들기",
+    content:
+      "단순히 반전이 아니라 HSL 의 L 값을 곡선처럼 조절해야 시각적 대비가 자연스럽게 유지됩니다.",
+    tag: "Color",
+    accent: "from-indigo-500/20 to-indigo-500/0",
+  },
+  {
+    title: "접근성 포커스 링 다시 보기",
+    content:
+      "outline: none 으로 지우지 말고, ring-offset 으로 배경과 분리해 보이게 디자인하세요.",
+    tag: "A11y",
+    accent: "from-teal-500/20 to-teal-500/0",
+  },
+  {
+    title: "Bento Grid 가 다시 유행하는 이유",
+    content:
+      "동등한 카드의 단조로움을 깨고, 정보의 위계를 면적으로 표현할 수 있어 시선이 자연스럽게 흐릅니다.",
+    tag: "Layout",
+    accent: "from-fuchsia-500/20 to-fuchsia-500/0",
+  },
+];
+
+const AUTHORS = [
+  { name: "박도현", avatar: "🦊" },
+  { name: "이서진", avatar: "🐻" },
+  { name: "하윤서", avatar: "🐰" },
+  { name: "정민재", avatar: "🦉" },
+  { name: "김지안", avatar: "🦁" },
+  { name: "최서연", avatar: "🐯" },
+  { name: "장하린", avatar: "🐼" },
+  { name: "오태경", avatar: "🦝" },
+];
+
+const BATCH_SIZE = 6;
+
+function generatePosts(pageNumber: number, limit: number): Post[] {
+  const startId = (pageNumber - 1) * limit + 1;
+  const result: Post[] = [];
+
+  for (let i = 0; i < limit; i += 1) {
+    const id = startId + i;
+    const topic = TOPICS[(id - 1) % TOPICS.length];
+    const author = AUTHORS[(id - 1) % AUTHORS.length];
+    const minutesAgo = id * 7 + Math.floor(Math.random() * 13);
+    const date =
+      minutesAgo < 60
+        ? `${minutesAgo}분 전`
+        : minutesAgo < 60 * 24
+          ? `${Math.floor(minutesAgo / 60)}시간 전`
+          : `${Math.floor(minutesAgo / (60 * 24))}일 전`;
+
+    result.push({
+      id,
+      title: `#${id} ${topic.title}`,
+      content: topic.content,
+      author: author.name,
+      avatar: author.avatar,
+      date,
+      likes: 12 + ((id * 37) % 240),
+      comments: 1 + ((id * 11) % 38),
+      tag: topic.tag,
+      accent: topic.accent,
+    });
+  }
+
+  return result;
+}
+
+function InfiniteScrollDemo(): ReactElement {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  const [codeType, setCodeType] = useState<"react">("react");
   const loaderRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const pageRef = useRef(1);
+  const loadingRef = useRef(false);
 
-  // 더미 포스트 생성 헬퍼 함수
-  const generatePosts = (pageNumber: number, limit: number) => {
-    const startId = (pageNumber - 1) * limit + 1;
-    const endId = startId + limit - 1;
-    const result: Post[] = [];
+  const isLoaderInView = useCallback((): boolean => {
+    const target = loaderRef.current;
+    const root = containerRef.current;
+    if (!target || !root) return false;
+    const t = target.getBoundingClientRect();
+    const r = root.getBoundingClientRect();
+    return t.top < r.bottom + 240;
+  }, []);
 
-    for (let id = startId; id <= endId; id++) {
-      const post: Post = {
-        id,
-        title: `인피니트 스크롤에 맞는 포스트 #${id}`,
-        content: `이것은 인피니트 스크롤을 시연하기 위한 더미 콘텐츠입니다. 이 포스트는 ID ${id}를 가지고 있습니다. 실제로는 API에서 데이터를 가져오겠지만,`,
-        author: `사용자${(id % 5) + 1}`,
-        date: new Date(Date.now() - id * 86400000).toLocaleDateString("ko-KR", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }),
-        likes: Math.floor(Math.random() * 100),
-        comments: Math.floor(Math.random() * 20),
-      };
-      result.push(post);
-    }
-
-    return result;
-  };
-
-  // 페이지 로딩 함수
-  const loadMorePosts = () => {
-    if (loading || !hasMore) return;
-
+  const loadMore = useCallback((): void => {
+    if (loadingRef.current) return;
+    loadingRef.current = true;
     setLoading(true);
 
-    // API 호출 시뮬레이션
     setTimeout(() => {
-      const newPosts = generatePosts(page, 5);
-      setPosts((prevPosts) => [...prevPosts, ...newPosts]);
-      setPage((prevPage) => prevPage + 1);
+      const nextPage = pageRef.current;
+      const newPosts = generatePosts(nextPage, BATCH_SIZE);
+      setPosts((prev) => [...prev, ...newPosts]);
+      pageRef.current = nextPage + 1;
+      loadingRef.current = false;
       setLoading(false);
 
-      // 5페이지 이후에는 더 이상 페이지가 없다고 설정
-      if (page >= 5) {
-        setHasMore(false);
-      }
-    }, 1000);
-  };
+      requestAnimationFrame(() => {
+        if (isLoaderInView()) loadMore();
+      });
+    }, 600);
+  }, [isLoaderInView]);
 
-  // Intersection Observer 설정
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading) {
-          loadMorePosts();
-        }
-      },
-      { threshold: 0.1 }
-    );
+    const root = containerRef.current;
+    if (!root) return;
 
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current);
-    }
+    const onScroll = (): void => {
+      if (isLoaderInView()) loadMore();
+    };
+
+    root.addEventListener("scroll", onScroll, { passive: true });
+    loadMore();
 
     return () => {
-      if (loaderRef.current) {
-        observer.unobserve(loaderRef.current);
-      }
+      root.removeEventListener("scroll", onScroll);
     };
-  }, [loaderRef, loading, hasMore]);
-
-  // 초기 포스트 로딩
-  useEffect(() => {
-    loadMorePosts();
-  }, []);
-
-  const getReactCode = () => {
-    return `import React, { useState, useEffect, useRef } from 'react';
-import { Loader2 } from 'lucide-react';
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-  author: string;
-  date: string;
-  likes: number;
-  comments: number;
-}
-
-interface InfiniteScrollProps {
-  loadMore: () => Promise<Post[]>;
-  hasMore: boolean;
-  loading: boolean;
-  className?: string;
-}
-
-const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
-  loadMore,
-  hasMore,
-  loading,
-  className = ''
-}) => {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [page, setPage] = useState(1);
-  const loaderRef = useRef<HTMLDivElement>(null);
-
-  // Intersection Observer를 활용한 무한 스크롤 구현
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading) {
-          handleLoadMore();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current);
-    }
-
-    return () => {
-      if (loaderRef.current) {
-        observer.unobserve(loaderRef.current);
-      }
-    };
-  }, [loaderRef, loading, hasMore]);
-
-  const handleLoadMore = async () => {
-    try {
-      const newPosts = await loadMore();
-      setPosts(prevPosts => [...prevPosts, ...newPosts]);
-      setPage(prevPage => prevPage + 1);
-    } catch (error) {
-      console.error('Failed to load more posts:', error);
-    }
-  };
-
-  // 초기 페이지 로드
-  useEffect(() => {
-    handleLoadMore();
-  }, []);
+  }, [loadMore, isLoaderInView]);
 
   return (
-    <div className={\`space-y-4 \${className}\`}>
-      {posts.map((post) => (
-        <div
-          key={post.id}
-          className="p-4 border rounded-lg hover:shadow-sm transition-shadow bg-white"
-        >
-          <h3 className="font-semibold text-lg mb-2">{post.title}</h3>
-          <p className="text-gray-600 mb-3">{post.content}</p>
-          <div className="flex justify-between items-center text-sm text-gray-500">
-            <div>
-              작성자: {post.author} · {post.date}
-            </div>
-            <div>
-              좋아요 {post.likes} · 댓글 {post.comments}
-            </div>
+    <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-200">
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <h4 className="text-lg font-semibold">무한 스크롤 데모</h4>
+        <div className="flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+          <span className="num tabular-nums">{posts.length}</span>
+          <span>개 로드됨</span>
+        </div>
+      </div>
+
+      <p className="mb-4 text-sm text-gray-600">
+        아래로 스크롤하면 추가 포스트가 끝없이 자동으로 로드됩니다.
+      </p>
+
+      <div
+        ref={containerRef}
+        className="scrollbar-clean h-96 overflow-y-auto rounded-xl border border-border bg-muted/30 p-3 sm:p-4"
+      >
+        <div className="space-y-3">
+          {posts.map((post) => (
+            <article
+              key={post.id}
+              className="reveal-up group relative overflow-hidden rounded-xl border border-border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm"
+            >
+              <div
+                aria-hidden
+                className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${post.accent} opacity-60 group-hover:opacity-100 transition-opacity`}
+              />
+              <div className="relative flex items-start gap-3">
+                <div
+                  aria-hidden
+                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-background text-xl ring-1 ring-border"
+                >
+                  {post.avatar}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                    <span className="font-medium text-foreground">
+                      {post.author}
+                    </span>
+                    <span aria-hidden>·</span>
+                    <span className="num tabular-nums">{post.date}</span>
+                    <span className="ml-auto inline-flex items-center rounded-full bg-foreground/[0.06] px-2 py-0.5 text-[10px] font-semibold tracking-wide text-foreground/70">
+                      {post.tag}
+                    </span>
+                  </div>
+                  <h5 className="mt-1.5 text-sm font-semibold leading-snug text-foreground sm:text-base">
+                    {post.title}
+                  </h5>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    {post.content}
+                  </p>
+                  <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground">
+                    <span className="inline-flex items-center gap-1">
+                      <Heart className="h-3.5 w-3.5" aria-hidden />
+                      <span className="num tabular-nums">{post.likes}</span>
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <MessageCircle
+                        className="h-3.5 w-3.5"
+                        aria-hidden
+                      />
+                      <span className="num tabular-nums">{post.comments}</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+
+          <div
+            ref={loaderRef}
+            className="flex items-center justify-center py-5"
+            aria-live="polite"
+          >
+            {loading ? (
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-3 py-1.5 text-xs text-muted-foreground backdrop-blur">
+                <Loader2
+                  className="h-4 w-4 animate-spin text-primary"
+                  aria-hidden
+                />
+                <span>새로운 포스트 불러오는 중…</span>
+              </div>
+            ) : (
+              <span className="text-xs text-muted-foreground">
+                조금만 더 내려보세요
+              </span>
+            )}
           </div>
         </div>
-      ))}
-
-      {/* 로딩 표시기 */}
-      <div
-        ref={loaderRef}
-        className="py-8 flex justify-center items-center"
-      >
-        {loading ? (
-          <div className="flex items-center gap-2">
-            <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
-            <span className="text-gray-600">로딩 중..</span>
-          </div>
-        ) : !hasMore ? (
-          <span className="text-gray-500">더 이상 포스트가 없습니다.</span>
-        ) : null}
       </div>
     </div>
   );
-};
+}
 
-// 사용 예시
-const App: React.FC = () => {
+export default function InfiniteScrollSlide(): ReactElement {
+  const getReactCode = (): string => {
+    return `import { useCallback, useEffect, useRef, useState } from 'react';
+
+interface Post { id: number; title: string; }
+
+function generatePosts(page: number, limit: number): Post[] {
+  const start = (page - 1) * limit + 1;
+  return Array.from({ length: limit }, (_, i) => ({
+    id: start + i,
+    title: \`#\${start + i} 새로운 포스트\`,
+  }));
+}
+
+export function InfiniteList() {
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
 
-  // API 호출 시뮬레이션
-  const generatePosts = (pageNumber: number, limit: number = 10): Post[] => {
-    const startId = (pageNumber - 1) * limit + 1;
-    const posts: Post[] = [];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const loaderRef = useRef<HTMLDivElement>(null);
+  // refs avoid stale-closure bugs inside the observer callback
+  const pageRef = useRef(1);
+  const loadingRef = useRef(false);
 
-    for (let id = startId; id < startId + limit; id++) {
-      posts.push({
-        id,
-        title: \`포스트 제목 #\${id}\`,
-        content: \`이것은 포스트 #\${id}의 내용입니다. 실제로는 API에서 데이터를 받아오겠지만,\`,
-        author: \`사용자\${(id % 5) + 1}\`,
-        date: new Date(Date.now() - id * 86400000).toLocaleDateString('ko-KR'),
-        likes: Math.floor(Math.random() * 100),
-        comments: Math.floor(Math.random() * 20),
-      });
-    }
-
-    return posts;
-  };
-
-  const loadMore = async (): Promise<Post[]> => {
+  const loadMore = useCallback(() => {
+    if (loadingRef.current) return;
+    loadingRef.current = true;
     setLoading(true);
 
-    // API 호출 시뮬레이션
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    setTimeout(() => {
+      const nextPage = pageRef.current;
+      setPosts((prev) => [...prev, ...generatePosts(nextPage, 6)]);
+      pageRef.current = nextPage + 1;
+      loadingRef.current = false;
+      setLoading(false);
+    }, 600);
+  }, []);
 
-    const newPosts = generatePosts(currentPage, 10);
-    
-    // 5페이지 이후에는 더 이상 페이지가 없다고 설정
-    if (currentPage >= 5) {
-      setHasMore(false);
-    }
+  useEffect(() => {
+    const target = loaderRef.current;
+    const root = containerRef.current;
+    if (!target || !root) return;
 
-    setCurrentPage(prev => prev + 1);
-    setLoading(false);
+    const io = new IntersectionObserver(
+      (entries) => entries[0].isIntersecting && loadMore(),
+      { root, threshold: 0, rootMargin: '120px' },
+    );
+    io.observe(target);
+    return () => io.disconnect();
+  }, [loadMore]);
 
-    return newPosts;
-  };
+  useEffect(() => { loadMore(); }, [loadMore]);
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">무한 스크롤 예시</h1>
-      <div className="h-96 overflow-y-auto border rounded-lg p-4">
-        <InfiniteScroll
-          loadMore={loadMore}
-          hasMore={hasMore}
-          loading={loading}
-        />
-      </div>
+    <div ref={containerRef} className="h-96 overflow-y-auto">
+      {posts.map((p) => (
+        <article key={p.id}>{p.title}</article>
+      ))}
+      <div ref={loaderRef}>{loading && 'Loading...'}</div>
     </div>
   );
-};
-
-export default App;`;
+}`;
   };
 
   return (
@@ -283,8 +352,8 @@ export default App;`;
                   무한 스크롤이란?
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  무한 스크롤을 사용하면 페이지 단위의 전달을 없이 자동으로 추가
-                  콘텐츠를 로드하는 UX 패턴입니다. 별도로 페이지 이동이나
+                  무한 스크롤을 사용하면 페이지 단위의 전환 없이 자동으로 추가
+                  콘텐츠를 로드하는 UX 패턴입니다. 별도 페이지 이동이나
                   '더보기' 버튼 없이 연속적인 콘텐츠 탐색 경험을 제공합니다.
                 </p>
               </div>
@@ -309,7 +378,7 @@ export default App;`;
                     </li>
                     <li>
                       • <strong>페이지네이션 API 활용:</strong> 서버에서 페이지
-                      단위 커서 기반 페이지네이션 호출
+                      단위 또는 커서 기반 페이지네이션 호출
                     </li>
                   </ul>
                 </div>
@@ -331,13 +400,13 @@ export default App;`;
                 </div>
               </div>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h4 className="text-md font-semibold mb-3 text-blue-800">
+              <div className="bg-sky-50 border border-sky-200 rounded-lg p-4">
+                <h4 className="text-md font-semibold mb-3 text-sky-800">
                   장단점 비교
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <h5 className="font-medium text-green-700 mb-2">장점</h5>
+                    <h5 className="font-medium text-emerald-700 mb-2">장점</h5>
                     <ul className="space-y-1 text-sm text-gray-600">
                       <li>• 연속적인 탐색 경험</li>
                       <li>• 페이지 전환 없음</li>
@@ -346,7 +415,7 @@ export default App;`;
                     </ul>
                   </div>
                   <div>
-                    <h5 className="font-medium text-red-700 mb-2">단점</h5>
+                    <h5 className="font-medium text-rose-700 mb-2">단점</h5>
                     <ul className="space-y-1 text-sm text-gray-600">
                       <li>• 성능 이슈 가능성</li>
                       <li>• 특정 위치 찾기 어려움</li>
@@ -357,14 +426,14 @@ export default App;`;
                 </div>
               </div>
 
-              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                <h4 className="text-md font-semibold mb-3 text-yellow-800">
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <h4 className="text-md font-semibold mb-3 text-amber-800">
                   구현 시 고려사항
                 </h4>
                 <ul className="space-y-2 text-gray-600">
                   <li>• 로딩 상태 표시기 제공</li>
                   <li>• 에러 처리 및 재시도 메커니즘</li>
-                  <li>• 메모리 사용량 관리(데이터가 많을 경우)</li>
+                  <li>• 메모리 사용량 관리 (데이터가 많을 경우)</li>
                   <li>• 디바운싱(debouncing) 또는 스로틀링(throttling) 활용</li>
                   <li>• 초기 로드 시간 최적화</li>
                   <li>• SEO 및 접근성 고려</li>
@@ -380,70 +449,7 @@ export default App;`;
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <div className="flex justify-between items-center mb-4">
-                <h4 className="text-lg font-semibold">무한 스크롤 데모</h4>
-                <div className="text-sm text-gray-500">
-                  현재 {posts.length}개의 포스트가 로드됨
-                </div>
-              </div>
-
-              <p className="text-sm text-gray-600 mb-4">
-                아래로 스크롤하면 추가 포스트가 자동으로 로드됩니다.
-              </p>
-
-              <div
-                ref={containerRef}
-                className="h-96 border rounded-lg overflow-y-auto bg-white p-4"
-                style={{
-                  scrollbarWidth: "thin",
-                  scrollbarColor: "#49bcf3 #f1f1f1",
-                }}
-              >
-                {posts.length > 0 ? (
-                  <div className="space-y-4">
-                    {posts.map((post) => (
-                      <div
-                        key={post.id}
-                        className="p-4 border rounded-lg hover:shadow-sm transition-shadow"
-                      >
-                        <h4 className="font-medium text-lg">{post.title}</h4>
-                        <p className="text-gray-600 my-2">{post.content}</p>
-                        <div className="flex justify-between items-center text-sm text-gray-500">
-                          <div>
-                            작성자: {post.author} · {post.date}
-                          </div>
-                          <div>
-                            좋아요 {post.likes} · 댓글 {post.comments}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-
-                    {/* 로딩 표시기 */}
-                    <div
-                      ref={loaderRef}
-                      className="py-4 flex justify-center items-center"
-                    >
-                      {loading ? (
-                        <div className="flex items-center gap-2">
-                          <Loader2 className="w-5 h-5 text-[#49bcf3] animate-spin" />
-                          <span className="text-gray-600">로딩 중..</span>
-                        </div>
-                      ) : !hasMore ? (
-                        <span className="text-gray-500">
-                          더 이상 포스트가 없습니다.
-                        </span>
-                      ) : null}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="h-full flex justify-center items-center">
-                    <Loader2 className="w-6 h-6 text-[#49bcf3] animate-spin" />
-                  </div>
-                )}
-              </div>
-            </div>
+            <InfiniteScrollDemo />
           </TabsContent>
         </Tabs>
       </div>
