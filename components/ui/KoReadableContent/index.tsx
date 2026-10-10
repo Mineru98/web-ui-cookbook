@@ -75,6 +75,19 @@ function shouldBalanceTag(
     : false;
 }
 
+// Children.map 은 자식이 하나여도 배열을 돌려준다. Radix 의 asChild(Slot) 는 자식이
+// 정확히 하나의 요소이길 요구하므로, 요소 하나일 때는 배열로 감싸지 않고 그대로 넘긴다.
+function enhanceChildren(
+  children: ReactNode,
+  insideSkippedTag: boolean,
+): ReactNode {
+  if (isValidElement(children)) return enhanceNode(children, insideSkippedTag);
+
+  return Children.map(children, (child) =>
+    enhanceNode(child, insideSkippedTag),
+  );
+}
+
 function enhanceNode(node: ReactNode, insideSkippedTag = false): ReactNode {
   if (!isValidElement(node)) return node;
 
@@ -87,8 +100,9 @@ function enhanceNode(node: ReactNode, insideSkippedTag = false): ReactNode {
   const tagName = typeof element.type === "string" ? element.type : "";
 
   if (!tagName) {
-    const enhancedChildren = Children.map(element.props.children, (child) =>
-      enhanceNode(child, insideSkippedTag),
+    const enhancedChildren = enhanceChildren(
+      element.props.children,
+      insideSkippedTag,
     );
 
     return cloneElement(element, {
@@ -101,8 +115,9 @@ function enhanceNode(node: ReactNode, insideSkippedTag = false): ReactNode {
 
   if (!element.props.children || skipChildren) return element;
 
-  const enhancedChildren = Children.map(element.props.children, (child) =>
-    enhanceNode(child, skipChildren),
+  const enhancedChildren = enhanceChildren(
+    element.props.children,
+    skipChildren,
   );
 
   if (
