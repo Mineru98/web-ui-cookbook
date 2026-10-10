@@ -28,21 +28,21 @@ export default function AppBarSlide() {
           <div className="bg-white border-b shadow-xs">
             <div className="flex items-center justify-between px-4 py-3">
               <div className="flex items-center">
-                <button className="p-1.5 rounded-full hover:bg-gray-100">
-                  <ArrowLeft className="h-5 w-5 text-gray-700" />
+                <button className="p-1.5 rounded-full hover:bg-muted">
+                  <ArrowLeft className="h-5 w-5 text-foreground" />
                 </button>
                 <span className="ml-4 font-medium">선택된 항목 (3)</span>
               </div>
 
               <div className="flex items-center gap-3">
-                <button className="p-1.5 rounded-full hover:bg-gray-100">
-                  <Share className="h-5 w-5 text-gray-700" />
+                <button className="p-1.5 rounded-full hover:bg-muted">
+                  <Share className="h-5 w-5 text-foreground" />
                 </button>
-                <button className="p-1.5 rounded-full hover:bg-gray-100">
-                  <BookmarkPlus className="h-5 w-5 text-gray-700" />
+                <button className="p-1.5 rounded-full hover:bg-muted">
+                  <BookmarkPlus className="h-5 w-5 text-foreground" />
                 </button>
-                <button className="p-1.5 rounded-full hover:bg-gray-100">
-                  <MoreVertical className="h-5 w-5 text-gray-700" />
+                <button className="p-1.5 rounded-full hover:bg-muted">
+                  <MoreVertical className="h-5 w-5 text-foreground" />
                 </button>
               </div>
             </div>
@@ -53,25 +53,25 @@ export default function AppBarSlide() {
         return (
           <div className="bg-white border-b shadow-xs">
             <div className="flex items-center justify-between px-4 py-2.5">
-              <button className="p-1.5 rounded-full hover:bg-gray-100">
-                <ArrowLeft className="h-5 w-5 text-gray-700" />
+              <button className="p-1.5 rounded-full hover:bg-muted">
+                <ArrowLeft className="h-5 w-5 text-foreground" />
               </button>
 
               <div className="flex-1 mx-3">
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Search className="h-4 w-4 text-gray-400" />
+                    <Search className="h-4 w-4 text-muted-foreground/70" />
                   </div>
                   <input
                     type="text"
                     placeholder="검색어를 입력하세요"
-                    className="pl-10 pr-4 py-1.5 w-full rounded-full bg-gray-100 focus:bg-white focus:outline-hidden focus:ring-1 focus:ring-[#49bcf3] text-sm"
+                    className="pl-10 pr-4 py-1.5 w-full rounded-full bg-muted focus:bg-white focus:outline-hidden focus:ring-1 focus:ring-brand-sky text-sm"
                   />
                 </div>
               </div>
 
-              <button className="p-1.5 rounded-full hover:bg-gray-100">
-                <MoreVertical className="h-5 w-5 text-gray-700" />
+              <button className="p-1.5 rounded-full hover:bg-muted">
+                <MoreVertical className="h-5 w-5 text-foreground" />
               </button>
             </div>
           </div>
@@ -79,7 +79,7 @@ export default function AppBarSlide() {
 
       case "prominent":
         return (
-          <div className="bg-[#49bcf3] text-white shadow-md">
+          <div className="bg-brand-sky text-white shadow-md">
             <div className="flex items-center justify-between px-4 py-3">
               <div className="flex items-center">
                 <button className="p-1.5 rounded-full hover:bg-white/10">
@@ -97,7 +97,7 @@ export default function AppBarSlide() {
                   onClick={() => setShowNotification(!showNotification)}
                 >
                   <Bell className="h-5 w-5" />
-                  <span className="absolute top-0 right-0 block w-2 h-2 bg-red-500 rounded-full"></span>
+                  <span className="absolute top-0 right-0 block w-2 h-2 bg-destructive rounded-full"></span>
                 </button>
                 <button className="p-1.5 rounded-full hover:bg-white/10">
                   <MoreVertical className="h-5 w-5" />
@@ -112,7 +112,7 @@ export default function AppBarSlide() {
               </p>
             </div>
 
-            <div className="flex bg-[#2a8bc4]">
+            <div className="flex bg-brand-ocean">
               <button className="flex-1 py-2 text-sm font-medium border-b-2 border-white">
                 탭 1
               </button>
@@ -131,25 +131,25 @@ export default function AppBarSlide() {
           <div className="bg-white border-b shadow-xs">
             <div className="flex items-center justify-between px-4 py-3">
               <div className="flex items-center">
-                <button className="p-1.5 rounded-full hover:bg-gray-100">
-                  <Menu className="h-5 w-5 text-gray-700" />
+                <button className="p-1.5 rounded-full hover:bg-muted">
+                  <Menu className="h-5 w-5 text-foreground" />
                 </button>
                 <span className="ml-4 font-medium">앱 이름</span>
               </div>
 
               <div className="flex items-center gap-2">
-                <button className="p-1.5 rounded-full hover:bg-gray-100">
-                  <Search className="h-5 w-5 text-gray-700" />
+                <button className="p-1.5 rounded-full hover:bg-muted">
+                  <Search className="h-5 w-5 text-foreground" />
                 </button>
                 <button
-                  className="p-1.5 rounded-full hover:bg-gray-100 relative"
+                  className="p-1.5 rounded-full hover:bg-muted relative"
                   onClick={() => setShowNotification(!showNotification)}
                 >
-                  <Bell className="h-5 w-5 text-gray-700" />
-                  <span className="absolute top-0 right-0 block w-2 h-2 bg-red-500 rounded-full"></span>
+                  <Bell className="h-5 w-5 text-foreground" />
+                  <span className="absolute top-0 right-0 block w-2 h-2 bg-destructive rounded-full"></span>
                 </button>
-                <button className="p-1.5 rounded-full hover:bg-gray-100">
-                  <MoreVertical className="h-5 w-5 text-gray-700" />
+                <button className="p-1.5 rounded-full hover:bg-muted">
+                  <MoreVertical className="h-5 w-5 text-foreground" />
                 </button>
               </div>
             </div>
@@ -505,7 +505,7 @@ export default StandardAppBarExample;`;
 
   return (
     <SlideLayout title="App Bar (앱바)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -513,95 +513,97 @@ export default StandardAppBarExample;`;
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                앱바(App Bar)는 화면 상단에 위치한 컴포넌트로, 현재 화면의
-                제목과 함께 네비게이션, 검색, 액션 버튼과 같은 주요 기능을
-                제공합니다. 일반적으로 '툴바(Toolbar)' 또는 '네비게이션
-                바(Navigation Bar)'라고도 불립니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  앱바(App Bar)는 화면 상단에 위치한 컴포넌트로, 현재 화면의
+                  제목과 함께 네비게이션, 검색, 액션 버튼과 같은 주요 기능을
+                  제공합니다. 일반적으로 '툴바(Toolbar)' 또는 '네비게이션
+                  바(Navigation Bar)'라고도 불립니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">특징</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>화면 상단에 고정되어 표시됩니다</li>
-                <li>좌측에는 현재 화면의 제목을 표시합니다</li>
-                <li>네비게이션 메뉴 버튼, 뒤로 가기 버튼 등을 포함합니다</li>
-                <li>검색, 공유, 설정 등의 액션 버튼을 우측에 배치합니다</li>
-                <li>스크롤 시 숨김/표시 기능을 지원할 수 있습니다.</li>
-                <li>브랜드 색상을 사용하여 앱의 아이덴티티를 강조합니다</li>
-              </ul>
-            </div>
+              <div className="bg-white rounded-lg p-6 shadow-md border">
+                <h3 className="text-lg font-semibold mb-2">특징</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>화면 상단에 고정되어 표시됩니다</li>
+                  <li>좌측에는 현재 화면의 제목을 표시합니다</li>
+                  <li>네비게이션 메뉴 버튼, 뒤로 가기 버튼 등을 포함합니다</li>
+                  <li>검색, 공유, 설정 등의 액션 버튼을 우측에 배치합니다</li>
+                  <li>스크롤 시 숨김/표시 기능을 지원할 수 있습니다.</li>
+                  <li>브랜드 색상을 사용하여 앱의 아이덴티티를 강조합니다</li>
+                </ul>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">앱바 유형</h3>
-              <ul className="list-disc pl-5 space-y-2">
-                <li>
-                  <strong>기본형 (Standard)</strong>
-                  <p className="text-sm text-gray-600">
-                    가장 일반적인 형태로, 제목과 액션 버튼을 포함합니다
-                  </p>
-                </li>
-                <li>
-                  <strong>컨텍스트형 (Contextual)</strong>
-                  <p className="text-sm text-gray-600">
-                    항목 선택 시 나타나며, 선택된 항목에 대한 액션을 제공합니다
-                  </p>
-                </li>
-                <li>
-                  <strong>검색형 (Search)</strong>
-                  <p className="text-sm text-gray-600">
-                    검색 기능을 강조한 형태로, 검색창이 중앙에 배치됩니다
-                  </p>
-                </li>
-                <li>
-                  <strong>확장형 (Prominent)</strong>
-                  <p className="text-sm text-gray-600">
-                    추가 콘텐츠나 탭을 포함하는 확장된 높이의 앱바입니다.
-                  </p>
-                </li>
-                <li>
-                  <strong>축소형 (Collapsed)</strong>
-                  <p className="text-sm text-gray-600">
-                    스크롤 시 높이가 축소되어 화면 공간을 효율적으로 사용합니다
-                  </p>
-                </li>
-              </ul>
-            </div>
+              <div className="bg-white rounded-lg p-6 shadow-md border">
+                <h3 className="text-lg font-semibold mb-2">앱바 유형</h3>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>
+                    <strong>기본형 (Standard)</strong>
+                    <p className="text-sm text-muted-foreground">
+                      가장 일반적인 형태로, 제목과 액션 버튼을 포함합니다
+                    </p>
+                  </li>
+                  <li>
+                    <strong>컨텍스트형 (Contextual)</strong>
+                    <p className="text-sm text-muted-foreground">
+                      항목 선택 시 나타나며, 선택된 항목에 대한 액션을 제공합니다
+                    </p>
+                  </li>
+                  <li>
+                    <strong>검색형 (Search)</strong>
+                    <p className="text-sm text-muted-foreground">
+                      검색 기능을 강조한 형태로, 검색창이 중앙에 배치됩니다
+                    </p>
+                  </li>
+                  <li>
+                    <strong>확장형 (Prominent)</strong>
+                    <p className="text-sm text-muted-foreground">
+                      추가 콘텐츠나 탭을 포함하는 확장된 높이의 앱바입니다.
+                    </p>
+                  </li>
+                  <li>
+                    <strong>축소형 (Collapsed)</strong>
+                    <p className="text-sm text-muted-foreground">
+                      스크롤 시 높이가 축소되어 화면 공간을 효율적으로 사용합니다
+                    </p>
+                  </li>
+                </ul>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>앱 내 화면 간 이동 및 네비게이션</li>
-                <li>현재 위치 표시 및 계층 구조 전달</li>
-                <li>검색 기능 제공</li>
-                <li>알림, 메시지 등의 상태 표시</li>
-                <li>설정, 공유, 즐겨찾기 등 자주 사용하는 기능 접근</li>
-                <li>항목 선택 시 관련 액션 표시</li>
-                <li>사용자 계정 및 프로필 관리</li>
-              </ul>
-            </div>
+              <div className="bg-white rounded-lg p-6 shadow-md border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>앱 내 화면 간 이동 및 네비게이션</li>
+                  <li>현재 위치 표시 및 계층 구조 전달</li>
+                  <li>검색 기능 제공</li>
+                  <li>알림, 메시지 등의 상태 표시</li>
+                  <li>설정, 공유, 즐겨찾기 등 자주 사용하는 기능 접근</li>
+                  <li>항목 선택 시 관련 액션 표시</li>
+                  <li>사용자 계정 및 프로필 관리</li>
+                </ul>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">디자인 지침</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>액션 버튼은 우선순위에 따라 배치합니다</li>
-                <li>3-5개의 액션 버튼으로 제한하여 복잡성을 방지합니다</li>
-                <li>충분한 터치 영역(최소 48x48dp)을 확보합니다</li>
-                <li>브랜드 색상과 대비를 고려하여 가독성을 확보합니다</li>
-                <li>반응형으로 설계하여 다양한 화면 크기에 대응합니다</li>
-                <li>
-                  적절한 그림자 및 패딩을 사용하여 시각적 안정감을 제공합니다
-                </li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border">
+                <h3 className="text-lg font-semibold mb-2">디자인 지침</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>액션 버튼은 우선순위에 따라 배치합니다</li>
+                  <li>3-5개의 액션 버튼으로 제한하여 복잡성을 방지합니다</li>
+                  <li>충분한 터치 영역(최소 48x48dp)을 확보합니다</li>
+                  <li>브랜드 색상과 대비를 고려하여 가독성을 확보합니다</li>
+                  <li>반응형으로 설계하여 다양한 화면 크기에 대응합니다</li>
+                  <li>
+                    적절한 그림자 및 패딩을 사용하여 시각적 안정감을 제공합니다
+                  </li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-background">
               <PrismCode language="typescript" code={getReactCode()} />
             </div>
           </TabsContent>
@@ -612,8 +614,8 @@ export default StandardAppBarExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     appBarType === "standard"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setAppBarType("standard")}
                 >
@@ -622,8 +624,8 @@ export default StandardAppBarExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     appBarType === "context"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setAppBarType("context")}
                 >
@@ -632,8 +634,8 @@ export default StandardAppBarExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     appBarType === "search"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setAppBarType("search")}
                 >
@@ -642,8 +644,8 @@ export default StandardAppBarExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     appBarType === "prominent"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setAppBarType("prominent")}
                 >
@@ -657,7 +659,7 @@ export default StandardAppBarExample;`;
                 {renderAppBar()}
                 <div className="p-4">
                   <h3 className="font-medium mb-3">인터랙티브 데모</h3>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-muted-foreground text-sm mb-4">
                     위의 버튼을 클릭하여 다양한 앱바 유형을 확인해보세요.
                   </p>
 
@@ -665,8 +667,8 @@ export default StandardAppBarExample;`;
                     <button
                       className={`px-3 py-1.5 rounded text-sm ${
                         appBarType === "standard"
-                          ? "bg-[#49bcf3] text-white"
-                          : "bg-gray-100"
+                          ? "bg-brand-sky text-white"
+                          : "bg-muted"
                       }`}
                       onClick={() => setAppBarType("standard")}
                     >
@@ -675,8 +677,8 @@ export default StandardAppBarExample;`;
                     <button
                       className={`px-3 py-1.5 rounded text-sm ${
                         appBarType === "context"
-                          ? "bg-[#49bcf3] text-white"
-                          : "bg-gray-100"
+                          ? "bg-brand-sky text-white"
+                          : "bg-muted"
                       }`}
                       onClick={() => setAppBarType("context")}
                     >
@@ -685,8 +687,8 @@ export default StandardAppBarExample;`;
                     <button
                       className={`px-3 py-1.5 rounded text-sm ${
                         appBarType === "search"
-                          ? "bg-[#49bcf3] text-white"
-                          : "bg-gray-100"
+                          ? "bg-brand-sky text-white"
+                          : "bg-muted"
                       }`}
                       onClick={() => setAppBarType("search")}
                     >
@@ -695,8 +697,8 @@ export default StandardAppBarExample;`;
                     <button
                       className={`px-3 py-1.5 rounded text-sm ${
                         appBarType === "prominent"
-                          ? "bg-[#49bcf3] text-white"
-                          : "bg-gray-100"
+                          ? "bg-brand-sky text-white"
+                          : "bg-muted"
                       }`}
                       onClick={() => setAppBarType("prominent")}
                     >

@@ -8,13 +8,13 @@ import { PrismCode } from "@/components/ui/prism/PrismCode"
 
 export default function ButtonSlide() {
   const [clickCount, setClickCount] = useState(0)
-  const [variant, setVariant] = useState<"default" | "destructive" | "outline-solid" | "secondary" | "ghost" | "link">(
+  const [variant, setVariant] = useState<"default" | "destructive" | "outline" | "secondary" | "ghost" | "link">(
     "default",
   )
 
   return (
     <SlideLayout title="Button">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -22,29 +22,31 @@ export default function ButtonSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Button은 사용자가 액션을 트리거할 수 있는 인터랙티브 요소입니다. 클릭하거나 탭하면 지정된 작업을
-                수행합니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Button은 사용자가 액션을 트리거할 수 있는 인터랙티브 요소입니다. 클릭하거나 탭하면 지정된 작업을
+                  수행합니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>양식 제출 (Form submission)</li>
-                <li>대화 상자 확인/취소 (Dialog confirmation/cancellation)</li>
-                <li>페이지 이동 (Navigation)</li>
-                <li>기능 활성화/비활성화 (Feature toggle)</li>
-                <li>프로세스 시작/중지 (Process start/stop)</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>양식 제출 (Form submission)</li>
+                  <li>대화 상자 확인/취소 (Dialog confirmation/cancellation)</li>
+                  <li>페이지 이동 (Navigation)</li>
+                  <li>기능 활성화/비활성화 (Feature toggle)</li>
+                  <li>프로세스 시작/중지 (Process start/stop)</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-white">
               <PrismCode
                 language="typescript"
                 code={`import React, { useState } from 'react';
@@ -145,7 +147,7 @@ export default ButtonExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-2">버튼 스타일</label>
                 <select

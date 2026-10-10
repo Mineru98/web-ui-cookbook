@@ -38,7 +38,7 @@ export default function FormSlide() {
 
   return (
     <SlideLayout title="Form">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -46,30 +46,32 @@ export default function FormSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Form은 사용자로부터 데이터를 수집하기 위한 여러 입력 요소를 그룹화한 UI 컴포넌트입니다. 텍스트 필드,
-                체크박스, 라디오 버튼 등 다양한 입력 요소를 포함할 수 있습니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Form은 사용자로부터 데이터를 수집하기 위한 여러 입력 요소를 그룹화한 UI 컴포넌트입니다. 텍스트 필드,
+                  체크박스, 라디오 버튼 등 다양한 입력 요소를 포함할 수 있습니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>로그인/회원가입</li>
-                <li>연락처 정보 수집</li>
-                <li>설문조사</li>
-                <li>결제 정보 입력</li>
-                <li>검색 필터</li>
-                <li>설정 구성</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>로그인/회원가입</li>
+                  <li>연락처 정보 수집</li>
+                  <li>설문조사</li>
+                  <li>결제 정보 입력</li>
+                  <li>검색 필터</li>
+                  <li>설정 구성</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`import React, { useState } from 'react';
@@ -194,12 +196,12 @@ export default FormExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               {isSubmitted ? (
-                <div className="p-4 bg-green-50 border border-green-200 rounded-md">
-                  <h3 className="text-lg font-semibold text-green-800 mb-2">폼이 제출되었습니다!</h3>
-                  <p className="text-green-700">다음 정보가 제출되었습니다:</p>
-                  <ul className="mt-2 space-y-1 text-green-700">
+                <div className="p-4 bg-success-soft border border-success-line rounded-md">
+                  <h3 className="text-lg font-semibold text-success-ink mb-2">폼이 제출되었습니다!</h3>
+                  <p className="text-success-ink">다음 정보가 제출되었습니다:</p>
+                  <ul className="mt-2 space-y-1 text-success-ink">
                     <li>
                       <strong>이름:</strong> {formData.name}
                     </li>

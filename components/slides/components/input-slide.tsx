@@ -14,7 +14,7 @@ export default function InputSlide() {
 
   return (
     <SlideLayout title="Input / TextField">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -22,30 +22,32 @@ export default function InputSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Input(또는 TextField)은 사용자로부터 텍스트 데이터를 입력받는 UI 요소입니다. 다양한 형식의 데이터를 텍스트,
-                숫자, 이메일, 비밀번호 등을 수집할 수 있습니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Input(또는 TextField)은 사용자로부터 텍스트 데이터를 입력받는 UI 요소입니다. 다양한 형식의 데이터를 텍스트,
+                  숫자, 이메일, 비밀번호 등을 수집할 수 있습니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>로그인/회원가입 양식</li>
-                <li>검색 필드</li>
-                <li>연락처 정보 수집</li>
-                <li>설문조사 및 피드백 양식</li>
-                <li>결제 정보 입력</li>
-                <li>데이터 필터링 옵션</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>로그인/회원가입 양식</li>
+                  <li>검색 필드</li>
+                  <li>연락처 정보 수집</li>
+                  <li>설문조사 및 피드백 양식</li>
+                  <li>결제 정보 입력</li>
+                  <li>데이터 필터링 옵션</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`import React, { useState } from 'react';
@@ -135,7 +137,7 @@ export default InputExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="space-y-4 mb-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">입력 필드 유형</label>

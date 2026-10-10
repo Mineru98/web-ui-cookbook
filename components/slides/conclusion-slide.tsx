@@ -1,4 +1,5 @@
 import { Check, ArrowUpRight } from "lucide-react";
+import type { CSSProperties } from "react";
 import { KoHeading } from "@/components/ui/KoHeading";
 import { KoText } from "@/components/ui/KoText";
 
@@ -46,38 +47,44 @@ export default function ConclusionSlide() {
       <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/30" />
 
       <div className="relative z-10 mx-auto h-full w-full max-w-5xl overflow-y-auto px-6 py-10 sm:px-10 sm:py-14 scrollbar-clean">
-        <KoText
-          as="div"
-          balance={false}
-          className="reveal-fade inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-medium tracking-wide text-white/90 backdrop-blur-md"
-        >
-          Wrap Up · 마무리
-        </KoText>
+        <div className="reveal-fade inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 backdrop-blur-md">
+          <KoText
+            as="span"
+            balance={false}
+            className="text-xs font-medium tracking-wide text-white/90"
+          >
+            Wrap Up · 마무리
+          </KoText>
+        </div>
 
-        <KoHeading
-          as="h1"
-          className="reveal-up mt-4 text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl"
+        <div className="reveal-up mt-4">
+          <KoHeading
+            as="h1"
+            className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl"
+          >
+            잘 만든 UI는
+            <br />
+            <span className="bg-linear-to-r from-white to-white/60 bg-clip-text text-transparent">
+              대화에서 시작합니다
+            </span>
+          </KoHeading>
+        </div>
+        <div
+          className="reveal-up anim-delay mt-4 max-w-2xl"
+          style={{ "--anim-delay": "120ms" } as CSSProperties}
         >
-          잘 만든 UI는
-          <br />
-          <span className="bg-linear-to-r from-white to-white/60 bg-clip-text text-transparent">
-            대화에서 시작합니다
-          </span>
-        </KoHeading>
-        <KoText
-          className="reveal-up mt-4 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg"
-          style={{ animationDelay: "120ms" }}
-        >
-          UI 컴포넌트와 상호작용 어휘를 함께 정리하는 일은, 결국 더 좋은 제품을
-          만들기 위한 가장 빠른 길입니다.
-        </KoText>
+          <KoText className="text-base leading-relaxed text-white/85 sm:text-lg">
+            UI 컴포넌트와 상호작용 어휘를 함께 정리하는 일은, 결국 더 좋은 제품을
+            만들기 위한 가장 빠른 길입니다.
+          </KoText>
+        </div>
 
         <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
           {TAKEAWAYS.map((item, idx) => (
             <div
               key={item.title}
-              className="reveal-up rounded-2xl border border-white/15 bg-white/8 p-5 backdrop-blur-md transition-colors hover:bg-white/12"
-              style={{ animationDelay: `${200 + idx * 80}ms` }}
+              className="reveal-up anim-delay rounded-2xl border border-white/15 bg-white/8 p-5 backdrop-blur-md transition-colors hover:bg-white/12"
+              style={{ "--anim-delay": `${200 + idx * 80}ms` } as CSSProperties}
             >
               <div className="flex items-center gap-3">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 text-white">

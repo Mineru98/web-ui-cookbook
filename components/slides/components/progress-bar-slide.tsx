@@ -25,7 +25,7 @@ export default function ProgressBarSlide() {
 
   return (
     <SlideLayout title="Progress Bar">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -33,30 +33,32 @@ export default function ProgressBarSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Progress Bar는 작업의 진행 상태를 시각적으로 표시하는 UI
-                요소입니다. 사용자에게 작업이 얼마나 완료되었는지 알려줍니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Progress Bar는 작업의 진행 상태를 시각적으로 표시하는 UI
+                  요소입니다. 사용자에게 작업이 얼마나 완료되었는지 알려줍니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>파일 업로드/다운로드 진행 상태</li>
-                <li>양식 작성 진행 상태</li>
-                <li>설치 프로세스</li>
-                <li>페이지 로딩 표시</li>
-                <li>목표 달성 진행 상태</li>
-                <li>단계별 프로세스 표시</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>파일 업로드/다운로드 진행 상태</li>
+                  <li>양식 작성 진행 상태</li>
+                  <li>설치 프로세스</li>
+                  <li>페이지 로딩 표시</li>
+                  <li>목표 달성 진행 상태</li>
+                  <li>단계별 프로세스 표시</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`import React, { useState, useEffect } from 'react';
@@ -159,7 +161,7 @@ export default ProgressBarExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="space-y-6 mb-6">
                 <div>
                   <Label className="mb-2 block">진행률: {progress}%</Label>
@@ -205,22 +207,16 @@ export default ProgressBarExample;`}
                   <Progress
                     value={progress}
                     className="h-2"
-                    style={
-                      {
-                        "--progress-background": "rgb(229, 231, 235)",
-                        "--progress-foreground": color,
-                      } as React.CSSProperties
-                    }
                   />
                 </div>
 
-                <div className="h-6 w-full bg-gray-200 rounded-full overflow-hidden">
+                <div className="h-6 w-full bg-secondary rounded-full overflow-hidden">
                   <div
-                    className="h-full transition-all duration-500 ease-in-out"
+                    className="h-full w-(--w) bg-(--c) transition-all duration-500 ease-in-out"
                     style={{
-                      width: `${progress}%`,
-                      backgroundColor: color,
-                    }}
+                      "--w": `${progress}%`,
+                      "--c": color,
+                    } as React.CSSProperties}
                   ></div>
                 </div>
               </div>

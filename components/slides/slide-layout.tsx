@@ -22,30 +22,34 @@ export default function SlideLayout({
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-32 right-[-10%] h-[420px] w-[420px] rounded-full bg-primary/10 blur-3xl"
+        className="pointer-events-none absolute -top-32 -right-1/10 h-105 w-105 rounded-full bg-primary/10 blur-3xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-40 left-[-10%] h-[380px] w-[380px] rounded-full bg-sky-400/10 blur-3xl"
+        className="pointer-events-none absolute -bottom-40 -left-1/10 h-95 w-95 rounded-full bg-brand-sky/10 blur-3xl"
       />
 
       <div className="relative flex h-full w-full flex-col px-5 pt-6 pb-4 sm:px-8 sm:pt-8 md:px-10 lg:px-12">
         <header className="mx-auto w-full max-w-6xl shrink-0">
           {eyebrow ? (
-            <KoText
-              as="div"
-              balance={false}
-              className="reveal-fade text-[11px] font-semibold uppercase tracking-[0.18em] text-primary"
-            >
-              {eyebrow}
-            </KoText>
+            <div className="reveal-fade">
+              <KoText
+                as="div"
+                balance={false}
+                className="text-2xs font-semibold uppercase tracking-eyebrow text-primary"
+              >
+                {eyebrow}
+              </KoText>
+            </div>
           ) : null}
-          <KoHeading
-            as="h1"
-            className="reveal-up mt-1 text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl"
-          >
-            {title}
-          </KoHeading>
+          <div className="reveal-up mt-1">
+            <KoHeading
+              as="h1"
+              className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl"
+            >
+              {title}
+            </KoHeading>
+          </div>
           <div
             aria-hidden
             className="reveal-fade mt-4 h-px w-full bg-linear-to-r from-border via-border to-transparent"

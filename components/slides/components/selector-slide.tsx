@@ -32,7 +32,7 @@ export default function SelectorSlide() {
 
   return (
     <SlideLayout title="Selector">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -40,31 +40,33 @@ export default function SelectorSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Selector(또는 Select)는 여러 옵션 중 하나를 선택할 수 있는
-                드롭다운 형태의 UI 요소입니다. 드롭다운 메뉴처럼 보이며, 주로
-                공간 절약이 중요시되어 있습니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Selector(또는 Select)는 여러 옵션 중 하나를 선택할 수 있는
+                  드롭다운 형태의 UI 요소입니다. 드롭다운 메뉴처럼 보이며, 주로
+                  공간 절약이 중요시되어 있습니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>국가, 지역 선택</li>
-                <li>카테고리 선택</li>
-                <li>날짜, 시간 범위 선택</li>
-                <li>정렬 옵션 선택</li>
-                <li>언어 선택</li>
-                <li>테마 선택</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>국가, 지역 선택</li>
+                  <li>카테고리 선택</li>
+                  <li>날짜, 시간 범위 선택</li>
+                  <li>정렬 옵션 선택</li>
+                  <li>언어 선택</li>
+                  <li>테마 선택</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`import React, { useState } from 'react';
@@ -213,7 +215,7 @@ export default SelectorExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="mb-6 space-y-4">
                 <div className="flex items-center space-x-2">
                   <input
@@ -225,7 +227,7 @@ export default SelectorExample;`}
                   />
                   <button
                     onClick={addOption}
-                    className="px-4 py-2 bg-[#49bcf3] text-white rounded-md"
+                    className="px-4 py-2 bg-brand-sky text-white rounded-md"
                   >
                     추가
                   </button>

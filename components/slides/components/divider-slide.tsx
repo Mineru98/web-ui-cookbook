@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import SlideLayout from "../slide-layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
@@ -16,7 +16,7 @@ export default function DividerSlide() {
 
   return (
     <SlideLayout title="Divider">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -24,30 +24,32 @@ export default function DividerSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Divider(또는 Separator)는 콘텐츠나 섹션을 시각적으로 구분하는 가로
-                또는 세로 선입니다. UI의 구조와 계층을 명확하게 하는 데 도움을 줍니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Divider(또는 Separator)는 콘텐츠나 섹션을 시각적으로 구분하는 가로
+                  또는 세로 선입니다. UI의 구조와 계층을 명확하게 하는 데 도움을 줍니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>콘텐츠 섹션 구분</li>
-                <li>메뉴 항목 구분</li>
-                <li>폼 섹션 구분</li>
-                <li>카드 내부 콘텐츠 구분</li>
-                <li>헤더와 본문 구분</li>
-                <li>리스트 구분</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>콘텐츠 섹션 구분</li>
+                  <li>메뉴 항목 구분</li>
+                  <li>폼 섹션 구분</li>
+                  <li>카드 내부 콘텐츠 구분</li>
+                  <li>헤더와 본문 구분</li>
+                  <li>리스트 구분</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`import React from 'react';
@@ -121,7 +123,7 @@ export default DividerExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="space-y-4 mb-6">
                 <div>
                   <Label className="mb-2 block">방향</Label>
@@ -130,15 +132,16 @@ export default DividerExample;`}
                     onValueChange={(value) =>
                       setOrientation(value as "horizontal" | "vertical")
                     }
-                    className="flex space-x-4"
                   >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="horizontal" id="horizontal" />
-                      <Label htmlFor="horizontal">가로</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="vertical" id="vertical" />
-                      <Label htmlFor="vertical">세로</Label>
+                    <div className="flex space-x-6">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="horizontal" id="horizontal" />
+                        <Label htmlFor="horizontal">가로</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="vertical" id="vertical" />
+                        <Label htmlFor="vertical">세로</Label>
+                      </div>
                     </div>
                   </RadioGroup>
                 </div>
@@ -182,11 +185,11 @@ export default DividerExample;`}
                   <div className="space-y-4">
                     <p>상단 콘텐츠</p>
                     <div
-                      className="w-full"
+                      className="w-full h-(--h) bg-(--c)"
                       style={{
-                        height: thickness,
-                        backgroundColor: color,
-                      }}
+                        "--h": thickness,
+                        "--c": color,
+                      } as CSSProperties}
                     ></div>
                     <p>하단 콘텐츠</p>
                   </div>
@@ -196,11 +199,11 @@ export default DividerExample;`}
                       <p>왼쪽 콘텐츠</p>
                     </div>
                     <div
-                      className="h-full"
+                      className="h-full w-(--w) bg-(--c)"
                       style={{
-                        width: thickness,
-                        backgroundColor: color,
-                      }}
+                        "--w": thickness,
+                        "--c": color,
+                      } as CSSProperties}
                     ></div>
                     <div className="flex-1 flex items-center justify-center">
                       <p>오른쪽 콘텐츠</p>

@@ -10,7 +10,7 @@ const VisuallyHidden = React.forwardRef<HTMLSpanElement, VisuallyHiddenProps>(
         ref={ref}
         className={cn(
           "absolute w-px h-px p-0 overflow-hidden whitespace-nowrap border-0",
-          "clip-rect-0",
+          "",
           className
         )}
         {...props}

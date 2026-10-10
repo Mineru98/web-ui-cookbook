@@ -27,7 +27,7 @@ export default function TableSlide() {
 
   return (
     <SlideLayout title="Table">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -35,30 +35,32 @@ export default function TableSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Table은 행과 열로 구성된 데이터를 표시하는 UI 요소입니다. 구조화된 정보를 효과적으로 보여주는 데
-                사용됩니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Table은 행과 열로 구성된 데이터를 표시하는 UI 요소입니다. 구조화된 정보를 효과적으로 보여주는 데
+                  사용됩니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>데이터 목록 표시</li>
-                <li>사용자 관리 대시보드</li>
-                <li>재고 관리</li>
-                <li>금융 데이터 표시</li>
-                <li>일정 및 시간표</li>
-                <li>비교 차트</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>데이터 목록 표시</li>
+                  <li>사용자 관리 대시보드</li>
+                  <li>재고 관리</li>
+                  <li>금융 데이터 표시</li>
+                  <li>일정 및 시간표</li>
+                  <li>비교 차트</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`import React, { useState } from 'react';
@@ -203,7 +205,7 @@ export default TableExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="mb-6 space-y-4">
                 <div className="grid grid-cols-3 gap-4">
                   <div>
@@ -250,7 +252,7 @@ export default TableExample;`}
                   <TableCaption>사용자 목록</TableCaption>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="w-[100px]">ID</TableHead>
+                      <TableHead className="w-25">ID</TableHead>
                       <TableHead>이름</TableHead>
                       <TableHead>이메일</TableHead>
                       <TableHead>역할</TableHead>

@@ -13,7 +13,7 @@ export default function ClickSlide() {
 
   return (
     <SlideLayout title="Click / Tap / Touch">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -21,43 +21,45 @@ export default function ClickSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                사용자가 요소를 짧게 누르거나 터치하는 기본적인 상호작용입니다.
-                React에서는 주로 onClick 이벤트로 처리되며, 디바이스 플랫폼에 따라
-                다음과 같이 부릅니다.
-              </p>
-              <ul className="list-disc pl-5 space-y-1 mt-2">
-                <li>
-                  <strong>Click</strong>: 주로 데스크톱, 마우스 환경
-                </li>
-                <li>
-                  <strong>Tap</strong>: 주로 모바일 디바이스 환경
-                </li>
-                <li>
-                  <strong>Touch</strong>: 터치스크린에서의 일반적인 터치 제스처
-                </li>
-              </ul>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  사용자가 요소를 짧게 누르거나 터치하는 기본적인 상호작용입니다.
+                  React에서는 주로 onClick 이벤트로 처리되며, 디바이스 플랫폼에 따라
+                  다음과 같이 부릅니다.
+                </p>
+                <ul className="list-disc pl-5 space-y-1 mt-2">
+                  <li>
+                    <strong>Click</strong>: 주로 데스크톱, 마우스 환경
+                  </li>
+                  <li>
+                    <strong>Tap</strong>: 주로 모바일 디바이스 환경
+                  </li>
+                  <li>
+                    <strong>Touch</strong>: 터치스크린에서의 일반적인 터치 제스처
+                  </li>
+                </ul>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">주요 특징</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>가장 기본적이며 널리 사용되는 상호작용 방식</li>
-                <li>사용자가 액션을 실행하도록 명확한 시각적 피드백이 필요</li>
-                <li>
-                  호버(Hover) 상태는 데스크탑에서 사용 가능하나 모바일에서는
-                  불가능
-                </li>
-                <li>접근성을 위해 충분한 터치 영역(44x44px 권장)이 필요</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">주요 특징</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>가장 기본적이며 널리 사용되는 상호작용 방식</li>
+                  <li>사용자가 액션을 실행하도록 명확한 시각적 피드백이 필요</li>
+                  <li>
+                    호버(Hover) 상태는 데스크탑에서 사용 가능하나 모바일에서는
+                    불가능
+                  </li>
+                  <li>접근성을 위해 충분한 터치 영역(44x44px 권장)이 필요</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-white">
               <PrismCode
                 language="typescript"
                 code={`// 기본 클릭 동작 (Button)
@@ -155,7 +157,7 @@ function InteractiveArea() {
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="flex flex-col items-center p-6 border rounded-lg shadow-xs">
                   <h4 className="font-medium mb-3">Click 예시</h4>
@@ -183,7 +185,7 @@ function InteractiveArea() {
                 <div className="flex flex-col items-center p-6 border rounded-lg shadow-xs">
                   <h4 className="font-medium mb-3">Touch 예시</h4>
                   <div
-                    className="w-24 h-24 bg-[#49bcf3] rounded-full flex items-center justify-center text-white cursor-pointer mb-4"
+                    className="w-24 h-24 bg-brand-sky rounded-full flex items-center justify-center text-white cursor-pointer mb-4"
                     onClick={() => setTouchCount((prev) => prev + 1)}
                   >
                     터치

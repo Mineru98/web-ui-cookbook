@@ -84,9 +84,9 @@ export default function ListViewSlide() {
       case "in-progress":
         return "bg-blue-100 text-blue-800";
       case "pending":
-        return "bg-gray-100 text-gray-800";
+        return "bg-muted text-foreground";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-muted text-foreground";
     }
   };
 
@@ -100,7 +100,7 @@ export default function ListViewSlide() {
       case "low":
         return "bg-yellow-100 text-yellow-800";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-muted text-foreground";
     }
   };
 
@@ -109,7 +109,7 @@ export default function ListViewSlide() {
       <div
         key={item.id}
         className={`border rounded-md mb-2 overflow-hidden transition-all ${
-          selectedItem === item.id ? "ring-2 ring-[#49bcf3]" : ""
+          selectedItem === item.id ? "ring-2 ring-brand-sky" : ""
         }`}
         onClick={() =>
           setSelectedItem(item.id === selectedItem ? null : item.id)
@@ -123,8 +123,8 @@ export default function ListViewSlide() {
           <div
             className={`w-6 h-6 rounded-full flex items-center justify-center mr-3 cursor-pointer ${
               item.status === "completed"
-                ? "bg-[#49bcf3]"
-                : "border border-gray-300"
+                ? "bg-brand-sky"
+                : "border"
             }`}
             onClick={(e) => {
               e.stopPropagation();
@@ -141,7 +141,7 @@ export default function ListViewSlide() {
               <h4
                 className={`font-medium ${
                   item.status === "completed"
-                    ? "line-through text-gray-500"
+                    ? "line-through text-muted-foreground"
                     : ""
                 }`}
               >
@@ -158,7 +158,7 @@ export default function ListViewSlide() {
             </div>
 
             {viewType !== "compact" && (
-              <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+              <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
             )}
 
             {viewType === "detailed" && (
@@ -170,13 +170,13 @@ export default function ListViewSlide() {
                 >
                   {item.status.replace("-", " ")}
                 </span>
-                <span className="text-xs text-gray-500">ID: {item.id}</span>
+                <span className="text-xs text-muted-foreground">ID: {item.id}</span>
               </div>
             )}
           </div>
 
           <div className="flex items-center">
-            <ChevronRight className="w-5 h-5 text-gray-400" />
+            <ChevronRight className="w-5 h-5 text-muted-foreground/70" />
           </div>
         </div>
       </div>
@@ -185,7 +185,7 @@ export default function ListViewSlide() {
 
   return (
     <SlideLayout title="List View (리스트 뷰)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -193,43 +193,45 @@ export default function ListViewSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">의의</h3>
-              <p>
-                리스트 뷰는 항목들을 세로로 나열하는 UI 패턴으로, 주로 텍스트와
-                간단한 컨트롤로 구성됩니다. 사용자들이 여러 항목을 검색하고
-                선택하며 작업을 수행하는 효율적인 방법을 제공합니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border">
+                <h3 className="text-lg font-semibold mb-2">의의</h3>
+                <p>
+                  리스트 뷰는 항목들을 세로로 나열하는 UI 패턴으로, 주로 텍스트와
+                  간단한 컨트롤로 구성됩니다. 사용자들이 여러 항목을 검색하고
+                  선택하며 작업을 수행하는 효율적인 방법을 제공합니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">일반적인 용도</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>이메일 메시지, 알림 표시</li>
-                <li>설정 옵션 나열</li>
-                <li>작업 목록 관리</li>
-                <li>검색 결과 표시</li>
-                <li>연락처 목록 관리</li>
-                <li>콘텐츠 카테고리 검색</li>
-              </ul>
-            </div>
+              <div className="bg-white rounded-lg p-6 shadow-md border">
+                <h3 className="text-lg font-semibold mb-2">일반적인 용도</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>이메일 메시지, 알림 표시</li>
+                  <li>설정 옵션 나열</li>
+                  <li>작업 목록 관리</li>
+                  <li>검색 결과 표시</li>
+                  <li>연락처 목록 관리</li>
+                  <li>콘텐츠 카테고리 검색</li>
+                </ul>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">주요 특징</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>스크롤 가능한 리스트</li>
-                <li>클릭 가능한 인터페이스</li>
-                <li>롱프레스 컨텍스트 작업</li>
-                <li>선택/비선택 상태 UI</li>
-                <li>다양한 밀도 레이아웃 지원</li>
-                <li>드래그 앤 새로고침 풀 스크롤 지원</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border">
+                <h3 className="text-lg font-semibold mb-2">주요 특징</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>스크롤 가능한 리스트</li>
+                  <li>클릭 가능한 인터페이스</li>
+                  <li>롱프레스 컨텍스트 작업</li>
+                  <li>선택/비선택 상태 UI</li>
+                  <li>다양한 밀도 레이아웃 지원</li>
+                  <li>드래그 앤 새로고침 풀 스크롤 지원</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-background">
               <PrismCode
                 language="typescript"
                 code={`import React, { useState } from 'react';
@@ -412,13 +414,13 @@ export default ListViewExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border">
               <div className="flex gap-4 mb-4">
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     viewType === "default"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setViewType("default")}
                 >
@@ -427,8 +429,8 @@ export default ListViewExample;`}
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     viewType === "compact"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setViewType("compact")}
                 >
@@ -437,8 +439,8 @@ export default ListViewExample;`}
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     viewType === "detailed"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setViewType("detailed")}
                 >
@@ -449,8 +451,8 @@ export default ListViewExample;`}
               <div className="border rounded-lg p-4 bg-white">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="font-medium">작업 목록</h3>
-                  <button className="p-1 rounded-full hover:bg-gray-100">
-                    <MoreVertical className="w-5 h-5 text-gray-500" />
+                  <button className="p-1 rounded-full hover:bg-muted">
+                    <MoreVertical className="w-5 h-5 text-muted-foreground" />
                   </button>
                 </div>
 
@@ -460,8 +462,8 @@ export default ListViewExample;`}
               </div>
 
               {selectedItem && (
-                <div className="mt-4 p-4 bg-[#49bcf3]/10 rounded-md">
-                  <p className="text-sm text-[#49bcf3]">
+                <div className="mt-4 p-4 bg-brand-sky/10 rounded-md">
+                  <p className="text-sm text-brand-sky">
                     항목 #{selectedItem}가 선택되었습니다. 실제
                     애플리케이션에서는 상세 정보 표시, 작업 상태 변경 항목의
                     작업을 수행하는 것을 학습합니다.

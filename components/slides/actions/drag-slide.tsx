@@ -1,7 +1,7 @@
 "use client";
 
 import SlideLayout from "../slide-layout";
-import { useState, useRef } from "react";
+import { useState, useRef, type CSSProperties } from "react";
 import { GridIcon, GripVertical } from "lucide-react";
 import { PrismCode } from "@/components/ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -96,26 +96,26 @@ export default function DragSlide() {
 
     return (
       <div
-        className="relative border-2 border-dashed border-gray-300 rounded-lg h-48 mb-6"
+        className="relative border-2 border-dashed border-border rounded-lg h-48 mb-6"
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
       >
         <div
           ref={boxRef}
-          className={`absolute cursor-grab bg-[#49bcf3] text-white rounded-md p-2 shadow-md flex items-center ${
+          className={`absolute left-(--x) top-(--y) cursor-grab bg-brand-sky text-white rounded-md p-2 shadow-md flex items-center ${
             isDragging ? "cursor-grabbing opacity-80" : ""
           }`}
           style={{
-            left: `${position.x}px`,
-            top: `${position.y}px`,
-          }}
+            "--x": `${position.x}px`,
+            "--y": `${position.y}px`,
+          } as CSSProperties}
           onMouseDown={handleMouseDown}
         >
           <GridIcon className="w-4 h-4 mr-2" />
           <span>드래그 가능한 요소</span>
         </div>
-        <div className="absolute bottom-2 right-2 text-xs text-gray-400">
+        <div className="absolute bottom-2 right-2 text-xs text-muted-foreground/70">
           이 박스를 클릭하고 드래그해보세요
         </div>
       </div>
@@ -124,7 +124,7 @@ export default function DragSlide() {
 
   return (
     <SlideLayout title="Drag (드래그)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -132,44 +132,46 @@ export default function DragSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                드래그(Drag)는 요소를 클릭하고 마우스 버튼을 누른 상태에서
-                위치를 변경하는 사용자 인터랙션 방식입니다. React에서는 마우스
-                이벤트나 HTML5 Drag & Drop API를 사용하여 구현되며, 주로 아이템
-                재정렬, 위치 변경, 요소의 이동 등에 사용됩니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  드래그(Drag)는 요소를 클릭하고 마우스 버튼을 누른 상태에서
+                  위치를 변경하는 사용자 인터랙션 방식입니다. React에서는 마우스
+                  이벤트나 HTML5 Drag & Drop API를 사용하여 구현되며, 주로 아이템
+                  재정렬, 위치 변경, 요소의 이동 등에 사용됩니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">
-                드래그 상호작용 유형
-              </h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>요소 위치 변경(자유 이동)</li>
-                <li>목록 순서 변경(드래그 앤 드롭)</li>
-                <li>크기 조절 (리사이징)</li>
-                <li>캔버스 요소 드래그(디자인 툴)</li>
-                <li>파일 드래그(파일 시스템 상호작용)</li>
-              </ul>
-            </div>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">
+                  드래그 상호작용 유형
+                </h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>요소 위치 변경(자유 이동)</li>
+                  <li>목록 순서 변경(드래그 앤 드롭)</li>
+                  <li>크기 조절 (리사이징)</li>
+                  <li>캔버스 요소 드래그(디자인 툴)</li>
+                  <li>파일 드래그(파일 시스템 상호작용)</li>
+                </ul>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">구현 고려사항</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>드래그 중인 상태를 시각적으로 표시</li>
-                <li>드롭 가능한 영역 표시</li>
-                <li>드래그 중에는 부드러운 애니메이션 적용</li>
-                <li>터치 기기에서의 드래그 지원</li>
-                <li>접근성을 위한 키보드 대체 옵션 제공</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">구현 고려사항</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>드래그 중인 상태를 시각적으로 표시</li>
+                  <li>드롭 가능한 영역 표시</li>
+                  <li>드래그 중에는 부드러운 애니메이션 적용</li>
+                  <li>터치 기기에서의 드래그 지원</li>
+                  <li>접근성을 위한 키보드 대체 옵션 제공</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-white">
               <PrismCode
                 language="typescript"
                 code={`// 드래그 가능한 React 컴포넌트
@@ -342,13 +344,13 @@ function DragDropExample() {
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200 space-y-6">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border space-y-6">
               <DraggableBox />
 
               <div className="border rounded-lg overflow-hidden shadow-xs">
-                <div className="bg-slate-50 p-3 border-b">
+                <div className="bg-muted/50 p-3 border-b">
                   <h3 className="font-medium">드래그 앤 드롭 목록</h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     아이템을 드래그하여 순서를 변경해보세요
                   </p>
                 </div>
@@ -365,12 +367,12 @@ function DragDropExample() {
                         draggedItem === index ? "opacity-50" : ""
                       }`}
                     >
-                      <div className="cursor-grab mr-3 text-gray-400 hover:text-gray-600">
+                      <div className="cursor-grab mr-3 text-muted-foreground/70 hover:text-foreground">
                         <GripVertical size={18} />
                       </div>
                       <div>
                         <div className="font-medium">{task.content}</div>
-                        <div className="text-xs text-gray-500">
+                        <div className="text-xs text-muted-foreground">
                           {task.category}
                         </div>
                       </div>

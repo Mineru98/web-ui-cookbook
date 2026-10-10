@@ -27,7 +27,7 @@ export default function SearchBarSlide() {
               {isExpanded ? (
                 <>
                   <button
-                    className="p-2 text-gray-500"
+                    className="p-2 text-muted-foreground"
                     onClick={() => setIsExpanded(false)}
                   >
                     <ArrowLeft className="h-5 w-5" />
@@ -36,20 +36,20 @@ export default function SearchBarSlide() {
                     <input
                       type="text"
                       placeholder="검색어를 입력하세요"
-                      className="w-full pl-3 pr-8 py-2 bg-gray-100 rounded-lg focus:outline-hidden focus:ring-1 focus:ring-[#49bcf3]"
+                      className="w-full pl-3 pr-8 py-2 bg-muted rounded-lg focus:outline-hidden focus:ring-1 focus:ring-brand-sky"
                       value={searchText}
                       onChange={(e) => setSearchText(e.target.value)}
                     />
                     {searchText && (
                       <button
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400"
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-muted-foreground/70"
                         onClick={handleClear}
                       >
                         <X className="h-4 w-4" />
                       </button>
                     )}
                   </div>
-                  <button className="p-2 text-gray-500 ml-1">
+                  <button className="p-2 text-muted-foreground ml-1">
                     <Mic className="h-5 w-5" />
                   </button>
                 </>
@@ -57,7 +57,7 @@ export default function SearchBarSlide() {
                 <>
                   <span className="text-lg font-medium flex-1">앱 타이틀</span>
                   <button
-                    className="p-2 text-gray-500"
+                    className="p-2 text-muted-foreground"
                     onClick={() => setIsExpanded(true)}
                   >
                     <Search className="h-5 w-5" />
@@ -70,13 +70,13 @@ export default function SearchBarSlide() {
 
       case "persistent":
         return (
-          <div className="bg-[#49bcf3] text-white p-2">
+          <div className="bg-brand-sky text-white p-2">
             <div className="flex items-center">
               <button className="p-2">
                 <ArrowLeft className="h-5 w-5" />
               </button>
 
-              <div className="flex-1 mx-2 relative bg-[#49bcf3]/20 rounded-lg flex items-center">
+              <div className="flex-1 mx-2 relative bg-brand-sky/20 rounded-lg flex items-center">
                 <Search className="h-4 w-4 absolute left-3 text-white/70" />
                 <input
                   type="text"
@@ -106,8 +106,8 @@ export default function SearchBarSlide() {
         return (
           <div className="bg-white border-b">
             <div className="p-2">
-              <div className="flex items-center relative bg-gray-100 rounded-lg">
-                <Search className="h-4 w-4 absolute left-3 text-gray-400" />
+              <div className="flex items-center relative bg-muted rounded-lg">
+                <Search className="h-4 w-4 absolute left-3 text-muted-foreground/70" />
                 <input
                   type="text"
                   placeholder="검색어를 입력하세요"
@@ -117,13 +117,13 @@ export default function SearchBarSlide() {
                 />
                 {searchText ? (
                   <button
-                    className="absolute right-2 text-gray-400"
+                    className="absolute right-2 text-muted-foreground/70"
                     onClick={handleClear}
                   >
                     <X className="h-4 w-4" />
                   </button>
                 ) : (
-                  <button className="absolute right-2 text-gray-400">
+                  <button className="absolute right-2 text-muted-foreground/70">
                     <Mic className="h-4 w-4" />
                   </button>
                 )}
@@ -131,23 +131,23 @@ export default function SearchBarSlide() {
             </div>
 
             <div className="py-1 px-2 flex items-center overflow-x-auto gap-2 whitespace-nowrap">
-              <button className="px-3 py-1 text-xs bg-[#49bcf3]/10 text-[#49bcf3] rounded-full flex items-center">
+              <button className="px-3 py-1 text-xs bg-brand-sky/10 text-brand-sky rounded-full flex items-center">
                 <Filter className="h-3 w-3 mr-1" />
                 필터
               </button>
-              <button className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full">
+              <button className="px-3 py-1 text-xs bg-muted text-foreground rounded-full">
                 최신순
               </button>
-              <button className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full">
+              <button className="px-3 py-1 text-xs bg-muted text-foreground rounded-full">
                 인기순
               </button>
-              <button className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full">
+              <button className="px-3 py-1 text-xs bg-muted text-foreground rounded-full">
                 가격낮은순
               </button>
-              <button className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full">
+              <button className="px-3 py-1 text-xs bg-muted text-foreground rounded-full">
                 가격높은순
               </button>
-              <button className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full">
+              <button className="px-3 py-1 text-xs bg-muted text-foreground rounded-full">
                 평점순
               </button>
             </div>
@@ -159,25 +159,25 @@ export default function SearchBarSlide() {
           <div className="bg-white border-b p-2">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-4 w-4 text-gray-400" />
+                <Search className="h-4 w-4 text-muted-foreground/70" />
               </div>
               <input
                 type="text"
                 placeholder="검색어를 입력하세요"
-                className="w-full pl-10 pr-8 py-2 bg-gray-100 rounded-lg focus:outline-hidden focus:ring-1 focus:ring-[#49bcf3]"
+                className="w-full pl-10 pr-8 py-2 bg-muted rounded-lg focus:outline-hidden focus:ring-1 focus:ring-brand-sky"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
               <div className="absolute inset-y-0 right-0 flex items-center">
                 {searchText && (
                   <button
-                    className="h-full px-2 text-gray-400"
+                    className="h-full px-2 text-muted-foreground/70"
                     onClick={handleClear}
                   >
                     <X className="h-4 w-4" />
                   </button>
                 )}
-                <button className="h-full px-3 text-gray-500">
+                <button className="h-full px-3 text-muted-foreground">
                   <Mic className="h-4 w-4" />
                 </button>
               </div>
@@ -689,7 +689,7 @@ export default FilterSearchBarExample;`;
 
   return (
     <SlideLayout title="Search Bar (검색바)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -697,71 +697,73 @@ export default FilterSearchBarExample;`;
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="prose max-w-none mb-6">
-              <h2 className="text-xl font-semibold mb-3">의의</h2>
-              <p>
-                검색바(Search Bar)는 사용자가 애플리케이션 내에서 특정 콘텐츠를
-                검색할 수 있게 해주는 사용자 인터페이스 요소입니다. 일반적으로
-                텍스트 입력 필드와 검색 아이콘으로 구성되며, 필요에 따라 음성
-                검색, 필터 옵션 등 추가 기능을 포함하기도 합니다.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-              <div className="p-4 bg-slate-50 rounded-md">
-                <h3 className="text-lg font-medium mb-2">검색바 유형</h3>
-                <ul className="list-disc pl-6 space-y-1">
-                  <li>
-                    <strong>기본형(Basic)</strong>
-                    <p className="text-sm text-gray-600">
-                      항상 표시되는 기본적인 검색 필드
-                    </p>
-                  </li>
-                  <li>
-                    <strong>확장형(Expandable)</strong>
-                    <p className="text-sm text-gray-600">
-                      아이콘을 클릭하면 확장되는 검색바
-                    </p>
-                  </li>
-                  <li>
-                    <strong>영구형(Persistent)</strong>
-                    <p className="text-sm text-gray-600">
-                      탑바에 통합된 형태의 검색 필드
-                    </p>
-                  </li>
-                  <li>
-                    <strong>필터형(With Filters)</strong>
-                    <p className="text-sm text-gray-600">
-                      추가 필터 옵션을 포함한 검색바
-                    </p>
-                  </li>
-                  <li>
-                    <strong>제안형(Suggestions)</strong>
-                    <p className="text-sm text-gray-600">
-                      검색어 입력 시 제안을 표시
-                    </p>
-                  </li>
-                </ul>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="max-w-none mb-6">
+                <h2 className="text-xl font-semibold mb-3">의의</h2>
+                <p>
+                  검색바(Search Bar)는 사용자가 애플리케이션 내에서 특정 콘텐츠를
+                  검색할 수 있게 해주는 사용자 인터페이스 요소입니다. 일반적으로
+                  텍스트 입력 필드와 검색 아이콘으로 구성되며, 필요에 따라 음성
+                  검색, 필터 옵션 등 추가 기능을 포함하기도 합니다.
+                </p>
               </div>
 
-              <div className="p-4 bg-slate-50 rounded-md">
-                <h3 className="text-lg font-medium mb-2">주요 구성 요소</h3>
-                <ul className="list-disc pl-6 space-y-1">
-                  <li>검색 아이콘</li>
-                  <li>텍스트 입력 필드</li>
-                  <li>지우기 버튼</li>
-                  <li>음성 검색 버튼 (선택)</li>
-                  <li>필터 옵션 (선택)</li>
-                  <li>추천 검색어 (선택)</li>
-                  <li>최근 검색어 (선택)</li>
-                </ul>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div className="p-4 bg-muted/50 rounded-md">
+                  <h3 className="text-lg font-medium mb-2">검색바 유형</h3>
+                  <ul className="list-disc pl-6 space-y-1">
+                    <li>
+                      <strong>기본형(Basic)</strong>
+                      <p className="text-sm text-muted-foreground">
+                        항상 표시되는 기본적인 검색 필드
+                      </p>
+                    </li>
+                    <li>
+                      <strong>확장형(Expandable)</strong>
+                      <p className="text-sm text-muted-foreground">
+                        아이콘을 클릭하면 확장되는 검색바
+                      </p>
+                    </li>
+                    <li>
+                      <strong>영구형(Persistent)</strong>
+                      <p className="text-sm text-muted-foreground">
+                        탑바에 통합된 형태의 검색 필드
+                      </p>
+                    </li>
+                    <li>
+                      <strong>필터형(With Filters)</strong>
+                      <p className="text-sm text-muted-foreground">
+                        추가 필터 옵션을 포함한 검색바
+                      </p>
+                    </li>
+                    <li>
+                      <strong>제안형(Suggestions)</strong>
+                      <p className="text-sm text-muted-foreground">
+                        검색어 입력 시 제안을 표시
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="p-4 bg-muted/50 rounded-md">
+                  <h3 className="text-lg font-medium mb-2">주요 구성 요소</h3>
+                  <ul className="list-disc pl-6 space-y-1">
+                    <li>검색 아이콘</li>
+                    <li>텍스트 입력 필드</li>
+                    <li>지우기 버튼</li>
+                    <li>음성 검색 버튼 (선택)</li>
+                    <li>필터 옵션 (선택)</li>
+                    <li>추천 검색어 (선택)</li>
+                    <li>최근 검색어 (선택)</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-background">
               <PrismCode language="typescript" code={getReactCode()} />
             </div>
           </TabsContent>
@@ -772,8 +774,8 @@ export default FilterSearchBarExample;`;
                 <button
                   className={`px-3 py-1 text-sm rounded-full ${
                     searchBarType === "basic"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setSearchBarType("basic")}
                 >
@@ -782,8 +784,8 @@ export default FilterSearchBarExample;`;
                 <button
                   className={`px-3 py-1 text-sm rounded-full ${
                     searchBarType === "expandable"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setSearchBarType("expandable")}
                 >
@@ -792,8 +794,8 @@ export default FilterSearchBarExample;`;
                 <button
                   className={`px-3 py-1 text-sm rounded-full ${
                     searchBarType === "persistent"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setSearchBarType("persistent")}
                 >
@@ -802,8 +804,8 @@ export default FilterSearchBarExample;`;
                 <button
                   className={`px-3 py-1 text-sm rounded-full ${
                     searchBarType === "with-filters"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setSearchBarType("with-filters")}
                 >
@@ -812,7 +814,7 @@ export default FilterSearchBarExample;`;
               </div>
             </div>
 
-            <div className="bg-gray-50 p-6 rounded-lg">
+            <div className="bg-muted/50 p-6 rounded-lg">
               <h4 className="font-medium mb-4">검색바 데모</h4>
               <div className="bg-white p-4 rounded border">
                 {renderSearchBar()}

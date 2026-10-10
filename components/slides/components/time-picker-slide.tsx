@@ -23,7 +23,7 @@ export default function TimePickerSlide() {
 
   return (
     <SlideLayout title="Time Picker">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -31,30 +31,32 @@ export default function TimePickerSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Time Picker는 사용자가 시간을 선택할 수 있는 UI 요소입니다. 시,
-                분, 초와 AM/PM을 선택할 수 있는 인터페이스를 제공합니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Time Picker는 사용자가 시간을 선택할 수 있는 UI 요소입니다. 시,
+                  분, 초와 AM/PM을 선택할 수 있는 인터페이스를 제공합니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>예약 및 회의 예약</li>
-                <li>알람 설정</li>
-                <li>작업 시간 설정</li>
-                <li>배송 시간 선택</li>
-                <li>일정 관리</li>
-                <li>타이머 설정</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>예약 및 회의 예약</li>
+                  <li>알람 설정</li>
+                  <li>작업 시간 설정</li>
+                  <li>배송 시간 선택</li>
+                  <li>일정 관리</li>
+                  <li>타이머 설정</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`import { useState } from "react"
@@ -163,19 +165,19 @@ const convertTo24Hour = (hours: string, period: "AM" | "PM"): string => {
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="flex flex-col items-center space-y-4">
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
-                      className="w-[240px] justify-start text-left font-normal"
+                      className="w-60 justify-start text-left"
                     >
-                      {formatTime()}
+                      <span className="font-normal">{formatTime()}</span>
                       <Clock className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-4" align="start">
+                  <PopoverContent className="w-auto" align="start">
                     <div className="flex space-x-2">
                       <select
                         value={hours}

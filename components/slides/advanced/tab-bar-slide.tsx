@@ -2,6 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bookmark, Clock, Compass, User } from "lucide-react";
+import type { CSSProperties } from "react";
 import { useState } from "react";
 import { PrismCode } from "../../ui/prism/PrismCode";
 import SlideLayout from "../slide-layout";
@@ -34,7 +35,7 @@ export default function TabBarSlide() {
     switch (tabBarStyle) {
       case "scrollable":
         return (
-          <div className="border-b border-slate-300">
+          <div className="border-b border-border">
             <div className="overflow-x-auto">
               <div className="flex whitespace-nowrap">
                 {longTabItems.map((tab) => (
@@ -42,8 +43,8 @@ export default function TabBarSlide() {
                     key={tab.id}
                     className={`px-6 py-3 text-sm font-medium ${
                       activeTab === tab.id
-                        ? "text-sky-700 border-b-2 border-sky-700"
-                        : "text-slate-600 hover:text-slate-900"
+                        ? "text-brand-deep border-b-2 border-brand-deep"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                     onClick={() => setActiveTab(tab.id)}
                   >
@@ -57,15 +58,15 @@ export default function TabBarSlide() {
 
       case "underline":
         return (
-          <div className="border-b border-slate-300">
+          <div className="border-b border-border">
             <div className="flex justify-around">
               {tabItems.map((tab) => (
                 <button
                   key={tab.id}
                   className={`px-6 py-3 relative text-sm font-medium ${
                     activeTab === tab.id
-                      ? "text-sky-700"
-                      : "text-slate-600 hover:text-slate-900"
+                      ? "text-brand-deep"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                   onClick={() => setActiveTab(tab.id)}
                 >
@@ -74,7 +75,7 @@ export default function TabBarSlide() {
                     {tab.label}
                   </div>
                   {activeTab === tab.id && (
-                    <div className="absolute bottom-0 inset-x-0 h-0.5 bg-sky-700"></div>
+                    <div className="absolute bottom-0 inset-x-0 h-0.5 bg-brand-deep"></div>
                   )}
                 </button>
               ))}
@@ -84,14 +85,14 @@ export default function TabBarSlide() {
 
       case "pills":
         return (
-          <div className="flex rounded-lg border border-slate-300 bg-slate-200/80 p-1.5">
+          <div className="flex rounded-lg border bg-secondary p-1.5">
             {tabItems.map((tab) => (
               <button
                 key={tab.id}
                 className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-all ${
                   activeTab === tab.id
-                    ? "bg-white text-sky-700 shadow-xs shadow-slate-300/40"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? "bg-white text-brand-deep shadow-xs shadow-foreground/10"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
                 onClick={() => setActiveTab(tab.id)}
               >
@@ -110,19 +111,19 @@ export default function TabBarSlide() {
           tabItems.findIndex((tab) => tab.id === activeTab) * itemWidth;
 
         return (
-          <div className="border-b border-slate-300 bg-slate-50">
+          <div className="border-b border-border bg-muted/50">
             <div className="relative">
               <div className="flex justify-around">
                 {tabItems.map((tab) => (
                   <button
                     key={tab.id}
-                    className={`px-6 py-3 text-sm font-medium z-10 transition-colors ${
+                    className={`w-(--w) px-6 py-3 text-sm font-medium z-10 transition-colors ${
                       activeTab === tab.id
-                        ? "text-sky-700"
-                        : "text-slate-600 hover:text-slate-900"
+                        ? "text-brand-deep"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                     onClick={() => setActiveTab(tab.id)}
-                    style={{ width: `${itemWidth}%` }}
+                    style={{ "--w": `${itemWidth}%` } as CSSProperties}
                   >
                     <div className="flex flex-col items-center">
                       <tab.icon className="h-5 w-5 mb-1" />
@@ -132,11 +133,13 @@ export default function TabBarSlide() {
                 ))}
               </div>
               <div
-                className="absolute bottom-0 h-0.5 bg-sky-700 transition-all duration-300"
-                style={{
-                  width: `${itemWidth}%`,
-                  left: `${indicatorPosition}%`,
-                }}
+                className="absolute bottom-0 left-(--x) h-0.5 w-(--w) bg-brand-deep transition-all duration-300"
+                style={
+                  {
+                    "--w": `${itemWidth}%`,
+                    "--x": `${indicatorPosition}%`,
+                  } as CSSProperties
+                }
               ></div>
             </div>
           </div>
@@ -144,15 +147,15 @@ export default function TabBarSlide() {
 
       default: // basic
         return (
-          <div className="border-b border-slate-300">
+          <div className="border-b border-border">
             <div className="flex justify-around">
               {tabItems.map((tab) => (
                 <button
                   key={tab.id}
                   className={`px-6 py-3 text-sm font-medium ${
                     activeTab === tab.id
-                      ? "text-sky-700 border-b-2 border-sky-700"
-                      : "text-slate-600 hover:text-slate-900"
+                      ? "text-brand-deep border-b-2 border-brand-deep"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                   onClick={() => setActiveTab(tab.id)}
                 >
@@ -631,7 +634,7 @@ export default MaterialTabBarExample;`;
 
   return (
     <SlideLayout title="탭바(Tab Bar)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -639,99 +642,101 @@ export default MaterialTabBarExample;`;
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="prose max-w-none mb-6">
-              <h2 className="text-xl font-semibold mb-3">정의</h2>
-              <p>
-                탭바(Tab Bar)는 일관된 계층 구조에서 여러 화면을 전환하는 콘텐츠
-                전환을 위한 네비게이션 컴포넌트입니다. 사용자에게 쉽게 관리할 수
-                있는 콘텐츠간을 이동할 수 있도록 카테고리별로 구분하여 직관적인
-                인터페이스를 제공합니다.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="rounded-md border border-slate-200 bg-slate-100 p-4">
-                <h3 className="text-lg font-medium mb-2">탭바 스타일</h3>
-                <ul className="list-disc pl-6 space-y-1">
-                  <li>
-                    <strong>기본형(Basic)</strong>
-                    <p className="text-sm text-slate-700">
-                      일반적인 텍스트만 있는 단순 인디케이터로 구성된 스타일
-                    </p>
-                  </li>
-                  <li>
-                    <strong>아이콘 언더라인형(Underline)</strong>
-                    <p className="text-sm text-slate-700">
-                      아이콘과 텍스트 결합, 세로로 언더라인 인디케이터 표시
-                    </p>
-                  </li>
-                  <li>
-                    <strong>스크롤형 (Scrollable)</strong>
-                    <p className="text-sm text-slate-700">
-                      많은 탭 항목을 한번에 가로로 스크롤 가능한 방식
-                    </p>
-                  </li>
-                  <li>
-                    <strong>알약형 (Pills)</strong>
-                    <p className="text-sm text-slate-700">
-                      둥근 모서리의 태블릿 전체 배경 강조하는 방식
-                    </p>
-                  </li>
-                  <li>
-                    <strong>머티리얼형(Material)</strong>
-                    <p className="text-sm text-slate-700">
-                      애니메이션 인디케이터가 함께 동작하며 부드럽게 전환
-                    </p>
-                  </li>
-                </ul>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="max-w-none mb-6">
+                <h2 className="text-xl font-semibold mb-3">정의</h2>
+                <p>
+                  탭바(Tab Bar)는 일관된 계층 구조에서 여러 화면을 전환하는 콘텐츠
+                  전환을 위한 네비게이션 컴포넌트입니다. 사용자에게 쉽게 관리할 수
+                  있는 콘텐츠간을 이동할 수 있도록 카테고리별로 구분하여 직관적인
+                  인터페이스를 제공합니다.
+                </p>
               </div>
 
-              <div className="rounded-md border border-slate-200 bg-slate-100 p-4">
-                <h3 className="text-lg font-medium mb-2">사용 사례</h3>
-                <ul className="list-disc pl-6 space-y-1">
-                  <li>
-                    카테고리별 콘텐츠 분류 (뉴스, 스포츠, 엔터테인먼트 등)
-                  </li>
-                  <li>설정 페이지의 섹션 구분 (일반, 계정, 알림 등)</li>
-                  <li>
-                    상품 상세 페이지의 정보 구분 (상세정보, 리뷰, 문의 등)
-                  </li>
-                  <li>소셜 미디어의 피드라인 분류 (프로필, 인기, 추천 등)</li>
-                  <li>다양한 보기 모드 전환 (목록형, 갤러리형, 지도형 등)</li>
-                </ul>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="rounded-md border bg-muted p-4">
+                  <h3 className="text-lg font-medium mb-2">탭바 스타일</h3>
+                  <ul className="list-disc pl-6 space-y-1">
+                    <li>
+                      <strong>기본형(Basic)</strong>
+                      <p className="text-sm text-foreground">
+                        일반적인 텍스트만 있는 단순 인디케이터로 구성된 스타일
+                      </p>
+                    </li>
+                    <li>
+                      <strong>아이콘 언더라인형(Underline)</strong>
+                      <p className="text-sm text-foreground">
+                        아이콘과 텍스트 결합, 세로로 언더라인 인디케이터 표시
+                      </p>
+                    </li>
+                    <li>
+                      <strong>스크롤형 (Scrollable)</strong>
+                      <p className="text-sm text-foreground">
+                        많은 탭 항목을 한번에 가로로 스크롤 가능한 방식
+                      </p>
+                    </li>
+                    <li>
+                      <strong>알약형 (Pills)</strong>
+                      <p className="text-sm text-foreground">
+                        둥근 모서리의 태블릿 전체 배경 강조하는 방식
+                      </p>
+                    </li>
+                    <li>
+                      <strong>머티리얼형(Material)</strong>
+                      <p className="text-sm text-foreground">
+                        애니메이션 인디케이터가 함께 동작하며 부드럽게 전환
+                      </p>
+                    </li>
+                  </ul>
+                </div>
 
-                <h3 className="text-lg font-medium mt-4 mb-2">
-                  접근성 고려사항
+                <div className="rounded-md border bg-muted p-4">
+                  <h3 className="text-lg font-medium mb-2">사용 사례</h3>
+                  <ul className="list-disc pl-6 space-y-1">
+                    <li>
+                      카테고리별 콘텐츠 분류 (뉴스, 스포츠, 엔터테인먼트 등)
+                    </li>
+                    <li>설정 페이지의 섹션 구분 (일반, 계정, 알림 등)</li>
+                    <li>
+                      상품 상세 페이지의 정보 구분 (상세정보, 리뷰, 문의 등)
+                    </li>
+                    <li>소셜 미디어의 피드라인 분류 (프로필, 인기, 추천 등)</li>
+                    <li>다양한 보기 모드 전환 (목록형, 갤러리형, 지도형 등)</li>
+                  </ul>
+
+                  <h3 className="text-lg font-medium mt-4 mb-2">
+                    접근성 고려사항
+                  </h3>
+                  <ul className="list-disc pl-6 space-y-1 text-sm text-foreground">
+                    <li>충분한 터치 영역으로 가독성 보장</li>
+                    <li>적절한 터치 영역 크기 (최소 48x48dp)</li>
+                    <li>현재 선택된 탭의 명확한 표시</li>
+                    <li>스크린 리더 지원 (ARIA 속성 사용)</li>
+                    <li>키보드 접근성 지원</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="rounded-md border border-brand-sky/50 bg-primary-soft p-4">
+                <h3 className="mb-2 text-lg font-medium text-brand-deep">
+                  디자이너 권장사항
                 </h3>
-                <ul className="list-disc pl-6 space-y-1 text-sm text-slate-700">
-                  <li>충분한 터치 영역으로 가독성 보장</li>
-                  <li>적절한 터치 영역 크기 (최소 48x48dp)</li>
-                  <li>현재 선택된 탭의 명확한 표시</li>
-                  <li>스크린 리더 지원 (ARIA 속성 사용)</li>
-                  <li>키보드 접근성 지원</li>
+                <ul className="list-disc space-y-1 pl-6 text-foreground">
+                  <li>타겟 사용자의 언어 사용 (폰트 크기와 스타일)</li>
+                  <li>한번에 보이는 탭의 적절한 개수 (4-6개 권장)</li>
+                  <li>명확한 라벨 사용 (짧고 직관적인 단어 선택)</li>
+                  <li>아이콘과 텍스트 조합으로 이해도 향상</li>
+                  <li>적절한 여백과 간격으로 가독성 보장</li>
+                  <li>탭 전환 시 부드러운 애니메이션 사용</li>
+                  <li>다양한 디바이스 크기 고려 (탭 좌우 스크롤)</li>
                 </ul>
               </div>
-            </div>
-
-            <div className="rounded-md border border-sky-300/70 bg-sky-50 p-4">
-              <h3 className="mb-2 text-lg font-medium text-sky-800">
-                디자이너 권장사항
-              </h3>
-              <ul className="list-disc space-y-1 pl-6 text-slate-700">
-                <li>타겟 사용자의 언어 사용 (폰트 크기와 스타일)</li>
-                <li>한번에 보이는 탭의 적절한 개수 (4-6개 권장)</li>
-                <li>명확한 라벨 사용 (짧고 직관적인 단어 선택)</li>
-                <li>아이콘과 텍스트 조합으로 이해도 향상</li>
-                <li>적절한 여백과 간격으로 가독성 보장</li>
-                <li>탭 전환 시 부드러운 애니메이션 사용</li>
-                <li>다양한 디바이스 크기 고려 (탭 좌우 스크롤)</li>
-              </ul>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="rounded-lg bg-slate-900 p-4 text-white">
+            <div className="rounded-lg bg-foreground p-4 text-background">
               <PrismCode code={getReactCode()} language="typescript" />
             </div>
           </TabsContent>
@@ -741,8 +746,8 @@ export default MaterialTabBarExample;`;
               <button
                 className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
                   tabBarStyle === "basic"
-                    ? "bg-sky-700 text-white"
-                    : "bg-slate-200 text-slate-800 hover:bg-slate-300"
+                    ? "bg-brand-deep text-white"
+                    : "bg-secondary text-foreground hover:bg-muted-foreground/30"
                 }`}
                 onClick={() => setTabBarStyle("basic")}
               >
@@ -751,8 +756,8 @@ export default MaterialTabBarExample;`;
               <button
                 className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
                   tabBarStyle === "underline"
-                    ? "bg-sky-700 text-white"
-                    : "bg-slate-200 text-slate-800 hover:bg-slate-300"
+                    ? "bg-brand-deep text-white"
+                    : "bg-secondary text-foreground hover:bg-muted-foreground/30"
                 }`}
                 onClick={() => setTabBarStyle("underline")}
               >
@@ -761,8 +766,8 @@ export default MaterialTabBarExample;`;
               <button
                 className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
                   tabBarStyle === "scrollable"
-                    ? "bg-sky-700 text-white"
-                    : "bg-slate-200 text-slate-800 hover:bg-slate-300"
+                    ? "bg-brand-deep text-white"
+                    : "bg-secondary text-foreground hover:bg-muted-foreground/30"
                 }`}
                 onClick={() => setTabBarStyle("scrollable")}
               >
@@ -771,8 +776,8 @@ export default MaterialTabBarExample;`;
               <button
                 className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
                   tabBarStyle === "pills"
-                    ? "bg-sky-700 text-white"
-                    : "bg-slate-200 text-slate-800 hover:bg-slate-300"
+                    ? "bg-brand-deep text-white"
+                    : "bg-secondary text-foreground hover:bg-muted-foreground/30"
                 }`}
                 onClick={() => setTabBarStyle("pills")}
               >
@@ -781,8 +786,8 @@ export default MaterialTabBarExample;`;
               <button
                 className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
                   tabBarStyle === "material"
-                    ? "bg-sky-700 text-white"
-                    : "bg-slate-200 text-slate-800 hover:bg-slate-300"
+                    ? "bg-brand-deep text-white"
+                    : "bg-secondary text-foreground hover:bg-muted-foreground/30"
                 }`}
                 onClick={() => setTabBarStyle("material")}
               >
@@ -790,11 +795,11 @@ export default MaterialTabBarExample;`;
               </button>
             </div>
 
-            <div className="overflow-hidden rounded-md border border-slate-300 bg-white shadow-xs">
+            <div className="overflow-hidden rounded-md border bg-white shadow-xs">
               <div className="p-4 flex justify-center">
                 <div className="w-full max-w-md">
                   {renderTabBar()}
-                  <div className="p-8 text-center text-slate-600">
+                  <div className="p-8 text-center text-muted-foreground">
                     {activeTab} 콘텐츠
                   </div>
                 </div>

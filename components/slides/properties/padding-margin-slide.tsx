@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import SlideLayout from "../slide-layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
@@ -17,7 +17,7 @@ export default function PaddingMarginSlide() {
 
   return (
     <SlideLayout title="Padding & Margin">
-      <div className="space-y-8 max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="space-y-8 max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -25,39 +25,41 @@ export default function PaddingMarginSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p className="mb-4">
-                Padding과 Margin은 UI 요소의 공간을 제어하는 CSS 속성입니다.
-              </p>
-              <ul className="list-disc pl-5 space-y-2">
-                <li>
-                  <strong>Padding</strong>: 요소의 내부 여백으로, 요소의 내용과
-                  테두리 사이의 공간입니다.
-                </li>
-                <li>
-                  <strong>Margin</strong>: 요소의 외부 여백으로, 요소의 테두리와
-                  주변 요소 사이의 공간입니다.
-                </li>
-              </ul>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p className="mb-4">
+                  Padding과 Margin은 UI 요소의 공간을 제어하는 CSS 속성입니다.
+                </p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>
+                    <strong>Padding</strong>: 요소의 내부 여백으로, 요소의 내용과
+                    테두리 사이의 공간입니다.
+                  </li>
+                  <li>
+                    <strong>Margin</strong>: 요소의 외부 여백으로, 요소의 테두리와
+                    주변 요소 사이의 공간입니다.
+                  </li>
+                </ul>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>요소 간 간격 조정</li>
-                <li>텍스트와 컨테이너 사이의 공간 조정</li>
-                <li>레이아웃 구성</li>
-                <li>요소 정렬</li>
-                <li>UI 요소의 가독성 향상</li>
-                <li>반응형 디자인 구현</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>요소 간 간격 조정</li>
+                  <li>텍스트와 컨테이너 사이의 공간 조정</li>
+                  <li>레이아웃 구성</li>
+                  <li>요소 정렬</li>
+                  <li>UI 요소의 가독성 향상</li>
+                  <li>반응형 디자인 구현</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`// React/CSS에서의 패딩과 마진
@@ -115,22 +117,23 @@ export default function PaddingMarginSlide() {
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="space-y-4 mb-6">
                 <RadioGroup
                   value={activeProperty}
                   onValueChange={(value) =>
                     setActiveProperty(value as "padding" | "margin")
                   }
-                  className="flex space-x-4"
                 >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="padding" id="padding" />
-                    <Label htmlFor="padding">패딩</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="margin" id="margin" />
-                    <Label htmlFor="margin">마진</Label>
+                  <div className="flex space-x-6">
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="padding" id="padding" />
+                      <Label htmlFor="padding">패딩</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="margin" id="margin" />
+                      <Label htmlFor="margin">마진</Label>
+                    </div>
                   </div>
                 </RadioGroup>
 
@@ -158,20 +161,20 @@ export default function PaddingMarginSlide() {
               </div>
 
               <div
-                className="relative border-2 border-dashed border-gray-300 rounded-md"
-                style={{ padding: `${margin}px` }}
+                className="relative border-2 border-dashed border-border rounded-md p-(--p)"
+                style={{ "--p": `${margin}px` } as CSSProperties}
               >
-                <div className="text-center text-xs text-gray-500 absolute inset-0 flex items-center justify-center">
+                <div className="text-center text-xs text-muted-foreground absolute inset-0 flex items-center justify-center">
                   마진 영역
                 </div>
                 <div
-                  className="relative bg-[#49bcf3] rounded-md text-white flex items-center justify-center"
-                  style={{ padding: `${padding}px` }}
+                  className="relative bg-brand-sky rounded-md text-white flex items-center justify-center p-(--p)"
+                  style={{ "--p": `${padding}px` } as CSSProperties}
                 >
                   <div className="text-center text-xs absolute inset-0 flex items-center justify-center opacity-30">
                     패딩 영역
                   </div>
-                  <div className="bg-white text-[#49bcf3] p-2 rounded-md">
+                  <div className="bg-white text-brand-sky p-2 rounded-md">
                     콘텐츠
                   </div>
                 </div>

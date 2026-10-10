@@ -77,6 +77,7 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   }
 
   return (
+    // eslint-disable-next-line shadcn/no-inline-styles -- shadcn chart injects per-chart theme CSS variables; no static class equivalent.
     <style
       dangerouslySetInnerHTML={{
         __html: Object.entries(THEMES)
@@ -300,10 +301,8 @@ const ChartLegendContent = React.forwardRef<
                 <itemConfig.icon />
               ) : (
                 <div
-                  className="h-2 w-2 shrink-0 rounded-[2px]"
-                  style={{
-                    backgroundColor: item.color,
-                  }}
+                  className="h-2 w-2 shrink-0 rounded-[2px] bg-(--c)"
+                  style={{ "--c": item.color } as React.CSSProperties}
                 />
               )}
               {itemConfig?.label}

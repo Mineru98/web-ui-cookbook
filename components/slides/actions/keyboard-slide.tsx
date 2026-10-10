@@ -3,7 +3,7 @@
 import { PrismCode } from "@/components/ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import SlideLayout from "../slide-layout";
 
 export default function KeyboardSlide() {
@@ -65,7 +65,7 @@ export default function KeyboardSlide() {
 
   return (
     <SlideLayout title="Keyboard (키보드)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -73,63 +73,65 @@ export default function KeyboardSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">의의</h3>
-              <p>
-                키보드 입력은 물리적인 또는 가상 키보드를 통해 애플리케이션과
-                통신하는 방식입니다. React에서 KeyboardEvent를 통해 처리하며,
-                데스크톱 환경에서 주요 입력 방식이며, 모바일 환경에서 키보드
-                입력 및 기능 사용 기능을 입력합니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">의의</h3>
+                <p>
+                  키보드 입력은 물리적인 또는 가상 키보드를 통해 애플리케이션과
+                  통신하는 방식입니다. React에서 KeyboardEvent를 통해 처리하며,
+                  데스크톱 환경에서 주요 입력 방식이며, 모바일 환경에서 키보드
+                  입력 및 기능 사용 기능을 입력합니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">
-                일반적인 키보드 입력
-              </h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>
-                  <strong>단축키:</strong> Ctrl+C (복사), Ctrl+V (붙여넣기) 등{" "}
-                </li>
-                <li>
-                  <strong>네비게이션:</strong> Tab (다음 요소), Shift+Tab (이전
-                  요소)
-                </li>
-                <li>
-                  <strong>전송:</strong> Enter 등{" "}
-                </li>
-                <li>
-                  <strong>취소:</strong> Escape 등{" "}
-                </li>
-                <li>
-                  <strong>방향키:</strong> 이동, 메뉴 탐색 및 선택
-                </li>
-                <li>
-                  <strong>페이지 이동:</strong> Page Up, Page Down
-                </li>
-                <li>
-                  <strong>아이템 선택:</strong> Space, Enter
-                </li>
-              </ul>
-            </div>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">
+                  일반적인 키보드 입력
+                </h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>
+                    <strong>단축키:</strong> Ctrl+C (복사), Ctrl+V (붙여넣기) 등{" "}
+                  </li>
+                  <li>
+                    <strong>네비게이션:</strong> Tab (다음 요소), Shift+Tab (이전
+                    요소)
+                  </li>
+                  <li>
+                    <strong>전송:</strong> Enter 등{" "}
+                  </li>
+                  <li>
+                    <strong>취소:</strong> Escape 등{" "}
+                  </li>
+                  <li>
+                    <strong>방향키:</strong> 이동, 메뉴 탐색 및 선택
+                  </li>
+                  <li>
+                    <strong>페이지 이동:</strong> Page Up, Page Down
+                  </li>
+                  <li>
+                    <strong>아이템 선택:</strong> Space, Enter
+                  </li>
+                </ul>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">접근성 고려사항</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>모든 기능을 키보드만으로도 사용 가능해야 합니다</li>
-                <li>포커스 상태가 시각적으로 명확하게 표시되어야 합니다</li>
-                <li>일관성 있는 패턴 사용</li>
-                <li>키보드 트랩 방지 (요소에 갇히지 않도록)</li>
-                <li>단축키는 일관된 패턴 사용</li>
-                <li>스크린리더 호환성 보장</li>
-                <li>키보드 내비 제공 (사용 가능한 단축키 목록 제공)</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">접근성 고려사항</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>모든 기능을 키보드만으로도 사용 가능해야 합니다</li>
+                  <li>포커스 상태가 시각적으로 명확하게 표시되어야 합니다</li>
+                  <li>일관성 있는 패턴 사용</li>
+                  <li>키보드 트랩 방지 (요소에 갇히지 않도록)</li>
+                  <li>단축키는 일관된 패턴 사용</li>
+                  <li>스크린리더 호환성 보장</li>
+                  <li>키보드 내비 제공 (사용 가능한 단축키 목록 제공)</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-white">
               <PrismCode
                 language="typescript"
                 code={`// 기본 키보드 이벤트 리스너
@@ -336,12 +338,12 @@ function KeyboardEventTypes() {
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="border rounded-lg overflow-hidden shadow-xs">
-                  <div className="bg-slate-50 p-3 border-b">
+                  <div className="bg-muted/50 p-3 border-b">
                     <h3 className="font-medium">키보드 이벤트 데모</h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       아무 키나 눌러보세요{" "}
                     </p>
                   </div>
@@ -349,15 +351,15 @@ function KeyboardEventTypes() {
                   <div className="p-4 bg-white">
                     <div className="mb-4">
                       <div className="flex justify-between mb-2">
-                        <span className="text-sm text-gray-500">
+                        <span className="text-sm text-muted-foreground">
                           마지막으로 누른 키
                         </span>
-                        <span className="font-mono font-medium bg-gray-100 px-2 py-1 rounded text-sm">
+                        <span className="font-mono font-medium bg-muted px-2 py-1 rounded text-sm">
                           {lastKey || "-"}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-500">
+                        <span className="text-sm text-muted-foreground">
                           현재 누르고 있는 키
                         </span>
                         <div className="font-mono font-medium">
@@ -366,14 +368,14 @@ function KeyboardEventTypes() {
                               {activeKeys.map((key) => (
                                 <span
                                   key={key}
-                                  className="bg-[#49bcf3] text-white px-2 py-1 rounded text-xs"
+                                  className="bg-brand-sky text-white px-2 py-1 rounded text-xs"
                                 >
                                   {key}
                                 </span>
                               ))}
                             </div>
                           ) : (
-                            <span className="bg-gray-100 px-2 py-1 rounded text-sm">
+                            <span className="bg-muted px-2 py-1 rounded text-sm">
                               -
                             </span>
                           )}
@@ -383,17 +385,15 @@ function KeyboardEventTypes() {
 
                     <div>
                       <h4 className="text-sm font-medium mb-2">키보드 게임</h4>
-                      <div className="border-2 border-dashed border-gray-300 rounded-md p-4 h-32 relative">
+                      <div className="border-2 border-dashed border-border rounded-md p-4 h-32 relative">
                         <div
-                          className="absolute bg-[#49bcf3] rounded-md w-10 h-10"
+                          className="absolute left-(--x) top-(--y) -translate-x-1/2 -translate-y-1/2 transition-all duration-100 ease-out bg-brand-sky rounded-md w-10 h-10"
                           style={{
-                            left: `${boxPosition.x}%`,
-                            top: `${boxPosition.y}%`,
-                            transform: "translate(-50%, -50%)",
-                            transition: "all 0.1s ease-out",
-                          }}
+                            "--x": `${boxPosition.x}%`,
+                            "--y": `${boxPosition.y}%`,
+                          } as CSSProperties}
                         />
-                        <div className="absolute bottom-2 right-2 text-xs text-gray-400">
+                        <div className="absolute bottom-2 right-2 text-xs text-muted-foreground/70">
                           방향키로 캐릭터를 움직여보세요{" "}
                         </div>
                       </div>
@@ -410,7 +410,7 @@ function KeyboardEventTypes() {
                             <div
                               className={`w-10 h-10 border-2 ${
                                 isKeyActive("arrowup")
-                                  ? "bg-[#49bcf3] text-white"
+                                  ? "bg-brand-sky text-white"
                                   : "bg-white"
                               } rounded-md flex items-center justify-center shadow-xs mx-auto`}
                             >
@@ -423,7 +423,7 @@ function KeyboardEventTypes() {
                             <div
                               className={`w-10 h-10 border-2 ${
                                 isKeyActive("arrowleft")
-                                  ? "bg-[#49bcf3] text-white"
+                                  ? "bg-brand-sky text-white"
                                   : "bg-white"
                               } rounded-md flex items-center justify-center shadow-xs mx-auto`}
                             >
@@ -434,7 +434,7 @@ function KeyboardEventTypes() {
                             <div
                               className={`w-10 h-10 border-2 ${
                                 isKeyActive("arrowdown")
-                                  ? "bg-[#49bcf3] text-white"
+                                  ? "bg-brand-sky text-white"
                                   : "bg-white"
                               } rounded-md flex items-center justify-center shadow-xs mx-auto`}
                             >
@@ -445,7 +445,7 @@ function KeyboardEventTypes() {
                             <div
                               className={`w-10 h-10 border-2 ${
                                 isKeyActive("arrowright")
-                                  ? "bg-[#49bcf3] text-white"
+                                  ? "bg-brand-sky text-white"
                                   : "bg-white"
                               } rounded-md flex items-center justify-center shadow-xs mx-auto`}
                             >
@@ -459,7 +459,7 @@ function KeyboardEventTypes() {
                 </div>
 
                 <div className="border rounded-lg overflow-hidden shadow-xs">
-                  <div className="bg-slate-50 p-3 border-b">
+                  <div className="bg-muted/50 p-3 border-b">
                     <h3 className="font-medium">일반적인 키보드 단축키</h3>
                   </div>
 
@@ -468,27 +468,27 @@ function KeyboardEventTypes() {
                       <tbody>
                         <tr className="border-b">
                           <td className="py-2 font-medium">Ctrl/Cmd + C</td>
-                          <td className="py-2 text-gray-600">복사</td>
+                          <td className="py-2 text-muted-foreground">복사</td>
                         </tr>
                         <tr className="border-b">
                           <td className="py-2 font-medium">Ctrl/Cmd + V</td>
-                          <td className="py-2 text-gray-600">붙여넣기</td>
+                          <td className="py-2 text-muted-foreground">붙여넣기</td>
                         </tr>
                         <tr className="border-b">
                           <td className="py-2 font-medium">Ctrl/Cmd + Z</td>
-                          <td className="py-2 text-gray-600">실행 취소</td>
+                          <td className="py-2 text-muted-foreground">실행 취소</td>
                         </tr>
                         <tr className="border-b">
                           <td className="py-2 font-medium">Ctrl/Cmd + S</td>
-                          <td className="py-2 text-gray-600">저장</td>
+                          <td className="py-2 text-muted-foreground">저장</td>
                         </tr>
                         <tr className="border-b">
                           <td className="py-2 font-medium">Ctrl/Cmd + F</td>
-                          <td className="py-2 text-gray-600">찾기</td>
+                          <td className="py-2 text-muted-foreground">찾기</td>
                         </tr>
                         <tr>
                           <td className="py-2 font-medium">Alt + Tab</td>
-                          <td className="py-2 text-gray-600">앱 전환</td>
+                          <td className="py-2 text-muted-foreground">앱 전환</td>
                         </tr>
                       </tbody>
                     </table>

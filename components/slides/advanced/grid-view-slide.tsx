@@ -292,7 +292,7 @@ export default App;`;
 
   return (
     <SlideLayout title="Grid View (그리드 뷰)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -303,10 +303,10 @@ export default App;`;
           <TabsContent value="description" className="mt-4">
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-3 text-gray-800">
+                <h3 className="text-lg font-semibold mb-3 text-foreground">
                   Grid View란?
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   Grid View는 2차원 격자 형태로 아이템들을 배치하는 레이아웃
                   컴포넌트입니다. 이미지 갤러리, 상품 목록, 카드 레이아웃 등에
                   주로 사용됩니다.
@@ -314,10 +314,10 @@ export default App;`;
               </div>
 
               <div>
-                <h4 className="text-md font-semibold mb-2 text-gray-800">
+                <h4 className="font-semibold mb-2 text-foreground">
                   주요 특징
                 </h4>
-                <ul className="space-y-2 text-gray-600">
+                <ul className="space-y-2 text-muted-foreground">
                   <li>
                     • <strong>반응형 디자인:</strong> 화면 크기에 따라 자동으로
                     열 수 조정
@@ -338,10 +338,10 @@ export default App;`;
               </div>
 
               <div>
-                <h4 className="text-md font-semibold mb-2 text-gray-800">
+                <h4 className="font-semibold mb-2 text-foreground">
                   사용 사례
                 </h4>
-                <ul className="space-y-2 text-gray-600">
+                <ul className="space-y-2 text-muted-foreground">
                   <li>• 사진 갤러리 및 이미지 앨범</li>
                   <li>• 상품 카탈로그 및 쇼핑몰 상품 진열</li>
                   <li>• 앱 아이콘 그리드(홈스크린)</li>
@@ -351,10 +351,10 @@ export default App;`;
               </div>
 
               <div>
-                <h4 className="text-md font-semibold mb-2 text-gray-800">
+                <h4 className="font-semibold mb-2 text-foreground">
                   구현 시 고려사항
                 </h4>
-                <ul className="space-y-2 text-gray-600">
+                <ul className="space-y-2 text-muted-foreground">
                   <li>• 적절한 이미지 비율과 크기 설정</li>
                   <li>• 로딩 상태 및 플레이스홀더 제공</li>
                   <li>• 접근성을 위한 적절한 내비게이션 지원</li>
@@ -366,16 +366,16 @@ export default App;`;
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-background">
               <PrismCode language="typescript" code={getReactCode()} />
             </div>
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="flex justify-between items-center mb-4">
                 <h4 className="text-lg font-semibold">Grid View 데모</h4>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-muted-foreground">
                   {filteredItems.length}개 항목
                 </div>
               </div>
@@ -385,8 +385,8 @@ export default App;`;
                 <button
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
                     selectedCategory === null
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      ? "bg-brand-sky text-white"
+                      : "bg-secondary text-foreground hover:bg-muted-foreground/30"
                   }`}
                   onClick={() => setSelectedCategory(null)}
                 >
@@ -397,8 +397,8 @@ export default App;`;
                     key={category}
                     className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
                       selectedCategory === category
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                        ? "bg-brand-sky text-white"
+                        : "bg-secondary text-foreground hover:bg-muted-foreground/30"
                     }`}
                     onClick={() => setSelectedCategory(category)}
                   >
@@ -412,8 +412,8 @@ export default App;`;
                 <button
                   className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
                     gridSize === "small"
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      ? "bg-brand-sky text-white"
+                      : "bg-secondary text-foreground hover:bg-muted-foreground/30"
                   }`}
                   onClick={() => setGridSize("small")}
                 >
@@ -426,8 +426,8 @@ export default App;`;
                 <button
                   className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
                     gridSize === "medium"
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      ? "bg-brand-sky text-white"
+                      : "bg-secondary text-foreground hover:bg-muted-foreground/30"
                   }`}
                   onClick={() => setGridSize("medium")}
                 >
@@ -440,8 +440,8 @@ export default App;`;
                 <button
                   className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
                     gridSize === "large"
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      ? "bg-brand-sky text-white"
+                      : "bg-secondary text-foreground hover:bg-muted-foreground/30"
                   }`}
                   onClick={() => setGridSize("large")}
                 >
@@ -464,29 +464,29 @@ export default App;`;
                 {filteredItems.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-gray-50 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+                    className="bg-muted/50 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
                   >
-                    <div className="aspect-square bg-gray-100 flex items-center justify-center text-2xl">
+                    <div className="aspect-square bg-muted flex items-center justify-center text-2xl">
                       {item.image}
                     </div>
                     <div className="p-2">
                       <h4
-                        className={`font-medium text-sm mb-1 text-gray-800 ${
+                        className={`font-medium text-sm mb-1 text-foreground ${
                           gridSize === "small" ? "text-xs" : "text-sm"
                         }`}
                       >
                         {item.title}
                       </h4>
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-muted-foreground">
                           {item.category}
                         </span>
                         <button
                           onClick={() => handleLike(item.id)}
                           className={`flex items-center gap-1 text-xs transition-colors ${
                             item.isLiked
-                              ? "text-red-500"
-                              : "text-gray-400 hover:text-gray-600"
+                              ? "text-destructive"
+                              : "text-muted-foreground/70 hover:text-muted-foreground"
                           }`}
                         >
                           <Heart

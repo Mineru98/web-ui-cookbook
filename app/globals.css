@@ -53,12 +53,43 @@ layer(base);
   --color-sidebar-border: hsl(var(--sidebar-border));
   --color-sidebar-ring: hsl(var(--sidebar-ring));
 
+  /* Brand — hex kept as-is (was written as bg-[#49bcf3] etc.) */
+  --color-brand-sky: #49bcf3;
+  --color-brand-ocean: #2a8bc4;
+  --color-brand-forest: #134429;
+  --color-brand-deep: hsl(var(--brand-deep));
+  --color-primary-soft: hsl(var(--primary-soft));
+
+  /* Status / accent — replaces raw palette classes */
+  --color-success: #22c55e;
+  --color-success-soft: #f0fdf4;
+  --color-success-line: #bbf7d0;
+  --color-success-ink: #166534;
+  --color-warning-soft: #fffbeb;
+  --color-warning-line: #fde68a;
+  --color-warning-ink: #92400e;
+  --color-highlight: #a855f7;
+  --color-highlight-deep: #5a00cc;
+
+  /* Type scale extras — replaces text-[11px], tracking-[0.18em] etc. */
+  --text-2xs: 11px;
+  --text-3xs: 10px;
+  --tracking-eyebrow: 0.18em;
+  --tracking-eyebrow-wide: 0.22em;
+  --leading-display: 1.1;
+
+  --shadow-float: 0 4px 30px -10px rgb(15 23 42 / 0.45);
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
+  /* fadeIn has no @keyframes (the old arbitrary class was already a no-op); kept as-is */
+  --animate-fade-in-slow: fadeIn 2s ease-in;
+  --animate-bounce-slow: bounce 1.5s infinite;
+  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
 
   @keyframes accordion-down {
     from {
@@ -74,6 +105,17 @@ layer(base);
     }
     to {
       height: 0;
+    }
+  }
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
     }
   }
 }
@@ -334,4 +376,34 @@ layer(base);
       opacity: 1;
     }
   }
+}
+
+/* Single-purpose sizing helpers — replace max-h-[calc(...)] / w-[88vw] / transition-[width] */
+@utility max-h-slide-body {
+  max-height: calc(100vh - 12rem);
+}
+
+@utility max-h-panel {
+  max-height: calc(100% - 3rem);
+}
+
+@utility w-sheet {
+  width: 88vw;
+}
+
+@utility transition-width {
+  transition-property: width;
+  transition-timing-function: var(--default-transition-timing-function);
+  transition-duration: var(--default-transition-duration);
+}
+
+/* animation-delay from a custom property — style={{ "--anim-delay": "120ms" }} */
+@utility anim-delay {
+  animation-delay: var(--anim-delay, 0ms);
+}
+
+/* Thin brand-colored scrollbar — replaces style={{ scrollbarWidth, scrollbarColor }} */
+@utility scrollbar-brand {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-brand-sky) var(--color-muted);
 }

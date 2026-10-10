@@ -43,7 +43,7 @@ export default function CardViewSlide() {
 
   return (
     <SlideLayout title="Card View (카드 뷰)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -51,43 +51,45 @@ export default function CardViewSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">개요</h3>
-              <p>
-                카드 뷰는 관련된 정보를 담는 컨테이너로, 주로 이미지, 제목,
-                간략한 설명과 액션을 포함합니다. 정보를 시각적으로 구분하고
-                그룹화하여 사용자가 콘텐츠를 쉽게 스캔하고 인터랙션할 수 있게
-                합니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">개요</h3>
+                <p>
+                  카드 뷰는 관련된 정보를 담는 컨테이너로, 주로 이미지, 제목,
+                  간략한 설명과 액션을 포함합니다. 정보를 시각적으로 구분하고
+                  그룹화하여 사용자가 콘텐츠를 쉽게 스캔하고 인터랙션할 수 있게
+                  합니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">주요 구성 요소</h3>
-              <ul className="list-disc pl-6 space-y-1">
-                <li>제목: 간결하고 명확한 제목</li>
-                <li>이미지/아이콘: 시각적 요소 (선택 사항)</li>
-                <li>설명: 간략한 내용 요약</li>
-                <li>액션 버튼: 인터랙션 요소</li>
-                <li>메타데이터: 태그, 날짜, 작성자 등</li>
-              </ul>
-            </div>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">주요 구성 요소</h3>
+                <ul className="list-disc pl-6 space-y-1">
+                  <li>제목: 간결하고 명확한 제목</li>
+                  <li>이미지/아이콘: 시각적 요소 (선택 사항)</li>
+                  <li>설명: 간략한 내용 요약</li>
+                  <li>액션 버튼: 인터랙션 요소</li>
+                  <li>메타데이터: 태그, 날짜, 작성자 등</li>
+                </ul>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-6 space-y-1">
-                <li>상품 목록 (이커머스)</li>
-                <li>뉴스 블로그 글</li>
-                <li>소셜 미디어 피드</li>
-                <li>대시보드 정보 패널</li>
-                <li>사용자 프로필</li>
-                <li>포트폴리오 프로젝트 시각화</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-6 space-y-1">
+                  <li>상품 목록 (이커머스)</li>
+                  <li>뉴스 블로그 글</li>
+                  <li>소셜 미디어 피드</li>
+                  <li>대시보드 정보 패널</li>
+                  <li>사용자 프로필</li>
+                  <li>포트폴리오 프로젝트 시각화</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-background">
               <PrismCode
                 language="typescript"
                 code={`import React from 'react';
@@ -206,40 +208,40 @@ export default CardExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <h3 className="text-lg font-medium mb-4">카드 컴포넌트 예시</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {cards.map((card) => (
                   <div
                     key={card.id}
                     className={`border rounded-lg overflow-hidden shadow-xs hover:shadow-md transition-shadow duration-300 cursor-pointer ${
-                      selectedCard === card.id ? "ring-2 ring-[#49bcf3]" : ""
+                      selectedCard === card.id ? "ring-2 ring-brand-sky" : ""
                     }`}
                     onClick={() =>
                       setSelectedCard(card.id === selectedCard ? null : card.id)
                     }
                   >
-                    <div className="h-32 bg-linear-to-r from-[#49bcf3]/80 to-[#49bcf3] flex items-center justify-center text-4xl">
+                    <div className="h-32 bg-linear-to-r from-brand-sky/80 to-brand-sky flex items-center justify-center text-4xl">
                       {card.image}
                     </div>
                     <div className="p-4">
                       <h4 className="font-medium text-lg mb-2">{card.title}</h4>
-                      <p className="text-gray-600 text-sm mb-3">
+                      <p className="text-muted-foreground text-sm mb-3">
                         {card.description}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {card.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-0.5 bg-[#49bcf3]/10 text-[#49bcf3] text-xs rounded-full"
+                            className="px-2 py-0.5 bg-brand-sky/10 text-brand-sky text-xs rounded-full"
                           >
                             {tag}
                           </span>
                         ))}
                       </div>
                     </div>
-                    <div className="border-t p-3 flex justify-end bg-gray-50">
-                      <button className="px-3 py-1 bg-[#49bcf3] text-white text-sm rounded-md hover:bg-[#49bcf3]/90">
+                    <div className="border-t p-3 flex justify-end bg-muted/50">
+                      <button className="px-3 py-1 bg-brand-sky text-white text-sm rounded-md hover:bg-brand-sky/90">
                         상세 정보 보기
                       </button>
                     </div>
@@ -248,8 +250,8 @@ export default CardExample;`}
               </div>
 
               {selectedCard && (
-                <div className="mt-4 p-4 bg-[#49bcf3]/10 rounded-md">
-                  <p className="text-sm text-[#49bcf3]">
+                <div className="mt-4 p-4 bg-brand-sky/10 rounded-md">
+                  <p className="text-sm text-brand-sky">
                     카드 #{selectedCard}가 선택되었습니다. 실제
                     애플리케이션에서는 상세 정보 표시, 모달 열기, 다른 페이지로
                     이동 등의 작업을 수행할 수 있습니다.

@@ -31,7 +31,7 @@ export default function IconButtonSlide() {
 
   return (
     <SlideLayout title="Icon Button">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -39,29 +39,31 @@ export default function IconButtonSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Icon Button은 텍스트 대신 아이콘을 사용하는 버튼입니다. 공간을 절약하면서도 직관적인 의미를 전달할 수
-                있습니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Icon Button은 텍스트 대신 아이콘을 사용하는 버튼입니다. 공간을 절약하면서도 직관적인 의미를 전달할 수
+                  있습니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>툴바 (Toolbar)에서의 액션 버튼</li>
-                <li>소셜 미디어 상호작용 (좋아요, 공유 등)</li>
-                <li>컴팩트한 UI가 필요한 모바일 인터페이스</li>
-                <li>네비게이션 컨트롤 (홈으로 가기 등)</li>
-                <li>상태 토글 (음소거/음소거 해제, 북마크 등)</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>툴바 (Toolbar)에서의 액션 버튼</li>
+                  <li>소셜 미디어 상호작용 (좋아요, 공유 등)</li>
+                  <li>컴팩트한 UI가 필요한 모바일 인터페이스</li>
+                  <li>네비게이션 컨트롤 (홈으로 가기 등)</li>
+                  <li>상태 토글 (음소거/음소거 해제, 북마크 등)</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`import React, { useState } from 'react';
@@ -131,7 +133,7 @@ const IconButtonExample: React.FC = () => {
       <div className="space-y-2">
         <h3 className="text-sm font-medium">상태 변경 버튼</h3>
         <Button
-          variant={liked ? "default" : "outline-solid"}
+          variant={liked ? "default" : "outline"}
           size="icon"
           onClick={() => {
             setLiked(!liked);
@@ -188,7 +190,7 @@ export default IconButtonExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="mb-6">
                 <label className="block text-sm font-medium mb-2">아이콘 선택</label>
                 <select

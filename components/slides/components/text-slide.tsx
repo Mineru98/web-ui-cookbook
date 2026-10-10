@@ -11,7 +11,7 @@ export default function TextSlide() {
 
   return (
     <SlideLayout title="Text">
-      <div className="space-y-8 max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="space-y-8 max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -19,29 +19,31 @@ export default function TextSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Text는 사용자 인터페이스에서 정보를 표시하는 기본적인 요소입니다. 다양한 크기, 두께, 색상으로 표현할 수
-                있으며, 제목, 본문, 레이블 등 다양한 용도로 사용됩니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Text는 사용자 인터페이스에서 정보를 표시하는 기본적인 요소입니다. 다양한 크기, 두께, 색상으로 표현할 수
+                  있으며, 제목, 본문, 레이블 등 다양한 용도로 사용됩니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>제목 (Heading): 페이지나 섹션의 제목</li>
-                <li>본문 (Body): 주요 내용의 표시</li>
-                <li>레이블(Label): 입력 필드나 버튼 등의 설명</li>
-                <li>캡션 (Caption): 이미지나 표에 대한 설명</li>
-                <li>링크 (Link): 클릭 가능한 텍스트</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>제목 (Heading): 페이지나 섹션의 제목</li>
+                  <li>본문 (Body): 주요 내용의 표시</li>
+                  <li>레이블(Label): 입력 필드나 버튼 등의 설명</li>
+                  <li>캡션 (Caption): 이미지나 표에 대한 설명</li>
+                  <li>링크 (Link): 클릭 가능한 텍스트</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-white">
               <PrismCode
                 language="typescript"
                 code={`import React from 'react';
@@ -126,7 +128,7 @@ export default TextExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-2">글자 크기</label>
                 <select

@@ -65,7 +65,7 @@ const TOPICS: Array<{ title: string; content: string; tag: string; accent: strin
   {
     title: "접근성 포커스 링 다시 보기",
     content:
-      "outline-solid: none 으로 지우지 말고, ring-offset 으로 배경과 분리해 보이게 디자인하세요.",
+      "outline: none 으로 지우지 말고, ring-offset 으로 배경과 분리해 보이게 디자인하세요.",
     tag: "A11y",
     accent: "from-teal-500/20 to-teal-500/0",
   },
@@ -177,7 +177,7 @@ function InfiniteScrollDemo(): ReactElement {
   }, [loadMore, isLoaderInView]);
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-200">
+    <div className="bg-white rounded-2xl p-6 shadow-md border border-border">
       <div className="mb-4 flex items-center justify-between gap-3">
         <h4 className="text-lg font-semibold">무한 스크롤 데모</h4>
         <div className="flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
@@ -186,7 +186,7 @@ function InfiniteScrollDemo(): ReactElement {
         </div>
       </div>
 
-      <p className="mb-4 text-sm text-gray-600">
+      <p className="mb-4 text-sm text-muted-foreground">
         아래로 스크롤하면 추가 포스트가 끝없이 자동으로 로드됩니다.
       </p>
 
@@ -218,7 +218,7 @@ function InfiniteScrollDemo(): ReactElement {
                     </span>
                     <span aria-hidden>·</span>
                     <span className="num tabular-nums">{post.date}</span>
-                    <span className="ml-auto inline-flex items-center rounded-full bg-foreground/6 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-foreground/70">
+                    <span className="ml-auto inline-flex items-center rounded-full bg-foreground/6 px-2 py-0.5 text-3xs font-semibold tracking-wide text-foreground/70">
                       {post.tag}
                     </span>
                   </div>
@@ -337,7 +337,7 @@ export function InfiniteList() {
 
   return (
     <SlideLayout title="Infinite Scroll (무한 스크롤)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -348,10 +348,10 @@ export function InfiniteList() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-3 text-gray-800">
+                <h3 className="text-lg font-semibold mb-3 text-foreground">
                   무한 스크롤이란?
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   무한 스크롤을 사용하면 페이지 단위의 전환 없이 자동으로 추가
                   콘텐츠를 로드하는 UX 패턴입니다. 별도 페이지 이동이나
                   '더보기' 버튼 없이 연속적인 콘텐츠 탐색 경험을 제공합니다.
@@ -359,11 +359,11 @@ export function InfiniteList() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-slate-50 rounded-lg p-4">
-                  <h4 className="text-md font-semibold mb-3 text-gray-800">
+                <div className="bg-muted/50 rounded-lg p-4">
+                  <h4 className="font-semibold mb-3 text-foreground">
                     구현 방식
                   </h4>
-                  <ul className="space-y-2 text-gray-600">
+                  <ul className="space-y-2 text-muted-foreground">
                     <li>
                       • <strong>Intersection Observer API:</strong> 요소가
                       뷰포트에 들어오는지 감지하는 현대적인 방식
@@ -383,11 +383,11 @@ export function InfiniteList() {
                   </ul>
                 </div>
 
-                <div className="bg-slate-50 rounded-lg p-4">
-                  <h4 className="text-md font-semibold mb-3 text-gray-800">
+                <div className="bg-muted/50 rounded-lg p-4">
+                  <h4 className="font-semibold mb-3 text-foreground">
                     사용 사례
                   </h4>
-                  <ul className="space-y-2 text-gray-600">
+                  <ul className="space-y-2 text-muted-foreground">
                     <li>
                       • 소셜 미디어 피드 (Facebook, Twitter, Instagram 등)
                     </li>
@@ -400,14 +400,14 @@ export function InfiniteList() {
                 </div>
               </div>
 
-              <div className="bg-sky-50 border border-sky-200 rounded-lg p-4">
-                <h4 className="text-md font-semibold mb-3 text-sky-800">
+              <div className="bg-primary-soft border border-brand-sky/30 rounded-lg p-4">
+                <h4 className="font-semibold mb-3 text-brand-deep">
                   장단점 비교
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <h5 className="font-medium text-emerald-700 mb-2">장점</h5>
-                    <ul className="space-y-1 text-sm text-gray-600">
+                    <h5 className="font-medium text-success-ink mb-2">장점</h5>
+                    <ul className="space-y-1 text-sm text-muted-foreground">
                       <li>• 연속적인 탐색 경험</li>
                       <li>• 페이지 전환 없음</li>
                       <li>• 사용자 참여 증대</li>
@@ -415,8 +415,8 @@ export function InfiniteList() {
                     </ul>
                   </div>
                   <div>
-                    <h5 className="font-medium text-rose-700 mb-2">단점</h5>
-                    <ul className="space-y-1 text-sm text-gray-600">
+                    <h5 className="font-medium text-destructive mb-2">단점</h5>
+                    <ul className="space-y-1 text-sm text-muted-foreground">
                       <li>• 성능 이슈 가능성</li>
                       <li>• 특정 위치 찾기 어려움</li>
                       <li>• 접근성 문제 발생 가능</li>
@@ -426,11 +426,11 @@ export function InfiniteList() {
                 </div>
               </div>
 
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                <h4 className="text-md font-semibold mb-3 text-amber-800">
+              <div className="bg-warning-soft border border-warning-line rounded-lg p-4">
+                <h4 className="font-semibold mb-3 text-warning-ink">
                   구현 시 고려사항
                 </h4>
-                <ul className="space-y-2 text-gray-600">
+                <ul className="space-y-2 text-muted-foreground">
                   <li>• 로딩 상태 표시기 제공</li>
                   <li>• 에러 처리 및 재시도 메커니즘</li>
                   <li>• 메모리 사용량 관리 (데이터가 많을 경우)</li>
@@ -443,7 +443,7 @@ export function InfiniteList() {
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-background">
               <PrismCode language="typescript" code={getReactCode()} />
             </div>
           </TabsContent>

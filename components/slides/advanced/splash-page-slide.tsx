@@ -4,6 +4,7 @@ import { PrismCode } from "@/components/ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
 import SlideLayout from "../slide-layout";
 
 export default function SplashPageSlide() {
@@ -213,7 +214,7 @@ export default BrandedSplashScreen;`;
       return (
         <div className="bg-white p-4 text-center">
           <button
-            className="px-4 py-2 bg-[#49bcf3] text-white rounded-md text-sm"
+            className="px-4 py-2 bg-brand-sky text-white rounded-md text-sm"
             onClick={handleStartLoading}
           >
             스플래시 화면 보기
@@ -225,16 +226,16 @@ export default BrandedSplashScreen;`;
     switch (splashType) {
       case "animated":
         return (
-          <div className="h-72 bg-linear-to-br from-[#49bcf3] to-[#134429] flex flex-col items-center justify-center">
-            <div className="animate-[bounce_1.5s_infinite]">
-              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-[#49bcf3] font-bold text-xl p-5">
+          <div className="h-72 bg-linear-to-br from-brand-sky to-brand-forest flex flex-col items-center justify-center">
+            <div className="animate-bounce-slow">
+              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-brand-sky font-bold text-xl p-5">
                 LOGO
               </div>
             </div>
-            <div className="mt-6 text-white font-medium animate-[fadeIn_2s_ease-in]">
+            <div className="mt-6 text-white font-medium animate-fade-in-slow">
               애니메이션 스플래시
             </div>
-            <div className="mt-2 text-white/70 text-sm animate-[fadeIn_2s_ease-in]">
+            <div className="mt-2 text-white/70 text-sm animate-fade-in-slow">
               로딩 중...
             </div>
           </div>
@@ -242,9 +243,9 @@ export default BrandedSplashScreen;`;
 
       case "branded":
         return (
-          <div className="h-72 bg-[#49bcf3] flex flex-col items-center justify-center text-white">
+          <div className="h-72 bg-brand-sky flex flex-col items-center justify-center text-white">
             <div className="flex flex-col items-center">
-              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-[#49bcf3] font-bold text-2xl p-5 mb-4">
+              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-brand-sky font-bold text-2xl p-5 mb-4">
                 UI
               </div>
               <div className="text-xl font-bold uppercase tracking-widest">
@@ -262,20 +263,20 @@ export default BrandedSplashScreen;`;
 
       case "progress":
         return (
-          <div className="h-72 bg-[#f4f4f4] flex flex-col items-center justify-center">
-            <div className="w-20 h-20 bg-[#49bcf3] rounded-full flex items-center justify-center text-white font-bold text-xl p-5">
+          <div className="h-72 bg-muted flex flex-col items-center justify-center">
+            <div className="w-20 h-20 bg-brand-sky rounded-full flex items-center justify-center text-white font-bold text-xl p-5">
               UI
             </div>
-            <div className="mt-6 font-medium text-[#49bcf3]">
+            <div className="mt-6 font-medium text-brand-sky">
               {progress}% 완료
             </div>
-            <div className="w-56 h-2 bg-gray-200 rounded-full mt-2 overflow-hidden">
+            <div className="w-56 h-2 bg-secondary rounded-full mt-2 overflow-hidden">
               <div
-                className="bg-[#49bcf3] h-full transition-all duration-300 ease-in-out"
-                style={{ width: `${progress}%` }}
+                className="bg-brand-sky h-full w-(--w) transition-all duration-300 ease-in-out"
+                style={{ "--w": `${progress}%` } as CSSProperties}
               />
             </div>
-            <div className="mt-2 text-gray-500 text-sm">리소스 로딩 중...</div>
+            <div className="mt-2 text-muted-foreground text-sm">리소스 로딩 중...</div>
           </div>
         );
 
@@ -283,12 +284,12 @@ export default BrandedSplashScreen;`;
         return (
           <div className="h-72 bg-white flex items-center justify-center">
             <div className="text-center">
-              <div className="w-20 h-20 bg-[#49bcf3] rounded-lg flex items-center justify-center text-white font-bold text-xl mx-auto">
+              <div className="w-20 h-20 bg-brand-sky rounded-lg flex items-center justify-center text-white font-bold text-xl mx-auto">
                 APP
               </div>
-              <div className="mt-4 font-medium text-gray-800">앱 이름</div>
+              <div className="mt-4 font-medium text-foreground">앱 이름</div>
               <div className="mt-4 flex justify-center">
-                <Loader2 className="animate-spin h-5 w-5 text-gray-500" />
+                <Loader2 className="animate-spin h-5 w-5 text-muted-foreground" />
               </div>
             </div>
           </div>
@@ -298,7 +299,7 @@ export default BrandedSplashScreen;`;
 
   return (
     <SlideLayout title="Splash Page (스플래시 페이지)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -306,8 +307,9 @@ export default BrandedSplashScreen;`;
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="prose max-w-none mb-6">
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+            <div className="max-w-none mb-6">
               <h2 className="text-xl font-semibold mb-3">정의</h2>
               <p>
                 스플래시 페이지(Splash Page) 또는 스플래시 스크린(Splash
@@ -323,8 +325,8 @@ export default BrandedSplashScreen;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     splashType === "basic"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setSplashType("basic")}
                 >
@@ -333,8 +335,8 @@ export default BrandedSplashScreen;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     splashType === "animated"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setSplashType("animated")}
                 >
@@ -343,8 +345,8 @@ export default BrandedSplashScreen;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     splashType === "branded"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setSplashType("branded")}
                 >
@@ -353,8 +355,8 @@ export default BrandedSplashScreen;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     splashType === "progress"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setSplashType("progress")}
                 >
@@ -378,7 +380,7 @@ export default BrandedSplashScreen;`;
                         ? "브랜드 스플래시 페이지"
                         : "진행률 표시 스플래시 페이지"}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-4">
+                    <p className="text-muted-foreground text-sm mb-4">
                       {splashType === "basic"
                         ? "로고와 간단한 로딩 인디케이터를 포함한 기본적인 스플래시 화면입니다."
                         : splashType === "animated"
@@ -388,7 +390,7 @@ export default BrandedSplashScreen;`;
                         : "실제 로딩 진행 상황을 보여주어 사용자에게 명확한 정보를 제공합니다."}
                     </p>
 
-                    <div className="bg-gray-50 p-3 rounded-md border text-sm">
+                    <div className="bg-muted/50 p-3 rounded-md border text-sm">
                       <strong>사용 시 고려사항:</strong>
                       <ul className="list-disc pl-5 mt-2 space-y-1">
                         <li>과도하게 길게 표시하지 않도록 제한</li>
@@ -405,74 +407,74 @@ export default BrandedSplashScreen;`;
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                <div className="p-4 bg-slate-50 rounded-md">
+                <div className="p-4 bg-muted/50 rounded-md">
                   <h3 className="text-lg font-medium mb-2">
                     스플래시 페이지 유형
                   </h3>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>
                       <strong>기본 스플래시 화면</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         로고와 텍스트만 포함한 단순한 형태
                       </p>
                     </li>
                     <li>
                       <strong>애니메이션 스플래시 화면</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         움직이는 요소가 포함된 동적인 형태
                       </p>
                     </li>
                     <li>
                       <strong>브랜드 스플래시 화면</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         회사/제품의 브랜드 아이덴티티를 강조
                       </p>
                     </li>
                     <li>
                       <strong>진행률 표시 스플래시</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         로딩 진행 상황을 시각적으로 표시
                       </p>
                     </li>
                     <li>
                       <strong>인터랙티브 스플래시</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         사용자의 호출에 응답하는 요소 포함
                       </p>
                     </li>
                   </ul>
                 </div>
 
-                <div className="p-4 bg-slate-50 rounded-md">
+                <div className="p-4 bg-muted/50 rounded-md">
                   <h3 className="text-lg font-medium mb-2">주요 구성 요소</h3>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>
                       <strong>로고/브랜드 요소</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         회사나 앱의 아이덴티티를 나타내는 시각적 요소
                       </p>
                     </li>
                     <li>
                       <strong>로딩 인디케이터</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         스피너, 프로그레스 바 등 진행 상황 표시
                       </p>
                     </li>
                     <li>
                       <strong>배경</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         단색, 그라디언트 또는 이미지 배경
                       </p>
                     </li>
                     <li>
                       <strong>텍스트 정보</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         앱 이름, 로고, 버전 정보 등
                       </p>
                     </li>
                     <li>
                       <strong>애니메이션</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         전환 효과, 로고 애니메이션 등
                       </p>
                     </li>
@@ -481,11 +483,11 @@ export default BrandedSplashScreen;`;
               </div>
             </div>
 
-            <div className="p-4 border border-[#49bcf3]/20 bg-[#49bcf3]/5 rounded-md">
-              <h3 className="text-lg font-medium mb-2 text-[#49bcf3]">
+            <div className="p-4 border border-brand-sky/20 bg-brand-sky/5 rounded-md">
+              <h3 className="text-lg font-medium mb-2 text-brand-sky">
                 디자인 및 구현 고려사항
               </h3>
-              <ul className="list-disc pl-6 space-y-1 text-gray-700">
+              <ul className="list-disc pl-6 space-y-1 text-foreground">
                 <li>
                   <strong>표시 시간 최적화</strong>
                   <p className="text-sm">
@@ -530,16 +532,17 @@ export default BrandedSplashScreen;`;
                 </li>
               </ul>
             </div>
+            </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 border rounded-md mb-6">
+            <div className="bg-foreground p-4 border rounded-md mb-6">
               <PrismCode language="typescript" code={getReactCode()} />
             </div>
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-2">
                   스플래시 화면 유형 선택
@@ -562,7 +565,7 @@ export default BrandedSplashScreen;`;
                   {!isLoading ? (
                     <div className="bg-white p-4 text-center">
                       <button
-                        className="px-4 py-2 bg-[#49bcf3] text-white rounded-md text-sm"
+                        className="px-4 py-2 bg-brand-sky text-white rounded-md text-sm"
                         onClick={handleStartLoading}
                       >
                         스플래시 화면 보기
@@ -573,39 +576,39 @@ export default BrandedSplashScreen;`;
                       {splashType === "basic" && (
                         <div className="h-72 bg-white flex items-center justify-center">
                           <div className="text-center">
-                            <div className="w-20 h-20 bg-[#49bcf3] rounded-lg flex items-center justify-center text-white font-bold text-xl mx-auto">
+                            <div className="w-20 h-20 bg-brand-sky rounded-lg flex items-center justify-center text-white font-bold text-xl mx-auto">
                               APP
                             </div>
-                            <div className="mt-4 font-medium text-gray-800">
+                            <div className="mt-4 font-medium text-foreground">
                               앱 이름
                             </div>
                             <div className="mt-4 flex justify-center">
-                              <Loader2 className="animate-spin h-5 w-5 text-gray-500" />
+                              <Loader2 className="animate-spin h-5 w-5 text-muted-foreground" />
                             </div>
                           </div>
                         </div>
                       )}
 
                       {splashType === "animated" && (
-                        <div className="h-72 bg-linear-to-br from-[#49bcf3] to-[#134429] flex flex-col items-center justify-center">
-                          <div className="animate-[bounce_1.5s_infinite]">
-                            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-[#49bcf3] font-bold text-xl p-5">
+                        <div className="h-72 bg-linear-to-br from-brand-sky to-brand-forest flex flex-col items-center justify-center">
+                          <div className="animate-bounce-slow">
+                            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-brand-sky font-bold text-xl p-5">
                               LOGO
                             </div>
                           </div>
-                          <div className="mt-6 text-white font-medium animate-[fadeIn_2s_ease-in]">
+                          <div className="mt-6 text-white font-medium animate-fade-in-slow">
                             애니메이션 스플래시
                           </div>
-                          <div className="mt-2 text-white/70 text-sm animate-[fadeIn_2s_ease-in]">
+                          <div className="mt-2 text-white/70 text-sm animate-fade-in-slow">
                             로딩 중...
                           </div>
                         </div>
                       )}
 
                       {splashType === "branded" && (
-                        <div className="h-72 bg-[#49bcf3] flex flex-col items-center justify-center text-white">
+                        <div className="h-72 bg-brand-sky flex flex-col items-center justify-center text-white">
                           <div className="flex flex-col items-center">
-                            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-[#49bcf3] font-bold text-2xl p-5 mb-4">
+                            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-brand-sky font-bold text-2xl p-5 mb-4">
                               UI
                             </div>
                             <div className="text-xl font-bold uppercase tracking-widest">
@@ -622,20 +625,20 @@ export default BrandedSplashScreen;`;
                       )}
 
                       {splashType === "progress" && (
-                        <div className="h-72 bg-[#f4f4f4] flex flex-col items-center justify-center">
-                          <div className="w-20 h-20 bg-[#49bcf3] rounded-full flex items-center justify-center text-white font-bold text-xl p-5">
+                        <div className="h-72 bg-muted flex flex-col items-center justify-center">
+                          <div className="w-20 h-20 bg-brand-sky rounded-full flex items-center justify-center text-white font-bold text-xl p-5">
                             UI
                           </div>
-                          <div className="mt-6 font-medium text-[#49bcf3]">
+                          <div className="mt-6 font-medium text-brand-sky">
                             {progress}% 완료
                           </div>
-                          <div className="w-56 h-2 bg-gray-200 rounded-full mt-2 overflow-hidden">
+                          <div className="w-56 h-2 bg-secondary rounded-full mt-2 overflow-hidden">
                             <div
-                              className="bg-[#49bcf3] h-full transition-all duration-300 ease-in-out"
-                              style={{ width: `${progress}%` }}
+                              className="bg-brand-sky h-full w-(--w) transition-all duration-300 ease-in-out"
+                              style={{ "--w": `${progress}%` } as CSSProperties}
                             />
                           </div>
-                          <div className="mt-2 text-gray-500 text-sm">
+                          <div className="mt-2 text-muted-foreground text-sm">
                             리소스 로딩 중...
                           </div>
                         </div>
@@ -645,7 +648,7 @@ export default BrandedSplashScreen;`;
                 </div>
 
                 {!isLoading && (
-                  <div className="w-full text-sm mt-4 p-4 bg-gray-50 rounded-md">
+                  <div className="w-full text-sm mt-4 p-4 bg-muted/50 rounded-md">
                     <h3 className="font-medium mb-2">특징:</h3>
                     {splashType === "basic" && (
                       <ul className="list-disc pl-5 space-y-1">

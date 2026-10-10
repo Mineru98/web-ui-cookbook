@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import SlideLayout from "../slide-layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PrismCode } from "@/components/ui/prism/PrismCode";
@@ -12,7 +12,7 @@ export default function OutlinedButtonSlide() {
 
   return (
     <SlideLayout title="Outlined Button">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -20,30 +20,32 @@ export default function OutlinedButtonSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Outlined Button은 배경이 없고 테두리 외곽선을 사용하여 강조하는
-                버튼입니다. 일반적으로 보조 액션이나 덜 중요한 액션에
-                사용됩니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Outlined Button은 배경이 없고 테두리 외곽선을 사용하여 강조하는
+                  버튼입니다. 일반적으로 보조 액션이나 덜 중요한 액션에
+                  사용됩니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>보조 액션 (Secondary actions)</li>
-                <li>취소 버튼 (Cancel buttons)</li>
-                <li>필터 토글 (Filter toggles)</li>
-                <li>옵션 선택 (Option selection)</li>
-                <li>시각적으로 덜 강조되어야 하는 액션</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>보조 액션 (Secondary actions)</li>
+                  <li>취소 버튼 (Cancel buttons)</li>
+                  <li>필터 토글 (Filter toggles)</li>
+                  <li>옵션 선택 (Option selection)</li>
+                  <li>시각적으로 덜 강조되어야 하는 액션</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`import React from 'react';
@@ -132,7 +134,7 @@ export default OutlinedButtonExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="space-y-4 mb-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">
@@ -168,15 +170,12 @@ export default OutlinedButtonExample;`}
 
               <div className="flex justify-center">
                 <button
-                  className={`px-4 py-2 rounded-md transition-colors duration-200 border-solid`}
+                  className="px-4 py-2 rounded-md transition-colors duration-200 border-solid border-(length:--bw) border-(--bc) text-(--bc) bg-(--bg)"
                   style={{
-                    borderWidth: borderWidth,
-                    borderColor: borderColor,
-                    color: borderColor,
-                    backgroundColor: hovered
-                      ? `${borderColor}10`
-                      : "transparent",
-                  }}
+                    "--bw": borderWidth,
+                    "--bc": borderColor,
+                    "--bg": hovered ? `${borderColor}10` : "transparent",
+                  } as CSSProperties}
                   onMouseEnter={() => setHovered(true)}
                   onMouseLeave={() => setHovered(false)}
                 >

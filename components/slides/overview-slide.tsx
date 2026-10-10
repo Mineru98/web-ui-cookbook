@@ -5,6 +5,7 @@ import {
   Layers,
   type LucideIcon,
 } from "lucide-react";
+import type { CSSProperties } from "react";
 import SlideLayout from "./slide-layout";
 import { KoHeading } from "@/components/ui/KoHeading";
 import { KoText } from "@/components/ui/KoText";
@@ -84,8 +85,8 @@ export default function OverviewSlide() {
           return (
             <div
               key={category.id}
-              className={`reveal-up group relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:p-6 ${category.span}`}
-              style={{ animationDelay: `${idx * 90}ms` }}
+              className={`reveal-up anim-delay group relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:p-6 ${category.span}`}
+              style={{ "--anim-delay": `${idx * 90}ms` } as CSSProperties}
             >
               <div
                 aria-hidden

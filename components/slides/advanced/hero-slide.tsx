@@ -17,7 +17,7 @@ export default function HeroSlide() {
       case "centered":
         return (
           <div className="relative">
-            <div className="h-64 bg-linear-to-r from-[#49bcf3] to-[#134429] flex items-center justify-center">
+            <div className="h-64 bg-linear-to-r from-brand-sky to-brand-forest flex items-center justify-center">
               <div className="text-center text-white p-6 max-w-lg mx-auto">
                 <h2 className="text-2xl font-bold mb-2">
                   중앙 정렬 히어로 섹션
@@ -27,7 +27,7 @@ export default function HeroSlide() {
                   강조하는 히어로 섹션입니다. 브랜드 메시지나 주요 마케팅 카피에
                   적합합니다.
                 </p>
-                <button className="bg-white text-[#49bcf3] px-4 py-2 rounded-md font-medium text-sm">
+                <button className="bg-white text-brand-sky px-4 py-2 rounded-md font-medium text-sm">
                   자세히 알아보기
                 </button>
               </div>
@@ -39,7 +39,7 @@ export default function HeroSlide() {
         return (
           <div className="relative">
             <div className="h-64 bg-white flex flex-col md:flex-row">
-              <div className="flex-1 bg-[#49bcf3] flex items-center justify-center p-6">
+              <div className="flex-1 bg-brand-sky flex items-center justify-center p-6">
                 <div className="text-white max-w-xs">
                   <h2 className="text-xl font-bold mb-2">분할 히어로 섹션</h2>
                   <p className="text-white/80 mb-4 text-sm">
@@ -52,12 +52,12 @@ export default function HeroSlide() {
                   </button>
                 </div>
               </div>
-              <div className="flex-1 bg-gray-200 flex items-center justify-center">
+              <div className="flex-1 bg-secondary flex items-center justify-center">
                 <div className="p-6 text-center">
-                  <div className="w-24 h-24 bg-gray-300 rounded-full mb-3 mx-auto flex items-center justify-center">
-                    <span className="text-3xl text-gray-500">🖼️</span>
+                  <div className="w-24 h-24 bg-muted-foreground/30 rounded-full mb-3 mx-auto flex items-center justify-center">
+                    <span className="text-3xl text-muted-foreground">🖼️</span>
                   </div>
-                  <p className="text-gray-500 text-sm">
+                  <p className="text-muted-foreground text-sm">
                     이미지 또는 비디오 영역
                   </p>
                 </div>
@@ -69,13 +69,13 @@ export default function HeroSlide() {
       case "video":
         return (
           <div className="relative">
-            <div className="h-64 bg-gray-800 flex items-center justify-center overflow-hidden relative">
+            <div className="h-64 bg-foreground flex items-center justify-center overflow-hidden relative">
               <div className="absolute inset-0 bg-black/50 z-10"></div>
               <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent z-10"></div>
 
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-full h-full bg-gray-700 flex items-center justify-center">
-                  <span className="text-4xl text-gray-500">🎬</span>
+                <div className="w-full h-full bg-foreground flex items-center justify-center">
+                  <span className="text-4xl text-muted-foreground">🎬</span>
                 </div>
               </div>
 
@@ -85,7 +85,7 @@ export default function HeroSlide() {
                   움직이는 영상을 배경으로 사용하여 사용자의 주목을 끌고 더욱
                   인상 깊은 느낌을 전달합니다.
                 </p>
-                <button className="bg-[#49bcf3] text-white px-4 py-2 rounded-md font-medium text-sm">
+                <button className="bg-brand-sky text-white px-4 py-2 rounded-md font-medium text-sm">
                   시작하기
                 </button>
               </div>
@@ -96,12 +96,12 @@ export default function HeroSlide() {
       default: // basic
         return (
           <div className="relative">
-            <div className="h-64 bg-gray-200 flex items-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-linear-to-r from-[#49bcf3]/90 to-transparent z-10"></div>
+            <div className="h-64 bg-secondary flex items-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-linear-to-r from-brand-sky/90 to-transparent z-10"></div>
 
               <div className="absolute inset-0">
-                <div className="w-full h-full bg-gray-300 flex items-center justify-center">
-                  <span className="text-4xl text-gray-500">🖼️</span>
+                <div className="w-full h-full bg-muted-foreground/30 flex items-center justify-center">
+                  <span className="text-4xl text-muted-foreground">🖼️</span>
                 </div>
               </div>
 
@@ -111,7 +111,7 @@ export default function HeroSlide() {
                   웹사이트의 첫인상을 결정하는 히어로 섹션으로 방문자의 주의를
                   끌고 핵심 메시지를 효과적으로 전달합니다.
                 </p>
-                <button className="bg-white text-[#49bcf3] px-4 py-2 rounded-md font-medium text-sm">
+                <button className="bg-white text-brand-sky px-4 py-2 rounded-md font-medium text-sm">
                   세부사항 보기
                 </button>
               </div>
@@ -423,7 +423,7 @@ export default VideoHeroExample;`;
 
   return (
     <SlideLayout title="Hero (히어로)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -431,8 +431,9 @@ export default VideoHeroExample;`;
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="prose max-w-none mb-6">
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+            <div className="max-w-none mb-6">
               <h2 className="text-xl font-semibold mb-3">정의</h2>
               <p>
                 히어로(Hero)는 웹사이트의 최상단 화면에 위치하는 큰 배너
@@ -448,8 +449,8 @@ export default VideoHeroExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     heroType === "basic"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setHeroType("basic")}
                 >
@@ -458,8 +459,8 @@ export default VideoHeroExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     heroType === "centered"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setHeroType("centered")}
                 >
@@ -468,8 +469,8 @@ export default VideoHeroExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     heroType === "split"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setHeroType("split")}
                 >
@@ -478,8 +479,8 @@ export default VideoHeroExample;`;
                 <button
                   className={`px-3 py-1.5 rounded text-sm ${
                     heroType === "video"
-                      ? "bg-[#49bcf3] text-white"
-                      : "bg-gray-100"
+                      ? "bg-brand-sky text-white"
+                      : "bg-muted"
                   }`}
                   onClick={() => setHeroType("video")}
                 >
@@ -502,7 +503,7 @@ export default VideoHeroExample;`;
                       ? "분할 히어로 섹션"
                       : "비디오 배경 히어로 섹션"}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-muted-foreground text-sm mb-4">
                     {heroType === "basic"
                       ? "배경 이미지와 왼쪽 정렬된 텍스트로 구성된 일반적인 히어로 섹션입니다. 대부분의 웹사이트에서 범용적으로 사용됩니다."
                       : heroType === "centered"
@@ -512,7 +513,7 @@ export default VideoHeroExample;`;
                       : "배경에 동영상을 사용하여 더욱 인상 깊고 몰입감 있는 첫 화면을 제공합니다. 브랜드 스토리텔링에 효과적입니다."}
                   </p>
 
-                  <div className="bg-gray-50 p-3 rounded-md border text-sm">
+                  <div className="bg-muted/50 p-3 rounded-md border text-sm">
                     <strong>사용 시 고려사항:</strong>
                     <ul className="list-disc pl-5 mt-2 space-y-1">
                       <li>메시지를 간결하고 명확하게 작성</li>
@@ -526,84 +527,84 @@ export default VideoHeroExample;`;
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                <div className="p-4 bg-slate-50 rounded-md">
+                <div className="p-4 bg-muted/50 rounded-md">
                   <h3 className="text-lg font-medium mb-2">히어로 섹션 유형</h3>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>
                       <strong>기본형 (Basic Hero)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         배경 이미지와 텍스트, 오버레이를 사용하는 기본 상태
                       </p>
                     </li>
                     <li>
                       <strong>중앙 정렬형 (Centered Hero)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         모든 요소가 중앙으로 정렬되어 깔끔하고 집중적인 레이아웃
                       </p>
                     </li>
                     <li>
                       <strong>분할형 (Split Hero)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         화면을 반으로 나누어 텍스트와 이미지를 균등하게 배치
                       </p>
                     </li>
                     <li>
                       <strong>비디오형 (Video Hero)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         움직이는 영상을 배경으로 사용하여 몰입감을 제공
                       </p>
                     </li>
                     <li>
                       <strong>풀스크린형 (Fullscreen Hero)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         화면 전체를 채우는 큰 히어로 섹션
                       </p>
                     </li>
                     <li>
                       <strong>애니메이션형 (Animated Hero)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         동적 요소와 애니메이션을 사용하는 인터랙티브한 레이아웃
                       </p>
                     </li>
                   </ul>
                 </div>
 
-                <div className="p-4 bg-slate-50 rounded-md">
+                <div className="p-4 bg-muted/50 rounded-md">
                   <h3 className="text-lg font-medium mb-2">주요 구성 요소</h3>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>
                       <strong>헤드라인 (Headline)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         주요 메시지를 전달하는 강력하고 간결한 제목
                       </p>
                     </li>
                     <li>
                       <strong>서브헤드라인 (Subheadline)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         헤드라인을 보완하는 부가 설명
                       </p>
                     </li>
                     <li>
                       <strong>CTA 버튼 (Call-to-Action)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         사용자의 다음 행동을 유도하는 버튼
                       </p>
                     </li>
                     <li>
                       <strong>배경 이미지/비디오 (Background)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         주의를 끌고 메시지를 강화하는 시각적 요소
                       </p>
                     </li>
                     <li>
                       <strong>오버레이 (Overlay)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         텍스트의 가독성을 향상시키기 위한 반투명 레이어
                       </p>
                     </li>
                     <li>
                       <strong>네비게이션 요소 (Navigation)</strong>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-muted-foreground">
                         히어로 섹션 위에 포함되는 네비게이션 컴포넌트
                       </p>
                     </li>
@@ -612,11 +613,11 @@ export default VideoHeroExample;`;
               </div>
             </div>
 
-            <div className="p-4 border border-[#49bcf3]/20 bg-[#49bcf3]/5 rounded-md">
-              <h3 className="text-lg font-medium mb-2 text-[#49bcf3]">
+            <div className="p-4 border border-brand-sky/20 bg-brand-sky/5 rounded-md">
+              <h3 className="text-lg font-medium mb-2 text-brand-sky">
                 효과적인 히어로 섹션 작성 팁
               </h3>
-              <ul className="list-disc pl-6 space-y-1 text-gray-700">
+              <ul className="list-disc pl-6 space-y-1 text-foreground">
                 <li>
                   <strong>명확한 목적 정의</strong>
                   <p className="text-sm">
@@ -665,7 +666,7 @@ export default VideoHeroExample;`;
             </div>
 
             {/* 히어로 섹션 추천 사용 */}
-            <div className="bg-gray-800 p-4 border rounded-md mb-6">
+            <div className="bg-foreground p-4 border rounded-md mb-6">
               <PrismCode
                 language="typescript"
                 code={`// ${
@@ -824,16 +825,17 @@ export default ${
                 };`}
               />
             </div>
+            </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-background">
               <PrismCode language="typescript" code={getReactCode()} />
             </div>
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-2">
                   히어로 유형 선택
@@ -854,11 +856,11 @@ export default ${
                 {/* 히어로 데모 영역 */}
                 <div className="w-full border rounded-lg overflow-hidden">
                   {heroType === "basic" && (
-                    <div className="h-64 bg-gray-200 flex items-center relative overflow-hidden">
-                      <div className="absolute inset-0 bg-linear-to-r from-[#49bcf3]/90 to-transparent z-10"></div>
+                    <div className="h-64 bg-secondary flex items-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-linear-to-r from-brand-sky/90 to-transparent z-10"></div>
                       <div className="absolute inset-0">
-                        <div className="w-full h-full bg-gray-300 flex items-center justify-center">
-                          <span className="text-4xl text-gray-500">🖼️</span>
+                        <div className="w-full h-full bg-muted-foreground/30 flex items-center justify-center">
+                          <span className="text-4xl text-muted-foreground">🖼️</span>
                         </div>
                       </div>
                       <div className="relative z-20 text-white p-6 max-w-lg">
@@ -869,7 +871,7 @@ export default ${
                           웹사이트의 첫인상을 결정하는 히어로 섹션으로 방문자의
                           주의를 끌고 핵심 메시지를 효과적으로 전달합니다.
                         </p>
-                        <button className="bg-white text-[#49bcf3] px-4 py-2 rounded-md font-medium text-sm">
+                        <button className="bg-white text-brand-sky px-4 py-2 rounded-md font-medium text-sm">
                           세부사항 보기
                         </button>
                       </div>
@@ -877,7 +879,7 @@ export default ${
                   )}
 
                   {heroType === "centered" && (
-                    <div className="h-64 bg-linear-to-r from-[#49bcf3] to-[#134429] flex items-center justify-center">
+                    <div className="h-64 bg-linear-to-r from-brand-sky to-brand-forest flex items-center justify-center">
                       <div className="text-center text-white p-6 max-w-lg mx-auto">
                         <h2 className="text-xl font-bold mb-2">
                           중앙 정렬 히어로 섹션
@@ -887,7 +889,7 @@ export default ${
                           배치하여 강조하는 히어로 섹션입니다. 브랜드 메시지나
                           주요 마케팅 카피에 적합합니다.
                         </p>
-                        <button className="bg-white text-[#49bcf3] px-4 py-2 rounded-md font-medium text-sm">
+                        <button className="bg-white text-brand-sky px-4 py-2 rounded-md font-medium text-sm">
                           자세히 알아보기
                         </button>
                       </div>
@@ -896,7 +898,7 @@ export default ${
 
                   {heroType === "split" && (
                     <div className="h-64 bg-white flex flex-col md:flex-row">
-                      <div className="flex-1 bg-[#49bcf3] flex items-center justify-center p-6">
+                      <div className="flex-1 bg-brand-sky flex items-center justify-center p-6">
                         <div className="text-white max-w-xs">
                           <h2 className="text-xl font-bold mb-2">
                             분할 히어로 섹션
@@ -911,12 +913,12 @@ export default ${
                           </button>
                         </div>
                       </div>
-                      <div className="flex-1 bg-gray-200 flex items-center justify-center">
+                      <div className="flex-1 bg-secondary flex items-center justify-center">
                         <div className="p-6 text-center">
-                          <div className="w-24 h-24 bg-gray-300 rounded-full mb-3 mx-auto flex items-center justify-center">
-                            <span className="text-3xl text-gray-500">🖼️</span>
+                          <div className="w-24 h-24 bg-muted-foreground/30 rounded-full mb-3 mx-auto flex items-center justify-center">
+                            <span className="text-3xl text-muted-foreground">🖼️</span>
                           </div>
-                          <p className="text-gray-500 text-sm">
+                          <p className="text-muted-foreground text-sm">
                             이미지 또는 비디오 영역
                           </p>
                         </div>
@@ -925,12 +927,12 @@ export default ${
                   )}
 
                   {heroType === "video" && (
-                    <div className="h-64 bg-gray-800 flex items-center justify-center overflow-hidden relative">
+                    <div className="h-64 bg-foreground flex items-center justify-center overflow-hidden relative">
                       <div className="absolute inset-0 bg-black/50 z-10"></div>
                       <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent z-10"></div>
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-full h-full bg-gray-700 flex items-center justify-center">
-                          <span className="text-4xl text-gray-500">🎬</span>
+                        <div className="w-full h-full bg-foreground flex items-center justify-center">
+                          <span className="text-4xl text-muted-foreground">🎬</span>
                         </div>
                       </div>
                       <div className="relative z-20 text-white text-center max-w-lg mx-auto p-6">
@@ -941,7 +943,7 @@ export default ${
                           움직이는 영상을 배경으로 사용하여 사용자의 주목을 끌고
                           더욱 인상 깊은 느낌을 전달합니다.
                         </p>
-                        <button className="bg-[#49bcf3] text-white px-4 py-2 rounded-md font-medium text-sm">
+                        <button className="bg-brand-sky text-white px-4 py-2 rounded-md font-medium text-sm">
                           시작하기
                         </button>
                       </div>
@@ -949,7 +951,7 @@ export default ${
                   )}
                 </div>
 
-                <div className="w-full text-sm mt-4 p-4 bg-gray-50 rounded-md">
+                <div className="w-full text-sm mt-4 p-4 bg-muted/50 rounded-md">
                   <h3 className="font-medium mb-2">특징:</h3>
                   {heroType === "basic" && (
                     <ul className="list-disc pl-5 space-y-1">

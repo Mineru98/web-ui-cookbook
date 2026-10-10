@@ -54,24 +54,28 @@ export default function TitleSlide({ onStart }: TitleSlideProps): ReactElement {
       <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/25" />
 
       <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-6 py-12 sm:px-10">
-        <KoText
-          as="div"
-          balance={false}
+        <div
           data-title-reveal="fade"
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-1.5 text-xs font-medium tracking-wide text-white backdrop-blur-md sm:text-sm"
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-1.5 backdrop-blur-md"
         >
-          <Sparkles className="h-3.5 w-3.5" aria-hidden />
-          <span>Web UI Cookbook · 2026</span>
-        </KoText>
+          <Sparkles className="h-3.5 w-3.5 text-white" aria-hidden />
+          <KoText
+            as="span"
+            balance={false}
+            className="text-xs font-medium tracking-wide text-white sm:text-sm"
+          >
+            Web UI Cookbook · 2026
+          </KoText>
+        </div>
 
         <KoHeading
           as="h1"
           data-title-reveal="up"
-          className="text-center text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
+          className="text-center text-4xl font-bold leading-display tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
         >
           UI 컴포넌트
           <br className="hidden sm:block" />{" "}
-          <span className="bg-linear-to-r from-white via-sky-50 to-white/70 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-white via-primary-soft to-white/70 bg-clip-text text-transparent">
             교육 자료
           </span>
         </KoHeading>
@@ -92,7 +96,7 @@ export default function TitleSlide({ onStart }: TitleSlideProps): ReactElement {
             <KoText
               as="span"
               balance={false}
-              className="num text-base font-semibold"
+              className="text-base font-semibold tabular-nums"
             >
               37
             </KoText>
@@ -104,7 +108,7 @@ export default function TitleSlide({ onStart }: TitleSlideProps): ReactElement {
             <KoText
               as="span"
               balance={false}
-              className="num text-base font-semibold"
+              className="text-base font-semibold tabular-nums"
             >
               5
             </KoText>
@@ -124,7 +128,7 @@ export default function TitleSlide({ onStart }: TitleSlideProps): ReactElement {
           onClick={onStart}
           disabled={!onStart}
           data-title-reveal="fade"
-          className="press focus-ring group mt-12 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_30px_-10px_rgba(15,23,42,0.45)] backdrop-blur-md transition-all hover:bg-white/25 disabled:cursor-default disabled:opacity-70 sm:text-base"
+          className="press focus-ring group mt-12 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-6 py-3 text-sm font-semibold text-white shadow-float backdrop-blur-md transition-all hover:bg-white/25 disabled:cursor-default disabled:opacity-70 sm:text-base"
           aria-label="다음 슬라이드로 이동"
         >
           <span>시작하기</span>
@@ -133,14 +137,15 @@ export default function TitleSlide({ onStart }: TitleSlideProps): ReactElement {
             aria-hidden
           />
         </button>
-        <KoText
-          as="p"
-          balance={false}
-          data-title-reveal="fade"
-          className="mt-3 text-[11px] uppercase tracking-[0.22em] text-white/60"
-        >
-          ← → 키 또는 하단 버튼으로 이동
-        </KoText>
+        <div data-title-reveal="fade" className="mt-3">
+          <KoText
+            as="p"
+            balance={false}
+            className="text-2xs uppercase tracking-eyebrow-wide text-white/60"
+          >
+            ← → 키 또는 하단 버튼으로 이동
+          </KoText>
+        </div>
       </div>
     </div>
   );

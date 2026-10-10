@@ -17,7 +17,7 @@ export default function SliderSlide() {
 
   return (
     <SlideLayout title="Slider">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -25,30 +25,32 @@ export default function SliderSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Slider는 사용자가 지정된 범위 내에서 값을 선택할 수 있는 UI
-                요소입니다. 드래그 가능한 핸들을 사용해 값을 조절합니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Slider는 사용자가 지정된 범위 내에서 값을 선택할 수 있는 UI
+                  요소입니다. 드래그 가능한 핸들을 사용해 값을 조절합니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>볼륨 조절</li>
-                <li>밝기, 대비 등 시각적 설정</li>
-                <li>가격 범위 필터</li>
-                <li>줌 레벨 조절</li>
-                <li>진행 상태 표시 및 조절</li>
-                <li>수치 입력 (키, 무게 등)</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>볼륨 조절</li>
+                  <li>밝기, 대비 등 시각적 설정</li>
+                  <li>가격 범위 필터</li>
+                  <li>줌 레벨 조절</li>
+                  <li>진행 상태 표시 및 조절</li>
+                  <li>수치 입력 (키, 무게 등)</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`import React, { useState } from 'react';
@@ -183,7 +185,7 @@ export default SliderExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="space-y-6 mb-6">
                 <div className="grid grid-cols-3 gap-4">
                   <div>
@@ -243,8 +245,8 @@ export default SliderExample;`}
                 </div>
 
                 <div
-                  className="h-20 bg-[#49bcf3] rounded-md opacity-30"
-                  style={{ opacity: value[0] / 100 }}
+                  className="h-20 bg-brand-sky rounded-md opacity-(--o)"
+                  style={{ "--o": value[0] / 100 } as React.CSSProperties}
                 >
                   <div className="h-full flex items-center justify-center text-white font-bold">
                     불투명도: {value[0]}%

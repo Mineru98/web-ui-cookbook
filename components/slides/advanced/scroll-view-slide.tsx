@@ -2,6 +2,7 @@
 
 import SlideLayout from "../slide-layout";
 import { useState, useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 import { ChevronUp } from "lucide-react";
 import { PrismCode } from "@/components/ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -216,7 +217,7 @@ export default App;`;
 
   return (
     <SlideLayout title="Scroll View (스크롤뷰)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -224,8 +225,9 @@ export default App;`;
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-8 mt-4">
-            <div className="prose max-w-none">
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-8">
+            <div className="max-w-none">
               <h2 className="text-xl font-semibold mb-3">정의</h2>
               <p>
                 스크롤뷰는 화면에 표시 가능한 영역보다 많은 콘텐츠를 담을 수 있는
@@ -235,37 +237,37 @@ export default App;`;
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-4 bg-slate-50 rounded-md">
+              <div className="p-4 bg-muted/50 rounded-md">
                 <h3 className="text-lg font-medium mb-2">스크롤뷰 종류</h3>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>
                     <strong>수직 스크롤(Vertical Scroll)</strong>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       위아래로 스크롤하는 가장 일반적인 형태
                     </p>
                   </li>
                   <li>
                     <strong>수평 스크롤(Horizontal Scroll)</strong>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       좌우로 스크롤하는 형태, 갤러리나 캐러셀에 자주 사용
                     </p>
                   </li>
                   <li>
                     <strong>양방향 스크롤(Both Directions)</strong>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       수직과 수평 모두 스크롤 가능한 형태, 큰 데이터 표에 사용
                     </p>
                   </li>
                   <li>
                     <strong>페이지 스크롤(Paging)</strong>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       한 번에 한 페이지씩 스크롤되는 형태
                     </p>
                   </li>
                 </ul>
               </div>
 
-              <div className="p-4 bg-slate-50 rounded-md">
+              <div className="p-4 bg-muted/50 rounded-md">
                 <h3 className="text-lg font-medium mb-2">고려사항</h3>
                 <ul className="list-disc pl-6 space-y-1">
                   <li>스크롤바 디자인과 가시성</li>
@@ -279,11 +281,11 @@ export default App;`;
               </div>
             </div>
 
-            <div className="p-4 border border-[#49bcf3]/20 bg-[#49bcf3]/5 rounded-md">
-              <h3 className="text-lg font-medium mb-2 text-[#49bcf3]">
+            <div className="p-4 border border-brand-sky/20 bg-brand-sky/5 rounded-md">
+              <h3 className="text-lg font-medium mb-2 text-brand-sky">
                 구현 시 접근성
               </h3>
-              <ul className="list-disc pl-6 space-y-1 text-gray-700">
+              <ul className="list-disc pl-6 space-y-1 text-foreground">
                 <li>스크롤 위치 표시기를 제공하여 현재 위치 인식 쉽게</li>
                 <li>스크롤 상단으로 이동 버튼으로 긴 콘텐츠 탐색 지원</li>
                 <li>키보드 탐색(방향키, Page Up/Down) 지원</li>
@@ -293,11 +295,12 @@ export default App;`;
                 <li>터치 제스처와 마우스를 모두 고려한 설계</li>
               </ul>
             </div>
+            </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
 
-            <div className="bg-gray-800 p-4 border rounded-md">
+            <div className="bg-foreground p-4 border rounded-md">
               <PrismCode
                 language="typescript"
                 code={getReactCode()}
@@ -309,7 +312,7 @@ export default App;`;
             <div className="flex-1 flex flex-col">
               <div className="flex justify-between items-center mb-3">
                 <h3 className="text-lg font-medium">스크롤뷰 표시</h3>
-                <div className="flex items-center gap-2 text-xs text-gray-500">
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <span>스크롤 위치: {Math.round(scrollPosition)}</span>
                   <span>|</span>
                   <span>최대: {Math.round(maxScroll)}</span>
@@ -327,22 +330,17 @@ export default App;`;
               <div className="relative flex-1 flex flex-col">
                 <div
                   ref={scrollContainerRef}
-                  className="flex-1 border rounded-lg overflow-y-auto bg-white p-4"
-                  style={{
-                    scrollbarWidth: "thin",
-                    scrollbarColor: "#49bcf3 #f1f1f1",
-                    height: "400px",
-                  }}
+                  className="flex-1 border rounded-lg overflow-y-auto bg-white p-4 h-100 scrollbar-brand"
                 >
                   {/* 스크롤 진행 표시기 */}
-                  <div className="sticky top-0 left-0 right-0 h-1 bg-gray-100 mb-4 -mx-4">
+                  <div className="sticky top-0 left-0 right-0 h-1 bg-muted mb-4 -mx-4">
                     <div
-                      className="h-full bg-[#49bcf3]"
+                      className="h-full bg-brand-sky w-(--w)"
                       style={{
-                        width: `${
+                        "--w": `${
                           maxScroll ? (scrollPosition / maxScroll) * 100 : 0
                         }%`,
-                      }}
+                      } as CSSProperties}
                     ></div>
                   </div>
 
@@ -353,14 +351,14 @@ export default App;`;
                         key={index}
                         className={`p-4 rounded-lg ${
                           index % 3 === 0
-                            ? "bg-[#49bcf3]/5 border border-[#49bcf3]/10"
+                            ? "bg-brand-sky/5 border border-brand-sky/10"
                             : index % 3 === 1
-                            ? "bg-gray-50"
+                            ? "bg-muted/50"
                             : "border"
                         }`}
                       >
-                        <p className="text-gray-700">{text}</p>
-                        <div className="text-xs text-gray-400 mt-2">
+                        <p className="text-foreground">{text}</p>
+                        <div className="text-xs text-muted-foreground/70 mt-2">
                           문단 #{index + 1}
                         </div>
                       </div>
@@ -371,11 +369,11 @@ export default App;`;
                 {/* 스크롤 상단으로 버튼 */}
                 {showScrollToTop && (
                   <button
-                    className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-lg border hover:bg-gray-50 transition-opacity duration-300"
+                    className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-lg border hover:bg-muted/50 transition-opacity duration-300"
                     onClick={scrollToTop}
                     aria-label="상단으로 스크롤"
                   >
-                    <ChevronUp className="w-5 h-5 text-gray-700" />
+                    <ChevronUp className="w-5 h-5 text-foreground" />
                   </button>
                 )}
               </div>

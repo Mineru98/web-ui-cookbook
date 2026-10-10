@@ -25,7 +25,7 @@ export default function RadioButtonSlide() {
 
   return (
     <SlideLayout title="Radio Button">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -33,30 +33,32 @@ export default function RadioButtonSlide() {
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">정의</h3>
-              <p>
-                Radio Button은 사용자가 여러 옵션 중 하나를 선택할 수 있는 UI
-                요소입니다. 동일한 그룹 내에서는 한 번에 하나의 라디오 버튼만
-                선택할 수 있습니다.
-              </p>
-            </div>
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">정의</h3>
+                <p>
+                  Radio Button은 사용자가 여러 옵션 중 하나를 선택할 수 있는 UI
+                  요소입니다. 동일한 그룹 내에서는 한 번에 하나의 라디오 버튼만
+                  선택할 수 있습니다.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>단일 선택이 필요한 설문조사 질문</li>
-                <li>성별, 연령대 등의 인구통계학적 정보 수집</li>
-                <li>배송 방법, 결제 방법 선택</li>
-                <li>특정 옵션 중 하나 선택</li>
-                <li>필터링 옵션 (정렬 기준 등)</li>
-              </ul>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
+                <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>단일 선택이 필요한 설문조사 질문</li>
+                  <li>성별, 연령대 등의 인구통계학적 정보 수집</li>
+                  <li>배송 방법, 결제 방법 선택</li>
+                  <li>특정 옵션 중 하나 선택</li>
+                  <li>필터링 옵션 (정렬 기준 등)</li>
+                </ul>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg">
+            <div className="bg-foreground p-4 rounded-lg">
               <PrismCode
                 language="typescript"
                 code={`import React, { useState } from 'react';
@@ -137,7 +139,7 @@ export default RadioButtonExample;`}
           </TabsContent>
 
           <TabsContent value="demo" className="mt-4">
-            <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+            <div className="bg-white rounded-lg p-6 shadow-md border border-border">
               <div className="mb-6 space-y-4">
                 <div className="flex items-center space-x-2">
                   <input
@@ -149,7 +151,7 @@ export default RadioButtonExample;`}
                   />
                   <button
                     onClick={addOption}
-                    className="px-4 py-2 bg-[#49bcf3] text-white rounded-md"
+                    className="px-4 py-2 bg-brand-sky text-white rounded-md"
                   >
                     추가
                   </button>
@@ -160,17 +162,18 @@ export default RadioButtonExample;`}
                 <RadioGroup
                   value={selectedOption}
                   onValueChange={setSelectedOption}
-                  className="space-y-2"
                 >
-                  {options.map((option, index) => (
-                    <div key={index} className="flex items-center space-x-2">
-                      <RadioGroupItem
-                        value={`option${index + 1}`}
-                        id={`option${index + 1}`}
-                      />
-                      <Label htmlFor={`option${index + 1}`}>{option}</Label>
-                    </div>
-                  ))}
+                  <div className="space-y-4">
+                    {options.map((option, index) => (
+                      <div key={index} className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value={`option${index + 1}`}
+                          id={`option${index + 1}`}
+                        />
+                        <Label htmlFor={`option${index + 1}`}>{option}</Label>
+                      </div>
+                    ))}
+                  </div>
                 </RadioGroup>
 
                 <p className="mt-4 text-sm">

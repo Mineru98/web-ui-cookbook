@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactElement, useCallback, useEffect, useMemo, useState } from "react";
+import { type CSSProperties, type ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -206,8 +206,8 @@ export default function Home(): ReactElement {
         aria-label="슬라이드 진행률"
       >
         <div
-          className="h-full bg-linear-to-r from-primary to-sky-400 transition-[width] duration-500 ease-out"
-          style={{ width: `${progress}%` }}
+          className="h-full bg-linear-to-r from-primary to-brand-sky transition-width duration-500 ease-out w-(--w)"
+          style={{ "--w": `${progress}%` } as CSSProperties}
         />
       </div>
 
@@ -219,7 +219,7 @@ export default function Home(): ReactElement {
             size="icon"
             onClick={goToHome}
             aria-label="홈으로"
-            className="press focus-ring h-9 w-9"
+            className="press h-9 w-9"
           >
             <HomeIcon className="h-4 w-4" />
           </Button>
@@ -230,7 +230,7 @@ export default function Home(): ReactElement {
                 variant="outline"
                 size="icon"
                 aria-label="목차"
-                className="press focus-ring h-9 w-9"
+                className="press h-9 w-9"
               >
                 <Menu className="h-4 w-4" />
               </Button>
@@ -239,13 +239,13 @@ export default function Home(): ReactElement {
               title="목차"
               description="슬라이드 목차"
               side="left"
-              className="w-[88vw] max-w-[360px] sm:w-[400px]"
+              className="w-sheet max-w-90 sm:w-100"
             >
               <div className="flex h-full flex-col">
                 <div>
                   <KoText
                     balance={false}
-                    className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary"
+                    className="text-2xs font-semibold uppercase tracking-eyebrow text-primary"
                   >
                     Contents
                   </KoText>
@@ -269,13 +269,15 @@ export default function Home(): ReactElement {
                 <div className="scrollbar-clean mt-5 flex-1 space-y-5 overflow-y-auto pr-1">
                   {groupedSlides.map((group) => (
                     <div key={group.section}>
-                      <KoHeading
-                        as="h3"
-                        balance={false}
-                        className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-                      >
-                        {group.section}
-                      </KoHeading>
+                      <div className="mb-2 px-2">
+                        <KoHeading
+                          as="h3"
+                          balance={false}
+                          className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                        >
+                          {group.section}
+                        </KoHeading>
+                      </div>
                       <div className="space-y-0.5">
                         {group.items.map((item) => {
                           const isActive = item.index === currentSlide;
@@ -295,7 +297,7 @@ export default function Home(): ReactElement {
                               aria-current={isActive ? "page" : undefined}
                             >
                               <span
-                                className={`num inline-flex h-6 min-w-[1.6rem] items-center justify-center rounded-md px-1.5 text-[11px] font-semibold tabular-nums ${
+                                className={`num inline-flex h-6 min-w-6.5 items-center justify-center rounded-md px-1.5 text-2xs font-semibold tabular-nums ${
                                   isActive
                                     ? "bg-white/20 text-white"
                                     : "bg-muted text-muted-foreground group-hover:bg-background"
@@ -322,7 +324,7 @@ export default function Home(): ReactElement {
           <span className="truncate text-xs font-medium text-foreground sm:text-sm">
             {active.title}
           </span>
-          <span className="num text-[11px] text-muted-foreground tabular-nums">
+          <span className="num text-2xs text-muted-foreground tabular-nums">
             {currentSlide + 1} / {total}
           </span>
         </div>
@@ -334,7 +336,7 @@ export default function Home(): ReactElement {
             onClick={goToPrevious}
             disabled={currentSlide === 0}
             aria-label="이전 슬라이드"
-            className="press focus-ring h-9 w-9"
+            className="press h-9 w-9"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -344,7 +346,7 @@ export default function Home(): ReactElement {
             onClick={goToNext}
             disabled={currentSlide === SLIDES.length - 1}
             aria-label="다음 슬라이드"
-            className="press focus-ring h-9 w-9"
+            className="press h-9 w-9"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>

@@ -363,7 +363,7 @@ export default SettingsDrawerExample;`;
 
   return (
     <SlideLayout title="Drawer (드로어)">
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="max-h-slide-body overflow-y-auto">
         <Tabs defaultValue="description">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">설명</TabsTrigger>
@@ -371,8 +371,9 @@ export default SettingsDrawerExample;`;
             <TabsTrigger value="demo">데모</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description" className="space-y-4 mt-4">
-            <div className="prose max-w-none mb-6">
+          <TabsContent value="description" className="mt-4">
+            <div className="space-y-4">
+            <div className="max-w-none mb-6">
               <h2 className="text-xl font-semibold mb-3">의의</h2>
               <p>
                 드로어(Drawer)는 화면 가장자리에서 슬라이딩하여 나타나는 패널로,
@@ -382,43 +383,43 @@ export default SettingsDrawerExample;`;
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-4 bg-slate-50 rounded-md">
+              <div className="p-4 bg-muted/50 rounded-md">
                 <h3 className="text-lg font-medium mb-2">드로어 종류</h3>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>
                     <strong>측면 드로어(Side Drawer)</strong>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       화면 좌측 또는 우측에서 슬라이드, 주로 내비게이션에 사용
                     </p>
                   </li>
                   <li>
                     <strong>바닥 드로어(Bottom Drawer)</strong>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       화면 아래에서 위로 슬라이드, 추가 액션이나 컨텐츠에 사용
                     </p>
                   </li>
                   <li>
                     <strong>상단 드로어(Top Drawer)</strong>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       화면 위에서 아래로 슬라이드, 알림이나 검색에 사용
                     </p>
                   </li>
                   <li>
                     <strong>임시 드로어(Temporary Drawer)</strong>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       햄버거 아이콘으로 임시로 열고 오버레이 클릭으로 닫힘
                     </p>
                   </li>
                   <li>
                     <strong>영구 드로어(Permanent Drawer)</strong>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       항상 화면에 표시되고 닫히지 않음 (주로 데스크톱에서 사용)
                     </p>
                   </li>
                 </ul>
               </div>
 
-              <div className="p-4 bg-slate-50 rounded-md">
+              <div className="p-4 bg-muted/50 rounded-md">
                 <h3 className="text-lg font-medium mb-2">사용 패턴</h3>
                 <ul className="list-disc pl-6 space-y-1">
                   <li>모바일 내비게이션 메뉴</li>
@@ -433,11 +434,11 @@ export default SettingsDrawerExample;`;
               </div>
             </div>
 
-            <div className="p-4 border border-[#49bcf3]/20 bg-[#49bcf3]/5 rounded-md">
-              <h3 className="text-lg font-medium mb-2 text-[#49bcf3]">
+            <div className="p-4 border border-brand-sky/20 bg-brand-sky/5 rounded-md">
+              <h3 className="text-lg font-medium mb-2 text-brand-sky">
                 개발자 권장사항
               </h3>
-              <ul className="list-disc pl-6 space-y-1 text-gray-700">
+              <ul className="list-disc pl-6 space-y-1 text-foreground">
                 <li>
                   <strong>명확한 계층 구조</strong>
                   <p className="text-sm">
@@ -478,10 +479,11 @@ export default SettingsDrawerExample;`;
                 </li>
               </ul>
             </div>
+            </div>
           </TabsContent>
 
           <TabsContent value="code" className="mt-4">
-            <div className="bg-gray-800 p-4 rounded-lg text-white">
+            <div className="bg-foreground p-4 rounded-lg text-background">
               <div className="overflow-x-auto rounded-lg">
                 <PrismCode code={getReactCode()} language="typescript" />
               </div>
@@ -493,7 +495,7 @@ export default SettingsDrawerExample;`;
               <div className="flex justify-between mb-4 gap-4">
                 <button
                   onClick={toggleLeftDrawer}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#49bcf3] text-white rounded-lg hover:bg-[#49bcf3]/90"
+                  className="flex items-center gap-2 px-4 py-2 bg-brand-sky text-white rounded-lg hover:bg-brand-sky/90"
                 >
                   <Menu className="w-5 h-5" />
                   왼쪽 드로어 열기
@@ -501,14 +503,14 @@ export default SettingsDrawerExample;`;
 
                 <button
                   onClick={toggleRightDrawer}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#49bcf3] text-white rounded-lg hover:bg-[#49bcf3]/90"
+                  className="flex items-center gap-2 px-4 py-2 bg-brand-sky text-white rounded-lg hover:bg-brand-sky/90"
                 >
                   설정 패널 열기
                   <Menu className="w-5 h-5" />
                 </button>
               </div>
 
-              <div className="relative bg-gray-100 h-80 rounded-lg overflow-hidden shadow-md">
+              <div className="relative bg-muted h-80 rounded-lg overflow-hidden shadow-md">
                 {/* 왼쪽 드로어 */}
                 <div
                   className={`absolute top-0 left-0 bottom-0 w-64 bg-white shadow-lg transition-transform duration-300 ease-in-out ${
@@ -519,9 +521,9 @@ export default SettingsDrawerExample;`;
                     <h3 className="font-medium">내비게이션</h3>
                     <button
                       onClick={toggleLeftDrawer}
-                      className="p-1 rounded-full hover:bg-gray-100"
+                      className="p-1 rounded-full hover:bg-muted"
                     >
-                      <X className="w-5 h-5 text-gray-500" />
+                      <X className="w-5 h-5 text-muted-foreground" />
                     </button>
                   </div>
 
@@ -533,8 +535,8 @@ export default SettingsDrawerExample;`;
                             onClick={() => setActiveMenuItem(item.id)}
                             className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-left ${
                               activeMenuItem === item.id
-                                ? "bg-[#49bcf3]/10 text-[#49bcf3]"
-                                : "hover:bg-gray-100"
+                                ? "bg-brand-sky/10 text-brand-sky"
+                                : "hover:bg-muted"
                             }`}
                           >
                             <item.icon className="w-5 h-5" />
@@ -544,7 +546,7 @@ export default SettingsDrawerExample;`;
                       ))}
 
                       <li className="mt-6">
-                        <button className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-left text-red-500 hover:bg-red-50">
+                        <button className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-left text-destructive hover:bg-destructive/10">
                           <LogOut className="w-5 h-5" />
                           <span>로그아웃</span>
                         </button>
@@ -563,9 +565,9 @@ export default SettingsDrawerExample;`;
                     <h3 className="font-medium">설정 패널</h3>
                     <button
                       onClick={toggleRightDrawer}
-                      className="p-1 rounded-full hover:bg-gray-100"
+                      className="p-1 rounded-full hover:bg-muted"
                     >
-                      <X className="w-5 h-5 text-gray-500" />
+                      <X className="w-5 h-5 text-muted-foreground" />
                     </button>
                   </div>
 
@@ -583,7 +585,7 @@ export default SettingsDrawerExample;`;
                               className="sr-only peer"
                               defaultChecked
                             />
-                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#49bcf3]"></div>
+                            <div className="w-11 h-6 bg-secondary peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-sky"></div>
                           </label>
                         </div>
                       </div>
@@ -594,8 +596,8 @@ export default SettingsDrawerExample;`;
                         </label>
                         <div className="flex gap-2">
                           <button className="w-8 h-8 bg-white border rounded-full"></button>
-                          <button className="w-8 h-8 bg-gray-900 border rounded-full"></button>
-                          <button className="w-8 h-8 bg-[#49bcf3] border rounded-full"></button>
+                          <button className="w-8 h-8 bg-foreground border rounded-full"></button>
+                          <button className="w-8 h-8 bg-brand-sky border rounded-full"></button>
                         </div>
                       </div>
 
@@ -605,7 +607,7 @@ export default SettingsDrawerExample;`;
                         </label>
                         <input
                           type="range"
-                          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#49bcf3]"
+                          className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-brand-sky"
                           min="1"
                           max="3"
                           step="1"
@@ -621,7 +623,7 @@ export default SettingsDrawerExample;`;
                   <header className="flex justify-between items-center mb-6">
                     <button
                       onClick={toggleLeftDrawer}
-                      className="p-2 rounded-md hover:bg-gray-200"
+                      className="p-2 rounded-md hover:bg-secondary"
                     >
                       <Menu className="w-5 h-5" />
                     </button>
@@ -630,7 +632,7 @@ export default SettingsDrawerExample;`;
 
                     <button
                       onClick={toggleRightDrawer}
-                      className="p-2 rounded-md hover:bg-gray-200"
+                      className="p-2 rounded-md hover:bg-secondary"
                     >
                       <Settings className="w-5 h-5" />
                     </button>
@@ -642,13 +644,13 @@ export default SettingsDrawerExample;`;
                       <br />
                       드로어를 열어보세요
                     </p>
-                    <p className="text-gray-500 mt-2 text-sm">
+                    <p className="text-muted-foreground mt-2 text-sm">
                       좌우에서 드로어가 슬라이드 애니메이션으로 나타납니다{" "}
                     </p>
 
                     <div className="mt-8">
                       <p className="font-medium">활성 메뉴 항목:</p>
-                      <p className="text-[#49bcf3] mt-1">
+                      <p className="text-brand-sky mt-1">
                         {menuItems.find((item) => item.id === activeMenuItem)
                           ?.label || "홈"}
                       </p>
