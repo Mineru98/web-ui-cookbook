@@ -495,7 +495,7 @@ export default BasicFabExample;`;
                 </label>
                 <select
                   value={fabType}
-                  onChange={(e) => setFabType(e.target.value as any)}
+                  onChange={(e) => setFabType(e.target.value as typeof fabType)}
                   className="w-full p-2 border rounded-md mb-4"
                 >
                   <option value="basic">기본형(Regular FAB)</option>

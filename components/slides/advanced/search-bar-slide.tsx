@@ -12,7 +12,6 @@ export default function SearchBarSlide() {
   >("basic");
   const [searchText, setSearchText] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
-  const [codeType, setCodeType] = useState<"react">("react");
 
   const handleClear = () => {
     setSearchText("");

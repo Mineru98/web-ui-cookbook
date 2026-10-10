@@ -12,6 +12,79 @@ interface Task {
   category: string;
 }
 
+// 드래그 가능한 시각적 요소
+const DraggableBox = () => {
+  const [position, setPosition] = useState({ x: 50, y: 50 });
+  const [isDragging, setIsDragging] = useState(false);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const dragStartPos = useRef({ x: 0, y: 0 });
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    // 마우스 시작 위치 저장
+    dragStartPos.current = {
+      x: e.clientX - position.x,
+      y: e.clientY - position.y,
+    };
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+
+    // 새 위치 계산
+    const newX = e.clientX - dragStartPos.current.x;
+    const newY = e.clientY - dragStartPos.current.y;
+
+    // 이동 범위 제한
+    const containerRect =
+      boxRef.current?.parentElement?.getBoundingClientRect();
+    const boxRect = boxRef.current?.getBoundingClientRect();
+
+    if (containerRect && boxRect) {
+      const minX = 0;
+      const maxX = containerRect.width - boxRect.width;
+      const minY = 0;
+      const maxY = containerRect.height - boxRect.height;
+
+      setPosition({
+        x: Math.max(minX, Math.min(maxX, newX)),
+        y: Math.max(minY, Math.min(maxY, newY)),
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  return (
+    <div
+      className="relative border-2 border-dashed border-border rounded-lg h-48 mb-6"
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
+      <div
+        ref={boxRef}
+        className={`absolute left-(--x) top-(--y) cursor-grab bg-brand-sky text-white rounded-md p-2 shadow-md flex items-center ${
+          isDragging ? "cursor-grabbing opacity-80" : ""
+        }`}
+        style={{
+          "--x": `${position.x}px`,
+          "--y": `${position.y}px`,
+        } as CSSProperties}
+        onMouseDown={handleMouseDown}
+      >
+        <GridIcon className="w-4 h-4 mr-2" />
+        <span>드래그 가능한 요소</span>
+      </div>
+      <div className="absolute bottom-2 right-2 text-xs text-muted-foreground/70">
+        이 박스를 클릭하고 드래그해보세요
+      </div>
+    </div>
+  );
+};
+
 export default function DragSlide() {
   const [tasks, setTasks] = useState<Task[]>([
     { id: "task-1", content: "디자인 시스템 설계", category: "디자인" },
@@ -47,79 +120,6 @@ export default function DragSlide() {
 
   const handleDragEnd = () => {
     setDraggedItem(null);
-  };
-
-  // 드래그 가능한 시각적 요소
-  const DraggableBox = () => {
-    const [position, setPosition] = useState({ x: 50, y: 50 });
-    const [isDragging, setIsDragging] = useState(false);
-    const boxRef = useRef<HTMLDivElement>(null);
-    const dragStartPos = useRef({ x: 0, y: 0 });
-
-    const handleMouseDown = (e: React.MouseEvent) => {
-      setIsDragging(true);
-      // 마우스 시작 위치 저장
-      dragStartPos.current = {
-        x: e.clientX - position.x,
-        y: e.clientY - position.y,
-      };
-    };
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-      if (!isDragging) return;
-
-      // 새 위치 계산
-      const newX = e.clientX - dragStartPos.current.x;
-      const newY = e.clientY - dragStartPos.current.y;
-
-      // 이동 범위 제한
-      const containerRect =
-        boxRef.current?.parentElement?.getBoundingClientRect();
-      const boxRect = boxRef.current?.getBoundingClientRect();
-
-      if (containerRect && boxRect) {
-        const minX = 0;
-        const maxX = containerRect.width - boxRect.width;
-        const minY = 0;
-        const maxY = containerRect.height - boxRect.height;
-
-        setPosition({
-          x: Math.max(minX, Math.min(maxX, newX)),
-          y: Math.max(minY, Math.min(maxY, newY)),
-        });
-      }
-    };
-
-    const handleMouseUp = () => {
-      setIsDragging(false);
-    };
-
-    return (
-      <div
-        className="relative border-2 border-dashed border-border rounded-lg h-48 mb-6"
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-      >
-        <div
-          ref={boxRef}
-          className={`absolute left-(--x) top-(--y) cursor-grab bg-brand-sky text-white rounded-md p-2 shadow-md flex items-center ${
-            isDragging ? "cursor-grabbing opacity-80" : ""
-          }`}
-          style={{
-            "--x": `${position.x}px`,
-            "--y": `${position.y}px`,
-          } as CSSProperties}
-          onMouseDown={handleMouseDown}
-        >
-          <GridIcon className="w-4 h-4 mr-2" />
-          <span>드래그 가능한 요소</span>
-        </div>
-        <div className="absolute bottom-2 right-2 text-xs text-muted-foreground/70">
-          이 박스를 클릭하고 드래그해보세요
-        </div>
-      </div>
-    );
   };
 
   return (

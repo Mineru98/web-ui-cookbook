@@ -14,7 +14,6 @@ export default function BottomSheetSlide() {
   const [sheetType, setSheetType] = useState<
     "basic" | "modal" | "scrollable" | "actions"
   >("basic");
-  const [codeType, setCodeType] = useState<"react">("react");
 
   const toggleSheet = () => {
     setIsOpen(!isOpen);

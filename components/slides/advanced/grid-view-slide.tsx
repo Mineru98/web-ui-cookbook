@@ -95,7 +95,6 @@ export default function GridViewSlide() {
     "medium"
   );
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [codeType, setCodeType] = useState<"react">("react");
 
   const handleLike = (id: number) => {
     setItems((prevItems) =>

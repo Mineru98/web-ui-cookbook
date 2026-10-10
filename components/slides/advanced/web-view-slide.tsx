@@ -18,7 +18,7 @@ export default function WebViewSlide() {
   const [webViewType, setWebViewType] = useState<
     "basic" | "custom-ui" | "embedded" | "full-page"
   >("basic");
-  const [url, setUrl] = useState("https://google.com");
+  const [url] = useState("https://google.com");
 
   const renderWebView = () => {
     switch (webViewType) {
@@ -206,7 +206,7 @@ export default function WebViewSlide() {
                           ? "bg-brand-sky text-white"
                           : "bg-muted"
                       }`}
-                      onClick={() => setWebViewType(type as any)}
+                      onClick={() => setWebViewType(type as typeof webViewType)}
                     >
                       {type === "basic"
                         ? "기본"

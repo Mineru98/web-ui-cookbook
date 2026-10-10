@@ -12,7 +12,6 @@ export default function TabBarSlide() {
   const [tabBarStyle, setTabBarStyle] = useState<
     "basic" | "scrollable" | "underline" | "pills" | "material"
   >("basic");
-  const [codeType, setCodeType] = useState<"react">("react");
 
   const tabItems = [
     { id: "recent", label: "최근", icon: Clock },

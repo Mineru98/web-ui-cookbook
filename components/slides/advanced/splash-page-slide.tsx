@@ -549,7 +549,7 @@ export default BrandedSplashScreen;`;
                 </label>
                 <select
                   value={splashType}
-                  onChange={(e) => setSplashType(e.target.value as any)}
+                  onChange={(e) => setSplashType(e.target.value as typeof splashType)}
                   className="w-full p-2 border rounded-md mb-4"
                 >
                   <option value="basic">기본형 스플래시</option>

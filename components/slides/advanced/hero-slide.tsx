@@ -10,7 +10,6 @@ export default function HeroSlide() {
   const [heroType, setHeroType] = useState<
     "basic" | "centered" | "split" | "video"
   >("basic");
-  const [codeType, setCodeType] = useState<"react">("react");
 
   const renderHero = () => {
     switch (heroType) {
@@ -842,7 +841,7 @@ export default ${
                 </label>
                 <select
                   value={heroType}
-                  onChange={(e) => setHeroType(e.target.value as any)}
+                  onChange={(e) => setHeroType(e.target.value as typeof heroType)}
                   className="w-full p-2 border rounded-md mb-4"
                 >
                   <option value="basic">기본형 (Basic Hero)</option>

@@ -11,7 +11,6 @@ export default function ScrollViewSlide() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
-  const [codeType, setCodeType] = useState<"react">("react");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

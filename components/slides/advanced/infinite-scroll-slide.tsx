@@ -131,6 +131,7 @@ function InfiniteScrollDemo(): ReactElement {
   const containerRef = useRef<HTMLDivElement>(null);
   const pageRef = useRef(1);
   const loadingRef = useRef(false);
+  const loadMoreRef = useRef<() => void>(() => {});
 
   const isLoaderInView = useCallback((): boolean => {
     const target = loaderRef.current;
@@ -155,10 +156,14 @@ function InfiniteScrollDemo(): ReactElement {
       setLoading(false);
 
       requestAnimationFrame(() => {
-        if (isLoaderInView()) loadMore();
+        if (isLoaderInView()) loadMoreRef.current();
       });
     }, 600);
   }, [isLoaderInView]);
+
+  useEffect(() => {
+    loadMoreRef.current = loadMore;
+  }, [loadMore]);
 
   useEffect(() => {
     const root = containerRef.current;
@@ -354,7 +359,7 @@ export function InfiniteList() {
                 <p className="text-muted-foreground leading-relaxed">
                   무한 스크롤을 사용하면 페이지 단위의 전환 없이 자동으로 추가
                   콘텐츠를 로드하는 UX 패턴입니다. 별도 페이지 이동이나
-                  '더보기' 버튼 없이 연속적인 콘텐츠 탐색 경험을 제공합니다.
+                  &apos;더보기&apos; 버튼 없이 연속적인 콘텐츠 탐색 경험을 제공합니다.
                 </p>
               </div>
 

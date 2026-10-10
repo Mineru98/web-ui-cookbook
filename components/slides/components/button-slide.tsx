@@ -152,7 +152,7 @@ export default ButtonExample;`}
                 <label className="block text-sm font-medium mb-2">버튼 스타일</label>
                 <select
                   value={variant}
-                  onChange={(e) => setVariant(e.target.value as any)}
+                  onChange={(e) => setVariant(e.target.value as typeof variant)}
                   className="w-full p-2 border rounded-md mb-4"
                 >
                   <option value="default">기본</option>

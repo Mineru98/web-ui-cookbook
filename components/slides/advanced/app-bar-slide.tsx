@@ -19,7 +19,6 @@ export default function AppBarSlide() {
     "standard" | "context" | "search" | "prominent"
   >("standard");
   const [showNotification, setShowNotification] = useState(false);
-  const [codeType, setCodeType] = useState<"react">("react");
 
   const renderAppBar = () => {
     switch (appBarType) {
@@ -520,8 +519,8 @@ export default StandardAppBarExample;`;
                 <p>
                   앱바(App Bar)는 화면 상단에 위치한 컴포넌트로, 현재 화면의
                   제목과 함께 네비게이션, 검색, 액션 버튼과 같은 주요 기능을
-                  제공합니다. 일반적으로 '툴바(Toolbar)' 또는 '네비게이션
-                  바(Navigation Bar)'라고도 불립니다.
+                  제공합니다. 일반적으로 &apos;툴바(Toolbar)&apos; 또는 &apos;네비게이션
+                  바(Navigation Bar)&apos;라고도 불립니다.
                 </p>
               </div>
 
