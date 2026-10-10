@@ -1,64 +1,71 @@
-import type { ReactNode } from "react";
+"use client";
+
+import type { CSSProperties, ReactNode } from "react";
 import { KoHeading } from "@/components/ui/KoHeading";
 import { KoReadableContent } from "@/components/ui/KoReadableContent";
 import { KoText } from "@/components/ui/KoText";
+import { useLessonContext } from "@/components/cookbook/lesson-context";
 
-interface SlideLayoutProps {
+type SlideLayoutProps = {
   title: string;
   eyebrow?: string;
   children: ReactNode;
   className?: string;
-}
+};
 
+/**
+ * 레슨 본문 머리말(eyebrow · 제목 · 구분선 · 정의 문장) + 본문.
+ * 스크롤은 레슨 화면의 main 이 맡으므로 여기서는 높이·스크롤을 만들지 않는다.
+ */
 export default function SlideLayout({
   title,
   eyebrow,
   children,
   className = "",
 }: SlideLayoutProps) {
+  const lesson = useLessonContext();
+  const eyebrowText = lesson
+    ? `${lesson.section} · Lesson ${String(lesson.number).padStart(2, "0")}`
+    : eyebrow;
+
   return (
-    <div
-      className={`relative h-full w-full overflow-hidden bg-background ${className}`}
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-32 -right-1/10 h-105 w-105 rounded-full bg-primary/10 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-40 -left-1/10 h-95 w-95 rounded-full bg-brand-sky/10 blur-3xl"
-      />
-
-      <div className="relative flex h-full w-full flex-col px-5 pt-6 pb-4 sm:px-8 sm:pt-8 md:px-10 lg:px-12">
-        <header className="mx-auto w-full max-w-6xl shrink-0">
-          {eyebrow ? (
-            <div className="reveal-fade">
-              <KoText
-                as="div"
-                balance={false}
-                className="text-2xs font-semibold uppercase tracking-eyebrow text-primary"
-              >
-                {eyebrow}
-              </KoText>
-            </div>
-          ) : null}
-          <div className="reveal-up mt-1">
-            <KoHeading
-              as="h1"
-              className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl"
+    <div className={`flex w-full flex-col gap-10 ${className}`}>
+      <header className="flex flex-col gap-1.5">
+        {eyebrowText ? (
+          <div className="anim-rise" style={{ "--anim-delay": "140ms" } as CSSProperties}>
+            <KoText
+              as="div"
+              balance={false}
+              className="text-2xs font-semibold uppercase tracking-eyebrow text-brand-deep"
             >
-              {title}
-            </KoHeading>
+              {eyebrowText}
+            </KoText>
           </div>
-          <div
-            aria-hidden
-            className="reveal-fade mt-4 h-px w-full bg-linear-to-r from-border via-border to-transparent"
-          />
-        </header>
-
-        <div className="mx-auto mt-5 w-full max-w-6xl flex-1 overflow-y-auto pr-1 scrollbar-clean sm:mt-6">
-          <KoReadableContent>{children}</KoReadableContent>
+        ) : null}
+        <div className="anim-rise" style={{ "--anim-delay": "200ms" } as CSSProperties}>
+          <KoHeading
+            as="h1"
+            className="text-title-sm font-bold tracking-tight text-foreground xs:text-title"
+          >
+            {title}
+          </KoHeading>
         </div>
+        <div
+          aria-hidden
+          className="anim-rise my-3.5 h-px bg-border"
+          style={{ "--anim-delay": "240ms" } as CSSProperties}
+        />
+        {lesson ? (
+          <div className="anim-rise" style={{ "--anim-delay": "280ms" } as CSSProperties}>
+            <KoText className="text-lg leading-relaxed text-muted-foreground">
+              {lesson.lead}
+            </KoText>
+          </div>
+        ) : null}
+      </header>
+
+      <div className="anim-rise min-w-0" style={{ "--anim-delay": "340ms" } as CSSProperties}>
+        <KoReadableContent>{children}</KoReadableContent>
       </div>
     </div>
   );
