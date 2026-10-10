@@ -3,11 +3,11 @@
 import { PrismCode } from "@/components/ui/prism/PrismCode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Copy, Download, Edit, Heart, Share, Trash, X } from "lucide-react";
-import { useState } from "react";
+import type { PointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import SlideLayout from "../slide-layout";
 
 export default function BottomSheetSlide() {
-  const [isOpen, setIsOpen] = useState(false);
   const [sheetHeight, setSheetHeight] = useState<
     "small" | "medium" | "large" | "full"
   >("medium");
@@ -15,12 +15,128 @@ export default function BottomSheetSlide() {
     "basic" | "modal" | "scrollable" | "actions"
   >("basic");
 
-  const toggleSheet = () => {
-    setIsOpen(!isOpen);
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+  const closeTimerRef = useRef<number | null>(null);
+  const dragRef = useRef<{
+    pointerId: number;
+    startY: number;
+    lastY: number;
+    lastT: number;
+    velocity: number;
+    height: number;
+    offset: number;
+    moving: boolean;
+  } | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // --sheet-y / --sheet-progress 는 JS 로만 바꾸고, 전환은 globals.css 의 sheet-panel / sheet-backdrop 이 담당한다.
+  const setSheetMotion = (y: string, progress: number) => {
+    sheetRef.current?.style.setProperty("--sheet-y", y);
+    backdropRef.current?.style.setProperty("--sheet-progress", String(progress));
   };
 
-  const closeSheet = () => {
-    setIsOpen(false);
+  const setDragging = (isDragging: boolean) => {
+    sheetRef.current?.setAttribute("data-dragging", String(isDragging));
+    backdropRef.current?.setAttribute("data-dragging", String(isDragging));
+  };
+
+  const openSheet = () => {
+    setIsMounted(true);
+  };
+
+  const unmountSheet = useCallback(() => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+    setIsMounted(false);
+  }, []);
+
+  const closeSheet = useCallback(() => {
+    if (closeTimerRef.current !== null) return; // 이미 닫는 중
+    sheetRef.current?.setAttribute("data-closing", "true");
+    sheetRef.current?.setAttribute("data-dragging", "false");
+    backdropRef.current?.setAttribute("data-dragging", "false");
+    sheetRef.current?.style.setProperty("--sheet-y", "100%");
+    backdropRef.current?.style.setProperty("--sheet-progress", "0");
+    // transitionend 가 오지 않는 환경(탭 비활성 등) 대비 안전장치
+    closeTimerRef.current = window.setTimeout(unmountSheet, 400);
+  }, [unmountSheet]);
+
+  useEffect(() => {
+    if (!isMounted) return;
+    // 닫힌 위치를 먼저 확정(reflow)한 뒤 열린 위치로 바꿔야 진입 전환이 걸린다.
+    sheetRef.current?.getBoundingClientRect();
+    setSheetMotion("0px", 1);
+    sheetRef.current?.focus({ preventScroll: true });
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeSheet();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [isMounted, closeSheet]);
+
+  useEffect(
+    () => () => {
+      if (closeTimerRef.current !== null) window.clearTimeout(closeTimerRef.current);
+    },
+    [],
+  );
+
+  const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    if (closeTimerRef.current !== null) return;
+    // 조작 가능한 요소·스크롤 영역에서는 시트 드래그를 시작하지 않는다.
+    if ((e.target as HTMLElement).closest("button,a,input,select,textarea,label,[data-no-drag]")) return;
+    const sheet = e.currentTarget;
+    sheet.setPointerCapture(e.pointerId);
+    dragRef.current = {
+      pointerId: e.pointerId,
+      startY: e.clientY,
+      lastY: e.clientY,
+      lastT: e.timeStamp,
+      velocity: 0,
+      height: sheet.offsetHeight,
+      offset: 0,
+      moving: false,
+    };
+  };
+
+  const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== e.pointerId) return;
+    const dy = e.clientY - drag.startY;
+    if (!drag.moving) {
+      if (Math.abs(dy) < 4) return; // 탭과 드래그 구분
+      drag.moving = true;
+      setDragging(true);
+    }
+    const dt = Math.max(e.timeStamp - drag.lastT, 1);
+    drag.velocity = 0.8 * ((e.clientY - drag.lastY) / dt) + 0.2 * drag.velocity;
+    drag.lastY = e.clientY;
+    drag.lastT = e.timeStamp;
+    // 위로 당길 때는 저항(rubber band), 아래로는 손가락을 1:1 로 따라간다.
+    drag.offset = dy > 0 ? dy : dy * 0.15;
+    const ratio = Math.min(Math.max(drag.offset / drag.height, 0), 1);
+    setSheetMotion(`${drag.offset}px`, 1 - ratio);
+  };
+
+  const endDrag = (e: PointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== e.pointerId) return;
+    dragRef.current = null;
+    if (!drag.moving) return;
+    const shouldClose =
+      e.type !== "pointercancel" &&
+      (drag.offset / drag.height > 0.3 || drag.velocity > 0.5);
+    if (shouldClose) {
+      closeSheet();
+    } else {
+      setDragging(false);
+      setSheetMotion("0px", 1); // 오버슈트 이징으로 원위치 스냅
+    }
   };
 
   const getHeightClass = () => {
@@ -109,8 +225,8 @@ export default function BottomSheetSlide() {
 
       case "scrollable":
         return (
-          <div>
-            <div className="px-4 py-3 border-b sticky top-0 bg-white z-10 flex justify-between items-center">
+          <div className="flex h-full flex-col">
+            <div className="px-4 py-3 border-b shrink-0 bg-white z-10 flex justify-between items-center">
               <h3 className="text-lg font-medium">댓글 (25개)</h3>
               <button
                 onClick={closeSheet}
@@ -120,7 +236,10 @@ export default function BottomSheetSlide() {
               </button>
             </div>
 
-            <div className="p-4 overflow-y-auto max-h-panel">
+            <div
+              data-no-drag
+              className="p-4 overflow-y-auto overscroll-contain touch-pan-y min-h-0 flex-1"
+            >
               <div className="space-y-4">
                 {[...Array(12)].map((_, idx) => (
                   <div key={idx} className="border-b pb-3">
@@ -334,7 +453,6 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 
 // 사용 예시
 const BasicBottomSheetExample: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [height, setHeight] = useState<'small' | 'medium' | 'large' | 'full'>('medium');
 
   return (
@@ -466,7 +584,6 @@ const ModalBottomSheet: React.FC<ModalBottomSheetProps> = ({
 
 // 사용 예시
 const ModalBottomSheetExample: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [height, setHeight] = useState<'small' | 'medium' | 'large' | 'full'>('medium');
 
   return (
@@ -631,7 +748,6 @@ const ScrollableBottomSheet: React.FC<ScrollableBottomSheetProps> = ({
 
 // 사용 예시
 const ScrollableBottomSheetExample: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
   
   const categories = [
     "전자제품", "의류", "도서", "스포츠", "가전제품", 
@@ -771,7 +887,6 @@ const ActionBottomSheet: React.FC<ActionBottomSheetProps> = ({
 
 // 사용 예시
 const ActionBottomSheetExample: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
 
   const actions: ActionItem[] = [
     {
@@ -1037,7 +1152,7 @@ export default ActionBottomSheetExample;`;
 
             <div className="flex justify-center mb-4">
               <button
-                onClick={toggleSheet}
+                onClick={openSheet}
                 className="px-6 py-3 bg-brand-sky text-white rounded-lg hover:bg-highlight-deep transition-colors"
               >
                 바텀 시트 열기
@@ -1052,21 +1167,41 @@ export default ActionBottomSheetExample;`;
             </div>
 
             {/* Actual Bottom Sheet */}
-            {isOpen && (
+            {isMounted && (
               <div className="fixed inset-0 z-50">
                 <div
-                  className="absolute inset-0 bg-black/50 transition-opacity"
+                  ref={backdropRef}
+                  data-dragging="false"
+                  className="sheet-backdrop absolute inset-0 bg-black/50"
                   onClick={closeSheet}
                 />
                 <div
-                  className={`absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform transition-transform duration-300 ease-out ${
-                    isOpen ? "translate-y-0" : "translate-y-full"
-                  } ${getHeightClass()}`}
+                  ref={sheetRef}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="바텀 시트"
+                  tabIndex={-1}
+                  data-dragging="false"
+                  data-closing="false"
+                  className={`sheet-panel group absolute bottom-0 left-0 right-0 flex flex-col select-none touch-none outline-none bg-white rounded-t-2xl shadow-2xl after:absolute after:inset-x-0 after:top-full after:h-8 after:bg-inherit ${getHeightClass()}`}
+                  onPointerDown={handlePointerDown}
+                  onPointerMove={handlePointerMove}
+                  onPointerUp={endDrag}
+                  onPointerCancel={endDrag}
+                  onTransitionEnd={(e) => {
+                    if (
+                      e.target === e.currentTarget &&
+                      e.propertyName === "translate" &&
+                      e.currentTarget.dataset.closing === "true"
+                    ) {
+                      unmountSheet();
+                    }
+                  }}
                 >
-                  <div className="flex justify-center pt-2 pb-4">
-                    <div className="w-10 h-1 bg-muted-foreground/30 rounded-full" />
+                  <div className="flex shrink-0 justify-center pt-2 pb-4 cursor-grab group-data-[dragging=true]:cursor-grabbing">
+                    <div className="w-10 h-1 bg-muted-foreground/30 rounded-full transition-all duration-200 group-data-[dragging=true]:w-14 group-data-[dragging=true]:bg-muted-foreground/60" />
                   </div>
-                  {renderSheetContent()}
+                  <div className="reveal-fade min-h-0 flex-1">{renderSheetContent()}</div>
                 </div>
               </div>
             )}

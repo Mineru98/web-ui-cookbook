@@ -402,6 +402,41 @@ layer(base);
   animation-delay: var(--anim-delay, 0ms);
 }
 
+/*
+  Bottom sheet motion — driven by two custom properties set from JS (no inline style):
+  --sheet-y: 0..100% translate offset, --sheet-progress: 0..1 backdrop opacity.
+  While data-dragging the sheet follows the pointer 1:1 (no transition);
+  on release it springs back / out using the overshoot easing below.
+*/
+@utility sheet-panel {
+  translate: 0 var(--sheet-y, 100%);
+  transition:
+    translate 420ms cubic-bezier(0.32, 1.12, 0.4, 1),
+    height 320ms cubic-bezier(0.32, 0.72, 0, 1);
+  will-change: translate;
+  &[data-closing="true"] {
+    transition-duration: 260ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  }
+  &[data-dragging="true"] {
+    transition: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 1ms;
+  }
+}
+
+@utility sheet-backdrop {
+  opacity: var(--sheet-progress, 0);
+  transition: opacity 320ms ease-out;
+  &[data-dragging="true"] {
+    transition: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 1ms;
+  }
+}
+
 /* Thin brand-colored scrollbar — replaces style={{ scrollbarWidth, scrollbarColor }} */
 @utility scrollbar-brand {
   scrollbar-width: thin;
