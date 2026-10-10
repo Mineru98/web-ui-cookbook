@@ -515,16 +515,6 @@ export default StandardAppBarExample;`;
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  앱바(App Bar)는 화면 상단에 위치한 컴포넌트로, 현재 화면의
-                  제목과 함께 네비게이션, 검색, 액션 버튼과 같은 주요 기능을
-                  제공합니다. 일반적으로 &apos;툴바(Toolbar)&apos; 또는 &apos;네비게이션
-                  바(Navigation Bar)&apos;라고도 불립니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border">
                 <h3 className="text-lg font-semibold mb-2">특징</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>화면 상단에 고정되어 표시됩니다</li>

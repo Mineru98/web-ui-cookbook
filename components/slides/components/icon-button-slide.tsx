@@ -42,14 +42,6 @@ export default function IconButtonSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Icon Button은 텍스트 대신 아이콘을 사용하는 버튼입니다. 공간을 절약하면서도 직관적인 의미를 전달할 수
-                  있습니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>툴바 (Toolbar)에서의 액션 버튼</li>

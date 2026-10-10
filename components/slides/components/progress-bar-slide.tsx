@@ -36,14 +36,6 @@ export default function ProgressBarSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Progress Bar는 작업의 진행 상태를 시각적으로 표시하는 UI
-                  요소입니다. 사용자에게 작업이 얼마나 완료되었는지 알려줍니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>파일 업로드/다운로드 진행 상태</li>

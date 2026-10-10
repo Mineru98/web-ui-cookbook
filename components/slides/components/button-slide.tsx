@@ -25,14 +25,6 @@ export default function ButtonSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Button은 사용자가 액션을 트리거할 수 있는 인터랙티브 요소입니다. 클릭하거나 탭하면 지정된 작업을
-                  수행합니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>양식 제출 (Form submission)</li>

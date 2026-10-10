@@ -45,14 +45,6 @@ export default function DropdownSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Dropdown은 클릭하면 옵션 목록을 표시하는 UI 요소입니다. 공간을
-                  절약하면서 여러 옵션을 제공할 수 있습니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>네비게이션 메뉴</li>

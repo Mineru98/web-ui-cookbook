@@ -43,15 +43,6 @@ export default function SelectorSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Selector(또는 Select)는 여러 옵션 중 하나를 선택할 수 있는
-                  드롭다운 형태의 UI 요소입니다. 드롭다운 메뉴처럼 보이며, 주로
-                  공간 절약이 중요시되어 있습니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>국가, 지역 선택</li>

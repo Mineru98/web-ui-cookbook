@@ -196,15 +196,6 @@ export default function ListViewSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border">
-                <h3 className="text-lg font-semibold mb-2">의의</h3>
-                <p>
-                  리스트 뷰는 항목들을 세로로 나열하는 UI 패턴으로, 주로 텍스트와
-                  간단한 컨트롤로 구성됩니다. 사용자들이 여러 항목을 검색하고
-                  선택하며 작업을 수행하는 효율적인 방법을 제공합니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border">
                 <h3 className="text-lg font-semibold mb-2">일반적인 용도</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>이메일 메시지, 알림 표시</li>

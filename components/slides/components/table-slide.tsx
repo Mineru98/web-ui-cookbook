@@ -38,14 +38,6 @@ export default function TableSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Table은 행과 열로 구성된 데이터를 표시하는 UI 요소입니다. 구조화된 정보를 효과적으로 보여주는 데
-                  사용됩니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>데이터 목록 표시</li>

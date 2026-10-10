@@ -28,14 +28,6 @@ export default function DatePickerSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Date Picker는 사용자가 날짜를 선택할 수 있는 캘린더 형태의 UI 요소입니다. 날짜 입력을 직관적이고 사용하기
-                  쉽게 만들어줍니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>예약 시스템 (호텔, 항공권 등)</li>

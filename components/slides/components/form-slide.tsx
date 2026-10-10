@@ -49,14 +49,6 @@ export default function FormSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Form은 사용자로부터 데이터를 수집하기 위한 여러 입력 요소를 그룹화한 UI 컴포넌트입니다. 텍스트 필드,
-                  체크박스, 라디오 버튼 등 다양한 입력 요소를 포함할 수 있습니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>로그인/회원가입</li>

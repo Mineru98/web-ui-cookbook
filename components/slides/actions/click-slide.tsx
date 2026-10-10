@@ -24,26 +24,6 @@ export default function ClickSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  사용자가 요소를 짧게 누르거나 터치하는 기본적인 상호작용입니다.
-                  React에서는 주로 onClick 이벤트로 처리되며, 디바이스 플랫폼에 따라
-                  다음과 같이 부릅니다.
-                </p>
-                <ul className="list-disc pl-5 space-y-1 mt-2">
-                  <li>
-                    <strong>Click</strong>: 주로 데스크톱, 마우스 환경
-                  </li>
-                  <li>
-                    <strong>Tap</strong>: 주로 모바일 디바이스 환경
-                  </li>
-                  <li>
-                    <strong>Touch</strong>: 터치스크린에서의 일반적인 터치 제스처
-                  </li>
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">주요 특징</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>가장 기본적이며 널리 사용되는 상호작용 방식</li>

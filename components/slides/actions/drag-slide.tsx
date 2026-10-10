@@ -135,16 +135,6 @@ export default function DragSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  드래그(Drag)는 요소를 클릭하고 마우스 버튼을 누른 상태에서
-                  위치를 변경하는 사용자 인터랙션 방식입니다. React에서는 마우스
-                  이벤트나 HTML5 Drag & Drop API를 사용하여 구현되며, 주로 아이템
-                  재정렬, 위치 변경, 요소의 이동 등에 사용됩니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">
                   드래그 상호작용 유형
                 </h3>
