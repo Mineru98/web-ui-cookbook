@@ -143,7 +143,7 @@ function InteractiveArea() {
   className="w-36 h-20 flex items-center justify-center cursor-pointer transition-all
              bg-gray-100 hover:bg-green-100 active:bg-green-200
              border border-gray-300 hover:border-green-400 active:border-green-500
-             shadow-sm hover:shadow-md active:shadow-lg"
+             shadow-xs hover:shadow-md active:shadow-lg"
   onClick={() => {
     console.log('호버 효과와 함께 클릭됨');
   }}
@@ -157,7 +157,7 @@ function InteractiveArea() {
           <TabsContent value="demo" className="mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="flex flex-col items-center p-6 border rounded-lg shadow-sm">
+                <div className="flex flex-col items-center p-6 border rounded-lg shadow-xs">
                   <h4 className="font-medium mb-3">Click 예시</h4>
                   <Button
                     onClick={() => setClickCount((prev) => prev + 1)}
@@ -168,7 +168,7 @@ function InteractiveArea() {
                   <p>클릭 횟수: {clickCount}</p>
                 </div>
 
-                <div className="flex flex-col items-center p-6 border rounded-lg shadow-sm">
+                <div className="flex flex-col items-center p-6 border rounded-lg shadow-xs">
                   <h4 className="font-medium mb-3">Tap 예시</h4>
                   <Button
                     onClick={() => setTapCount((prev) => prev + 1)}
@@ -180,7 +180,7 @@ function InteractiveArea() {
                   <p>탭 횟수: {tapCount}</p>
                 </div>
 
-                <div className="flex flex-col items-center p-6 border rounded-lg shadow-sm">
+                <div className="flex flex-col items-center p-6 border rounded-lg shadow-xs">
                   <h4 className="font-medium mb-3">Touch 예시</h4>
                   <div
                     className="w-24 h-24 bg-[#49bcf3] rounded-full flex items-center justify-center text-white cursor-pointer mb-4"

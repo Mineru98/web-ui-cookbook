@@ -90,7 +90,7 @@ export default function TabBarSlide() {
                 key={tab.id}
                 className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-all ${
                   activeTab === tab.id
-                    ? "bg-white text-sky-700 shadow-sm shadow-slate-300/40"
+                    ? "bg-white text-sky-700 shadow-xs shadow-slate-300/40"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
                 onClick={() => setActiveTab(tab.id)}
@@ -280,7 +280,7 @@ const ScrollableTabBar: React.FC<ScrollableTabBarProps> = ({
           {items.map((tab) => (
             <button
               key={tab.id}
-              className={\`px-6 py-4 text-sm font-medium transition-colors flex-shrink-0 \${
+              className={\`px-6 py-4 text-sm font-medium transition-colors shrink-0 \${
                 activeTab === tab.id
                   ? "text-purple-600 border-b-2 border-purple-600"
                   : "text-gray-500 hover:text-gray-700"
@@ -459,7 +459,7 @@ const PillTabBar: React.FC<PillTabBarProps> = ({
             key={tab.id}
             className={\`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 \${
               activeTab === tab.id
-                ? "bg-white text-purple-600 shadow-sm"
+                ? "bg-white text-purple-600 shadow-xs"
                 : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
             }\`}
             onClick={() => onTabChange(tab.id)}
@@ -790,7 +790,7 @@ export default MaterialTabBarExample;`;
               </button>
             </div>
 
-            <div className="overflow-hidden rounded-md border border-slate-300 bg-white shadow-sm">
+            <div className="overflow-hidden rounded-md border border-slate-300 bg-white shadow-xs">
               <div className="p-4 flex justify-center">
                 <div className="w-full max-w-md">
                   {renderTabBar()}

@@ -25,7 +25,7 @@ export default function AppBarSlide() {
     switch (appBarType) {
       case "context":
         return (
-          <div className="bg-white border-b shadow-sm">
+          <div className="bg-white border-b shadow-xs">
             <div className="flex items-center justify-between px-4 py-3">
               <div className="flex items-center">
                 <button className="p-1.5 rounded-full hover:bg-gray-100">
@@ -51,7 +51,7 @@ export default function AppBarSlide() {
 
       case "search":
         return (
-          <div className="bg-white border-b shadow-sm">
+          <div className="bg-white border-b shadow-xs">
             <div className="flex items-center justify-between px-4 py-2.5">
               <button className="p-1.5 rounded-full hover:bg-gray-100">
                 <ArrowLeft className="h-5 w-5 text-gray-700" />
@@ -65,7 +65,7 @@ export default function AppBarSlide() {
                   <input
                     type="text"
                     placeholder="검색어를 입력하세요"
-                    className="pl-10 pr-4 py-1.5 w-full rounded-full bg-gray-100 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#49bcf3] text-sm"
+                    className="pl-10 pr-4 py-1.5 w-full rounded-full bg-gray-100 focus:bg-white focus:outline-hidden focus:ring-1 focus:ring-[#49bcf3] text-sm"
                   />
                 </div>
               </div>
@@ -128,7 +128,7 @@ export default function AppBarSlide() {
 
       default: // standard
         return (
-          <div className="bg-white border-b shadow-sm">
+          <div className="bg-white border-b shadow-xs">
             <div className="flex items-center justify-between px-4 py-3">
               <div className="flex items-center">
                 <button className="p-1.5 rounded-full hover:bg-gray-100">
@@ -188,7 +188,7 @@ const ContextAppBarExample: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Context App Bar */}
-      <header className="bg-white border-b shadow-sm">
+      <header className="bg-white border-b shadow-xs">
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center">
             <button 
@@ -263,7 +263,7 @@ const SearchAppBarExample: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Search App Bar */}
-      <header className="bg-white border-b shadow-sm">
+      <header className="bg-white border-b shadow-xs">
         <div className="flex items-center justify-between px-4 py-2.5">
           <button 
             onClick={handleBack}
@@ -283,7 +283,7 @@ const SearchAppBarExample: React.FC = () => {
                 placeholder="검색어를 입력하세요"
                 value={searchQuery}
                 onChange={handleSearch}
-                className="pl-10 pr-4 py-1.5 w-full rounded-full bg-gray-100 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#49bcf3] text-sm transition-colors"
+                className="pl-10 pr-4 py-1.5 w-full rounded-full bg-gray-100 focus:bg-white focus:outline-hidden focus:ring-1 focus:ring-[#49bcf3] text-sm transition-colors"
               />
             </div>
           </div>
@@ -451,7 +451,7 @@ const StandardAppBarExample: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Standard App Bar */}
-      <header className="bg-white border-b shadow-sm">
+      <header className="bg-white border-b shadow-xs">
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center">
             <button 

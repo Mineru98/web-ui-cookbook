@@ -176,7 +176,7 @@ export default function Home(): ReactElement {
   }, [goToNext, goToPrevious, goToHome, goToSlide, menuOpen, total]);
 
   return (
-    <div className="flex min-h-[100dvh] flex-col bg-background">
+    <div className="flex min-h-dvh flex-col bg-background">
       {/* Slide stage */}
       <main className="relative flex-1 overflow-hidden">
         {SLIDES.map((slide, index) => (
@@ -206,13 +206,13 @@ export default function Home(): ReactElement {
         aria-label="슬라이드 진행률"
       >
         <div
-          className="h-full bg-gradient-to-r from-primary to-sky-400 transition-[width] duration-500 ease-out"
+          className="h-full bg-linear-to-r from-primary to-sky-400 transition-[width] duration-500 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
 
       {/* Bottom nav */}
-      <nav className="flex flex-shrink-0 items-center justify-between gap-2 border-t border-border bg-background/95 px-3 py-2.5 backdrop-blur supports-[backdrop-filter]:bg-background/80 sm:px-5 sm:py-3">
+      <nav className="flex shrink-0 items-center justify-between gap-2 border-t border-border bg-background/95 px-3 py-2.5 backdrop-blur-sm supports-backdrop-filter:bg-background/80 sm:px-5 sm:py-3">
         <div className="flex items-center gap-2">
           <Button
             variant="outline"

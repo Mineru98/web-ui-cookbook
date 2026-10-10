@@ -30,7 +30,7 @@ export default function SlideLayout({
       />
 
       <div className="relative flex h-full w-full flex-col px-5 pt-6 pb-4 sm:px-8 sm:pt-8 md:px-10 lg:px-12">
-        <header className="mx-auto w-full max-w-6xl flex-shrink-0">
+        <header className="mx-auto w-full max-w-6xl shrink-0">
           {eyebrow ? (
             <KoText
               as="div"
@@ -48,7 +48,7 @@ export default function SlideLayout({
           </KoHeading>
           <div
             aria-hidden
-            className="reveal-fade mt-4 h-px w-full bg-gradient-to-r from-border via-border to-transparent"
+            className="reveal-fade mt-4 h-px w-full bg-linear-to-r from-border via-border to-transparent"
           />
         </header>
 

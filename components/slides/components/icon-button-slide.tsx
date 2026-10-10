@@ -131,7 +131,7 @@ const IconButtonExample: React.FC = () => {
       <div className="space-y-2">
         <h3 className="text-sm font-medium">상태 변경 버튼</h3>
         <Button
-          variant={liked ? "default" : "outline"}
+          variant={liked ? "default" : "outline-solid"}
           size="icon"
           onClick={() => {
             setLiked(!liked);

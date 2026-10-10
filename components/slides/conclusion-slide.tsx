@@ -43,7 +43,7 @@ export default function ConclusionSlide() {
   return (
     <div className="relative h-full w-full overflow-hidden bg-mesh-brand">
       <div className="pointer-events-none absolute inset-0 bg-grain opacity-40 mix-blend-overlay" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/30" />
 
       <div className="relative z-10 mx-auto h-full w-full max-w-5xl overflow-y-auto px-6 py-10 sm:px-10 sm:py-14 scrollbar-clean">
         <KoText
@@ -60,7 +60,7 @@ export default function ConclusionSlide() {
         >
           잘 만든 UI는
           <br />
-          <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-white to-white/60 bg-clip-text text-transparent">
             대화에서 시작합니다
           </span>
         </KoHeading>
@@ -76,7 +76,7 @@ export default function ConclusionSlide() {
           {TAKEAWAYS.map((item, idx) => (
             <div
               key={item.title}
-              className="reveal-up rounded-2xl border border-white/15 bg-white/[0.08] p-5 backdrop-blur-md transition-colors hover:bg-white/[0.12]"
+              className="reveal-up rounded-2xl border border-white/15 bg-white/8 p-5 backdrop-blur-md transition-colors hover:bg-white/12"
               style={{ animationDelay: `${200 + idx * 80}ms` }}
             >
               <div className="flex items-center gap-3">
@@ -97,7 +97,7 @@ export default function ConclusionSlide() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-2xl border border-white/15 bg-white/[0.06] p-6 backdrop-blur-md sm:p-7">
+        <div className="mt-10 rounded-2xl border border-white/15 bg-white/6 p-6 backdrop-blur-md sm:p-7">
           <div className="flex items-center justify-between gap-3">
             <KoHeading
               as="h2"
@@ -114,7 +114,7 @@ export default function ConclusionSlide() {
             {NEXT_STEPS.map((step) => (
               <div
                 key={step.label}
-                className="rounded-xl border border-white/15 bg-white/[0.08] p-4 transition-colors hover:bg-white/[0.14]"
+                className="rounded-xl border border-white/15 bg-white/8 p-4 transition-colors hover:bg-white/[0.14]"
               >
                 <span className="num text-xs font-semibold tracking-widest text-white/60">
                   {step.label}

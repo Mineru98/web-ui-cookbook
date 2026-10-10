@@ -84,15 +84,15 @@ export default function OverviewSlide() {
           return (
             <div
               key={category.id}
-              className={`reveal-up group relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:p-6 ${category.span}`}
+              className={`reveal-up group relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:p-6 ${category.span}`}
               style={{ animationDelay: `${idx * 90}ms` }}
             >
               <div
                 aria-hidden
-                className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${category.accent}`}
+                className={`pointer-events-none absolute inset-0 bg-linear-to-br ${category.accent}`}
               />
               <div className="relative flex items-start justify-between">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-foreground/[0.04] text-foreground/80">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-foreground/4 text-foreground/80">
                   <Icon className="h-5 w-5" aria-hidden />
                 </div>
                 <span className="num text-2xl font-semibold tracking-tight text-foreground/40">
@@ -115,7 +115,7 @@ export default function OverviewSlide() {
                     className="flex items-start gap-2 leading-relaxed"
                   >
                     <span
-                      className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-primary/70"
+                      className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary/70"
                       aria-hidden
                     />
                     <KoText as="span">{item}</KoText>

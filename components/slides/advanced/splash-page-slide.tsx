@@ -77,7 +77,7 @@ const AnimatedSplashScreen: React.FC<AnimatedSplashScreenProps> = ({
   }, [onLoadingComplete, duration]);
 
   return (
-    <div className="h-screen bg-gradient-to-br from-purple-600 to-green-900 flex flex-col items-center justify-center text-white">
+    <div className="h-screen bg-linear-to-br from-purple-600 to-green-900 flex flex-col items-center justify-center text-white">
       <div className="animate-bounce mb-6">
         <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-purple-600 font-bold text-xl">
           LOGO
@@ -225,7 +225,7 @@ export default BrandedSplashScreen;`;
     switch (splashType) {
       case "animated":
         return (
-          <div className="h-72 bg-gradient-to-br from-[#49bcf3] to-[#134429] flex flex-col items-center justify-center">
+          <div className="h-72 bg-linear-to-br from-[#49bcf3] to-[#134429] flex flex-col items-center justify-center">
             <div className="animate-[bounce_1.5s_infinite]">
               <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-[#49bcf3] font-bold text-xl p-5">
                 LOGO
@@ -587,7 +587,7 @@ export default BrandedSplashScreen;`;
                       )}
 
                       {splashType === "animated" && (
-                        <div className="h-72 bg-gradient-to-br from-[#49bcf3] to-[#134429] flex flex-col items-center justify-center">
+                        <div className="h-72 bg-linear-to-br from-[#49bcf3] to-[#134429] flex flex-col items-center justify-center">
                           <div className="animate-[bounce_1.5s_infinite]">
                             <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-[#49bcf3] font-bold text-xl p-5">
                               LOGO

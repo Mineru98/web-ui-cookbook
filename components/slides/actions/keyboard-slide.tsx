@@ -302,7 +302,7 @@ function KeyboardEventTypes() {
       
       {/* 요소 키보드 이벤트 */}
       <div 
-        className="p-4 border rounded focus:ring-2 focus:ring-blue-500 outline-none"
+        className="p-4 border rounded focus:ring-2 focus:ring-blue-500 outline-hidden"
         tabIndex={0}
         onKeyDown={(e) => {
           setEventType(\`KeyDown: \${e.key}\`);
@@ -338,7 +338,7 @@ function KeyboardEventTypes() {
           <TabsContent value="demo" className="mt-4">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="border rounded-lg overflow-hidden shadow-sm">
+                <div className="border rounded-lg overflow-hidden shadow-xs">
                   <div className="bg-slate-50 p-3 border-b">
                     <h3 className="font-medium">키보드 이벤트 데모</h3>
                     <p className="text-sm text-gray-600">
@@ -412,7 +412,7 @@ function KeyboardEventTypes() {
                                 isKeyActive("arrowup")
                                   ? "bg-[#49bcf3] text-white"
                                   : "bg-white"
-                              } rounded-md flex items-center justify-center shadow-sm mx-auto`}
+                              } rounded-md flex items-center justify-center shadow-xs mx-auto`}
                             >
                               <ArrowUp size={18} />
                             </div>
@@ -425,7 +425,7 @@ function KeyboardEventTypes() {
                                 isKeyActive("arrowleft")
                                   ? "bg-[#49bcf3] text-white"
                                   : "bg-white"
-                              } rounded-md flex items-center justify-center shadow-sm mx-auto`}
+                              } rounded-md flex items-center justify-center shadow-xs mx-auto`}
                             >
                               <ArrowLeft size={18} />
                             </div>
@@ -436,7 +436,7 @@ function KeyboardEventTypes() {
                                 isKeyActive("arrowdown")
                                   ? "bg-[#49bcf3] text-white"
                                   : "bg-white"
-                              } rounded-md flex items-center justify-center shadow-sm mx-auto`}
+                              } rounded-md flex items-center justify-center shadow-xs mx-auto`}
                             >
                               <ArrowDown size={18} />
                             </div>
@@ -447,7 +447,7 @@ function KeyboardEventTypes() {
                                 isKeyActive("arrowright")
                                   ? "bg-[#49bcf3] text-white"
                                   : "bg-white"
-                              } rounded-md flex items-center justify-center shadow-sm mx-auto`}
+                              } rounded-md flex items-center justify-center shadow-xs mx-auto`}
                             >
                               <ArrowRight size={18} />
                             </div>
@@ -458,7 +458,7 @@ function KeyboardEventTypes() {
                   </div>
                 </div>
 
-                <div className="border rounded-lg overflow-hidden shadow-sm">
+                <div className="border rounded-lg overflow-hidden shadow-xs">
                   <div className="bg-slate-50 p-3 border-b">
                     <h3 className="font-medium">일반적인 키보드 단축키</h3>
                   </div>

@@ -17,7 +17,7 @@ export default function HeroSlide() {
       case "centered":
         return (
           <div className="relative">
-            <div className="h-64 bg-gradient-to-r from-[#49bcf3] to-[#134429] flex items-center justify-center">
+            <div className="h-64 bg-linear-to-r from-[#49bcf3] to-[#134429] flex items-center justify-center">
               <div className="text-center text-white p-6 max-w-lg mx-auto">
                 <h2 className="text-2xl font-bold mb-2">
                   중앙 정렬 히어로 섹션
@@ -71,7 +71,7 @@ export default function HeroSlide() {
           <div className="relative">
             <div className="h-64 bg-gray-800 flex items-center justify-center overflow-hidden relative">
               <div className="absolute inset-0 bg-black/50 z-10"></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent z-10"></div>
 
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-full h-full bg-gray-700 flex items-center justify-center">
@@ -97,7 +97,7 @@ export default function HeroSlide() {
         return (
           <div className="relative">
             <div className="h-64 bg-gray-200 flex items-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#49bcf3]/90 to-transparent z-10"></div>
+              <div className="absolute inset-0 bg-linear-to-r from-[#49bcf3]/90 to-transparent z-10"></div>
 
               <div className="absolute inset-0">
                 <div className="w-full h-full bg-gray-300 flex items-center justify-center">
@@ -152,7 +152,7 @@ const BasicHero: React.FC<BasicHeroProps> = ({
       />
       
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/20" />
+      <div className="absolute inset-0 bg-linear-to-r from-black/60 to-black/20" />
       
       {/* Content */}
       <div className="relative z-10 text-white p-6 max-w-lg">
@@ -722,7 +722,7 @@ const ${
       </div>
       
       {/* 그라디언트 오버레이 */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#49bcf3]/90 to-transparent z-10"></div>
+      <div className="absolute inset-0 bg-linear-to-r from-[#49bcf3]/90 to-transparent z-10"></div>
       
       {/* 콘텐츠 */}
       <div className="relative z-20 text-white p-6 max-w-lg">
@@ -732,14 +732,14 @@ const ${
         </p>
         <button 
           onClick={handleLearnMore}
-          className="bg-white text-[#49bcf3] px-6 py-3 rounded-md font-medium text-sm hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#49bcf3]"
+          className="bg-white text-[#49bcf3] px-6 py-3 rounded-md font-medium text-sm hover:bg-gray-100 transition-colors focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#49bcf3]"
         >
           세부사항 보기
         </button>
       </div>
     </div>`
         : heroType === "centered"
-        ? `<div className="h-96 bg-gradient-to-r from-[#49bcf3] to-[#134429] flex items-center justify-center">
+        ? `<div className="h-96 bg-linear-to-r from-[#49bcf3] to-[#134429] flex items-center justify-center">
       <div className="text-center text-white p-6 max-w-lg mx-auto">
         <h1 className="text-2xl font-bold mb-2">중앙 정렬 히어로 섹션</h1>
         <p className="text-white/80 mb-4 text-sm leading-relaxed">
@@ -748,7 +748,7 @@ const ${
         </p>
         <button 
           onClick={handleLearnMore}
-          className="bg-white text-[#49bcf3] px-6 py-3 rounded-md font-medium text-sm hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#49bcf3]"
+          className="bg-white text-[#49bcf3] px-6 py-3 rounded-md font-medium text-sm hover:bg-gray-100 transition-colors focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#49bcf3]"
         >
           자세히 알아보기
         </button>
@@ -765,7 +765,7 @@ const ${
           </p>
           <button 
             onClick={handleViewMore}
-            className="text-white border border-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-2 hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#49bcf3]"
+            className="text-white border border-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-2 hover:bg-white/10 transition-colors focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#49bcf3]"
           >
             더보기
             <ArrowRight className="h-4 w-4" />
@@ -793,7 +793,7 @@ const ${
       
       {/* 오버레이 그라디언트 */}
       <div className="absolute inset-0 bg-black/50 z-10"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+      <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent z-10"></div>
       
       {/* 콘텐츠 */}
       <div className="relative z-20 text-white text-center max-w-lg mx-auto p-6">
@@ -803,7 +803,7 @@ const ${
         </p>
         <button 
           onClick={handleGetStarted}
-          className="bg-[#49bcf3] text-white px-6 py-3 rounded-md font-medium text-sm hover:bg-[#49bcf3]/90 transition-colors focus:outline-none focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2"
+          className="bg-[#49bcf3] text-white px-6 py-3 rounded-md font-medium text-sm hover:bg-[#49bcf3]/90 transition-colors focus:outline-hidden focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2"
         >
           시작하기
         </button>
@@ -855,7 +855,7 @@ export default ${
                 <div className="w-full border rounded-lg overflow-hidden">
                   {heroType === "basic" && (
                     <div className="h-64 bg-gray-200 flex items-center relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#49bcf3]/90 to-transparent z-10"></div>
+                      <div className="absolute inset-0 bg-linear-to-r from-[#49bcf3]/90 to-transparent z-10"></div>
                       <div className="absolute inset-0">
                         <div className="w-full h-full bg-gray-300 flex items-center justify-center">
                           <span className="text-4xl text-gray-500">🖼️</span>
@@ -877,7 +877,7 @@ export default ${
                   )}
 
                   {heroType === "centered" && (
-                    <div className="h-64 bg-gradient-to-r from-[#49bcf3] to-[#134429] flex items-center justify-center">
+                    <div className="h-64 bg-linear-to-r from-[#49bcf3] to-[#134429] flex items-center justify-center">
                       <div className="text-center text-white p-6 max-w-lg mx-auto">
                         <h2 className="text-xl font-bold mb-2">
                           중앙 정렬 히어로 섹션
@@ -927,7 +927,7 @@ export default ${
                   {heroType === "video" && (
                     <div className="h-64 bg-gray-800 flex items-center justify-center overflow-hidden relative">
                       <div className="absolute inset-0 bg-black/50 z-10"></div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+                      <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent z-10"></div>
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="w-full h-full bg-gray-700 flex items-center justify-center">
                           <span className="text-4xl text-gray-500">🎬</span>

@@ -112,7 +112,7 @@ const TextExample: React.FC = () => {
         <p className="truncate max-w-xs">
           이것은 매우 긴 텍스트로 줄임표로 처리됩니다
         </p>
-        <p className="break-words">
+        <p className="wrap-break-word">
           이것은매우긴단어들로구성된텍스트입니다LineBreakHandling
         </p>
       </div>

@@ -387,7 +387,7 @@ const ListViewExample: React.FC = () => {
       </div>
 
       {/* 리스트 */}
-      <div className="bg-white rounded-lg p-4 shadow-sm">
+      <div className="bg-white rounded-lg p-4 shadow-xs">
         <div className="overflow-y-auto max-h-96">
           {renderListItems()}
         </div>

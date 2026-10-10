@@ -110,7 +110,7 @@ const CardComponent: React.FC<CardProps> = ({
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg">
       {/* 카드 이미지 */}
-      <div className="h-32 bg-gradient-to-r from-[#49bcf3]/80 to-[#49bcf3] flex items-center justify-center">
+      <div className="h-32 bg-linear-to-r from-[#49bcf3]/80 to-[#49bcf3] flex items-center justify-center">
         <span className="text-4xl" role="img" aria-label="이미지">
           {image}
         </span>
@@ -143,7 +143,7 @@ const CardComponent: React.FC<CardProps> = ({
       <div className="bg-gray-50 border-t border-gray-200 p-3 flex justify-end">
         <button
           onClick={onAction}
-          className="px-3 py-2 bg-[#49bcf3] text-white text-sm font-medium rounded-md hover:bg-[#49bcf3]/90 transition-colors focus:outline-none focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2"
+          className="px-3 py-2 bg-[#49bcf3] text-white text-sm font-medium rounded-md hover:bg-[#49bcf3]/90 transition-colors focus:outline-hidden focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2"
           aria-label="상세 정보 보기"
         >
           상세 정보 보기
@@ -212,14 +212,14 @@ export default CardExample;`}
                 {cards.map((card) => (
                   <div
                     key={card.id}
-                    className={`border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer ${
+                    className={`border rounded-lg overflow-hidden shadow-xs hover:shadow-md transition-shadow duration-300 cursor-pointer ${
                       selectedCard === card.id ? "ring-2 ring-[#49bcf3]" : ""
                     }`}
                     onClick={() =>
                       setSelectedCard(card.id === selectedCard ? null : card.id)
                     }
                   >
-                    <div className="h-32 bg-gradient-to-r from-[#49bcf3]/80 to-[#49bcf3] flex items-center justify-center text-4xl">
+                    <div className="h-32 bg-linear-to-r from-[#49bcf3]/80 to-[#49bcf3] flex items-center justify-center text-4xl">
                       {card.image}
                     </div>
                     <div className="p-4">

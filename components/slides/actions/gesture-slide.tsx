@@ -492,7 +492,7 @@ function GestureDemo({
   };
 
   return (
-    <div className="border rounded-lg overflow-hidden shadow-sm bg-white h-full">
+    <div className="border rounded-lg overflow-hidden shadow-xs bg-white h-full">
       <div className="bg-slate-50 p-3 border-b">
         <div className="flex items-center justify-between">
           <h3 className="font-medium">{title}</h3>

@@ -36,7 +36,7 @@ export default function SearchBarSlide() {
                     <input
                       type="text"
                       placeholder="검색어를 입력하세요"
-                      className="w-full pl-3 pr-8 py-2 bg-gray-100 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#49bcf3]"
+                      className="w-full pl-3 pr-8 py-2 bg-gray-100 rounded-lg focus:outline-hidden focus:ring-1 focus:ring-[#49bcf3]"
                       value={searchText}
                       onChange={(e) => setSearchText(e.target.value)}
                     />
@@ -81,7 +81,7 @@ export default function SearchBarSlide() {
                 <input
                   type="text"
                   placeholder="검색어를 입력하세요"
-                  className="w-full pl-9 pr-8 py-2 bg-transparent text-white placeholder-white/70 border-0 focus:outline-none focus:ring-0"
+                  className="w-full pl-9 pr-8 py-2 bg-transparent text-white placeholder-white/70 border-0 focus:outline-hidden focus:ring-0"
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
                 />
@@ -111,7 +111,7 @@ export default function SearchBarSlide() {
                 <input
                   type="text"
                   placeholder="검색어를 입력하세요"
-                  className="w-full pl-9 pr-8 py-2.5 bg-transparent border-0 focus:outline-none focus:ring-0"
+                  className="w-full pl-9 pr-8 py-2.5 bg-transparent border-0 focus:outline-hidden focus:ring-0"
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
                 />
@@ -164,7 +164,7 @@ export default function SearchBarSlide() {
               <input
                 type="text"
                 placeholder="검색어를 입력하세요"
-                className="w-full pl-10 pr-8 py-2 bg-gray-100 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#49bcf3]"
+                className="w-full pl-10 pr-8 py-2 bg-gray-100 rounded-lg focus:outline-hidden focus:ring-1 focus:ring-[#49bcf3]"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
@@ -229,7 +229,7 @@ const BasicSearchBar: React.FC<BasicSearchBarProps> = ({
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           placeholder={placeholder}
-          className="w-full pl-10 pr-20 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+          className="w-full pl-10 pr-20 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-hidden"
         />
         
         <div className="absolute right-2 flex items-center gap-1">
@@ -359,7 +359,7 @@ const ExpandableSearchBar: React.FC<ExpandableSearchBarProps> = ({
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             placeholder={placeholder}
-            className="w-full py-2 text-lg outline-none"
+            className="w-full py-2 text-lg outline-hidden"
           />
           
           <div className="flex items-center gap-1">
@@ -474,7 +474,7 @@ const PersistentSearchBar: React.FC<PersistentSearchBarProps> = ({
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             placeholder={placeholder}
-            className="w-full pl-10 pr-20 py-3 text-gray-900 rounded-lg outline-none"
+            className="w-full pl-10 pr-20 py-3 text-gray-900 rounded-lg outline-hidden"
           />
           
           <div className="absolute right-2 flex items-center gap-1">
@@ -592,7 +592,7 @@ const FilterSearchBar: React.FC<FilterSearchBarProps> = ({
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             placeholder={placeholder}
-            className="w-full pl-10 pr-24 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+            className="w-full pl-10 pr-24 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-hidden"
           />
           
           <div className="absolute right-2 flex items-center gap-1">

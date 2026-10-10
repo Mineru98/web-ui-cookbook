@@ -8,7 +8,7 @@ import { PrismCode } from "@/components/ui/prism/PrismCode"
 
 export default function ButtonSlide() {
   const [clickCount, setClickCount] = useState(0)
-  const [variant, setVariant] = useState<"default" | "destructive" | "outline" | "secondary" | "ghost" | "link">(
+  const [variant, setVariant] = useState<"default" | "destructive" | "outline-solid" | "secondary" | "ghost" | "link">(
     "default",
   )
 

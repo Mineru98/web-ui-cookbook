@@ -65,7 +65,7 @@ const TOPICS: Array<{ title: string; content: string; tag: string; accent: strin
   {
     title: "접근성 포커스 링 다시 보기",
     content:
-      "outline: none 으로 지우지 말고, ring-offset 으로 배경과 분리해 보이게 디자인하세요.",
+      "outline-solid: none 으로 지우지 말고, ring-offset 으로 배경과 분리해 보이게 디자인하세요.",
     tag: "A11y",
     accent: "from-teal-500/20 to-teal-500/0",
   },
@@ -198,16 +198,16 @@ function InfiniteScrollDemo(): ReactElement {
           {posts.map((post) => (
             <article
               key={post.id}
-              className="reveal-up group relative overflow-hidden rounded-xl border border-border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm"
+              className="reveal-up group relative overflow-hidden rounded-xl border border-border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xs"
             >
               <div
                 aria-hidden
-                className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${post.accent} opacity-60 group-hover:opacity-100 transition-opacity`}
+                className={`pointer-events-none absolute inset-0 bg-linear-to-br ${post.accent} opacity-60 group-hover:opacity-100 transition-opacity`}
               />
               <div className="relative flex items-start gap-3">
                 <div
                   aria-hidden
-                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-background text-xl ring-1 ring-border"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-background text-xl ring-1 ring-border"
                 >
                   {post.avatar}
                 </div>
@@ -218,7 +218,7 @@ function InfiniteScrollDemo(): ReactElement {
                     </span>
                     <span aria-hidden>·</span>
                     <span className="num tabular-nums">{post.date}</span>
-                    <span className="ml-auto inline-flex items-center rounded-full bg-foreground/[0.06] px-2 py-0.5 text-[10px] font-semibold tracking-wide text-foreground/70">
+                    <span className="ml-auto inline-flex items-center rounded-full bg-foreground/6 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-foreground/70">
                       {post.tag}
                     </span>
                   </div>
@@ -252,7 +252,7 @@ function InfiniteScrollDemo(): ReactElement {
             aria-live="polite"
           >
             {loading ? (
-              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-3 py-1.5 text-xs text-muted-foreground backdrop-blur">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-3 py-1.5 text-xs text-muted-foreground backdrop-blur-sm">
                 <Loader2
                   className="h-4 w-4 animate-spin text-primary"
                   aria-hidden

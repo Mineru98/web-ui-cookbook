@@ -118,7 +118,7 @@ const ExtendedFabExample: React.FC = () => {
       {/* Extended FAB */}
       <button
         onClick={handleAddItem}
-        className="fixed bottom-6 right-6 px-4 py-3 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-none focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center gap-2"
+        className="fixed bottom-6 right-6 px-4 py-3 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-hidden focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center gap-2"
         aria-label="새 항목 추가"
       >
         <Plus className="h-5 w-5" />
@@ -150,7 +150,7 @@ const MiniFabExample: React.FC = () => {
       {/* Mini FAB */}
       <button
         onClick={handleAddItem}
-        className="fixed bottom-6 right-6 w-10 h-10 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-none focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
+        className="fixed bottom-6 right-6 w-10 h-10 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-hidden focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
         aria-label="새 항목 추가"
       >
         <Plus className="h-4 w-4" />
@@ -238,7 +238,7 @@ const SpeedDialFabExample: React.FC = () => {
         {/* Main FAB */}
         <button
           onClick={toggleSpeedDial}
-          className="w-14 h-14 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-none focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
+          className="w-14 h-14 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-hidden focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
           aria-label={isDialOpen ? '스피드 다이얼 닫기' : '스피드 다이얼 열기'}
         >
           {isDialOpen ? (
@@ -274,7 +274,7 @@ const BasicFabExample: React.FC = () => {
       {/* Basic FAB */}
       <button
         onClick={handleAddItem}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-none focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
+        className="fixed bottom-6 right-6 w-14 h-14 bg-[#49bcf3] text-white rounded-full shadow-lg hover:bg-[#49bcf3]/90 focus:outline-hidden focus:ring-2 focus:ring-[#49bcf3] focus:ring-offset-2 transition-all duration-200 flex items-center justify-center"
         aria-label="새 항목 추가"
       >
         <Plus className="h-6 w-6" />

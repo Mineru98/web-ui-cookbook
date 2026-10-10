@@ -51,7 +51,7 @@ export default function TitleSlide({ onStart }: TitleSlideProps): ReactElement {
     >
       {/* Decorative grain & vignette */}
       <div className="pointer-events-none absolute inset-0 bg-grain opacity-50 mix-blend-overlay" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/25" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/25" />
 
       <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-6 py-12 sm:px-10">
         <KoText
@@ -71,7 +71,7 @@ export default function TitleSlide({ onStart }: TitleSlideProps): ReactElement {
         >
           UI 컴포넌트
           <br className="hidden sm:block" />{" "}
-          <span className="bg-gradient-to-r from-white via-sky-50 to-white/70 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-white via-sky-50 to-white/70 bg-clip-text text-transparent">
             교육 자료
           </span>
         </KoHeading>

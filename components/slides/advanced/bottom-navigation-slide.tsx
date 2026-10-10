@@ -433,7 +433,7 @@ const BottomNavigationExample: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* App Bar */}
-      <header className="bg-white border-b shadow-sm">
+      <header className="bg-white border-b shadow-xs">
         <div className="flex items-center justify-between px-4 py-3">
           <h1 className="text-lg font-semibold">하단 네비게이션 예시</h1>
           <select
@@ -560,19 +560,19 @@ export default BottomNavigationExample;`}
                     </p>
 
                     <div className="space-y-2 pb-4">
-                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
+                      <div className="h-16 bg-white rounded-lg shadow-xs border p-4">
                         콘텐츠 항목 1
                       </div>
-                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
+                      <div className="h-16 bg-white rounded-lg shadow-xs border p-4">
                         콘텐츠 항목 2
                       </div>
-                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
+                      <div className="h-16 bg-white rounded-lg shadow-xs border p-4">
                         콘텐츠 항목 3
                       </div>
-                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
+                      <div className="h-16 bg-white rounded-lg shadow-xs border p-4">
                         콘텐츠 항목 4
                       </div>
-                      <div className="h-16 bg-white rounded-lg shadow-sm border p-4">
+                      <div className="h-16 bg-white rounded-lg shadow-xs border p-4">
                         콘텐츠 항목 5
                       </div>
                     </div>

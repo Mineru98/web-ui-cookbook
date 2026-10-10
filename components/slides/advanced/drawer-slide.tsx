@@ -73,7 +73,7 @@ const NavigationDrawerExample: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white shadow-xs border-b">
         <div className="flex items-center justify-between p-4">
           <button
             onClick={toggleDrawer}
@@ -205,7 +205,7 @@ const SettingsDrawerExample: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white shadow-xs border-b">
         <div className="flex items-center justify-between p-4">
           <button className="p-2 rounded-md hover:bg-gray-100">
             <Menu className="w-6 h-6" />
@@ -258,7 +258,7 @@ const SettingsDrawerExample: React.FC = () => {
                   checked={pushNotifications}
                   onChange={(e) => setPushNotifications(e.target.checked)}
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#49bcf3]"></div>
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#49bcf3]"></div>
               </label>
             </div>
           </div>
@@ -583,7 +583,7 @@ export default SettingsDrawerExample;`;
                               className="sr-only peer"
                               defaultChecked
                             />
-                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#49bcf3]"></div>
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#49bcf3]"></div>
                           </label>
                         </div>
                       </div>

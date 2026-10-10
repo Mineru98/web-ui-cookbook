@@ -345,7 +345,7 @@ function DragDropExample() {
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200 space-y-6">
               <DraggableBox />
 
-              <div className="border rounded-lg overflow-hidden shadow-sm">
+              <div className="border rounded-lg overflow-hidden shadow-xs">
                 <div className="bg-slate-50 p-3 border-b">
                   <h3 className="font-medium">드래그 앤 드롭 목록</h3>
                   <p className="text-sm text-gray-600">
