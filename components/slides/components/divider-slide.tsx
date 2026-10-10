@@ -27,14 +27,6 @@ export default function DividerSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Divider(또는 Separator)는 콘텐츠나 섹션을 시각적으로 구분하는 가로
-                  또는 세로 선입니다. UI의 구조와 계층을 명확하게 하는 데 도움을 줍니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>콘텐츠 섹션 구분</li>

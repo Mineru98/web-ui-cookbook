@@ -23,15 +23,6 @@ export default function OutlinedButtonSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Outlined Button은 배경이 없고 테두리 외곽선을 사용하여 강조하는
-                  버튼입니다. 일반적으로 보조 액션이나 덜 중요한 액션에
-                  사용됩니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>보조 액션 (Secondary actions)</li>

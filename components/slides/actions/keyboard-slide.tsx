@@ -76,16 +76,6 @@ export default function KeyboardSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">의의</h3>
-                <p>
-                  키보드 입력은 물리적인 또는 가상 키보드를 통해 애플리케이션과
-                  통신하는 방식입니다. React에서 KeyboardEvent를 통해 처리하며,
-                  데스크톱 환경에서 주요 입력 방식이며, 모바일 환경에서 키보드
-                  입력 및 기능 사용 기능을 입력합니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">
                   일반적인 키보드 입력
                 </h3>

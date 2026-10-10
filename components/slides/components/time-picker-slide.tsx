@@ -34,14 +34,6 @@ export default function TimePickerSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Time Picker는 사용자가 시간을 선택할 수 있는 UI 요소입니다. 시,
-                  분, 초와 AM/PM을 선택할 수 있는 인터페이스를 제공합니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>예약 및 회의 예약</li>

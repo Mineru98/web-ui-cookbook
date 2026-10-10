@@ -28,14 +28,6 @@ export default function SliderSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Slider는 사용자가 지정된 범위 내에서 값을 선택할 수 있는 UI
-                  요소입니다. 드래그 가능한 핸들을 사용해 값을 조절합니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>볼륨 조절</li>

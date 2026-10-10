@@ -26,17 +26,6 @@ export default function GestureSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">의의</h3>
-                <p>
-                  제스처(Gesture)는 터치스크린이나 트랙패드를 통해 손가락의
-                  움직임을 해석하여 인터페이스를 제어하는 방식입니다. React에서는
-                  Touch Events API와 마우스 이벤트를 조합하여 구현하며,
-                  일반적으로는 탭, 스와이프, 핀치/스프레드, 더블 탭, 길게 누르기
-                  등이 포함됩니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">
                   일반적인 제스처 유형
                 </h3>

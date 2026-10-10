@@ -47,15 +47,6 @@ export default function CheckBoxSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Check Box는 사용자가 여러 옵션 중 여러 개를 선택할 수 있는 UI
-                  요소입니다. 각 체크박스는 독립적으로 선택하거나 해제할 수
-                  있습니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>다중 선택이 필요한 설문조사 질문</li>

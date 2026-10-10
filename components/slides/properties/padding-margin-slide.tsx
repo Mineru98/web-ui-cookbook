@@ -28,23 +28,6 @@ export default function PaddingMarginSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p className="mb-4">
-                  Padding과 Margin은 UI 요소의 공간을 제어하는 CSS 속성입니다.
-                </p>
-                <ul className="list-disc pl-5 space-y-2">
-                  <li>
-                    <strong>Padding</strong>: 요소의 내부 여백으로, 요소의 내용과
-                    테두리 사이의 공간입니다.
-                  </li>
-                  <li>
-                    <strong>Margin</strong>: 요소의 외부 여백으로, 요소의 테두리와
-                    주변 요소 사이의 공간입니다.
-                  </li>
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">주요 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>요소 간 간격 조정</li>

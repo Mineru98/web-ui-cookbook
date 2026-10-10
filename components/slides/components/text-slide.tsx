@@ -22,14 +22,6 @@ export default function TextSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Text는 사용자 인터페이스에서 정보를 표시하는 기본적인 요소입니다. 다양한 크기, 두께, 색상으로 표현할 수
-                  있으며, 제목, 본문, 레이블 등 다양한 용도로 사용됩니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>제목 (Heading): 페이지나 섹션의 제목</li>

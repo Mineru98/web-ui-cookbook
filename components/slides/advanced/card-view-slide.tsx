@@ -54,16 +54,6 @@ export default function CardViewSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">개요</h3>
-                <p>
-                  카드 뷰는 관련된 정보를 담는 컨테이너로, 주로 이미지, 제목,
-                  간략한 설명과 액션을 포함합니다. 정보를 시각적으로 구분하고
-                  그룹화하여 사용자가 콘텐츠를 쉽게 스캔하고 인터랙션할 수 있게
-                  합니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">주요 구성 요소</h3>
                 <ul className="list-disc pl-6 space-y-1">
                   <li>제목: 간결하고 명확한 제목</li>

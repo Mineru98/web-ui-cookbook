@@ -25,14 +25,6 @@ export default function InputSlide() {
           <TabsContent value="description" className="mt-4">
             <div className="space-y-4">
               <div className="bg-white rounded-lg p-6 shadow-md border border-border">
-                <h3 className="text-lg font-semibold mb-2">정의</h3>
-                <p>
-                  Input(또는 TextField)은 사용자로부터 텍스트 데이터를 입력받는 UI 요소입니다. 다양한 형식의 데이터를 텍스트,
-                  숫자, 이메일, 비밀번호 등을 수집할 수 있습니다.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-2">사용 사례</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>로그인/회원가입 양식</li>

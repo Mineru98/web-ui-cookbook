@@ -352,17 +352,6 @@ export function InfiniteList() {
 
           <TabsContent value="description" className="mt-4">
             <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-semibold mb-3 text-foreground">
-                  무한 스크롤이란?
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  무한 스크롤을 사용하면 페이지 단위의 전환 없이 자동으로 추가
-                  콘텐츠를 로드하는 UX 패턴입니다. 별도 페이지 이동이나
-                  &apos;더보기&apos; 버튼 없이 연속적인 콘텐츠 탐색 경험을 제공합니다.
-                </p>
-              </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-muted/50 rounded-lg p-4">
                   <h4 className="font-semibold mb-3 text-foreground">

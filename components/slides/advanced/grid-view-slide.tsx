@@ -302,17 +302,6 @@ export default App;`;
           <TabsContent value="description" className="mt-4">
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-3 text-foreground">
-                  Grid View란?
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Grid View는 2차원 격자 형태로 아이템들을 배치하는 레이아웃
-                  컴포넌트입니다. 이미지 갤러리, 상품 목록, 카드 레이아웃 등에
-                  주로 사용됩니다.
-                </p>
-              </div>
-
-              <div>
                 <h4 className="font-semibold mb-2 text-foreground">
                   주요 특징
                 </h4>
