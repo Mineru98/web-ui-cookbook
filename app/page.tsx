@@ -1,13 +1,14 @@
 "use client";
 
-import { type CSSProperties, type ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import {
-  ChevronLeft,
-  ChevronRight,
-  Menu,
-  Home as HomeIcon,
-} from "lucide-react";
-import TitleSlide from "@/components/slides/title-slide";
+  type CSSProperties,
+  type MouseEvent,
+  type ReactElement,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import OverviewSlide from "@/components/slides/overview-slide";
 import TextSlide from "@/components/slides/components/text-slide";
 import ButtonSlide from "@/components/slides/components/button-slide";
@@ -44,314 +45,328 @@ import FabSlide from "@/components/slides/advanced/fab-slide";
 import SearchBarSlide from "@/components/slides/advanced/search-bar-slide";
 import HeroSlide from "@/components/slides/advanced/hero-slide";
 import ConclusionSlide from "@/components/slides/conclusion-slide";
-import { Button } from "@/components/ui/button";
-import { KoHeading } from "@/components/ui/KoHeading";
-import { KoText } from "@/components/ui/KoText";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { CoverScreen } from "@/components/cookbook/cover-screen";
+import { LessonScreen, type ArticleMotion } from "@/components/cookbook/lesson-screen";
+import { prefersReducedMotion } from "@/components/cookbook/motion";
+import { OverviewScreen } from "@/components/cookbook/overview-screen";
+import { LESSONS } from "@/lib/lessons";
 
-type SlideDef = {
-  id: string;
-  title: string;
-  section: string;
-  component: ReactElement;
+type Screen = "cover" | "overview" | "lesson";
+type LayerMotion = "none" | "reveal" | "recede" | "leave";
+type Origin = { x: number; y: number; r: number };
+type Rect = { l: number; t: number; w: number; h: number };
+type ZoomState = { rect: Rect; stage: 0 | 1 | 2 };
+
+/** 레슨 id → 본문 슬라이드 (순서와 메타는 lib/lessons.ts 가 정한다) */
+const SLIDE_BODIES: Record<string, ReactElement> = {
+  "overview": <OverviewSlide />,
+  "text": <TextSlide />,
+  "button": <ButtonSlide />,
+  "icon-button": <IconButtonSlide />,
+  "outlined-button": <OutlinedButtonSlide />,
+  "input": <InputSlide />,
+  "radio-button": <RadioButtonSlide />,
+  "checkbox": <CheckBoxSlide />,
+  "dropdown": <DropdownSlide />,
+  "selector": <SelectorSlide />,
+  "form": <FormSlide />,
+  "slider": <SliderSlide />,
+  "divider": <DividerSlide />,
+  "date-picker": <DatePickerSlide />,
+  "time-picker": <TimePickerSlide />,
+  "table": <TableSlide />,
+  "progress-bar": <ProgressBarSlide />,
+  "padding-margin": <PaddingMarginSlide />,
+  "click": <ClickSlide />,
+  "drag": <DragSlide />,
+  "gesture": <GestureSlide />,
+  "keyboard": <KeyboardSlide />,
+  "card-view": <CardViewSlide />,
+  "list-view": <ListViewSlide />,
+  "grid-view": <GridViewSlide />,
+  "scroll-view": <ScrollViewSlide />,
+  "infinite-scroll": <InfiniteScrollSlide />,
+  "drawer": <DrawerSlide />,
+  "bottom-navigation": <BottomNavigationSlide />,
+  "bottom-sheet": <BottomSheetSlide />,
+  "app-bar": <AppBarSlide />,
+  "tab-bar": <TabBarSlide />,
+  "fab": <FabSlide />,
+  "search-bar": <SearchBarSlide />,
+  "hero": <HeroSlide />,
+  "conclusion": <ConclusionSlide />,
 };
 
-const REST_SLIDES: SlideDef[] = [
-  { id: "overview", title: "개요", section: "Intro", component: <OverviewSlide /> },
+const LAST_INDEX = LESSONS.length - 1;
 
-  { id: "text", title: "Text", section: "UI 요소", component: <TextSlide /> },
-  { id: "button", title: "Button", section: "UI 요소", component: <ButtonSlide /> },
-  { id: "icon-button", title: "Icon Button", section: "UI 요소", component: <IconButtonSlide /> },
-  { id: "outlined-button", title: "Outlined Button", section: "UI 요소", component: <OutlinedButtonSlide /> },
-  { id: "input", title: "Input", section: "UI 요소", component: <InputSlide /> },
-  { id: "radio-button", title: "Radio Button", section: "UI 요소", component: <RadioButtonSlide /> },
-  { id: "checkbox", title: "Checkbox", section: "UI 요소", component: <CheckBoxSlide /> },
-  { id: "dropdown", title: "Dropdown", section: "UI 요소", component: <DropdownSlide /> },
-  { id: "selector", title: "Selector", section: "UI 요소", component: <SelectorSlide /> },
-  { id: "form", title: "Form", section: "UI 요소", component: <FormSlide /> },
-  { id: "slider", title: "Slider", section: "UI 요소", component: <SliderSlide /> },
-  { id: "divider", title: "Divider", section: "UI 요소", component: <DividerSlide /> },
-  { id: "date-picker", title: "Date Picker", section: "UI 요소", component: <DatePickerSlide /> },
-  { id: "time-picker", title: "Time Picker", section: "UI 요소", component: <TimePickerSlide /> },
-  { id: "table", title: "Table", section: "UI 요소", component: <TableSlide /> },
-  { id: "progress-bar", title: "Progress Bar", section: "UI 요소", component: <ProgressBarSlide /> },
+const LAYER_MOTION_CLASS: Record<LayerMotion, string> = {
+  none: "",
+  reveal: "anim-reveal",
+  recede: "anim-recede",
+  leave: "anim-leave",
+};
 
-  { id: "padding-margin", title: "Padding · Margin", section: "UI 속성", component: <PaddingMarginSlide /> },
+type ScreenLayerProps = {
+  isTop: boolean;
+  motion: LayerMotion;
+  origin: Origin;
+  children: ReactNode;
+};
 
-  { id: "click", title: "Click", section: "UI 액션", component: <ClickSlide /> },
-  { id: "drag", title: "Drag", section: "UI 액션", component: <DragSlide /> },
-  { id: "gesture", title: "Gesture", section: "UI 액션", component: <GestureSlide /> },
-  { id: "keyboard", title: "Keyboard", section: "UI 액션", component: <KeyboardSlide /> },
+function ScreenLayer({ isTop, motion, origin, children }: ScreenLayerProps): ReactElement {
+  const vars = {
+    "--x": `${origin.x}px`,
+    "--y": `${origin.y}px`,
+    "--r": `${origin.r}px`,
+  } as CSSProperties;
+  return (
+    <div
+      className={
+        isTop
+          ? `absolute inset-0 z-2 overflow-hidden bg-background ${LAYER_MOTION_CLASS[motion]}`
+          : `absolute inset-0 z-1 overflow-hidden bg-background ${LAYER_MOTION_CLASS[motion]}`
+      }
+      style={vars}
+    >
+      {children}
+    </div>
+  );
+}
 
-  { id: "card-view", title: "Card View", section: "고급 컴포넌트", component: <CardViewSlide /> },
-  { id: "list-view", title: "List View", section: "고급 컴포넌트", component: <ListViewSlide /> },
-  { id: "grid-view", title: "Grid View", section: "고급 컴포넌트", component: <GridViewSlide /> },
-  { id: "scroll-view", title: "Scroll View", section: "고급 컴포넌트", component: <ScrollViewSlide /> },
-  { id: "infinite-scroll", title: "Infinite Scroll", section: "고급 컴포넌트", component: <InfiniteScrollSlide /> },
-  { id: "drawer", title: "Drawer", section: "고급 컴포넌트", component: <DrawerSlide /> },
-  { id: "bottom-navigation", title: "Bottom Navigation", section: "고급 컴포넌트", component: <BottomNavigationSlide /> },
-  { id: "bottom-sheet", title: "Bottom Sheet", section: "고급 컴포넌트", component: <BottomSheetSlide /> },
-  { id: "app-bar", title: "App Bar", section: "고급 컴포넌트", component: <AppBarSlide /> },
-  { id: "tab-bar", title: "Tab Bar", section: "고급 컴포넌트", component: <TabBarSlide /> },
-  { id: "fab", title: "FAB", section: "고급 컴포넌트", component: <FabSlide /> },
-  { id: "search-bar", title: "Search Bar", section: "고급 컴포넌트", component: <SearchBarSlide /> },
-  { id: "hero", title: "Hero", section: "고급 컴포넌트", component: <HeroSlide /> },
-
-  { id: "conclusion", title: "결론", section: "Outro", component: <ConclusionSlide /> },
-];
+const EMPTY_RECT: Rect = { l: 0, t: 0, w: 0, h: 0 };
 
 export default function Home(): ReactElement {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  /** 슬라이드 전환 중에도 "다음 목표 레슨"을 즉시 반영해 연속 입력이 이어지게 한다 */
+  const indexRef = useRef(0);
 
-  const goToSlide = useCallback((index: number): void => {
-    setCurrentSlide((s) => {
-      const max = REST_SLIDES.length; // total - 1 (title is index 0)
-      if (index < 0 || index > max) return s;
-      return index;
-    });
-  }, []);
+  const [screen, setScreen] = useState<Screen>("cover");
+  const [prev, setPrev] = useState<Screen | null>(null);
+  const [mode, setMode] = useState<"reveal" | null>(null);
+  const [leaving, setLeaving] = useState(false);
+  const [origin, setOrigin] = useState<Origin>({ x: 0, y: 0, r: 0 });
+  const [zoom, setZoom] = useState<ZoomState | null>(null);
+  const [index, setIndex] = useState(0);
+  const [visited, setVisited] = useState<ReadonlySet<number>>(new Set());
+  const [articleMotion, setArticleMotion] = useState<ArticleMotion>("none");
+  const [tab, setTab] = useState("all");
+  const [gridKey, setGridKey] = useState(0);
 
-  const goToNext = useCallback((): void => {
-    setCurrentSlide((s) => Math.min(s + 1, REST_SLIDES.length));
-  }, []);
+  const clearTimers = (): void => {
+    timers.current.forEach((t) => clearTimeout(t));
+    timers.current = [];
+  };
+  const later = (fn: () => void, ms: number): void => {
+    timers.current.push(setTimeout(fn, ms));
+  };
 
-  const goToPrevious = useCallback((): void => {
-    setCurrentSlide((s) => Math.max(s - 1, 0));
-  }, []);
+  useEffect(() => clearTimers, []);
 
-  const goToHome = useCallback((): void => {
-    setCurrentSlide(0);
-  }, []);
+  /** 클릭 지점(없으면 화면 중앙)과 그 지점에서 화면 끝까지의 거리를 root 기준으로 잰다 */
+  const measure = (e: MouseEvent<HTMLElement> | null): Origin & { rect: Rect } => {
+    const root = rootRef.current;
+    if (!root) return { x: 0, y: 0, r: 2400, rect: EMPTY_RECT };
+    const R = root.getBoundingClientRect();
+    const b = e ? e.currentTarget.getBoundingClientRect() : R;
+    const x = (e && e.clientX ? e.clientX : b.left + b.width / 2) - R.left;
+    const y = (e && e.clientY ? e.clientY : b.top + b.height / 2) - R.top;
+    const r = Math.ceil(Math.hypot(Math.max(x, R.width - x), Math.max(y, R.height - y))) + 24;
+    return { x, y, r, rect: { l: b.left - R.left, t: b.top - R.top, w: b.width, h: b.height } };
+  };
 
-  const SLIDES = useMemo<SlideDef[]>(
-    () => [
-      {
-        id: "title",
-        title: "표지",
-        section: "Intro",
-        component: <TitleSlide onStart={goToNext} />,
-      },
-      ...REST_SLIDES,
-    ],
-    [goToNext],
-  );
+  const openLesson = (i: number, motion: ArticleMotion = "none"): void => {
+    indexRef.current = i;
+    setIndex(i);
+    setArticleMotion(motion);
+    setVisited((v) => new Set(v).add(i));
+  };
 
-  const total = SLIDES.length;
-  const progress = ((currentSlide + 1) / total) * 100;
-  const active = SLIDES[currentSlide];
+  const showOverview = (nextTab: string): void => {
+    setTab(nextTab);
+    setGridKey((k) => k + 1);
+  };
 
-  const groupedSlides = useMemo(() => {
-    const groups: Array<{ section: string; items: Array<SlideDef & { index: number }> }> = [];
-    SLIDES.forEach((slide, index) => {
-      const last = groups[groups.length - 1];
-      if (last && last.section === slide.section) {
-        last.items.push({ ...slide, index });
-      } else {
-        groups.push({ section: slide.section, items: [{ ...slide, index }] });
-      }
-    });
-    return groups;
-  }, [SLIDES]);
+  const settle = (target: Screen): void => {
+    setScreen(target);
+    setPrev(null);
+    setMode(null);
+    setLeaving(false);
+    setZoom(null);
+  };
 
+  /** 표지 → 레슨/목차: 클릭 지점에서 원형으로 번지며 이전 화면은 뒤로 물러난다 */
+  const reveal = (e: MouseEvent<HTMLElement> | null, target: Screen, before: () => void): void => {
+    clearTimers();
+    before();
+    if (prefersReducedMotion()) {
+      settle(target);
+      return;
+    }
+    const o = measure(e);
+    setOrigin({ x: o.x, y: o.y, r: o.r });
+    setPrev(screen);
+    setScreen(target);
+    setMode("reveal");
+    setLeaving(false);
+    setZoom(null);
+    later(() => {
+      setPrev(null);
+      setMode(null);
+    }, 860);
+  };
+
+  /** 레슨 → 표지/목차: 현재 화면이 작아지며 사라진 뒤 대상 화면이 등장한다 */
+  const recede = (target: Screen, before: () => void): void => {
+    clearTimers();
+    if (prefersReducedMotion()) {
+      before();
+      settle(target);
+      return;
+    }
+    setLeaving(true);
+    setPrev(null);
+    setMode(null);
+    later(() => {
+      before();
+      settle(target);
+    }, 260);
+  };
+
+  /** 목차 카드 → 레슨: 카드 사각형이 전체 화면으로 커진 뒤 레슨이 떠오른다 */
+  const zoomTo = (e: MouseEvent<HTMLElement>, i: number): void => {
+    clearTimers();
+    if (prefersReducedMotion()) {
+      openLesson(i);
+      settle("lesson");
+      return;
+    }
+    const o = measure(e);
+    setZoom({ rect: o.rect, stage: 0 });
+    setPrev(null);
+    setMode(null);
+    setLeaving(false);
+    later(() => setZoom((z) => (z ? { ...z, stage: 1 } : z)), 30);
+    later(() => {
+      openLesson(i);
+      setScreen("lesson");
+      setZoom((z) => (z ? { ...z, stage: 2 } : z));
+    }, 560);
+    later(() => setZoom(null), 900);
+  };
+
+  /** 레슨 ↔ 레슨: 본문만 빠져나가고 새 본문이 진행 방향에서 들어온다 */
+  const slide = (i: number): void => {
+    const cur = indexRef.current;
+    if (i < 0 || i > LAST_INDEX || i === cur) return;
+    const forward = i > cur;
+    clearTimers();
+    indexRef.current = i;
+    if (prefersReducedMotion()) {
+      openLesson(i);
+      return;
+    }
+    setArticleMotion(forward ? "out-left" : "out-right");
+    later(() => openLesson(i, forward ? "in-right" : "in-left"), 200);
+  };
+
+  const goCover = (): void => recede("cover", () => undefined);
+  const goOverview = (): void => recede("overview", () => showOverview("all"));
+
+  const handleKey = (e: KeyboardEvent): void => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const target = e.target as HTMLElement | null;
+    if (target && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName))) return;
+    if (prev || zoom || leaving) return;
+
+    const isNext = e.key === "ArrowRight" || e.key === "PageDown";
+    const isPrev = e.key === "ArrowLeft" || e.key === "PageUp";
+    if (!isNext && !isPrev && e.key !== "Home" && e.key !== "End") return;
+    e.preventDefault();
+
+    if (screen === "cover") {
+      if (isNext) reveal(null, "lesson", () => openLesson(0));
+      else if (e.key === "End") reveal(null, "lesson", () => openLesson(LAST_INDEX));
+    } else if (screen === "overview") {
+      if (e.key === "Home") goCover();
+    } else if (isNext) slide(indexRef.current + 1);
+    else if (isPrev) slide(indexRef.current - 1);
+    else if (e.key === "Home") goCover();
+    else slide(LAST_INDEX);
+  };
+
+  const keyHandler = useRef(handleKey);
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent): void => {
-      if (menuOpen) return;
-      if (e.key === "ArrowRight" || e.key === "PageDown") {
-        e.preventDefault();
-        goToNext();
-      } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
-        e.preventDefault();
-        goToPrevious();
-      } else if (e.key === "Home") {
-        e.preventDefault();
-        goToHome();
-      } else if (e.key === "End") {
-        e.preventDefault();
-        goToSlide(total - 1);
-      }
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [goToNext, goToPrevious, goToHome, goToSlide, menuOpen, total]);
+    keyHandler.current = handleKey;
+  });
+  useEffect(() => {
+    const listener = (e: KeyboardEvent): void => keyHandler.current(e);
+    window.addEventListener("keydown", listener);
+    return () => window.removeEventListener("keydown", listener);
+  }, []);
+
+  const motionOf = (name: Screen): LayerMotion => {
+    if (screen === name) return mode === "reveal" ? "reveal" : leaving ? "leave" : "none";
+    return mode === "reveal" ? "recede" : "none";
+  };
+  const isOn = (name: Screen): boolean => screen === name || prev === name;
 
   return (
-    <div className="flex min-h-dvh flex-col bg-background">
-      {/* Slide stage */}
-      <main className="relative flex-1 overflow-hidden">
-        {SLIDES.map((slide, index) => (
-          <div
-            key={slide.id}
-            aria-hidden={index !== currentSlide}
-            className={`absolute inset-0 transition-transform duration-500 ease-out ${
-              index === currentSlide
-                ? "translate-x-0"
-                : index < currentSlide
-                  ? "-translate-x-full"
-                  : "translate-x-full"
-            }`}
-          >
-            {slide.component}
-          </div>
-        ))}
-      </main>
+    <div ref={rootRef} className="relative h-dvh min-h-160 overflow-hidden bg-background text-foreground">
+      {isOn("cover") ? (
+        <ScreenLayer isTop={screen === "cover"} motion={motionOf("cover")} origin={origin}>
+          <CoverScreen
+            onStart={(e) => reveal(e, "lesson", () => openLesson(0))}
+            onOverview={(e, nextTab) => reveal(e, "overview", () => showOverview(nextTab))}
+            onResume={(e) => reveal(e, "lesson", () => openLesson(indexRef.current))}
+          />
+        </ScreenLayer>
+      ) : null}
 
-      {/* Progress */}
-      <div
-        className="h-0.5 w-full bg-border/60"
-        role="progressbar"
-        aria-valuemin={0}
-        aria-valuemax={total}
-        aria-valuenow={currentSlide + 1}
-        aria-label="슬라이드 진행률"
-      >
+      {isOn("overview") ? (
+        <ScreenLayer isTop={screen === "overview"} motion={motionOf("overview")} origin={origin}>
+          <OverviewScreen
+            currentIndex={index}
+            visited={visited}
+            tab={tab}
+            gridKey={gridKey}
+            onTab={showOverview}
+            onOpen={zoomTo}
+            onBack={goCover}
+          />
+        </ScreenLayer>
+      ) : null}
+
+      {isOn("lesson") ? (
+        <ScreenLayer isTop={screen === "lesson"} motion={motionOf("lesson")} origin={origin}>
+          <LessonScreen
+            index={index}
+            visited={visited}
+            articleMotion={articleMotion}
+            onHome={goCover}
+            onOverview={goOverview}
+            onSlide={slide}
+          >
+            {SLIDE_BODIES[LESSONS[index].id]}
+          </LessonScreen>
+        </ScreenLayer>
+      ) : null}
+
+      {zoom ? (
         <div
-          className="h-full bg-linear-to-r from-primary to-brand-sky transition-width duration-500 ease-out w-(--w)"
-          style={{ "--w": `${progress}%` } as CSSProperties}
+          aria-hidden
+          data-stage={zoom.stage}
+          className="zoom-overlay pointer-events-none z-5 box-border border border-primary bg-primary-soft"
+          style={
+            {
+              "--zl": `${zoom.rect.l}px`,
+              "--zt": `${zoom.rect.t}px`,
+              "--zw": `${zoom.rect.w}px`,
+              "--zh": `${zoom.rect.h}px`,
+            } as CSSProperties
+          }
         />
-      </div>
-
-      {/* Bottom nav */}
-      <nav className="flex shrink-0 items-center justify-between gap-2 border-t border-border bg-background/95 px-3 py-2.5 backdrop-blur-sm supports-backdrop-filter:bg-background/80 sm:px-5 sm:py-3">
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={goToHome}
-            aria-label="홈으로"
-            className="press h-9 w-9"
-          >
-            <HomeIcon className="h-4 w-4" />
-          </Button>
-
-          <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                aria-label="목차"
-                className="press h-9 w-9"
-              >
-                <Menu className="h-4 w-4" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              title="목차"
-              description="슬라이드 목차"
-              side="left"
-              className="w-sheet max-w-90 sm:w-100"
-            >
-              <div className="flex h-full flex-col">
-                <div>
-                  <KoText
-                    balance={false}
-                    className="text-2xs font-semibold uppercase tracking-eyebrow text-primary"
-                  >
-                    Contents
-                  </KoText>
-                  <KoHeading
-                    as="h2"
-                    className="mt-1 text-xl font-bold tracking-tight"
-                  >
-                    목차
-                  </KoHeading>
-                  <KoText
-                    balance={false}
-                    className="mt-1 text-sm text-muted-foreground"
-                  >
-                    <span className="num font-medium text-foreground">
-                      {currentSlide + 1}
-                    </span>{" "}
-                    / <span className="num">{total}</span> 페이지
-                  </KoText>
-                </div>
-
-                <div className="scrollbar-clean mt-5 flex-1 space-y-5 overflow-y-auto pr-1">
-                  {groupedSlides.map((group) => (
-                    <div key={group.section}>
-                      <div className="mb-2 px-2">
-                        <KoHeading
-                          as="h3"
-                          balance={false}
-                          className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-                        >
-                          {group.section}
-                        </KoHeading>
-                      </div>
-                      <div className="space-y-0.5">
-                        {group.items.map((item) => {
-                          const isActive = item.index === currentSlide;
-                          return (
-                            <button
-                              key={item.id}
-                              type="button"
-                              onClick={() => {
-                                goToSlide(item.index);
-                                setMenuOpen(false);
-                              }}
-                              className={`focus-ring press group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
-                                isActive
-                                  ? "bg-primary text-primary-foreground"
-                                  : "hover:bg-secondary"
-                              }`}
-                              aria-current={isActive ? "page" : undefined}
-                            >
-                              <span
-                                className={`num inline-flex h-6 min-w-6.5 items-center justify-center rounded-md px-1.5 text-2xs font-semibold tabular-nums ${
-                                  isActive
-                                    ? "bg-white/20 text-white"
-                                    : "bg-muted text-muted-foreground group-hover:bg-background"
-                                }`}
-                              >
-                                {item.index + 1}
-                              </span>
-                              <span className="truncate font-medium">
-                                {item.title}
-                              </span>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-
-        <div className="flex min-w-0 flex-col items-center gap-0.5 text-center">
-          <span className="truncate text-xs font-medium text-foreground sm:text-sm">
-            {active.title}
-          </span>
-          <span className="num text-2xs text-muted-foreground tabular-nums">
-            {currentSlide + 1} / {total}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={goToPrevious}
-            disabled={currentSlide === 0}
-            aria-label="이전 슬라이드"
-            className="press h-9 w-9"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="default"
-            size="icon"
-            onClick={goToNext}
-            disabled={currentSlide === SLIDES.length - 1}
-            aria-label="다음 슬라이드"
-            className="press h-9 w-9"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-      </nav>
+      ) : null}
     </div>
   );
 }
